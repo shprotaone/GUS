@@ -59,7 +59,6 @@ namespace GUS.Core.Pool
         {
             var obj = pools[type].Objects.Count > 0 ?
                 pools[type].Objects.Dequeue() : InstantiateObject(type, pools[type].Container);
-
             obj.SetActive(true);
 
             return obj;
@@ -67,11 +66,12 @@ namespace GUS.Core.Pool
 
         public void DestroyObject(GameObject obj)
         {
-            PoolObjectType type = obj.GetComponent<IPoolObject>().Type;
-            pools[type].Objects.Enqueue(obj);
-            obj.transform.SetParent(pools[type].Container);
-            obj.transform.position = pools[type].Container.transform.position;
             obj.SetActive(false);
+            PoolObjectType type = obj.GetComponent<IPoolObject>().Type;
+            pools[type].Objects.Enqueue(obj);           
+            obj.transform.SetParent(pools[type].Container);
+            obj.transform.position = pools[type].Container.transform.position;           
+            Debug.Log("Destroy");
         }
     }
 

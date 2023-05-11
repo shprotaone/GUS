@@ -1,21 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using GUS.SceneManagment;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Rendering;
 
 public class SceneHandler : MonoBehaviour
 {
     [SerializeField] private AssetReference _runSeneRef;
+    [SerializeField] private Fader _fader;
     private SceneLoader _sceneLoader;
 
-    private void Start()
+    private void Awake()
     {
         _sceneLoader = FindObjectOfType<SceneLoader>();
+        _fader= FindObjectOfType<Fader>();
     }
 
     public void LoadRunScene()
     {
         _sceneLoader.ChangeAdditiveScene(_runSeneRef);
     }
+
+    public void FadeInHandle()
+    {
+        if(_fader != null)
+        {
+            _fader?.FadeIn();
+        }
+    }
+    public void FadeOutHandle()
+    {
+        if(_fader != null) StartCoroutine(_fader.FadeOut());
+    }
+    
+
 }

@@ -16,5 +16,6 @@ namespace GUS.Objects
         public List<Transform> SpawnPoints => _spawnPoints;
         public Transform EndPoint => _endPoint;
         public float PlatformLenght => Vector3.Distance(_beginPoint.position, _endPoint.position) / 2;
+        public ObjectPool PoolLink { get; set; }
     }
 }

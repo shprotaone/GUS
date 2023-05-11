@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2172797210956638737}
   - component: {fileID: 7840852190436644070}
   - component: {fileID: 449444978758877773}
+  - component: {fileID: 7343474912137082997}
   m_Layer: 0
   m_Name: Build
   m_TagString: Untagged
@@ -58,6 +59,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7158c6ce022b3a4691f642ef1a44f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &7343474912137082997
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552184738766531826}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7714244081367521174
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +106,7 @@ Transform:
   - {fileID: 2172797210956638737}
   - {fileID: 8034009340915634713}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1001 &7562724171119015410
 PrefabInstance:

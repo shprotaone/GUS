@@ -55,7 +55,14 @@ namespace GUS.Core.InputSys
             {
                 ResetSwipe();
                 return EnumBind.Right;
-            }          
+            }
+
+            if (_isTap)
+            {
+                _isTap = false;
+                return EnumBind.Fire;
+            }
+
             return EnumBind.None;
         }
 
@@ -123,9 +130,6 @@ namespace GUS.Core.InputSys
             {
                 _swipeDirection = Vector2.up;
             }
-
-            Debug.Log("Down" + down);
-            Debug.Log("Up" + up);
         }
 
         private void ResetSwipe()

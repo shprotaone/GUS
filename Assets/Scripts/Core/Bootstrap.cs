@@ -3,6 +3,7 @@ using GUS.Core.InputSys;
 using GUS.Core.InputSys.Joiystick;
 using GUS.Core.Locator;
 using GUS.Core.Pool;
+using GUS.Core.UI;
 using GUS.LevelBuild;
 using GUS.Player;
 using GUS.Player.State;
@@ -16,6 +17,8 @@ namespace GUS.Core
     public class Bootstrap : MonoBehaviour
     {      
         [SerializeField] private TMP_Text _stateText;
+        [SerializeField] private CameraController _cameraController;
+        [SerializeField] private SceneHandler _sceneHandler;
         [SerializeField] private GameStateController _stateController;
         [SerializeField] private UIController _uiController;
         [SerializeField] private PlayerActor _player;
@@ -26,28 +29,50 @@ namespace GUS.Core
         [SerializeField] private ObjectPool _platformPool;
         [SerializeField] private ObjectPool _collectablesPool;
         [SerializeField] private FloatingJoystick _joystick;    //кандидат на отделение
-        [SerializeField] private bool _joystickMove;
+        [SerializeField] private bool _isHub;
 
         private IServiceLocator _serviceLocator;
         private IInputType _inputType;
 
         private void Awake()
         {
-           if (!_joystickMove) RunInit();
+            _serviceLocator = new ServiceLocator();
+            if (!_isHub) RunInit();
            else HubInit();          
         }
 
         private void Start()
         {           
             _stateController.Init(_serviceLocator);
-            _player.Init(_inputType, _serviceLocator);
+            _player.Init(_inputType, _serviceLocator);    
+
+            if(_isHub) _stateController.InitHub();
+            else _stateController.InitGame();
         }
 
+        private void HubInit()
+        {
+            _serviceLocator.Register<CameraController>(_cameraController);
+            _serviceLocator.Register<SceneHandler>(_sceneHandler);
+            _serviceLocator.Register<FloatingJoystick>(_joystick);
+            _serviceLocator.Register<UIController>(_uiController);
+            _serviceLocator.Register<Wallet>(new Wallet(_serviceLocator));
+            _serviceLocator.Register<LevelSettings>(_levelSettings);
+            _serviceLocator.Register<GameStateMachine>(new GameStateMachine(_stateText, _serviceLocator, true));
+            _serviceLocator.Register<GameStateController>(_stateController);            
+            _serviceLocator.Register<TMP_Text>(_stateText);
+
+            SetInput();
+            PlayerInit();
+            _uiController.InitHub(_serviceLocator);
+            
+        }
 
         private void RunInit()
-        {
-            _serviceLocator = new ServiceLocator();
+        {          
+            _serviceLocator.Register<CameraController>(_cameraController);
             _serviceLocator.Register<UIController>(_uiController);
+            _serviceLocator.Register<Wallet>(new Wallet(_serviceLocator));
             PoolInitialization();
             _serviceLocator.Register<LevelSettings>(_levelSettings);
             _serviceLocator.Register<WorldController>(new WorldController(_startPoint, _serviceLocator));
@@ -57,18 +82,7 @@ namespace GUS.Core
 
             SetInput();
             PlayerInit();
-        }
-          
-        private void HubInit()
-        {
-            _serviceLocator= new ServiceLocator();
-            _serviceLocator.Register<UIController>(_uiController);
-            _serviceLocator.Register<LevelSettings>(_levelSettings);
-            //_serviceLocator.Register<TMP_Text>(_stateText);
-            _serviceLocator.Register<GameStateController>(_stateController);
-            _serviceLocator.Register<GameStateMachine>(new GameStateMachine(_serviceLocator,true));
-            SetInput();
-            PlayerInit();
+            _uiController.Init(_serviceLocator);        
         }
 
         private void FlyInit()
@@ -88,7 +102,7 @@ namespace GUS.Core
 
         private void SetInput()
         {
-            if (_joystickMove)
+            if (_isHub)
             {
                 _inputType = _joystick;
             }
@@ -109,8 +123,7 @@ namespace GUS.Core
         }
 
         private void PlayerInit()
-        {
-            _serviceLocator.Register<Wallet>(new Wallet(_serviceLocator));
+        {         
             _player.Init(_inputType, _serviceLocator);
             _serviceLocator.Register<PlayerActor>(_player);                
             _serviceLocator.Register<PlayerStateMachine>(new PlayerStateMachine(_serviceLocator));        

@@ -6,18 +6,22 @@ namespace GUS.Player.State
 {
     public class ExplorePlayerState : IState
     {
-        private PlayerActor _player;
+        private PlayerActor _playerActor;
         private PlayerStateMachine _playerState;
+        private float _steerSpeed;
         private ExploreMovement _movement;
         public ExplorePlayerState(float steerSpeed, PlayerActor playerActor,PlayerStateMachine playerStateMachine)
-        {
-            _movement = new ExploreMovement();
-            _movement.Init(playerActor, playerStateMachine, steerSpeed);
-        
+        {          
+            _playerActor = playerActor;
+            _playerState = playerStateMachine;
+            _steerSpeed = steerSpeed;        
         }
+
         public void Enter()
         {
-            _player?.SetMovementType(_movement);
+            _movement = new ExploreMovement();
+            _movement.Init(_playerActor, _playerState, _steerSpeed);
+            _playerActor?.SetMovementType(_movement);
         }
 
         public IEnumerator Execute()

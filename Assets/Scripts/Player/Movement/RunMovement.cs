@@ -49,11 +49,12 @@ namespace GUS.Player.Movement
         {
             if(_inputType != null && _canMoved)
             {
+                Move();
+                CheckMove();
                 Jump();
                 Crunch();
-                Move();
+
                 Fire();
-                CheckMove();
             }
         }
 
@@ -148,16 +149,14 @@ namespace GUS.Player.Movement
         {
             IsGrounded = _player.CharController.isGrounded;
 
-            if (IsGrounded && _verticalVelocity < -1)
+            if (IsGrounded && _verticalVelocity < 0.1f)
             {
-                _verticalVelocity = 0;
+                _verticalVelocity = -1;
             }
             else
             {
                 _verticalVelocity += _gravity * _gravityScale * Time.deltaTime;
             }
-
-            Debug.Log("Is Grounded");
         }
 
         private bool OnSLope()

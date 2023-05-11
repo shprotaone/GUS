@@ -1,4 +1,5 @@
 ﻿using GUS.Core.Locator;
+using GUS.Core.UI;
 using GUS.LevelBuild;
 using System.Collections;
 using UnityEngine;
@@ -22,13 +23,13 @@ namespace GUS.Core.GameState
         public IEnumerator Execute()
         {
             yield return new WaitForSeconds(1);
-            _uiController.RetryButton.gameObject.SetActive(true);
+            _uiController.UIEndGame.Panel(true);
             yield return null;
         }
 
         public void Exit()
         {
-            _uiController.RetryButton.gameObject.SetActive(false);
+            _uiController.UIEndGame.Panel(false);
             _worldCotroller.WorldStopper(false);
         }
 

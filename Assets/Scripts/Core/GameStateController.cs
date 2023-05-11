@@ -10,34 +10,27 @@ namespace GUS.Core
 {
     public class GameStateController : MonoBehaviour
     {
-        [SerializeField] private Button _startButton;
-        [SerializeField] private Button _restartButton;
-        [SerializeField] private Button _pauseButton;
+        [SerializeField] private SceneHandler _sceneHandler;
         [SerializeField] private Text _deltaText;
         [SerializeField] private Text _directionText;
-
-        [SerializeField] private bool _test;
 
         private GameStateMachine _gameStateMachine;
         private PlayerStateMachine _playerStateMachine;
         private IInputType _smartInput;
 
+        private IState _prevPlayerState;
+        private IState _prevGameState;
+        public SceneHandler SceneHandler => _sceneHandler;
+        public GameStateMachine GameStateMachine => _gameStateMachine;
+
         public void Init(IServiceLocator serviceLocator)
         {
             _gameStateMachine = serviceLocator.Get<GameStateMachine>();
             _playerStateMachine = serviceLocator.Get<PlayerStateMachine>();
-
-            if (_test)
-            {
-                _restartButton?.onClick.AddListener(RestartGame);
-                _startButton.onClick.AddListener(StartGame);
-                _pauseButton.onClick.AddListener(Pause);
-                InitGame(); //это убрать из хаба
-            }
-            
             _smartInput = serviceLocator.Get<IInputType>(); //для тестов
 
-            _playerStateMachine.stateChanged += CallCoroutine;
+            _playerStateMachine.stateChanged += CallPlayerRoutine;
+            _gameStateMachine.stateChanged += CallGameStateRoutine;
         }
 
         private void Update()
@@ -58,48 +51,86 @@ namespace GUS.Core
             _playerStateMachine.FixedUpdate();
         }
 
-        private void CallCoroutine()
+        private void CallPlayerRoutine()
         {
             StartCoroutine(_playerStateMachine.CurrentState.Execute());
         }
+
+        private void CallGameStateRoutine()
+        {
+            StartCoroutine(_gameStateMachine.CurrentState.Execute());
+        }
+
         public void InitGame()
         {
             _gameStateMachine.InitGameLoop(_gameStateMachine.initState);
             _playerStateMachine.Initialize(_playerStateMachine.initState);
-            _gameStateMachine.TransitionTo(_gameStateMachine._start);
+            _gameStateMachine.TransitionTo(_gameStateMachine.start);
+
+            StartGame();
         }
-        public void Explore()
+
+        public void ClickerGame()
         {
-            _playerStateMachine.Initialize(_playerStateMachine.initState);
-            _gameStateMachine.InitGameLoop(_gameStateMachine._pitStop);
-            _playerStateMachine.TransitionTo(_playerStateMachine.exploreState);
+            _gameStateMachine.TransitionTo(_gameStateMachine.clicker);
+            _playerStateMachine.TransitionTo(_playerStateMachine.clicker);
         }
+        
         public void StartGame()
-        {
-            
-            _gameStateMachine.TransitionTo(_gameStateMachine._session);
+        {         
+            _gameStateMachine.TransitionTo(_gameStateMachine.session);
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
+           // StartCoroutine(_gameStateMachine.CurrentState.Execute());
+        }
+
+        public void Resume()
+        {
+            _gameStateMachine.TransitionTo(_prevGameState);
+            _playerStateMachine.TransitionTo(_prevPlayerState);
+            //StartCoroutine(_gameStateMachine.CurrentState.Execute());
         }
 
         public void Pause()
         {
-            _gameStateMachine.TransitionTo(_gameStateMachine._pause);
+            _prevGameState = _gameStateMachine.CurrentState;
+            _prevPlayerState = _playerStateMachine.CurrentState;
+
+            _gameStateMachine.TransitionTo(_gameStateMachine.pause);
             _playerStateMachine.TransitionTo(_playerStateMachine.initState);
         }
 
         public void EndGame()
         {
-            _gameStateMachine.TransitionTo(_gameStateMachine._endGame);
+            _gameStateMachine.TransitionTo(_gameStateMachine.endGame);
             _playerStateMachine.TransitionTo(_playerStateMachine.deathState);
 
-            StartCoroutine(_gameStateMachine.CurrentState.Execute());
+            //StartCoroutine(_gameStateMachine.CurrentState.Execute());
         }
 
         public void RestartGame()
         {           
             _gameStateMachine.TransitionTo( _gameStateMachine.initState);
-            _gameStateMachine.TransitionTo(_gameStateMachine._start);
-            _playerStateMachine.Initialize(_playerStateMachine.initState);          
+            _gameStateMachine.TransitionTo(_gameStateMachine.start);            
+            _gameStateMachine.TransitionTo(_gameStateMachine.session);
+            _playerStateMachine.Initialize(_playerStateMachine.initState);
+            _playerStateMachine.TransitionTo(_playerStateMachine.runState);
+        }
+
+        public void SceneLoadHandler()
+        {
+            _sceneHandler.LoadRunScene();
+        }
+
+        public void InitHub()
+        {
+            _gameStateMachine.InitGameLoop(_gameStateMachine.initMapState);
+        }
+
+        public void Explore()
+        {
+            _playerStateMachine.Initialize(_playerStateMachine.initState);
+            _gameStateMachine.TransitionTo(_gameStateMachine.explore);
+            _playerStateMachine.TransitionTo(_playerStateMachine.exploreState);
         }
     }
 }

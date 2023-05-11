@@ -26,6 +26,7 @@ namespace GUS.Player.Movement
             if (player.InputType is FloatingJoystick)
             {
                 _inputType = (FloatingJoystick)player.InputType;
+                _inputType.gameObject.SetActive(true);
             }
             _playerState = playerState;
             _speedMovement = speedMovement;
@@ -35,6 +36,7 @@ namespace GUS.Player.Movement
 
         public void Update()
         {
+            Debug.Log("UpdateCall");
             if(_canMove)
             {
                 Move();
@@ -66,6 +68,7 @@ namespace GUS.Player.Movement
 
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 _playActor.CharController.Move(moveDir * _speedMovement * Time.deltaTime);
+                Debug.Log("Call from Explore");
             }
         }
 

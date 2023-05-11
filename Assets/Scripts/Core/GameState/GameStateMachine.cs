@@ -10,30 +10,33 @@ namespace GUS.Core.GameState
         public IState CurrentState { get; private set; }
 
         public readonly InitGameState initState;
-        public readonly StartState _start;
-        public readonly InGameState _session;
-        public readonly PitStopState _pitStop;
-        public readonly EndGameState _endGame;
-        public readonly ResultState _result;
-        public readonly PauseState _pause;
+        public readonly InitMapState initMapState;
+        public readonly StartState start;
+        public readonly InGameState session;
+        public readonly ClickerState clicker;
+        public readonly EndGameState endGame;
+        public readonly ResultState result;
+        public readonly PauseState pause;
+        public readonly ExploreState explore;
 
         public event Action stateChanged;
 
-        public GameStateMachine(IServiceLocator serviceLocator,bool isHub)
+        public GameStateMachine(TMP_Text text, IServiceLocator serviceLocator,bool isHub)
         {
-            _pitStop = new PitStopState(serviceLocator);
-            initState = new InitGameState();
+            initMapState = new InitMapState(serviceLocator,text);
+            explore = new ExploreState(serviceLocator);
         }
 
         public GameStateMachine(TMP_Text text,IServiceLocator serviceLocator)
         {
             //Каждый экземпляр Стейта в который должны передаваться настройки?
-            initState = new InitGameState(text);
-            _start = new StartState(text,serviceLocator);
-            _session = new InGameState(text,serviceLocator);         
-            _endGame = new EndGameState(serviceLocator);
-            _result = new ResultState();
-            _pause = new PauseState(text);
+            initState = new InitGameState(serviceLocator,text);
+            start = new StartState(text,serviceLocator);
+            session = new InGameState(text,serviceLocator);
+            clicker = new ClickerState(serviceLocator);
+            endGame = new EndGameState(serviceLocator);
+            result = new ResultState();
+            pause = new PauseState(serviceLocator,text);
         }
 
         public void InitGameLoop(IState state)

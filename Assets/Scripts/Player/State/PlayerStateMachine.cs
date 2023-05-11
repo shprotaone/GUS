@@ -1,6 +1,5 @@
 using GUS.Core;
 using GUS.Core.Locator;
-using GUS.Player.Movement;
 using System;
 
 namespace GUS.Player.State
@@ -20,6 +19,7 @@ namespace GUS.Player.State
         public readonly ExplorePlayerState exploreState;
         public readonly DeathPlayerState deathState;
         public readonly DownSlideState downslide;
+        public readonly ClickerPlayerState clicker;
 
         public event Action stateChanged;
 
@@ -29,13 +29,17 @@ namespace GUS.Player.State
             _player = service.Get<PlayerActor>();
 
             initState = new InitPlayerState(_player,this);
+            //base movement in runner
             runState = new RunPlayerState(settings,_player,this);            
             jumpState = new JumpPlayerState(settings,_player,this);
             downslide = new DownSlideState(settings.downSlideTime,_player,this);
             attackState = new AttackPlayerState(_player);
+            deathState = new DeathPlayerState(_player);
+            //special movement
+            clicker = new ClickerPlayerState(_player,this);
             //flyState = new FlyPlayerState(settings.steerSpeed,_movement,_player,this);
             exploreState = new ExplorePlayerState(settings.steerSpeed,_player, this);
-            deathState = new DeathPlayerState(_player);
+            
         }
 
         public void Initialize(IState state)

@@ -9,7 +9,7 @@ namespace GUS.Player.State
     {
         private PlayerStateMachine _playerState;
         private PlayerActor _player;
-        private IMovement _movement;
+        private RunMovement _movement;
         private float _steerSpeed;
 
         public RunPlayerState(LevelSettings settings, PlayerActor player,PlayerStateMachine state)
@@ -25,11 +25,8 @@ namespace GUS.Player.State
 
         public void SetMoveSettings(float distance,float gravity, float gravityScale)
         {
-            if (_movement is RunMovement run)
-            {
-                run.SetDistance(distance);
-                run.SetGravity(gravity,gravityScale);
-            }
+            _movement.SetDistance(distance);
+            _movement.SetGravity(gravity, gravityScale);
         }
 
         public void Enter()

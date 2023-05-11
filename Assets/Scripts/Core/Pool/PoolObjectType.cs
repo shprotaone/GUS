@@ -9,9 +9,12 @@
        JumpObstacle,
        CrounchObstacle,
        LeftSecondLevel,
-       RightSecondLevel,
-       Coins,
-       PitStop,
-       Empty
+       RightSecondLevel,       
+       Clicker,
+       Empty,
+
+       Coins = 40,
+       Magnet,
+       Multiply
     }
 }
