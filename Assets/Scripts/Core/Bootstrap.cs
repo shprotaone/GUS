@@ -7,7 +7,6 @@ using GUS.Core.UI;
 using GUS.LevelBuild;
 using GUS.Player;
 using GUS.Player.State;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using SystemInfo = UnityEngine.Device.SystemInfo;
@@ -23,6 +22,7 @@ namespace GUS.Core
         [SerializeField] private UIController _uiController;
         [SerializeField] private PlayerActor _player;
         [SerializeField] private Transform _startPoint;
+        [SerializeField] private SpecialPlatformBuilder _specialPlatformBuilder;
         [SerializeField] private PoolObjectStorage _platformStorage;
         [SerializeField] private PoolObjectStorage _collectablesStorage;
         [SerializeField] private LevelSettings _levelSettings;
@@ -36,6 +36,7 @@ namespace GUS.Core
 
         private void Awake()
         {
+            Application.targetFrameRate = -1;
             _serviceLocator = new ServiceLocator();
             if (!_isHub) RunInit();
            else HubInit();          
@@ -69,7 +70,8 @@ namespace GUS.Core
         }
 
         private void RunInit()
-        {          
+        {
+            _serviceLocator.Register<SpecialPlatformBuilder>(_specialPlatformBuilder);
             _serviceLocator.Register<CameraController>(_cameraController);
             _serviceLocator.Register<UIController>(_uiController);
             _serviceLocator.Register<Wallet>(new Wallet(_serviceLocator));

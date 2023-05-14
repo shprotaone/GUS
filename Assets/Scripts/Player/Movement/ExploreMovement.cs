@@ -36,7 +36,6 @@ namespace GUS.Player.Movement
 
         public void Update()
         {
-            Debug.Log("UpdateCall");
             if(_canMove)
             {
                 Move();

@@ -10,7 +10,6 @@ namespace GUS.Core.InputSys
     public interface IInputType
     {
         EnumBind Movement();
-
     }
 }
 

@@ -1,8 +1,4 @@
 using GUS.Core.Locator;
-using GUS.Core.UI;
-using GUS.Objects;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GUS.LevelBuild
@@ -11,7 +7,6 @@ namespace GUS.LevelBuild
     {
         private Transform _startPoint;
 
-        private Wallet _wallet;
         private PlatformBuilder _platformBuilder;
         private float _maxSpeed;
         private float _acceleration;
@@ -22,7 +17,6 @@ namespace GUS.LevelBuild
         public WorldController(Transform startPoint, IServiceLocator serviceLocator)
         {
             LevelSettings settings = serviceLocator.Get<LevelSettings>();
-            _wallet = serviceLocator.Get<Wallet>();
             _platformBuilder = new PlatformBuilder(startPoint, serviceLocator);
             _maxSpeed = settings.maxWorldSpeed;
             _acceleration = settings.acceleration;

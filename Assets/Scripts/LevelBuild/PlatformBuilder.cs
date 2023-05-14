@@ -11,14 +11,13 @@ namespace GUS.LevelBuild
 {
     public class PlatformBuilder
     {
-        private const int countStartPlatform = 2;
+        private const int countStartPlatform = 3;
         public const int RangeZ = -50;
 
         private Transform _startPosition;
         private Vector3 _offset = new Vector3(0, 0, -20);
                 
         private GameObject _nextPlatform;
-        private GameObject _currentCollectable;
         private Platform _lastPlatform;
         private Vector3 _lastPos;
 
@@ -27,15 +26,20 @@ namespace GUS.LevelBuild
         
         private ObjectPool _platformPool;
         private ObjectPool _collectablesPool;
+        private SpecialPlatformBuilder _specialPlatformBuilder;
         private BonusSpawner _bonusSpawner;
+
+        private int _platformCount = 0;
         private bool _isFree;
+
         public PlatformBuilder(Transform startPosition, IServiceLocator serviceLocator)
         {
             List<ObjectPool> pools = serviceLocator.GetAll<ObjectPool>().ToList();
+            _specialPlatformBuilder = serviceLocator.Get<SpecialPlatformBuilder>();
             _platformPool = pools[0];   //небезопасно
             _collectablesPool = pools[1];
 
-            _bonusSpawner = new BonusSpawner();
+            _bonusSpawner = new BonusSpawner(_collectablesPool);
             _platformsQueue = new Queue<Platform>();
             _randomLogic = new RandomLogic(_platformPool.Storage.parts);
 
@@ -47,7 +51,6 @@ namespace GUS.LevelBuild
             _isFree = true;
             for (int i = 0; i < countStartPlatform; i++)
             {
-                SetNextFreePlatform();
                 CreateNextPlatform();
             }
 
@@ -61,12 +64,14 @@ namespace GUS.LevelBuild
         public void CreateNextPlatform()
         {
             float nextPlatformOffset;
+            
 
             if (_platformsQueue.Count < 15)
             {
-                if(!_isFree) SetNextPlatform();
+                SetNextPlatform();
 
                 Platform currentPlatform = _nextPlatform.GetComponent<Platform>();
+                currentPlatform.SetBonus(_bonusSpawner);
 
                 if (_lastPlatform == null)
                 {
@@ -84,41 +89,27 @@ namespace GUS.LevelBuild
                 _nextPlatform.transform.position = instantiatePos + new Vector3(0,0,nextPlatformOffset);
 
                 _platformsQueue.Enqueue(currentPlatform);
-                _lastPlatform = currentPlatform;              
+                _lastPlatform = currentPlatform;
+
+                _platformCount++;
             }
         }
 
-        private void SetNextFreePlatform()
-        {
-            _nextPlatform = _platformPool.GetObject(0); //небезопасно, переделать на поиск по типу
-        }
         private void SetNextPlatform()
         {
-            int index = _randomLogic.GetDigit();
-            PoolObjectType type = _randomLogic.Parts[index].objectInfo.type;
-            _nextPlatform = _platformPool.GetObject(type);
-            SetBonus();
-        }
-
-        private void SetBonus()
-        {
-            Platform platform = _nextPlatform.GetComponent<Platform>();
-           
-            if (platform.SpawnPoints.Count > 0)
+            if (_isFree)
             {
-                Vector3 pos = _bonusSpawner.GetPos(platform.SpawnPoints);
-                ObjectInfo objInfo = _bonusSpawner.GetTypeBonus(_collectablesPool.Storage);
-
-                if (objInfo.type != PoolObjectType.Empty)
-                {
-                    _currentCollectable = _collectablesPool.GetObject(objInfo.type);
-                    _currentCollectable.transform.SetParent(platform.transform);
-                    _currentCollectable.transform.position = pos;
-                }
-                else
-                {
-                    //Debug.Log("Пустой объект");
-                }
+                _nextPlatform = _platformPool.GetObject(PoolObjectType.Platform);
+            }
+            else if(_specialPlatformBuilder.Find(_platformCount, out PoolObjectType SpecialType))
+            {
+                _nextPlatform = _platformPool.GetObject(SpecialType);
+            }
+            else
+            {
+                int index = _randomLogic.GetDigit();
+                PoolObjectType type = _randomLogic.Parts[index].objectInfo.type;
+                _nextPlatform = _platformPool.GetObject(type);
             }
         }
 
@@ -126,6 +117,7 @@ namespace GUS.LevelBuild
         {
             if (_platformsQueue.Peek().transform.position.z < RangeZ)
             {
+                _platformsQueue.Peek().DisableBonus(_collectablesPool);
                 _platformPool.DestroyObject(_platformsQueue.Peek().gameObject);
                 _platformsQueue.Dequeue();
             }
@@ -144,6 +136,7 @@ namespace GUS.LevelBuild
             {
                 Debug.Log("Билдер пуст");
             }
+            _platformCount = 0;
             _platformsQueue.Clear();
             _lastPlatform = null;
         }

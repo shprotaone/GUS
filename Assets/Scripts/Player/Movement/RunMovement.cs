@@ -61,7 +61,8 @@ namespace GUS.Player.Movement
         public void FixedUpdate()
         {
             if(_inputType != null && _canMoved)
-            {                                          
+            {
+                
                 CheckGravity();                               
             }          
         }

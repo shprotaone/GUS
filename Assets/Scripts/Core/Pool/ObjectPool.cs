@@ -71,7 +71,6 @@ namespace GUS.Core.Pool
             pools[type].Objects.Enqueue(obj);           
             obj.transform.SetParent(pools[type].Container);
             obj.transform.position = pools[type].Container.transform.position;           
-            Debug.Log("Destroy");
         }
     }
 

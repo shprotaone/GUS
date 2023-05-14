@@ -12,10 +12,39 @@ namespace GUS.Objects
         [SerializeField] private Transform _beginPoint;
         [SerializeField] private Transform _endPoint;
 
+        private GameObject _currentCollectable;
         public PoolObjectType Type => _objectPoolType;
         public List<Transform> SpawnPoints => _spawnPoints;
         public Transform EndPoint => _endPoint;
         public float PlatformLenght => Vector3.Distance(_beginPoint.position, _endPoint.position) / 2;
-        public ObjectPool PoolLink { get; set; }
+
+        public void SetBonus(BonusSpawner bonusSpawner)
+        {           
+            if (SpawnPoints.Count > 0)
+            {
+                Vector3 pos = bonusSpawner.GetPos(SpawnPoints);
+                ObjectInfo obj = bonusSpawner.GetTypeBonus();
+                _currentCollectable = bonusSpawner.GetObject(obj);
+
+                if (obj.type != PoolObjectType.Empty)
+                {
+                    _currentCollectable.transform.SetParent(transform);
+                    _currentCollectable.transform.position = pos;
+                }
+                else
+                {
+                    Debug.Log("Пустой объект");
+                }
+            }
+        }
+
+        public void DisableBonus(ObjectPool pool)
+        {
+            if(_currentCollectable != null)
+            {
+                pool.DestroyObject(_currentCollectable);
+                _currentCollectable = null;
+            }
+        }
     }
 }

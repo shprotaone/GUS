@@ -6,7 +6,7 @@ namespace GUS.Core.InputSys
 {
     public class SmartphoneInput : IInputType
     {
-        private const float rangeXForSlide = 300;
+        private const float rangeXForSlide = 40;
         private float _resetTimer;
 
         private Vector2 _swipeDirection;
@@ -14,12 +14,11 @@ namespace GUS.Core.InputSys
         private Vector2 _endPosition;
         private Vector2 _swipeDelta;
 
-        private float _deadZone = 50;
+        private float _deadZone = 5;
         private float _magnitudeTrashold = 40;
 
         private bool _isTap;
         private bool _isSwiping;
-        private bool _isTouch;
 
         public float Direction { get; private set; }
         public float Delta { get; private set; }
@@ -29,24 +28,38 @@ namespace GUS.Core.InputSys
             ResetSwipe();
         }
 
+        public EnumBind Firing()
+        {
+            if(Input.touchCount > 0)
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    Debug.Log("Firing");
+                    return EnumBind.Fire;
+                }
+            }          
+
+            return EnumBind.None;
+        }
+
         public EnumBind Movement()
         {
-            TouchInput();            
+            TouchInput();
             CheckDirection();
-            
+
             if (_swipeDirection.y > 0)
             {
                 ResetSwipe();
                 return EnumBind.Up;
-            }           
+            }
 
-            if(_swipeDirection.y < 0)
+            if (_swipeDirection.y < 0)
             {
                 ResetSwipe();
                 return EnumBind.Down;
             }
 
-            if(_swipeDirection.x == 1)
+            if (_swipeDirection.x == 1)
             {
                 ResetSwipe();
                 return EnumBind.Left;
@@ -55,12 +68,6 @@ namespace GUS.Core.InputSys
             {
                 ResetSwipe();
                 return EnumBind.Right;
-            }
-
-            if (_isTap)
-            {
-                _isTap = false;
-                return EnumBind.Fire;
             }
 
             return EnumBind.None;
@@ -74,10 +81,11 @@ namespace GUS.Core.InputSys
                 {
                     _startPosition = Input.GetTouch(0).position;
                 }
-                
-                if (Input.GetTouch(0).phase == TouchPhase.Ended && _startPosition != Vector2.zero)
+
+                if (Input.GetTouch(0).phase == TouchPhase.Moved && _startPosition != Vector2.zero)
                 {
                     _endPosition = Input.GetTouch(0).position;
+                    
                     CheckTouchOrSwipe();
                 }
             }
@@ -108,7 +116,6 @@ namespace GUS.Core.InputSys
                 Delta = _swipeDelta.y;
                 Direction = _swipeDirection.x;
             }
-           
         }
 
         private void CheckDownslide()

@@ -1,5 +1,4 @@
 using GUS.Objects.PowerUps;
-using GUS.Player;
 using UnityEngine;
 
 public interface IPowerUp

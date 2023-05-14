@@ -38,7 +38,7 @@ namespace GUS.Player.State
             //special movement
             clicker = new ClickerPlayerState(_player,this);
             //flyState = new FlyPlayerState(settings.steerSpeed,_movement,_player,this);
-            exploreState = new ExplorePlayerState(settings.steerSpeed,_player, this);
+            exploreState = new ExplorePlayerState(settings.exploreSpeed,_player, this);
             
         }
 

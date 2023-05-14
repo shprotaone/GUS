@@ -54,6 +54,7 @@ namespace GUS.Objects.PowerUps
             _handler.Disable();
             _objectPool.DestroyObject(this.gameObject);
         }
+
     }
 }
 

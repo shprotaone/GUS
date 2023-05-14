@@ -33,7 +33,7 @@ namespace GUS.TestSystems
             _generateButton.onClick.AddListener(Generate);
             _platformRandomLogic = new RandomLogic(_platformStorage.parts);
             
-            _bonusSpawner = new BonusSpawner();
+            _bonusSpawner = new BonusSpawner(_collectablesPool);
         }
 
         private void InitObjects()
@@ -69,7 +69,7 @@ namespace GUS.TestSystems
             if(platform.SpawnPoints.Count > 0)
             {
                 Vector3 pos = _bonusSpawner.GetPos(platform.SpawnPoints);
-                ObjectInfo objInfo = _bonusSpawner.GetTypeBonus(_collectableStorage);
+                ObjectInfo objInfo = _bonusSpawner.GetTypeBonus();
 
                 if (objInfo.type != PoolObjectType.Empty)
                 {

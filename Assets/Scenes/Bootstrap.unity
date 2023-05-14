@@ -595,7 +595,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &1516929137
 RectTransform:
@@ -669,11 +669,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 14386987645233738, guid: ed75c10fac52bed4ea3416f4202aaffd, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 72.9755
       objectReference: {fileID: 0}
     - target: {fileID: 14386987645233738, guid: ed75c10fac52bed4ea3416f4202aaffd, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 101.0173
       objectReference: {fileID: 0}
     - target: {fileID: 14386987645233738, guid: ed75c10fac52bed4ea3416f4202aaffd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -705,11 +705,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 14386987645233738, guid: ed75c10fac52bed4ea3416f4202aaffd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 10.687988
       objectReference: {fileID: 0}
     - target: {fileID: 14386987645233738, guid: ed75c10fac52bed4ea3416f4202aaffd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -18.252075
       objectReference: {fileID: 0}
     - target: {fileID: 14386987645233738, guid: ed75c10fac52bed4ea3416f4202aaffd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -737,6 +737,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 14386987645233740, guid: ed75c10fac52bed4ea3416f4202aaffd, type: 3}
       propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 14386987645233740, guid: ed75c10fac52bed4ea3416f4202aaffd, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 14386987645233741, guid: ed75c10fac52bed4ea3416f4202aaffd, type: 3}
