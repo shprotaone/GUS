@@ -6,6 +6,7 @@ namespace GUS.Player.State
 {
     public class PlayerStateMachine
     {
+        private AnimatorController _animator;
         private PlayerActor _player;
         public IState CurrentState { get; private set; }
         public IState ActionState { get; private set; }

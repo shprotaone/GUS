@@ -11,6 +11,7 @@ namespace GUS.Player.State
         private PlayerStateMachine _playerState;
         private RunMovement _movement;
         private PlayerActor _player;
+        private  AnimatorController _animatorController;
         private float _playerVelocity;
 
         private float _jumpHeight;      
@@ -21,12 +22,14 @@ namespace GUS.Player.State
             this._player = player;
             _playerState = playerState;
             _jumpHeight = settings.jumpHeight;
+            _animatorController = player.AnimatorController;
         }
 
         public void Enter()
         {
             _movement = (RunMovement)_player.MovementType;
             JumpMeth();
+            _animatorController.JumpActivate();
         }
 
         public IEnumerator Execute()

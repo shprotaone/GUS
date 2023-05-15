@@ -9,17 +9,18 @@ namespace GUS.Player.State
     {
         private PlayerStateMachine _playerState;
         private PlayerActor _player;
+        private AnimatorController _animatorController;
         private RunMovement _movement;
         private float _steerSpeed;
 
-        public RunPlayerState(LevelSettings settings, PlayerActor player,PlayerStateMachine state)
+        public RunPlayerState(LevelSettings settings, PlayerActor player, PlayerStateMachine state)
         {
             _movement = new RunMovement();
             SetMoveSettings(settings.distanceToMovement,settings.gravity,settings.gravityScale);
             _player = player;
             _steerSpeed = settings.steerSpeed;
             _playerState = state;
-
+            _animatorController = player.AnimatorController;
             _movement.Init(_player, _playerState, _steerSpeed);
         }
 
@@ -31,7 +32,8 @@ namespace GUS.Player.State
 
         public void Enter()
         {
-            _player.SetMovementType(_movement);       
+            _player.SetMovementType(_movement);
+            _animatorController.RunActivate(true);
         }
 
         public IEnumerator Execute()
@@ -41,7 +43,7 @@ namespace GUS.Player.State
 
         public void Exit()
         {
-            
+            _animatorController.RunActivate(false);
         }
 
         public void Update()

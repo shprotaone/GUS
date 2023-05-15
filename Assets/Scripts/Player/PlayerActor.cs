@@ -3,6 +3,7 @@ using GUS.Core.InputSys;
 using GUS.Core.Locator;
 using GUS.Core.Weapon;
 using GUS.Objects.PowerUps;
+using System;
 using UnityEngine;
 
 namespace GUS.Player
@@ -10,6 +11,7 @@ namespace GUS.Player
     public class PlayerActor : MonoBehaviour
     {
         [SerializeField] private CharacterController _controller;
+        [SerializeField] private AnimatorController _animator;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private PowerUpHandler _powerUpHandler;
               
@@ -22,12 +24,13 @@ namespace GUS.Player
         private IMovement _movement;
 
         public IMovement MovementType => _movement;
-        public CharacterController CharController => _controller;
         public IInputType InputType => _inputType;
         public IWeapon Weapon => _weapon;
+        public CharacterController CharController => _controller;
         public GameStateController GameStateController => _stateController;
         public Wallet Wallet => _wallet;
         public PowerUpHandler PowerUpHandler => _powerUpHandler;
+        public AnimatorController AnimatorController => _animator;
         private void Start()
         {
             _weapon = GetComponentInChildren<IWeapon>();
@@ -36,7 +39,8 @@ namespace GUS.Player
         public void Init(IInputType inputType,IServiceLocator serviceLocator)
         {
             _inputType = inputType;
-            _stateController = serviceLocator.Get<GameStateController>();   
+            _stateController = serviceLocator.Get<GameStateController>();
+            
             _wallet = serviceLocator.Get<Wallet>();
         }
 

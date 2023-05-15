@@ -45,7 +45,7 @@ namespace GUS.Core
         private void Start()
         {           
             _stateController.Init(_serviceLocator);
-            _player.Init(_inputType, _serviceLocator);    
+            //_player.Init(_inputType, _serviceLocator);    
 
             if(_isHub) _stateController.InitHub();
             else _stateController.InitGame();
@@ -127,8 +127,8 @@ namespace GUS.Core
         private void PlayerInit()
         {         
             _player.Init(_inputType, _serviceLocator);
-            _serviceLocator.Register<PlayerActor>(_player);                
-            _serviceLocator.Register<PlayerStateMachine>(new PlayerStateMachine(_serviceLocator));        
+            _serviceLocator.Register<PlayerActor>(_player);
+            _serviceLocator.Register<PlayerStateMachine>(new PlayerStateMachine(_serviceLocator));
         }
     }
 }
