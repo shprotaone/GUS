@@ -1,4 +1,5 @@
 using GUS.Core.Locator;
+using GUS.Player.State;
 using System;
 using TMPro;
 
@@ -29,7 +30,6 @@ namespace GUS.Core.GameState
 
         public GameStateMachine(TMP_Text text,IServiceLocator serviceLocator)
         {
-            //Каждый экземпляр Стейта в который должны передаваться настройки?
             initState = new InitGameState(serviceLocator,text);
             start = new StartState(text,serviceLocator);
             session = new InGameState(text,serviceLocator);
@@ -40,7 +40,7 @@ namespace GUS.Core.GameState
         }
 
         public void InitGameLoop(IState state)
-        {
+        {            
             CurrentState = state;
             CurrentState.Enter();
             stateChanged?.Invoke();

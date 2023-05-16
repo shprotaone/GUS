@@ -10,6 +10,7 @@ namespace GUS.Core.GameState
 {
     public class InGameState : IState
     {
+        private IServiceLocator _serviceLocator;
         private TMP_Text _stateText;
         private CameraController _cameraController;
         private WorldController _worldController;
@@ -21,18 +22,16 @@ namespace GUS.Core.GameState
         public InGameState(TMP_Text stateText, IServiceLocator serviceLocator)
         {
             _stateText = stateText;
+            _serviceLocator = serviceLocator;
             _cameraController = serviceLocator.Get<CameraController>();
             _worldController = serviceLocator.Get<WorldController>();
             _wallet = serviceLocator.Get<Wallet>();
-            _actor = Singleton<PlayerActor>.Instance;
         }
 
         public void Enter()
-        {
-            _stateText.text = "Enter to " + this.GetType().Name;
+        {            
             _cameraController.RunCamera();
-            _worldController.Move();
-            
+            _worldController.Move();            
             _isTimer = true;
         }
 
@@ -57,11 +56,7 @@ namespace GUS.Core.GameState
 
         public void Update()
         {
-            _worldController.Move();
-            if(_actor.MovementType is RunMovement run)
-            {
-                _cameraController.CameraCalculate(run);
-            }          
-        }
+            _worldController.Move();        
+        }      
     }
 }

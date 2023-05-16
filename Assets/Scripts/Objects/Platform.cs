@@ -11,6 +11,7 @@ namespace GUS.Objects
         [SerializeField] private PoolObjectType _objectPoolType;
         [SerializeField] private Transform _beginPoint;
         [SerializeField] private Transform _endPoint;
+        [SerializeField] private bool _isSpawning = true;
 
         private GameObject _currentCollectable;
         public PoolObjectType Type => _objectPoolType;
@@ -20,7 +21,7 @@ namespace GUS.Objects
 
         public void SetBonus(BonusSpawner bonusSpawner)
         {           
-            if (SpawnPoints.Count > 0)
+            if (SpawnPoints.Count > 0 && _isSpawning)
             {
                 Vector3 pos = bonusSpawner.GetPos(SpawnPoints);
                 ObjectInfo obj = bonusSpawner.GetTypeBonus();

@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class TreeEnemy : MonoBehaviour,IEnemy
 {
-    [SerializeField] private UIClicker _clicker;
+    [SerializeField] private ClickerGame _clicker;
     [SerializeField] private Apple[] _apples;
 
     private float _max;
     private float _step;
     private int _appleIndex = 0;
 
-    private void OnEnable()
+    public void Init(ClickerGame clicker)
     {
-        _clicker = gameObject.GetComponentInParent<UIClicker>();
+        _clicker = clicker;
         _max = _clicker.HP;
         _step = _clicker.HP / _apples.Length;
         _max -= _step;

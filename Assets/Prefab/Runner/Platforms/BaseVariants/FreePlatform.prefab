@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 8965814278925895964, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f0ac0194adba587468a65e19871f8bda, type: 2}
+      objectReference: {fileID: 2100000, guid: f81cf050118ffa749a2804110179ae74, type: 2}
     - target: {fileID: 8965814278925895967, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -122,6 +122,7 @@ MonoBehaviour:
   _objectPoolType: 0
   _beginPoint: {fileID: 372381312345813487}
   _endPoint: {fileID: 372381312331468582}
+  _isSpawning: 0
 --- !u!4 &5225920094672555460 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3584932247596613746, guid: 1056315413bce144fb2ed51b5995178e, type: 3}

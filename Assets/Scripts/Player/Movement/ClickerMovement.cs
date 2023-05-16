@@ -19,12 +19,9 @@ namespace GUS.Player.Movement
             
         }
         public void Fire()
-        {
-            _inputType.Firing();
-
-            if (_action == EnumBind.Fire)
+        {           
+            if (_inputType.Firing() == EnumBind.Fire)
             {
-                Debug.Log("Click");
                 OnClick?.Invoke();
             }
         }

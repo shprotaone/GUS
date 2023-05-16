@@ -1,20 +1,21 @@
 using GUS.Core.InputSys;
 using GUS.Core.Locator;
 using GUS.Player.State;
+using GUS.Utils;
+using System;
 using UnityEngine;
 
 namespace GUS.Player.Movement
 {
     public class RunMovement : IMovement
     {
+        public Action OnChangePosition;
         private Vector3 _startPosition;
         private PlayerStateMachine _playerState;
         private PlayerActor _player;
         private IInputType _inputType;
         private Vector3 _targetPosition;
-        //private Vector3 _direction;
         private EnumBind _movementAction;
-        private EnumBind _action;
 
         private float _distance;
         private float _speedMovement;
@@ -22,12 +23,10 @@ namespace GUS.Player.Movement
         private float _gravityScale;
         private float _verticalVelocity;
 
-        private bool _isLeft = false;
-        private bool _isRight = false;
+        private Line _currentLine;
         private bool _canMoved;
 
-        public bool IsLeft => _isLeft;
-        public bool IsRight => _isRight;
+        public Line Line => _currentLine;
 
         public bool IsGrounded { get;private set; }
         public void Init(PlayerActor player, PlayerStateMachine playerState, float speedMovement)
@@ -38,6 +37,9 @@ namespace GUS.Player.Movement
             _speedMovement = speedMovement;            
             _canMoved = true;
             _targetPosition = _player.transform.position;
+            _currentLine = Line.Center;
+            OnChangePosition += CheckLinePosition;
+            OnChangePosition += () => _player.CameraHandler(this);
         }
 
         public void SetDistance(float distance) => _distance = distance;
@@ -52,10 +54,8 @@ namespace GUS.Player.Movement
             if(_inputType != null && _canMoved)
             {
                 Move();
-                CheckMove();
                 Jump();
                 Crunch();
-
                 Fire();
             }
         }
@@ -63,8 +63,7 @@ namespace GUS.Player.Movement
         public void FixedUpdate()
         {
             if(_inputType != null && _canMoved)
-            {
-                
+            {               
                 CheckGravity();                               
             }          
         }
@@ -87,24 +86,24 @@ namespace GUS.Player.Movement
             _movementAction = _inputType.Movement();
             float tmpDist = Time.deltaTime * _speedMovement;
 
-            //_direction = Vector3.zero;
             Vector3 direction = new Vector3(0, 0, 0);
 
             direction.x = Mathf.Lerp(_player.transform.position.x, _targetPosition.x, tmpDist) - _player.transform.position.x;
-            direction.y = _verticalVelocity * Time.deltaTime;
+            direction.y = _verticalVelocity * Time.deltaTime;       
 
-            _player.CharController.Move(direction);
-
-            if (_movementAction == EnumBind.Left && !_isLeft)
+            if (_movementAction == EnumBind.Left && _currentLine != Line.Left)
             {
                 _targetPosition.x -= _distance;
+                OnChangePosition?.Invoke();
+                
             }
-            else if (_movementAction == EnumBind.Right && !_isRight)
+            else if (_movementAction == EnumBind.Right && _currentLine != Line.Right)
             {
                 _targetPosition.x += _distance;
+                OnChangePosition?.Invoke();
             }
 
-            ResetPosition();
+            _player.CharController.Move(direction);
         }
 
         private void Jump()
@@ -117,7 +116,7 @@ namespace GUS.Player.Movement
 
         private void Crunch()
         {
-            if (_movementAction == EnumBind.Down)
+            if (_movementAction == EnumBind.Down && _player.CharController.isGrounded)
             {
                 _playerState.TransitionTo(_playerState.downslide);
             }
@@ -125,26 +124,22 @@ namespace GUS.Player.Movement
 
         private void ResetPosition()
         {
-            _isLeft = false;
-            _isRight = false;
+            _currentLine = Line.Center;
         }
 
-        private void CheckMove()
+        private void CheckLinePosition()
         {
             if (_targetPosition.x == _distance)
             {
-                _isLeft = false;
-                _isRight = true;
+                _currentLine = Line.Right;
             }
             else if (_targetPosition.x == -_distance)
             {
-                _isLeft = true;
-                _isRight = false;
+                _currentLine = Line.Left;
             }
             else
             {
-                _isLeft = false;
-                _isRight = false;
+                _currentLine= Line.Center;
             }
         }
 
@@ -162,20 +157,6 @@ namespace GUS.Player.Movement
             }
         }
 
-        private bool OnSLope()
-        {
-            RaycastHit hit;
-
-            if (Physics.Raycast(_player.transform.position, Vector3.down, out hit, _player.CharController.height / 2))
-            {
-                if(hit.normal != Vector3.up)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public void ChangeVerticalVelocity(float velocity)
         {
             _verticalVelocity = velocity;
@@ -191,6 +172,8 @@ namespace GUS.Player.Movement
         {
             _targetPosition = _startPosition;
             ResetPosition();
+            CheckLinePosition();
+            OnChangePosition?.Invoke();
             Debug.Log("Back");
         }
     }

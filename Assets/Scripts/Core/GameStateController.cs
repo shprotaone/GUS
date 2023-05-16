@@ -10,6 +10,7 @@ namespace GUS.Core
 {
     public class GameStateController : MonoBehaviour
     {
+        [SerializeField] private Transform _clickerBossPosition;
         [SerializeField] private SceneHandler _sceneHandler;
         [SerializeField] private Text _deltaText;
         [SerializeField] private Text _directionText;
@@ -20,6 +21,8 @@ namespace GUS.Core
 
         private IState _prevPlayerState;
         private IState _prevGameState;
+
+        public Transform ClickerBossPos => _clickerBossPosition;
         public SceneHandler SceneHandler => _sceneHandler;
         public GameStateMachine GameStateMachine => _gameStateMachine;
 
@@ -77,9 +80,9 @@ namespace GUS.Core
         }
         
         public void StartGame()
-        {         
-            _gameStateMachine.TransitionTo(_gameStateMachine.session);
+        {
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
+            _gameStateMachine.TransitionTo(_gameStateMachine.session);          
            // StartCoroutine(_gameStateMachine.CurrentState.Execute());
         }
 

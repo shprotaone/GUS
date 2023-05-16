@@ -65,8 +65,7 @@ namespace GUS.LevelBuild
         {
             float nextPlatformOffset;
             
-
-            if (_platformsQueue.Count < 15)
+            if (_platformsQueue.Count < 7)
             {
                 SetNextPlatform();
 
@@ -91,7 +90,7 @@ namespace GUS.LevelBuild
                 _platformsQueue.Enqueue(currentPlatform);
                 _lastPlatform = currentPlatform;
 
-                _platformCount++;
+               
             }
         }
 
@@ -104,12 +103,14 @@ namespace GUS.LevelBuild
             else if(_specialPlatformBuilder.Find(_platformCount, out PoolObjectType SpecialType))
             {
                 _nextPlatform = _platformPool.GetObject(SpecialType);
+                _isFree = true;
             }
             else
             {
                 int index = _randomLogic.GetDigit();
                 PoolObjectType type = _randomLogic.Parts[index].objectInfo.type;
                 _nextPlatform = _platformPool.GetObject(type);
+                _platformCount++;
             }
         }
 
@@ -137,8 +138,14 @@ namespace GUS.LevelBuild
                 Debug.Log("Билдер пуст");
             }
             _platformCount = 0;
+            _specialPlatformBuilder.ResetCount();
             _platformsQueue.Clear();
             _lastPlatform = null;
+        }
+
+        public void FreePlatformsMode(bool flag)
+        {
+            _isFree = flag;
         }
     }
 }

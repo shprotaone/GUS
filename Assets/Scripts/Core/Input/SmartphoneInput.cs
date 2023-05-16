@@ -34,7 +34,6 @@ namespace GUS.Core.InputSys
             {
                 if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
-                    Debug.Log("Firing");
                     return EnumBind.Fire;
                 }
             }          

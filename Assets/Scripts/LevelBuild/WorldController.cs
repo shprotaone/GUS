@@ -1,4 +1,5 @@
 using GUS.Core.Locator;
+using System;
 using UnityEngine;
 
 namespace GUS.LevelBuild
@@ -58,8 +59,21 @@ namespace GUS.LevelBuild
 
         public void WorldStopper(bool flag)
         {
-            _worldIsStopped = flag;
-            _currentSpeed = 0;
+            if(_worldIsStopped)
+            {
+                _worldIsStopped = flag;
+                _currentSpeed = 0;
+            }
+            else
+            {
+                Debug.Log("IgnoreStopping");
+            }
+            
+        }
+
+        public void CreateOnlyFreePlatforms(bool flag)
+        {
+            _platformBuilder.FreePlatformsMode(flag);
         }
     }
 }
