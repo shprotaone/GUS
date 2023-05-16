@@ -22,11 +22,13 @@ namespace GUS.Player.Movement
         private float _gravityScale;
         private float _verticalVelocity;
 
-        private bool isLeft = false;
-        private bool isRight = false;
+        private bool _isLeft = false;
+        private bool _isRight = false;
         private bool _canMoved;
 
-        public Vector3 TargetPos => _targetPosition;
+        public bool IsLeft => _isLeft;
+        public bool IsRight => _isRight;
+
         public bool IsGrounded { get;private set; }
         public void Init(PlayerActor player, PlayerStateMachine playerState, float speedMovement)
         {
@@ -93,11 +95,11 @@ namespace GUS.Player.Movement
 
             _player.CharController.Move(direction);
 
-            if (_movementAction == EnumBind.Left && !isLeft)
+            if (_movementAction == EnumBind.Left && !_isLeft)
             {
                 _targetPosition.x -= _distance;
             }
-            else if (_movementAction == EnumBind.Right && !isRight)
+            else if (_movementAction == EnumBind.Right && !_isRight)
             {
                 _targetPosition.x += _distance;
             }
@@ -123,26 +125,26 @@ namespace GUS.Player.Movement
 
         private void ResetPosition()
         {
-            isLeft = false;
-            isRight = false;
+            _isLeft = false;
+            _isRight = false;
         }
 
         private void CheckMove()
         {
             if (_targetPosition.x == _distance)
             {
-                isLeft = false;
-                isRight = true;
+                _isLeft = false;
+                _isRight = true;
             }
             else if (_targetPosition.x == -_distance)
             {
-                isLeft = true;
-                isRight = false;
+                _isLeft = true;
+                _isRight = false;
             }
             else
             {
-                isLeft = false;
-                isRight = false;
+                _isLeft = false;
+                _isRight = false;
             }
         }
 

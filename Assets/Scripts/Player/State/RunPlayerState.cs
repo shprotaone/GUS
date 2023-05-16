@@ -1,4 +1,5 @@
 ﻿using GUS.Core;
+using GUS.Core.GameState;
 using GUS.Player.Movement;
 using System;
 using System.Collections;
@@ -49,6 +50,7 @@ namespace GUS.Player.State
         public void Update()
         {
             _movement.Update();
+            //_player.CameraCalculate(_movement);
         }
 
         public void FixedUpdate()

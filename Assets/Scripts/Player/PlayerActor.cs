@@ -3,7 +3,10 @@ using GUS.Core.InputSys;
 using GUS.Core.Locator;
 using GUS.Core.Weapon;
 using GUS.Objects.PowerUps;
+using GUS.Player.Movement;
+using Palmmedia.ReportGenerator.Core;
 using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace GUS.Player
@@ -14,10 +17,9 @@ namespace GUS.Player
         [SerializeField] private AnimatorController _animator;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private PowerUpHandler _powerUpHandler;
-              
+
         private GameStateController _stateController;
         private Wallet _wallet;
-        private Vector3 _dir;
 
         private IWeapon _weapon;
         private IInputType _inputType;
@@ -40,7 +42,6 @@ namespace GUS.Player
         {
             _inputType = inputType;
             _stateController = serviceLocator.Get<GameStateController>();
-            
             _wallet = serviceLocator.Get<Wallet>();
         }
 
@@ -78,16 +79,6 @@ namespace GUS.Player
         public void ActivatePowerUp(IPowerUp powerUp)
         {
             _powerUpHandler.Execute(powerUp);
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            //Gizmos.color = Color.yellow;
-            //if(_movement is RunMovement movement)
-            //{
-            //    Vector3 point = movement.TargetPos;
-            //    Gizmos.DrawSphere(point, 1);
-            //}                     
-        }
+        }     
     }
 }
