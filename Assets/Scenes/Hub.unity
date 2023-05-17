@@ -1067,24 +1067,13 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474625575}
   m_CullTransparentMesh: 1
---- !u!114 &571582935 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1393434693910822195, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
-  m_PrefabInstance: {fileID: 1858446788}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &671707568 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7320908609005532177, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
   m_PrefabInstance: {fileID: 1858446788}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 319d2fe34a804e245819465c9505ea59, type: 3}
   m_Name: 
@@ -1795,7 +1784,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1858446788}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 319d2fe34a804e245819465c9505ea59, type: 3}
   m_Name: 
@@ -2627,6 +2616,7 @@ MonoBehaviour:
   _levelSettings: {fileID: 11400000, guid: e0d5f89877db220478bf957613b9fffa, type: 2}
   _platformPool: {fileID: 0}
   _collectablesPool: {fileID: 0}
+  _progressiveSystem: {fileID: 0}
   _joystick: {fileID: 1775953848}
   _isHub: 1
 --- !u!114 &1433391780
@@ -2641,6 +2631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b72221a20d41624f95b00ac83646f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clickerBossPosition: {fileID: 0}
   _sceneHandler: {fileID: 1433391782}
   _deltaText: {fileID: 0}
   _directionText: {fileID: 0}
@@ -2659,6 +2650,7 @@ MonoBehaviour:
   _uiHubController: {fileID: 1433391784}
   _uiEndGame: {fileID: 0}
   _uiInGame: {fileID: 0}
+  _uiStartGame: {fileID: 0}
   _toHubButton: {fileID: 0}
   _restartButton: {fileID: 0}
   _resumeButton: {fileID: 0}
@@ -2695,7 +2687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1140729022}
-  _brain: {fileID: 571582935}
+  _brain: {fileID: 0}
   _hubWalkCamera: {fileID: 671707568}
   _hubMapCamera: {fileID: 1123370420}
   _clickerCamera: {fileID: 1252109800}
@@ -2703,6 +2695,8 @@ MonoBehaviour:
   _playerTarget: {fileID: 0}
   _pointView: {fileID: 0}
   _height: 0
+  _moveDistance: 0
+  _speedMovement: 0
 --- !u!114 &1433391784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3683,17 +3677,37 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.0000697613
       objectReference: {fileID: 0}
+    - target: {fileID: 1393434693928840719, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.33477163
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393434693928840719, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0026874116
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393434693928840719, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0009547638
+      objectReference: {fileID: 0}
     - target: {fileID: 1393434694128294943, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.10958679
+      value: 0.25437397
       objectReference: {fileID: 0}
     - target: {fileID: 1393434694128294943, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0006327509
+      value: 0.0004979592
       objectReference: {fileID: 0}
     - target: {fileID: 1393434694128294943, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000069761314
+      value: -0.0001309762
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393434694392053697, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0025575843
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393434694392053697, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0012619223
       objectReference: {fileID: 0}
     - target: {fileID: 1393434695094802986, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
       propertyPath: m_Name
@@ -3749,19 +3763,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2386202479958112653, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000012530592
+      value: -0.000000012530592
       objectReference: {fileID: 0}
     - target: {fileID: 2386202479958112653, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000004190077
+      value: 0.000000004190077
       objectReference: {fileID: 0}
     - target: {fileID: 3316828597022018450, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000004271822
+      value: 0.000000004271819
       objectReference: {fileID: 0}
     - target: {fileID: 3316828597022018450, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 5.052475e-10
+      value: -5.052471e-10
       objectReference: {fileID: 0}
     - target: {fileID: 7320908609005532177, guid: c3fd661607fd18c4f9d5966c6cde60ef, type: 3}
       propertyPath: m_Follow
@@ -3951,6 +3965,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 20.12
       objectReference: {fileID: 0}
+    - target: {fileID: 3163200715630416650, guid: 0bf91af217a123e4492130ffc53d13c7, type: 3}
+      propertyPath: _capsuleCollider
+      value: 
+      objectReference: {fileID: 1970592581}
+    - target: {fileID: 3163200715630416650, guid: 0bf91af217a123e4492130ffc53d13c7, type: 3}
+      propertyPath: _cameraController
+      value: 
+      objectReference: {fileID: 1433391783}
     - target: {fileID: 3163200715630416655, guid: 0bf91af217a123e4492130ffc53d13c7, type: 3}
       propertyPath: m_Constraints
       value: 4
@@ -3974,6 +3996,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088ab85b920567d4b9d1e2f56377767e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &1970592581 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 3163200715630416648, guid: 0bf91af217a123e4492130ffc53d13c7, type: 3}
+  m_PrefabInstance: {fileID: 1970592577}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &214418579060238819
 RectTransform:
   m_ObjectHideFlags: 0

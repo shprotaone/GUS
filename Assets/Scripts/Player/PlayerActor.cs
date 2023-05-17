@@ -13,8 +13,9 @@ namespace GUS.Player
     public class PlayerActor : MonoBehaviour
     {        
         [SerializeField] private CharacterController _controller;
-        [SerializeField] private AnimatorController _animator;
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private CapsuleCollider _capsuleCollider;
+        [SerializeField] private AnimatorController _animator;
         [SerializeField] private PowerUpHandler _powerUpHandler;
         [SerializeField] private CameraController _cameraController;
 
@@ -25,6 +26,7 @@ namespace GUS.Player
         private IInputType _inputType;
         private IMovement _movement;
 
+        #region Properties
         public IMovement MovementType => _movement;
         public IInputType InputType => _inputType;
         public IWeapon Weapon => _weapon;
@@ -33,6 +35,8 @@ namespace GUS.Player
         public Wallet Wallet => _wallet;
         public PowerUpHandler PowerUpHandler => _powerUpHandler;
         public AnimatorController AnimatorController => _animator;
+        public CapsuleCollider Collider => _capsuleCollider;
+        #endregion
         private void Start()
         {
             _weapon = GetComponentInChildren<IWeapon>();

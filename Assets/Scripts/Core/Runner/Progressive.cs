@@ -26,7 +26,7 @@ public class Progressive : MonoBehaviour
 
     public void CheckStage(int value)
     {
-        if (_parts[_stageCount].stageCount < value && _stageCount < _parts.Count)
+        if (_stageCount < _parts.Count && _parts[_stageCount].stageCount < value)
         {
             _currentLevelSettings = _parts[_stageCount].settings;
             SetNewSettings();

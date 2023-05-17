@@ -50,7 +50,7 @@ namespace GUS.Core.GameState
 
         public void Update()
         {
-
+            _controller.Move();
         }
     }
 }

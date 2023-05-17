@@ -21,6 +21,7 @@ namespace GUS.Player.State
         public readonly DeathPlayerState deathState;
         public readonly DownSlideState downslide;
         public readonly ClickerPlayerState clicker;
+        public readonly PausePlayerState pauseState;
 
         public event Action stateChanged;
 
@@ -30,12 +31,14 @@ namespace GUS.Player.State
             _player = service.Get<PlayerActor>();
 
             initState = new InitPlayerState(_player,this);
+            pauseState = new PausePlayerState(_player, this);
             //base movement in runner
             runState = new RunPlayerState(settings,_player,this);            
             jumpState = new JumpPlayerState(settings,_player,this);
             downslide = new DownSlideState(settings.downSlideTime,_player,this);
             attackState = new AttackPlayerState(_player);
             deathState = new DeathPlayerState(_player);
+            
             //special movement
             clicker = new ClickerPlayerState(_player,this);
             //flyState = new FlyPlayerState(settings.steerSpeed,_movement,_player,this);

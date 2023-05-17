@@ -1,3 +1,4 @@
+using DG.Tweening;
 using GUS.Core;
 using GUS.Core.GameState;
 using GUS.Player;
@@ -11,8 +12,10 @@ public class ClickerGame : MonoBehaviour
     [SerializeField] private BossSettings _settings;
     [SerializeField] private Slider _hpSlider;
     [SerializeField] private bool _isDynamicClicker;
+    [SerializeField] private Transform _bossTransform;
 
     private GameStateController _controller;
+    private GameObject _enemyObj;
     private Wallet _wallet;
     private ClickerState _clickerState;
     private ClickerMovement _clickerMovement;
@@ -22,10 +25,21 @@ public class ClickerGame : MonoBehaviour
 
     public float HP => _hp;
 
+    private void OnEnable()
+    {
+        if(_enemyObj == null)
+        {
+            _enemyObj = Instantiate(_settings.BossPrefab, _bossTransform);
+        }
+        _enemyObj.transform.SetParent(_bossTransform);
+    }
+
     public IEnumerator Init(PlayerActor actor)
     {
+        
         _controller = actor.GameStateController;
-        _wallet= actor.Wallet;
+        CreateEnemy();
+        _wallet = actor.Wallet;
         IState state = _controller.GameStateMachine.CurrentState;
 
         if(state is ClickerState clicker)
@@ -34,8 +48,7 @@ public class ClickerGame : MonoBehaviour
         }
 
         InitSlider();
-        CreateEnemy();
-
+      
         yield return new WaitForSeconds(0.5f);
         if (actor.MovementType is ClickerMovement clickerMovement)
         {
@@ -49,8 +62,10 @@ public class ClickerGame : MonoBehaviour
     private void CreateEnemy()
     {
         //TODO перебросить в фабрику
-        GameObject enemy = Instantiate(_settings.BossPrefab, _controller.ClickerBossPos);
-        _enemy = enemy.GetComponent<IEnemy>();
+        _enemyObj.transform.DOMove(_controller.ClickerBossPos.position, 1);
+        _enemyObj.transform.SetParent(_controller.ClickerBossPos);
+                   
+        _enemy = _enemyObj.GetComponent<IEnemy>();
         _enemy.Init(this);
     }
 

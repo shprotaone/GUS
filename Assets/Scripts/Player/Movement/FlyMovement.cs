@@ -83,7 +83,7 @@ namespace GUS.Player.Movement
             if (_inputType is Keyboard keyboard) keyboard.SetHold(flag);
         }
 
-        public void StopMovement(bool flag)
+        public void CanMove(bool flag)
         {
             _canMove = flag;
         }

@@ -1,34 +1,34 @@
 ﻿using DG.Tweening;
 using GUS.Core;
 using System.Collections;
-using UnityEngine;
 
 namespace GUS.Player.State
 {
-    public class DeathPlayerState: IState
+    public class PausePlayerState : IState
     {
         private PlayerActor _player;
-        private IMovement _movement;
+        private PlayerStateMachine _playerStateMachine;
 
-        public DeathPlayerState(PlayerActor player)
+        public PausePlayerState(PlayerActor player, PlayerStateMachine playerStateMachine)
         {
             _player = player;
+            _playerStateMachine = playerStateMachine;
+            
         }
 
         public void Enter()
         {
-            _movement = _player.MovementType;
-            _movement.CanMove(false);
+            _player.AnimatorController.Pause(true);
         }
 
         public IEnumerator Execute()
-        {           
+        {
             yield return null;
         }
 
         public void Exit()
         {
-            _movement.CanMove(true);
+            _player.AnimatorController.Pause(false);
         }
 
         public void FixedUpdate()
