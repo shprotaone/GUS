@@ -11,6 +11,7 @@ namespace GUS.LevelBuild
 {
     public class PlatformBuilder
     {
+        public event Action<int> OnPlatformAdded;
         private const int countStartPlatform = 3;
         public const int RangeZ = -50;
 
@@ -111,6 +112,7 @@ namespace GUS.LevelBuild
                 PoolObjectType type = _randomLogic.Parts[index].objectInfo.type;
                 _nextPlatform = _platformPool.GetObject(type);
                 _platformCount++;
+                OnPlatformAdded?.Invoke(_platformCount);                           
             }
         }
 

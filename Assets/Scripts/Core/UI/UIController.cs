@@ -12,6 +12,7 @@ namespace GUS.Core.UI
         [SerializeField] private UiHubController _uiHubController;
         [SerializeField] private UIEndGame _uiEndGame;
         [SerializeField] private UIInGame _uiInGame;
+        [SerializeField] private UIStartGame _uiStartGame;
         [SerializeField] private Button _toHubButton;
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button _resumeButton;
@@ -20,6 +21,7 @@ namespace GUS.Core.UI
 
         private GameStateController _controller;
 
+        public UIStartGame UIStartGame => _uiStartGame;
         public UIInGame UiInGame => _uiInGame;
         public UIEndGame UIEndGame => _uiEndGame;
 

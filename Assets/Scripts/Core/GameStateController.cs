@@ -32,6 +32,11 @@ namespace GUS.Core
             _playerStateMachine = serviceLocator.Get<PlayerStateMachine>();
             _smartInput = serviceLocator.Get<IInputType>(); //для тестов
 
+            if(_gameStateMachine.start!= null) // временное решение
+            {
+                _gameStateMachine.start.Init(this);
+            }
+            
             _playerStateMachine.stateChanged += CallPlayerRoutine;
             _gameStateMachine.stateChanged += CallGameStateRoutine;
         }
@@ -69,8 +74,6 @@ namespace GUS.Core
             _gameStateMachine.InitGameLoop(_gameStateMachine.initState);
             _playerStateMachine.Initialize(_playerStateMachine.initState);
             _gameStateMachine.TransitionTo(_gameStateMachine.start);
-
-            StartGame();
         }
 
         public void ClickerGame()
@@ -83,14 +86,12 @@ namespace GUS.Core
         {
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
             _gameStateMachine.TransitionTo(_gameStateMachine.session);          
-           // StartCoroutine(_gameStateMachine.CurrentState.Execute());
         }
 
         public void Resume()
         {
             _gameStateMachine.TransitionTo(_prevGameState);
             _playerStateMachine.TransitionTo(_prevPlayerState);
-            //StartCoroutine(_gameStateMachine.CurrentState.Execute());
         }
 
         public void Pause()
@@ -106,8 +107,6 @@ namespace GUS.Core
         {
             _gameStateMachine.TransitionTo(_gameStateMachine.endGame);
             _playerStateMachine.TransitionTo(_playerStateMachine.deathState);
-
-            //StartCoroutine(_gameStateMachine.CurrentState.Execute());
         }
 
         public void RestartGame()

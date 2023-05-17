@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using GUS.Core;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -48,6 +49,11 @@ namespace GUS.Player.State
         public void Update()
         {
             _movement.Update();
+        }
+
+        public void SetCrouch(float downSlideTime)
+        {
+            _downSlideTime = downSlideTime;
         }
     }
 }

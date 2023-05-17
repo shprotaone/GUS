@@ -75,6 +75,13 @@ namespace GUS.Player.State
         {
             CurrentState?.FixedUpdate();
         }
+
+        public void UpdateSettings(LevelSettings settings)
+        {
+            runState.SetMoveSettings(settings.distanceToMovement, settings.gravity, settings.gravityScale);
+            jumpState.SetJump(settings.jumpHeight);
+            downslide.SetCrouch(settings.downSlideTime);
+        }
     }
 }
 

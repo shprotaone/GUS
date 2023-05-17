@@ -1,5 +1,6 @@
 ﻿using GUS.Core;
 using GUS.Player.Movement;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -51,6 +52,12 @@ namespace GUS.Player.State
         {
             
         }
+
+        public void SetJump(float jumpHeight)
+        {
+            _jumpHeight = jumpHeight;
+        }
+
         private void JumpMeth()
         {
             _playerVelocity = _jumpHeight;
