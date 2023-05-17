@@ -231,7 +231,6 @@ GameObject:
   - component: {fileID: 1393434693910822194}
   - component: {fileID: 1393434693910822197}
   - component: {fileID: 1393434693910822196}
-  - component: {fileID: 7148722976644551822}
   - component: {fileID: 1703413970}
   - component: {fileID: 9043372969183614246}
   m_Layer: 0
@@ -307,39 +306,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393434693910822199}
   m_Enabled: 1
---- !u!114 &7148722976644551822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393434693910822199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
 --- !u!114 &1703413970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +366,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
+  m_CustomBlends: {fileID: 11400000, guid: f59124b488eac544cb16ac660f829878, type: 2}
   m_CameraCutEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -558,7 +524,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393434693928840718}
-  m_LocalRotation: {x: 0.33477163, y: 0.0026874116, z: -0.0009547638, w: 0.942295}
+  m_LocalRotation: {x: 0.33477166, y: 0.002687453, z: -0.00095477846, w: 0.942295}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -896,7 +862,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393434694392053696}
-  m_LocalRotation: {x: 0.44247338, y: 0.0025575843, z: -0.0012619223, w: 0.89677715}
+  m_LocalRotation: {x: 0.44247338, y: 0.002557628, z: -0.0012619437, w: 0.89677715}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1264,7 +1230,7 @@ Transform:
   - {fileID: 3336765420598985719}
   - {fileID: 52331116}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1801063748131122549
 GameObject:

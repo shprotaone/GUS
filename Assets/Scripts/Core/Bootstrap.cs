@@ -28,6 +28,7 @@ namespace GUS.Core
         [SerializeField] private LevelSettings _levelSettings;
         [SerializeField] private ObjectPool _platformPool;
         [SerializeField] private ObjectPool _collectablesPool;
+        [SerializeField] private Progressive _progressiveSystem;
         [SerializeField] private FloatingJoystick _joystick;    //кандидат на отделение
         [SerializeField] private bool _isHub;
 
@@ -71,6 +72,7 @@ namespace GUS.Core
 
         private void RunInit()
         {
+            
             _serviceLocator.Register<SpecialPlatformBuilder>(_specialPlatformBuilder);
             _serviceLocator.Register<CameraController>(_cameraController);
             _serviceLocator.Register<UIController>(_uiController);
@@ -80,10 +82,12 @@ namespace GUS.Core
             _serviceLocator.Register<WorldController>(new WorldController(_startPoint, _serviceLocator));
             _serviceLocator.Register<GameStateMachine>(new GameStateMachine(_stateText, _serviceLocator));
             _serviceLocator.Register<GameStateController>(_stateController);
-            _serviceLocator.Register<TMP_Text>(_stateText);           
+            _serviceLocator.Register<TMP_Text>(_stateText);
+            _serviceLocator.Register<Progressive>(_progressiveSystem);
 
             SetInput();
             PlayerInit();
+            _progressiveSystem.Init(_serviceLocator);
             _uiController.Init(_serviceLocator);        
         }
 

@@ -4,6 +4,7 @@ using GUS.Player;
 using System;
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
 
 namespace GUS.Core.GameState
 {
@@ -21,6 +22,15 @@ namespace GUS.Core.GameState
 
         [SerializeField] private float _height;
 
+        private float _shakeTime;
+        public IEnumerator ShakeCamera(float intensity, float time)
+        {   
+            CinemachineBasicMultiChannelPerlin channelPerlin = _runCamera.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
+            channelPerlin.m_AmplitudeGain = intensity;
+            yield return new WaitForSeconds(time);
+            channelPerlin.m_AmplitudeGain = 0;
+            
+        }
         public void ClickerCamera()
         {
             _clickerCamera.enabled = true;
@@ -64,6 +74,5 @@ namespace GUS.Core.GameState
             }
             _playerTarget.DOMoveX(posX,1);
         }
-
     }
 }

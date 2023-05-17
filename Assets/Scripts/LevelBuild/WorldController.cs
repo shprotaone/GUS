@@ -14,7 +14,7 @@ namespace GUS.LevelBuild
         private float _currentSpeed;
         private bool _worldIsStopped;
 
-        public float Distance { get; private set; }
+        public PlatformBuilder PlatformBuilder => _platformBuilder;
         public WorldController(Transform startPoint, IServiceLocator serviceLocator)
         {
             LevelSettings settings = serviceLocator.Get<LevelSettings>();
@@ -74,6 +74,12 @@ namespace GUS.LevelBuild
         public void CreateOnlyFreePlatforms(bool flag)
         {
             _platformBuilder.FreePlatformsMode(flag);
+        }
+
+        public void UpdateSettings(LevelSettings settings)
+        {
+            _maxSpeed = settings.maxWorldSpeed;
+            _acceleration = settings.acceleration;
         }
     }
 }

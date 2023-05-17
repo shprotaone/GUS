@@ -16,7 +16,7 @@ namespace GUS.Player
         [SerializeField] private AnimatorController _animator;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private PowerUpHandler _powerUpHandler;
-        [SerializeField] private CameraController _cam;
+        [SerializeField] private CameraController _cameraController;
 
         private Vector3 _startPosition;
         private GameStateController _stateController;
@@ -53,6 +53,7 @@ namespace GUS.Player
 
         public void Death()
         {
+            StartCoroutine(_cameraController.ShakeCamera(5, 0.2f));
             _stateController.EndGame();
         }  
 
@@ -85,7 +86,7 @@ namespace GUS.Player
 
         public void CameraHandler(RunMovement movement)
         {
-            _cam.CameraCalculate(movement);
+            _cameraController.CameraCalculate(movement);
         }
     }
 }

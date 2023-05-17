@@ -16,14 +16,15 @@ public class ClickerEntryComponent : MonoBehaviour
     {
         if(other.TryGetComponent(out PlayerActor actor) && _isActive)
         {
-            _isActive = false;                      
-            actor.ChangeGameType(false);
+            _isActive = false;                             
             StartCoroutine(Initialization(actor));
         }
     }
 
     private IEnumerator Initialization(PlayerActor actor)
-    {      
+    {
+        yield return new WaitForSeconds(0.5f);
+        actor.ChangeGameType(false);
         yield return StartCoroutine(_clicker.Init(actor));
     }
 
