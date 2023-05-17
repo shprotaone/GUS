@@ -162,7 +162,7 @@ namespace GUS.Player.Movement
             _verticalVelocity = velocity;
         }
 
-        public void StopMovement(bool flag)
+        public void CanMove(bool flag)
         {
             _canMoved = flag;
             _targetPosition = _startPosition;

@@ -21,6 +21,8 @@ namespace GUS.Core.GameState
         [SerializeField] private Transform _pointView;
 
         [SerializeField] private float _height;
+        [SerializeField] private float _moveDistance;
+        [SerializeField] private float _speedMovement;
 
         private float _shakeTime;
         public IEnumerator ShakeCamera(float intensity, float time)
@@ -62,17 +64,19 @@ namespace GUS.Core.GameState
 
             if (movement.Line == Utils.Line.Left)
             {
-                posX = -2f;
+                posX = -_moveDistance;
+                
             }
             else if (movement.Line == Utils.Line.Right)
             {
-                posX = 2f;
+                posX = _moveDistance;
             }
             else
             {
                 posX = 0;
             }
-            _playerTarget.DOMoveX(posX,1);
+            _playerTarget.DOMoveX(posX,_speedMovement).SetEase(Ease.OutQuint);
+            _pointView.DOMoveX(posX, _speedMovement);
         }
     }
 }

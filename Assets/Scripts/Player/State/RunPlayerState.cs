@@ -50,7 +50,6 @@ namespace GUS.Player.State
         public void Update()
         {
             _movement.Update();
-            //_player.CameraCalculate(_movement);
         }
 
         public void FixedUpdate()

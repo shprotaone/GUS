@@ -100,7 +100,7 @@ namespace GUS.Core
             _prevPlayerState = _playerStateMachine.CurrentState;
 
             _gameStateMachine.TransitionTo(_gameStateMachine.pause);
-            _playerStateMachine.TransitionTo(_playerStateMachine.initState);
+           _playerStateMachine.TransitionTo(_playerStateMachine.pauseState);
         }
 
         public void EndGame()
@@ -112,9 +112,8 @@ namespace GUS.Core
         public void RestartGame()
         {           
             _gameStateMachine.TransitionTo( _gameStateMachine.initState);
-            _gameStateMachine.TransitionTo(_gameStateMachine.start);            
-            _gameStateMachine.TransitionTo(_gameStateMachine.session);
-            _playerStateMachine.Initialize(_playerStateMachine.initState);
+            _gameStateMachine.TransitionTo(_gameStateMachine.start);
+            //_playerStateMachine.TransitionTo(_playerStateMachine.initState);
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
         }
 

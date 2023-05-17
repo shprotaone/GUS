@@ -35,7 +35,7 @@ namespace GUS.Player.Movement
             
         }
 
-        public void StopMovement(bool flag)
+        public void CanMove(bool flag)
         {
             
         }

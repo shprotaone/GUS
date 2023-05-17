@@ -12,7 +12,7 @@ namespace GUS.Player
         public void FixedUpdate();
         public void Move();
         public void Fire();
-        public void StopMovement(bool flag);
+        public void CanMove(bool flag);
 
     }
 }
