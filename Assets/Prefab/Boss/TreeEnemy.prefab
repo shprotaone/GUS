@@ -808,6 +808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9026785060004375037}
   - component: {fileID: 1566205264522548931}
+  - component: {fileID: 1054880551530397644}
   m_Layer: 0
   m_Name: TreeEnemy
   m_TagString: Untagged
@@ -859,6 +860,19 @@ MonoBehaviour:
   - {fileID: 516665062097934615}
   - {fileID: 1554403993251225907}
   - {fileID: 6348637579937086102}
+--- !u!65 &1054880551530397644
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8849782343287686584}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.0200458, y: 10.5199995, z: 5.1304855}
+  m_Center: {x: -0.022087812, y: 5.2459397, z: -0.011044025}
 --- !u!1001 &7816643094171310121
 PrefabInstance:
   m_ObjectHideFlags: 0
