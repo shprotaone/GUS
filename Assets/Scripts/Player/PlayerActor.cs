@@ -18,6 +18,7 @@ namespace GUS.Player
         [SerializeField] private AnimatorController _animator;
         [SerializeField] private PowerUpHandler _powerUpHandler;
         [SerializeField] private CameraController _cameraController;
+        [SerializeField] private ParticleController _particleController;
 
         private Vector3 _startPosition;
         private GameStateController _stateController;
@@ -27,6 +28,7 @@ namespace GUS.Player
         private IMovement _movement;
 
         #region Properties
+        public ParticleController Particles => _particleController;
         public IMovement MovementType => _movement;
         public IInputType InputType => _inputType;
         public IWeapon Weapon => _weapon;
@@ -57,6 +59,7 @@ namespace GUS.Player
 
         public void Death()
         {
+            _particleController.DeathEffect();
             StartCoroutine(_cameraController.ShakeCamera(5, 0.2f));
             _stateController.EndGame();
         }  

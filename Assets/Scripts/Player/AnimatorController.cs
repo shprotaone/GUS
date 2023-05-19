@@ -10,6 +10,7 @@ public class AnimatorController : MonoBehaviour
     private int RunStateId = Animator.StringToHash("Run");
     private int JumpId = Animator.StringToHash("Jump");
     private int CrouchID = Animator.StringToHash("Crouch");
+    private int RunSpeedMultiply = Animator.StringToHash("RunMultiplyer");
 
     private float _prevSpeed;
     public void RunActivate(bool flag) => _animator.SetBool(RunStateId, flag);
@@ -26,6 +27,10 @@ public class AnimatorController : MonoBehaviour
         {
             _animator.speed = _prevSpeed;
         }
+    }
+    public void ChangeAnimationSpeed(float speed)
+    {
+        _animator.SetFloat(RunSpeedMultiply, speed / 10);
     }
 
 }

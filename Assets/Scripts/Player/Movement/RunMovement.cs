@@ -1,3 +1,4 @@
+using DG.Tweening;
 using GUS.Core.InputSys;
 using GUS.Core.Locator;
 using GUS.Player.State;
@@ -16,6 +17,7 @@ namespace GUS.Player.Movement
         private IInputType _inputType;
         private Vector3 _targetPosition;
         private EnumBind _movementAction;
+        private ActorRotator _rotator;
 
         private float _distance;
         private float _speedMovement;
@@ -38,11 +40,14 @@ namespace GUS.Player.Movement
             _canMoved = true;
             _targetPosition = _player.transform.position;
             _currentLine = Line.Center;
+            _rotator = new ActorRotator(player);
+
             OnChangePosition += CheckLinePosition;
             OnChangePosition += () => _player.CameraHandler(this);
         }
 
         public void SetDistance(float distance) => _distance = distance;
+
         public void SetGravity(float gravity, float gravityScale)
         {
             _gravityScale = gravityScale;
@@ -95,12 +100,13 @@ namespace GUS.Player.Movement
             {
                 _targetPosition.x -= _distance;
                 OnChangePosition?.Invoke();
-                
+                _rotator.Rotate(Line.Left);
             }
             else if (_movementAction == EnumBind.Right && _currentLine != Line.Right)
             {
                 _targetPosition.x += _distance;
                 OnChangePosition?.Invoke();
+                _rotator.Rotate(Line.Right);
             }
 
             _player.CharController.Move(direction);
@@ -130,11 +136,11 @@ namespace GUS.Player.Movement
         private void CheckLinePosition()
         {
             if (_targetPosition.x == _distance)
-            {
+            {             
                 _currentLine = Line.Right;
             }
             else if (_targetPosition.x == -_distance)
-            {
+            {              
                 _currentLine = Line.Left;
             }
             else

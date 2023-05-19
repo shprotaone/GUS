@@ -81,7 +81,7 @@ namespace GUS.Player.State
 
         public void UpdateSettings(LevelSettings settings)
         {
-            runState.SetMoveSettings(settings.distanceToMovement, settings.gravity, settings.gravityScale);
+            runState.SetMoveSettings(settings);
             jumpState.SetJump(settings.jumpHeight);
             downslide.SetCrouch(settings.downSlideTime);
         }
