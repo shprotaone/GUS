@@ -30,6 +30,8 @@ public class Wallet
     public void ResetCounter()
     {
         _coins = 0;
+        _distancePoint = 0;
+        _uiController.RefreshDistancePointCount(_distancePoint);
         _uiController.RefreshCoinsCount(_coins);
     }
 

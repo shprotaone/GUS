@@ -1,28 +1,35 @@
-﻿using GUS.Core;
+﻿using DG.Tweening;
+using GUS.Core;
+using GUS.Core.GameState;
 using GUS.Core.InputSys;
 using GUS.Core.Locator;
 using GUS.Core.Weapon;
 using GUS.Objects.PowerUps;
-using System;
+using GUS.Player.Movement;
 using UnityEngine;
 
 namespace GUS.Player
 {
     public class PlayerActor : MonoBehaviour
-    {
+    {        
         [SerializeField] private CharacterController _controller;
-        [SerializeField] private AnimatorController _animator;
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private CapsuleCollider _capsuleCollider;
+        [SerializeField] private AnimatorController _animator;
         [SerializeField] private PowerUpHandler _powerUpHandler;
-              
+        [SerializeField] private CameraController _cameraController;
+        [SerializeField] private ParticleController _particleController;
+
+        private Vector3 _startPosition;
         private GameStateController _stateController;
         private Wallet _wallet;
-        private Vector3 _dir;
-
         private IWeapon _weapon;
         private IInputType _inputType;
         private IMovement _movement;
 
+        #region Properties
+        public CameraController CameraController => _cameraController;
+        public ParticleController Particles => _particleController;
         public IMovement MovementType => _movement;
         public IInputType InputType => _inputType;
         public IWeapon Weapon => _weapon;
@@ -31,16 +38,18 @@ namespace GUS.Player
         public Wallet Wallet => _wallet;
         public PowerUpHandler PowerUpHandler => _powerUpHandler;
         public AnimatorController AnimatorController => _animator;
+        public CapsuleCollider Collider => _capsuleCollider;
+        #endregion
         private void Start()
         {
             _weapon = GetComponentInChildren<IWeapon>();
+            _startPosition= transform.position;
         }
 
         public void Init(IInputType inputType,IServiceLocator serviceLocator)
         {
             _inputType = inputType;
             _stateController = serviceLocator.Get<GameStateController>();
-            
             _wallet = serviceLocator.Get<Wallet>();
         }
 
@@ -51,12 +60,15 @@ namespace GUS.Player
 
         public void Death()
         {
+            _particleController.DeathEffect();
+            StartCoroutine(_cameraController.ShakeCamera(5, 0.2f));
             _stateController.EndGame();
         }  
 
         public void RestartPosition()
         {
-            
+            transform.DOMove(_startPosition, 0.5f);
+            _animator.JumpActivate();
         }
 
         public void SmoothSecondLevel(bool isOn)
@@ -78,16 +90,11 @@ namespace GUS.Player
         public void ActivatePowerUp(IPowerUp powerUp)
         {
             _powerUpHandler.Execute(powerUp);
-        }
+        }     
 
-        private void OnDrawGizmosSelected()
+        public void CameraHandler(RunMovement movement)
         {
-            //Gizmos.color = Color.yellow;
-            //if(_movement is RunMovement movement)
-            //{
-            //    Vector3 point = movement.TargetPos;
-            //    Gizmos.DrawSphere(point, 1);
-            //}                     
+            _cameraController.CameraCalculate(movement);
         }
     }
 }

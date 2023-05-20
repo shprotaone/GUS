@@ -19,6 +19,7 @@ namespace GUS.Player.State
         }
         public void Enter()
         {
+            _actor.RestartPosition();
             _actor.SetMovementType(_clickerMovement);
             _clickerMovement.Init(_actor, _playerStateMachine, 0);
         }

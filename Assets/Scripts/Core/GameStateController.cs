@@ -10,6 +10,7 @@ namespace GUS.Core
 {
     public class GameStateController : MonoBehaviour
     {
+        [SerializeField] private Transform _clickerBossPosition;
         [SerializeField] private SceneHandler _sceneHandler;
         [SerializeField] private Text _deltaText;
         [SerializeField] private Text _directionText;
@@ -20,6 +21,8 @@ namespace GUS.Core
 
         private IState _prevPlayerState;
         private IState _prevGameState;
+
+        public Transform ClickerBossPos => _clickerBossPosition;
         public SceneHandler SceneHandler => _sceneHandler;
         public GameStateMachine GameStateMachine => _gameStateMachine;
 
@@ -29,6 +32,11 @@ namespace GUS.Core
             _playerStateMachine = serviceLocator.Get<PlayerStateMachine>();
             _smartInput = serviceLocator.Get<IInputType>(); //для тестов
 
+            if(_gameStateMachine.start!= null) // временное решение
+            {
+                _gameStateMachine.start.Init(this);
+            }
+            
             _playerStateMachine.stateChanged += CallPlayerRoutine;
             _gameStateMachine.stateChanged += CallGameStateRoutine;
         }
@@ -66,8 +74,6 @@ namespace GUS.Core
             _gameStateMachine.InitGameLoop(_gameStateMachine.initState);
             _playerStateMachine.Initialize(_playerStateMachine.initState);
             _gameStateMachine.TransitionTo(_gameStateMachine.start);
-
-            StartGame();
         }
 
         public void ClickerGame()
@@ -77,17 +83,15 @@ namespace GUS.Core
         }
         
         public void StartGame()
-        {         
-            _gameStateMachine.TransitionTo(_gameStateMachine.session);
+        {
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
-           // StartCoroutine(_gameStateMachine.CurrentState.Execute());
+            _gameStateMachine.TransitionTo(_gameStateMachine.session);          
         }
 
         public void Resume()
         {
             _gameStateMachine.TransitionTo(_prevGameState);
             _playerStateMachine.TransitionTo(_prevPlayerState);
-            //StartCoroutine(_gameStateMachine.CurrentState.Execute());
         }
 
         public void Pause()
@@ -96,23 +100,20 @@ namespace GUS.Core
             _prevPlayerState = _playerStateMachine.CurrentState;
 
             _gameStateMachine.TransitionTo(_gameStateMachine.pause);
-            _playerStateMachine.TransitionTo(_playerStateMachine.initState);
+           _playerStateMachine.TransitionTo(_playerStateMachine.pauseState);
         }
 
         public void EndGame()
         {
             _gameStateMachine.TransitionTo(_gameStateMachine.endGame);
             _playerStateMachine.TransitionTo(_playerStateMachine.deathState);
-
-            //StartCoroutine(_gameStateMachine.CurrentState.Execute());
         }
 
         public void RestartGame()
         {           
             _gameStateMachine.TransitionTo( _gameStateMachine.initState);
-            _gameStateMachine.TransitionTo(_gameStateMachine.start);            
-            _gameStateMachine.TransitionTo(_gameStateMachine.session);
-            _playerStateMachine.Initialize(_playerStateMachine.initState);
+            _gameStateMachine.TransitionTo(_gameStateMachine.start);
+            //_playerStateMachine.TransitionTo(_playerStateMachine.initState);
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
         }
 

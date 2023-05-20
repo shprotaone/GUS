@@ -18,7 +18,8 @@ namespace GUS.Player.State
         public void Enter()
         {
             _movement = _player.MovementType;
-            _movement.StopMovement(true);
+            _player.AnimatorController.DeathActivate();
+            _movement.CanMove(false);
         }
 
         public IEnumerator Execute()
@@ -28,7 +29,8 @@ namespace GUS.Player.State
 
         public void Exit()
         {
-            _movement.StopMovement(false);
+            _movement.CanMove(true);
+            _player.AnimatorController.DeathActivate();
         }
 
         public void FixedUpdate()

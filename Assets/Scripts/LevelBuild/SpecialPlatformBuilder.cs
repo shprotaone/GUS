@@ -22,6 +22,8 @@ namespace GUS.LevelBuild
             type = PoolObjectType.Empty;
             return false;
         }
+
+        public void ResetCount() => count = 0;
     }
 }
 

@@ -14,7 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parts:
   - objectInfo:
+      prefab: {fileID: 6198712829235060456, guid: c83e0d3f1d187b34690fa2d00eca59a6, type: 3}
+      type: 6
+      startCount: 5
+    _weight: 50
+  - objectInfo:
+      prefab: {fileID: 6198712829235060456, guid: 0ab6fd6d0e78d4d4da445ab28dc9764b, type: 3}
+      type: 8
+      startCount: 2
+    _weight: 0
+  - objectInfo:
       prefab: {fileID: 3404807321277698910, guid: 19aa7347d4f9a3a46a0b29ded86a5f5e, type: 3}
       type: 0
       startCount: 5
-    _weight: 50
+    _weight: 0

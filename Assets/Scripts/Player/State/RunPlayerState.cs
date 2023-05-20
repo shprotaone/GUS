@@ -1,4 +1,5 @@
 ﻿using GUS.Core;
+using GUS.Core.GameState;
 using GUS.Player.Movement;
 using System;
 using System.Collections;
@@ -16,23 +17,25 @@ namespace GUS.Player.State
         public RunPlayerState(LevelSettings settings, PlayerActor player, PlayerStateMachine state)
         {
             _movement = new RunMovement();
-            SetMoveSettings(settings.distanceToMovement,settings.gravity,settings.gravityScale);
+            
             _player = player;
             _steerSpeed = settings.steerSpeed;
             _playerState = state;
             _animatorController = player.AnimatorController;
             _movement.Init(_player, _playerState, _steerSpeed);
+            SetMoveSettings(settings);
         }
 
-        public void SetMoveSettings(float distance,float gravity, float gravityScale)
+        public void SetMoveSettings(LevelSettings settings)
         {
-            _movement.SetDistance(distance);
-            _movement.SetGravity(gravity, gravityScale);
+            _movement.SetDistance(settings.distanceToMovement);          
+            _movement.SetGravity(settings.gravity, settings.gravityScale);
+            _animatorController.ChangeAnimationSpeed(settings.maxWorldSpeed);
         }
 
         public void Enter()
         {
-            _player.SetMovementType(_movement);
+            _player.SetMovementType(_movement);           
             _animatorController.RunActivate(true);
         }
 

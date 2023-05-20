@@ -1,4 +1,5 @@
 ﻿using GUS.Core.Locator;
+using GUS.LevelBuild;
 using System.Collections;
 using TMPro;
 
@@ -6,6 +7,7 @@ namespace GUS.Core.GameState
 {
     public class InitGameState : IState
     {
+        private WorldController _worldController;
         private Wallet _wallet;
         private TMP_Text _stateText;
 

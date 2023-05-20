@@ -20,6 +20,7 @@ namespace GUS.Core.InputSys
         private bool _isTap;
         private bool _isSwiping;
 
+        public Vector2 StartPosition => _startPosition;
         public float Direction { get; private set; }
         public float Delta { get; private set; }
 
@@ -34,7 +35,7 @@ namespace GUS.Core.InputSys
             {
                 if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
-                    Debug.Log("Firing");
+                    _startPosition= Input.GetTouch(0).position;
                     return EnumBind.Fire;
                 }
             }          

@@ -9,6 +9,7 @@ namespace GUS.Player.Movement
     {
         public event Action OnClick;
         private PlayerStateMachine _playerStateMachine;
+        private ParticleController _particleController;
         private SmartphoneInput _inputType;
         private EnumBind _action;
 
@@ -16,16 +17,15 @@ namespace GUS.Player.Movement
         {
             _playerStateMachine = playerState;
             _inputType = (SmartphoneInput)player.InputType;
+            _particleController = player.Particles;
             
         }
         public void Fire()
-        {
-            _inputType.Firing();
-
-            if (_action == EnumBind.Fire)
+        {           
+            if (_inputType.Firing() == EnumBind.Fire)
             {
-                Debug.Log("Click");
                 OnClick?.Invoke();
+                _particleController.DamageEffect(_inputType.StartPosition);
             }
         }
 
@@ -38,7 +38,7 @@ namespace GUS.Player.Movement
             
         }
 
-        public void StopMovement(bool flag)
+        public void CanMove(bool flag)
         {
             
         }
