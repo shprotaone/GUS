@@ -7,12 +7,15 @@ namespace GUS.Core.GameState
 {
     public class InitMapState : IState
     {
-        private CameraController _cameraController;
+        private CameraHubController _cameraController;
         private SceneHandler _sceneHandler;
-        public InitMapState(IServiceLocator serviecLocator, TMP_Text text)
+        public InitMapState(IServiceLocator serviceLocator, TMP_Text text)
         {
-            _cameraController = serviecLocator.Get<CameraController>();
-            _sceneHandler = serviecLocator.Get<SceneHandler>();
+            if(serviceLocator.Get<ICamera>() is CameraHubController cam)
+            {
+                _cameraController = cam;
+            }
+            _sceneHandler = serviceLocator.Get<SceneHandler>();
         }
 
         public void Enter()

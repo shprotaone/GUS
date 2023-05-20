@@ -16,19 +16,19 @@ namespace GUS.Player
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private CapsuleCollider _capsuleCollider;
         [SerializeField] private AnimatorController _animator;
-        [SerializeField] private PowerUpHandler _powerUpHandler;
-        [SerializeField] private CameraController _cameraController;
+        [SerializeField] private PowerUpHandler _powerUpHandler;      
         [SerializeField] private ParticleController _particleController;
 
         private Vector3 _startPosition;
         private GameStateController _stateController;
         private Wallet _wallet;
+        private CameraRunController _cameraController;
         private IWeapon _weapon;
         private IInputType _inputType;
         private IMovement _movement;
 
         #region Properties
-        public CameraController CameraController => _cameraController;
+        public CameraRunController CameraController => _cameraController;
         public ParticleController Particles => _particleController;
         public IMovement MovementType => _movement;
         public IInputType InputType => _inputType;
@@ -49,6 +49,11 @@ namespace GUS.Player
         public void Init(IInputType inputType,IServiceLocator serviceLocator)
         {
             _inputType = inputType;
+            if(serviceLocator.Get<ICamera>() is CameraRunController cam)
+            {
+                _cameraController = cam;
+            }
+
             _stateController = serviceLocator.Get<GameStateController>();
             _wallet = serviceLocator.Get<Wallet>();
         }

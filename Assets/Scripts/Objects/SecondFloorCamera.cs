@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SecondFloorCamera : MonoBehaviour
 {
-    private CameraController _camera;
+    private CameraRunController _camera;
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent(out PlayerActor actor)){

@@ -7,6 +7,7 @@ using GUS.Core.UI;
 using GUS.LevelBuild;
 using GUS.Player;
 using GUS.Player.State;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using SystemInfo = UnityEngine.Device.SystemInfo;
@@ -16,7 +17,7 @@ namespace GUS.Core
     public class Bootstrap : MonoBehaviour
     {      
         [SerializeField] private TMP_Text _stateText;
-        [SerializeField] private CameraController _cameraController;
+        
         [SerializeField] private SceneHandler _sceneHandler;
         [SerializeField] private GameStateController _stateController;
         [SerializeField] private UIController _uiController;
@@ -32,29 +33,37 @@ namespace GUS.Core
         [SerializeField] private FloatingJoystick _joystick;    //кандидат на отделение
         [SerializeField] private bool _isHub;
 
+        private ICamera _cameraController;
         private IServiceLocator _serviceLocator;
         private IInputType _inputType;
 
         private void Awake()
         {
+            var cam = FindObjectsOfType<MonoBehaviour>().OfType<ICamera>();
+            _cameraController = cam.First();
+            
             Application.targetFrameRate = -1;
             _serviceLocator = new ServiceLocator();
+            
+
             if (!_isHub) RunInit();
            else HubInit();          
         }
 
         private void Start()
-        {           
+        {          
             _stateController.Init(_serviceLocator);
             //_player.Init(_inputType, _serviceLocator);    
 
             if(_isHub) _stateController.InitHub();
             else _stateController.InitGame();
+            
         }
 
         private void HubInit()
         {
-            _serviceLocator.Register<CameraController>(_cameraController);
+            _serviceLocator.Register(_cameraController);
+
             _serviceLocator.Register<SceneHandler>(_sceneHandler);
             _serviceLocator.Register<FloatingJoystick>(_joystick);
             _serviceLocator.Register<UIController>(_uiController);
@@ -72,9 +81,9 @@ namespace GUS.Core
 
         private void RunInit()
         {
-            
+            _serviceLocator.Register(_cameraController);
+
             _serviceLocator.Register<SpecialPlatformBuilder>(_specialPlatformBuilder);
-            _serviceLocator.Register<CameraController>(_cameraController);
             _serviceLocator.Register<UIController>(_uiController);
             _serviceLocator.Register<Wallet>(new Wallet(_serviceLocator));
             PoolInitialization();

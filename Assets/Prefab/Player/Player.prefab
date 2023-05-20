@@ -83,7 +83,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 1
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5062,7 +5062,7 @@ Transform:
   - {fileID: 1507829778230196330}
   - {fileID: 5169135293113493703}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &3163200715630416651
 CharacterController:
@@ -5129,7 +5129,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 3
 --- !u!114 &3610240871200906006
 MonoBehaviour:
@@ -6140,6 +6140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 5919822719752725272}
+  _particleController: {fileID: 0}
 --- !u!95 &5919822719752725272 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6523160185053040952, guid: 1b46117af218c1d42b778430a7631a31, type: 3}
