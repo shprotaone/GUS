@@ -52,6 +52,7 @@ MonoBehaviour:
   _objectPoolType: 3
   _beginPoint: {fileID: 6109258077604368066}
   _endPoint: {fileID: 6109258077609144331}
+  _isSpawning: 1
 --- !u!1001 &5874858103747663669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70,7 +71,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6099557574273814948, guid: d5917f79161b0de45a6d09acacb1596b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.12
+      value: 1.54
       objectReference: {fileID: 0}
     - target: {fileID: 6099557574273814948, guid: d5917f79161b0de45a6d09acacb1596b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -171,6 +172,10 @@ PrefabInstance:
     - target: {fileID: 6349251218990175934, guid: 516d3908ffed7564c8624dc0f5408222, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7245669873195386627, guid: 516d3908ffed7564c8624dc0f5408222, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.63
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
