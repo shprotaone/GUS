@@ -1,7 +1,5 @@
 ﻿using Cinemachine;
 using GUS.Player.Movement;
-using GUS.Player;
-using System;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
@@ -77,6 +75,18 @@ namespace GUS.Core.GameState
             }
             _playerTarget.DOMoveX(posX,_speedMovement).SetEase(Ease.OutQuint);
             _pointView.DOMoveX(posX, _speedMovement);
+        }
+
+        public void SecondFloor(bool flag)
+        {
+            if(flag)
+            {
+                _playerTarget.DOMoveY(4.5f, _speedMovement);
+            }
+            else
+            {
+                DOVirtual.DelayedCall(0.5f, () => _playerTarget.DOMoveY(2.5f, _speedMovement));
+            }
         }
     }
 }

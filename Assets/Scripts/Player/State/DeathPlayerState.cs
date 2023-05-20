@@ -18,6 +18,7 @@ namespace GUS.Player.State
         public void Enter()
         {
             _movement = _player.MovementType;
+            _player.AnimatorController.DeathActivate();
             _movement.CanMove(false);
         }
 
@@ -29,6 +30,7 @@ namespace GUS.Player.State
         public void Exit()
         {
             _movement.CanMove(true);
+            _player.AnimatorController.DeathActivate();
         }
 
         public void FixedUpdate()

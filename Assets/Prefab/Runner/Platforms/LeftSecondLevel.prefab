@@ -118,6 +118,7 @@ MonoBehaviour:
   _objectPoolType: 6
   _beginPoint: {fileID: 8637664038514486725}
   _endPoint: {fileID: 6239246715424391423}
+  _isSpawning: 1
 --- !u!1 &6374650872580529222
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +249,18 @@ PrefabInstance:
     - target: {fileID: 8684328803292170159, guid: 03bd5115eb95f934496d3c7d47e14751, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8858593914898855032, guid: 03bd5115eb95f934496d3c7d47e14751, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10.193762
+      objectReference: {fileID: 0}
+    - target: {fileID: 8858593914898855032, guid: 03bd5115eb95f934496d3c7d47e14751, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 34.635857
+      objectReference: {fileID: 0}
+    - target: {fileID: 8858593914898855032, guid: 03bd5115eb95f934496d3c7d47e14751, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.54
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

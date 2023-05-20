@@ -28,6 +28,7 @@ namespace GUS.Player
         private IMovement _movement;
 
         #region Properties
+        public CameraController CameraController => _cameraController;
         public ParticleController Particles => _particleController;
         public IMovement MovementType => _movement;
         public IInputType InputType => _inputType;

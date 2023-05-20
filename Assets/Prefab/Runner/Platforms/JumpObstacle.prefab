@@ -50,6 +50,7 @@ MonoBehaviour:
   _objectPoolType: 4
   _beginPoint: {fileID: 3371951447410276077}
   _endPoint: {fileID: 3371951447416473636}
+  _isSpawning: 1
 --- !u!1001 &3161919659446191874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,7 +143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4022112381028258460, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 4022112381028258460, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
       propertyPath: m_LocalPosition.z
@@ -175,6 +176,18 @@ PrefabInstance:
     - target: {fileID: 4022112381028258460, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442393705154631188, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 11.105485
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442393705154631188, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.3031416
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442393705154631188, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.2347116
       objectReference: {fileID: 0}
     - target: {fileID: 7947167666979330099, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
       propertyPath: m_Name
