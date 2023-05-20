@@ -6,12 +6,9 @@ using System.Collections;
 
 namespace GUS.Core.GameState
 {
-    public class CameraController: MonoBehaviour
+    public class CameraRunController: MonoBehaviour,ICamera
     {
-        [SerializeField] private Camera _camera;
         [SerializeField] private CinemachineBrain _brain;
-        [SerializeField] private CinemachineFreeLook _hubWalkCamera;
-        [SerializeField] private CinemachineVirtualCamera _hubMapCamera;
         [SerializeField] private CinemachineVirtualCamera _clickerCamera;
         [SerializeField] private CinemachineFreeLook _runCamera;
 
@@ -41,19 +38,6 @@ namespace GUS.Core.GameState
         {
             _clickerCamera.enabled = false;
             _runCamera.enabled = true;
-            _hubWalkCamera.enabled = false;
-        }
-
-        public void ExploreCamera()
-        {           
-            _hubWalkCamera.enabled = true;
-            _hubMapCamera.enabled = false;
-        }
-
-        public void MapCamera()
-        {
-            _hubMapCamera.enabled = true;
-            _hubWalkCamera.enabled = false;
         }
 
         public void CameraCalculate(RunMovement movement)

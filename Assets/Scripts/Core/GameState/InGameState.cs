@@ -1,7 +1,5 @@
 ﻿using GUS.Core.Locator;
 using GUS.LevelBuild;
-using GUS.Player;
-using GUS.Player.Movement;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -10,20 +8,18 @@ namespace GUS.Core.GameState
 {
     public class InGameState : IState
     {
-        private IServiceLocator _serviceLocator;
-        private TMP_Text _stateText;
-        private CameraController _cameraController;
+        private CameraRunController _cameraController;
         private WorldController _worldController;
         private Wallet _wallet;
-        private PlayerActor _actor;
 
         private bool _isTimer;
 
         public InGameState(TMP_Text stateText, IServiceLocator serviceLocator)
         {
-            _stateText = stateText;
-            _serviceLocator = serviceLocator;
-            _cameraController = serviceLocator.Get<CameraController>();
+            if(serviceLocator.Get<ICamera>() is CameraRunController camera)
+            {
+                _cameraController = camera;
+            }
             _worldController = serviceLocator.Get<WorldController>();
             _wallet = serviceLocator.Get<Wallet>();
         }
