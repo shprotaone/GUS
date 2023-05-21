@@ -18,6 +18,7 @@ namespace GUS.Player.State
         public void Enter()
         {
             _player.RestartPosition();
+            _player.AnimatorController.RunActivate(true);
         }
 
         public IEnumerator Execute()

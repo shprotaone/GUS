@@ -73,7 +73,6 @@ namespace GUS.Player
         public void RestartPosition()
         {
             transform.DOMove(_startPosition, 0.5f);
-            _animator.JumpActivate();
         }
 
         public void SmoothSecondLevel(bool isOn)
