@@ -9,7 +9,7 @@ public class EntrySecondLevel : MonoBehaviour
     {
         if(other.TryGetComponent(out PlayerActor actor))
         {
-            actor.SmoothSecondLevel(true);
+            //actor.SmoothSecondLevel(true);
         }
     }
 
@@ -17,7 +17,7 @@ public class EntrySecondLevel : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerActor actor))
         {
-            actor.SmoothSecondLevel(false);
+            //actor.SmoothSecondLevel(false);
         }
     }
 }
