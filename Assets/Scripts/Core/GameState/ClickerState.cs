@@ -29,8 +29,6 @@ namespace GUS.Core.GameState
             _cameraController.ClickerCamera();
             _uiController.HPSliderActivate(true);
             _worldController.CreateOnlyFreePlatforms(true);
-            //if(_isDynamicClicker) _worldController.WorldStopper(false);
-            //else _worldController.WorldStopper(true);
 
         }
 
