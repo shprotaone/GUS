@@ -52,5 +52,7 @@ namespace GUS.Core.GameState
         {
             _controller.Move();
         }
+
+        public void WithStartCut(bool flag) => _view.WithIntro(flag);
     }
 }

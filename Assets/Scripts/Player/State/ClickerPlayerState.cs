@@ -21,6 +21,7 @@ namespace GUS.Player.State
         {
             _actor.RestartPosition();
             _actor.SetMovementType(_clickerMovement);
+            _actor.AnimatorController.RunActivate(true);
             _clickerMovement.Init(_actor, _playerStateMachine, 0);
         }
 

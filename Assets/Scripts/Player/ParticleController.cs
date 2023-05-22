@@ -16,10 +16,19 @@ namespace GUS.Player
         {
             _camera = Camera.main;
         }
-        public void DeathEffect()
+        public void DeathEffect(bool flag)
         {
-            _deathParticle.gameObject.SetActive(true);
-            _deathParticle.Play();
+            if(flag)
+            {
+                _deathParticle.gameObject.SetActive(true);
+                _deathParticle.Play();
+            }
+            else
+            {
+                _afterDeath.Stop();
+                _afterDeath.gameObject.SetActive(false);
+            }
+            
         }
 
         public void DamageEffect(Vector3 position)
@@ -37,6 +46,7 @@ namespace GUS.Player
 
         public void AfterDeath()
         {
+            _afterDeath.gameObject.SetActive(true);
             _afterDeath.Play();           
         }
     }

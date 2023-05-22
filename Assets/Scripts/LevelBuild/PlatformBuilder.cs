@@ -12,7 +12,7 @@ namespace GUS.LevelBuild
     public class PlatformBuilder
     {
         public event Action<int> OnPlatformAdded;
-        private const int countStartPlatform = 3;
+        private const int countStartPlatform = 5;
         public const int RangeZ = -50;
 
         private Transform _startPosition;

@@ -65,7 +65,7 @@ namespace GUS.Player
 
         public void Death()
         {
-            _particleController.DeathEffect();
+            _particleController.DeathEffect(true);
             StartCoroutine(_cameraController.ShakeCamera(5, 0.2f));
             _stateController.EndGame();
         }  

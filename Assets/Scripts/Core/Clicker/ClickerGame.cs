@@ -13,6 +13,8 @@ public class ClickerGame : MonoBehaviour
     [SerializeField] private Slider _hpSlider;
     [SerializeField] private bool _isDynamicClicker;
     [SerializeField] private Transform _bossTransform;
+    [SerializeField] private Transform _runPos;
+    [SerializeField] private Transform _endPos;
 
     private GameStateController _controller;
     private GameObject _enemyObj;
@@ -24,6 +26,8 @@ public class ClickerGame : MonoBehaviour
     private bool _canAttack;
 
     public float HP => _hp;
+    public Transform RunPoint => _runPos;
+    public Transform EndPoint => _endPos;
 
     private void OnEnable()
     {
@@ -62,8 +66,9 @@ public class ClickerGame : MonoBehaviour
     private void CreateEnemy()
     {
         //TODO перебросить в фабрику
-        _enemyObj.transform.DOMove(_controller.ClickerBossPos.position, 1);
         _enemyObj.transform.SetParent(_controller.ClickerBossPos);
+        _enemyObj.transform.DOMove(_controller.ClickerBossPos.position, 1);
+        
                    
         _enemy = _enemyObj.GetComponent<IEnemy>();
         _enemy.Init(this);
