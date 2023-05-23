@@ -73,6 +73,7 @@ namespace GUS.Core
         {
             _gameStateMachine.InitGameLoop(_gameStateMachine.initState);
             _playerStateMachine.Initialize(_playerStateMachine.initState);
+            _gameStateMachine.start.WithStartCut(true);
             _gameStateMachine.TransitionTo(_gameStateMachine.start);
         }
 
@@ -112,7 +113,9 @@ namespace GUS.Core
         public void RestartGame()
         {           
             _gameStateMachine.TransitionTo( _gameStateMachine.initState);
+            _gameStateMachine.start.WithStartCut(false);
             _gameStateMachine.TransitionTo(_gameStateMachine.start);
+            
             //_playerStateMachine.TransitionTo(_playerStateMachine.initState);
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
         }

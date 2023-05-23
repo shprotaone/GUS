@@ -11,11 +11,13 @@ namespace GUS.Player.Movement
     public class RunMovement : IMovement
     {
         public Action OnChangePosition;
-        private Vector3 _startPosition;
+        
         private PlayerStateMachine _playerState;
         private PlayerActor _player;
         private IInputType _inputType;
+        private Vector3 _startPosition;
         private Vector3 _targetPosition;
+        private Vector3 _direction;
         private EnumBind _movementAction;
         private ActorRotator _rotator;
 
@@ -91,10 +93,8 @@ namespace GUS.Player.Movement
             _movementAction = _inputType.Movement();
             float tmpDist = Time.deltaTime * _speedMovement;
 
-            Vector3 direction = new Vector3(0, 0, 0);
-
-            direction.x = Mathf.Lerp(_player.transform.position.x, _targetPosition.x, tmpDist) - _player.transform.position.x;
-            direction.y = _verticalVelocity * Time.deltaTime;       
+            _direction.x = Mathf.Lerp(_player.transform.position.x, _targetPosition.x, tmpDist) - _player.transform.position.x;
+            _direction.y = _verticalVelocity * Time.deltaTime;
 
             if (_movementAction == EnumBind.Left && _currentLine != Line.Left)
             {
@@ -109,7 +109,7 @@ namespace GUS.Player.Movement
                 _rotator.Rotate(Line.Right);
             }
 
-            _player.CharController.Move(direction);
+            _player.CharController.Move(_direction);
         }
 
         private void Jump()
@@ -117,7 +117,7 @@ namespace GUS.Player.Movement
             if (_movementAction == EnumBind.Up && _player.CharController.isGrounded)
             {
                 _playerState.TransitionTo(_playerState.jumpState);
-            }
+            }            
         }
 
         private void Crunch()
@@ -171,7 +171,6 @@ namespace GUS.Player.Movement
         public void CanMove(bool flag)
         {
             _canMoved = flag;
-            _targetPosition = _startPosition;
         }
 
         public void ReturnPosition()

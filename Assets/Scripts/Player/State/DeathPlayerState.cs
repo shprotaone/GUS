@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using GUS.Core;
+using GUS.Player.Movement;
 using System.Collections;
 using UnityEngine;
 
@@ -29,8 +30,10 @@ namespace GUS.Player.State
 
         public void Exit()
         {
-            _movement.CanMove(true);
-            _player.AnimatorController.DeathActivate();
+            if(_movement is RunMovement move)
+                move.ReturnPosition();
+
+            _player.Particles.DeathEffect(false);
         }
 
         public void FixedUpdate()

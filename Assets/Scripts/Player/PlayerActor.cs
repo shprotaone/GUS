@@ -18,6 +18,7 @@ namespace GUS.Player
         [SerializeField] private AnimatorController _animator;
         [SerializeField] private PowerUpHandler _powerUpHandler;      
         [SerializeField] private ParticleController _particleController;
+        [SerializeField] private Transform _bossPosition;
 
         private Vector3 _startPosition;
         private GameStateController _stateController;
@@ -39,6 +40,7 @@ namespace GUS.Player
         public PowerUpHandler PowerUpHandler => _powerUpHandler;
         public AnimatorController AnimatorController => _animator;
         public CapsuleCollider Collider => _capsuleCollider;
+        public Transform BossPosition => _bossPosition;
         #endregion
         private void Start()
         {
@@ -65,7 +67,7 @@ namespace GUS.Player
 
         public void Death()
         {
-            _particleController.DeathEffect();
+            _particleController.DeathEffect(true);
             StartCoroutine(_cameraController.ShakeCamera(5, 0.2f));
             _stateController.EndGame();
         }  

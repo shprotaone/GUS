@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2403545723925584648
 Transform:
@@ -107,6 +107,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6389355404606519515, guid: 516d3908ffed7564c8624dc0f5408222, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929000029512162081, guid: 516d3908ffed7564c8624dc0f5408222, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 516d3908ffed7564c8624dc0f5408222, type: 3}
@@ -133,6 +141,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2403545723925584648}
     m_Modifications:
+    - target: {fileID: 1718431852788411541, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4022112381028258460, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -177,6 +189,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5315283863318227430, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5442393705154631188, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
       propertyPath: m_LocalScale.x
       value: 11.105485
@@ -189,9 +205,33 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.2347116
       objectReference: {fileID: 0}
+    - target: {fileID: 5666741936165475004, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5798703707957612128, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224980708268526746, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7464808942936222638, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527279267527273924, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7947167666979330099, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
       propertyPath: m_Name
       value: JumpObstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947167666979330099, guid: 40591339fc834c0439bca2dcb3190e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

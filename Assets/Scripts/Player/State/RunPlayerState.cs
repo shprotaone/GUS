@@ -35,8 +35,10 @@ namespace GUS.Player.State
 
         public void Enter()
         {
-            _player.SetMovementType(_movement);           
-            _animatorController.RunActivate(true);
+            _player.SetMovementType(_movement);
+            _movement.CanMove(true);
+            _animatorController.RunActivate(true); 
+            _player.CameraHandler(_movement);
         }
 
         public IEnumerator Execute()

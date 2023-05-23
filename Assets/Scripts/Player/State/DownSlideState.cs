@@ -8,7 +8,7 @@ namespace GUS.Player.State
 {
     public class DownSlideState :IState
     {
-        private const float downHeight = 0.5f;
+        private const float downHeight = 0.2f;
         private PlayerStateMachine _playerStateMachine;
         private IMovement _movement;
         private PlayerActor _player;

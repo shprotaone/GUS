@@ -12,7 +12,7 @@ namespace GUS.LevelBuild
     public class PlatformBuilder
     {
         public event Action<int> OnPlatformAdded;
-        private const int countStartPlatform = 3;
+        private const int countStartPlatform = 5;
         public const int RangeZ = -50;
 
         private Transform _startPosition;
@@ -33,6 +33,7 @@ namespace GUS.LevelBuild
         private int _platformCount = 0;
         private bool _isFree;
 
+        public ClickerGame NextClickerGame{ get;private set; }
         public PlatformBuilder(Transform startPosition, IServiceLocator serviceLocator)
         {
             List<ObjectPool> pools = serviceLocator.GetAll<ObjectPool>().ToList();
@@ -89,9 +90,7 @@ namespace GUS.LevelBuild
                 _nextPlatform.transform.position = instantiatePos + new Vector3(0,0,nextPlatformOffset);
 
                 _platformsQueue.Enqueue(currentPlatform);
-                _lastPlatform = currentPlatform;
-
-               
+                _lastPlatform = currentPlatform;              
             }
         }
 
@@ -104,6 +103,7 @@ namespace GUS.LevelBuild
             else if(_specialPlatformBuilder.Find(_platformCount, out PoolObjectType SpecialType))
             {
                 _nextPlatform = _platformPool.GetObject(SpecialType);
+                NextClickerGame = _nextPlatform.GetComponent<ClickerGame>();
                 _isFree = true;
             }
             else
