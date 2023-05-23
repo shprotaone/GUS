@@ -26,7 +26,7 @@ namespace GUS.Utils
 
         public int GetDigit()
         {
-            _digit = Random.Range(0, _totalWeight);
+            _digit = Random.Range(1, _totalWeight);
 
             for (int i = 0; i < _parts.Count; i++)
             {

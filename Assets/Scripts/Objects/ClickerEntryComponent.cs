@@ -24,7 +24,6 @@ public class ClickerEntryComponent : MonoBehaviour
     private IEnumerator Initialization(PlayerActor actor)
     {
         yield return new WaitForSeconds(0.5f);
-        actor.ChangeGameType(false);
         yield return StartCoroutine(_clicker.Init(actor));
     }
 

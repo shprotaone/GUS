@@ -2,7 +2,7 @@
 using GUS.Core.UI;
 using GUS.LevelBuild;
 using System.Collections;
-using UnityEngine.UI;
+using UnityEngine;
 
 namespace GUS.Core.GameState
 {
@@ -11,10 +11,8 @@ namespace GUS.Core.GameState
         private CameraRunController _cameraController;
         private WorldController _worldController;
         private UIController _uiController;
+        private ClickerGame _clicker;
 
-        private bool _isDynamicClicker = true;
-
-        public UIController UIController => _uiController;
         public ClickerState(IServiceLocator serviceLocator) 
         {
             if(serviceLocator.Get<ICamera>() is CameraRunController cam)
@@ -23,12 +21,18 @@ namespace GUS.Core.GameState
             }
             _worldController = serviceLocator.Get<WorldController>();
             _uiController= serviceLocator.Get<UIController>();
+            
         }
+
         public void Enter()
         {
+            Debug.Log("Call");
+            _clicker = _worldController.PlatformBuilder.NextClickerGame;
+            _clicker.InitSlider(_uiController.GetClickerSlider());
             _cameraController.ClickerCamera();
             _uiController.HPSliderActivate(true);
             _worldController.CreateOnlyFreePlatforms(true);
+            _clicker.Paused(false);
 
         }
 
@@ -38,7 +42,8 @@ namespace GUS.Core.GameState
         }
 
         public void Exit()
-        {            
+        {    
+            _clicker.Paused(true);
             _uiController.HPSliderActivate(false);
             //_worldController.WorldStopper(false);
             _worldController.CreateOnlyFreePlatforms(false);
@@ -52,16 +57,6 @@ namespace GUS.Core.GameState
         public void Update()
         {
             _worldController.Move();
-        }
-
-        public Slider GetClickerSlider()
-        {
-            return _uiController.GetClickerSlider();
-        }
-
-        public void SetMovementClicker(bool flag)
-        {
-            _isDynamicClicker = flag;
         }
     }
 }

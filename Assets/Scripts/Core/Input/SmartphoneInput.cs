@@ -6,15 +6,12 @@ namespace GUS.Core.InputSys
 {
     public class SmartphoneInput : IInputType
     {
-        private const float rangeXForSlide = 40;
-        private float _resetTimer;
-
         private Vector2 _swipeDirection;
         private Vector2 _startPosition;
         private Vector2 _endPosition;
         private Vector2 _swipeDelta;
 
-        private float _deadZone = 5;
+        private float _deadZone = 100;
         private float _magnitudeTrashold = 40;
 
         private bool _isTap;
@@ -53,14 +50,12 @@ namespace GUS.Core.InputSys
                 ResetSwipe();
                 return EnumBind.Up;
             }
-
-            if (_swipeDirection.y < 0)
+            else if (_swipeDirection.y < 0)
             {
                 ResetSwipe();
                 return EnumBind.Down;
             }
-
-            if (_swipeDirection.x == 1)
+            else if (_swipeDirection.x == 1)
             {
                 ResetSwipe();
                 return EnumBind.Left;
@@ -71,6 +66,7 @@ namespace GUS.Core.InputSys
                 return EnumBind.Right;
             }
 
+             
             return EnumBind.None;
         }
 
@@ -109,34 +105,20 @@ namespace GUS.Core.InputSys
 
                 if (_swipeDelta.magnitude > _deadZone)
                 {
-                    _swipeDirection = _swipeDelta.x > 0 ? Vector2.left : Vector2.right;
+                    if(Mathf.Abs(_swipeDelta.x) > Mathf.Abs(_swipeDelta.y))
+                    {
+                        if (_swipeDelta.x > 0) _swipeDirection = Vector2.left;
+                        else _swipeDirection = Vector2.right;
+                    }
+                    else
+                    {
+                        if(_swipeDelta.y > 0) _swipeDirection = Vector2.up;
+                        else _swipeDirection = Vector2.down;
+                    }
                 }
-
-                CheckDownslide();
-
+              
                 Delta = _swipeDelta.y;
                 Direction = _swipeDirection.x;
-            }
-        }
-
-        private void CheckDownslide()
-        {
-            bool down = _swipeDelta.magnitude > _deadZone &&
-                        _swipeDelta.x < rangeXForSlide &&
-                        _swipeDelta.x > -rangeXForSlide &&
-                        _swipeDelta.y < -rangeXForSlide;
-
-            bool up = _swipeDelta.magnitude > _deadZone &&
-                        _swipeDelta.x < rangeXForSlide &&
-                        _swipeDelta.x > -rangeXForSlide &&
-                        _swipeDelta.y > rangeXForSlide;
-            if (down)
-            {
-                _swipeDirection = Vector2.down;
-            }
-            else if (up)
-            {
-                _swipeDirection = Vector2.up;
             }
         }
 

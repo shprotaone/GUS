@@ -1,6 +1,12 @@
-public interface IEnemy
+namespace GUS.Objects.Enemies
 {
-    void Init(ClickerGame clicker);
-    void Behaviour(float value);
-    void Death();
+    public interface IEnemy
+    {
+        bool IsAlive { get; }
+        void Init(ClickerGame clicker);
+        void Behaviour(EnemyStage stage);
+        void Death();
+        void Paused(bool flag);
+    }
 }
+

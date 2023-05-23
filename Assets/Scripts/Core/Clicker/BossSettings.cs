@@ -7,4 +7,5 @@ public class BossSettings : ScriptableObject
     public GameObject BossPrefab;
     public float damage;
     public int reward;
+    public int[] stages;
 }

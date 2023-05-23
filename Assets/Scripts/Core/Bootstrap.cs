@@ -37,12 +37,13 @@ namespace GUS.Core
         private IServiceLocator _serviceLocator;
         private IInputType _inputType;
 
+        public IServiceLocator ServiceLocator => _serviceLocator;
         private void Awake()
         {
             var cam = FindObjectsOfType<MonoBehaviour>().OfType<ICamera>();
             _cameraController = cam.First();
             
-            Application.targetFrameRate = -1;
+            Application.targetFrameRate = 75;
             _serviceLocator = new ServiceLocator();
             
 

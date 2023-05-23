@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbd0b944c5d8264bafa319100243633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 9113790942215256037}
+  _manAnimator: {fileID: 8872740738213966171}
+  _bagAnimator: {fileID: 9113790942215256037}
+  _bagController: {fileID: 6773957931745468096}
 --- !u!1001 &4617525004211418093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,6 +117,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7914756264169429196, guid: 19f53aea7a27d2d45ae0740268917474, type: 3}
   m_PrefabInstance: {fileID: 4617525004211418093}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &8872740738213966171 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4266861819699659446, guid: 19f53aea7a27d2d45ae0740268917474, type: 3}
+  m_PrefabInstance: {fileID: 4617525004211418093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5476965654292095364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123,6 +130,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 159040811596034784}
     m_Modifications:
+    - target: {fileID: 1298155891806748484, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: _hit
+      value: 
+      objectReference: {fileID: 1482052448672270710}
     - target: {fileID: 2592376034198827010, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -175,6 +186,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: emitterVelocityMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6840532886344401964, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
       propertyPath: m_Name
       value: duffleBag_prop_run_anim_16frames_30fps
@@ -200,11 +219,27 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.94
   m_Center: {x: -0.12, y: 2.64, z: -0.98}
+--- !u!198 &1482052448672270710 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+  m_PrefabInstance: {fileID: 5476965654292095364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1848644053169061650 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6171520035872300694, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
   m_PrefabInstance: {fileID: 5476965654292095364}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6773957931745468096 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1298155891806748484, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+  m_PrefabInstance: {fileID: 5476965654292095364}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363574001023575464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0499c74ed51c3488b0d8bbf4a32a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &9113790942215256037 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3636841063742821985, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}

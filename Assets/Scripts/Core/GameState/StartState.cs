@@ -8,6 +8,7 @@ namespace GUS.Core.GameState
 {
     public class StartState : IState
     {
+        private CameraRunController _cameraController;
         private GameStateController _gameState;
         private UIStartGame _view;
         private TMP_Text _stateText;
@@ -18,6 +19,10 @@ namespace GUS.Core.GameState
             _view = serviceLocator.Get<UIController>().UIStartGame;
             _stateText = stateText;
             _controller = serviceLocator.Get<WorldController>();
+            if (serviceLocator.Get<ICamera>() is CameraRunController camera)
+            {
+                _cameraController = camera;
+            }
         }
 
         public void Init(GameStateController stateController)
@@ -29,6 +34,7 @@ namespace GUS.Core.GameState
         {
             _stateText.text = "Enter to " + this.GetType().Name;
             _controller.InitStart();
+            _cameraController.RunCamera();
         }
 
         public IEnumerator Execute()
