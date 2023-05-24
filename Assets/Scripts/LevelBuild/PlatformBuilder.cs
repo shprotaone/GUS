@@ -32,6 +32,7 @@ namespace GUS.LevelBuild
 
         private int _platformCount = 0;
         private bool _isFree;
+        private bool _rewardPlatform;
 
         public ClickerGame NextClickerGame{ get;private set; }
         public PlatformBuilder(Transform startPosition, IServiceLocator serviceLocator)
@@ -100,20 +101,39 @@ namespace GUS.LevelBuild
             {
                 _nextPlatform = _platformPool.GetObject(PoolObjectType.Platform);
             }
+            else if (_rewardPlatform)
+            {
+                _nextPlatform = _platformPool.GetObject(PoolObjectType.AfterClicker);
+                _rewardPlatform = false;
+            }
             else if(_specialPlatformBuilder.Find(_platformCount, out PoolObjectType SpecialType))
             {
                 _nextPlatform = _platformPool.GetObject(SpecialType);
                 NextClickerGame = _nextPlatform.GetComponent<ClickerGame>();
-                _isFree = true;
+                _rewardPlatform = true;
+                _isFree= true;
             }
             else
             {
-                int index = _randomLogic.GetDigit();
-                PoolObjectType type = _randomLogic.Parts[index].objectInfo.type;
+                NextObstaclePlatform();        
+            }
+        }
+
+        private void NextObstaclePlatform()
+        {
+            int index = _randomLogic.GetDigit();
+            PoolObjectType type = _randomLogic.Parts[index].objectInfo.type;
+
+            if (type == _lastPlatform.Type)
+            {
+                NextObstaclePlatform();
+            }
+            else
+            {
                 _nextPlatform = _platformPool.GetObject(type);
                 _platformCount++;
-                OnPlatformAdded?.Invoke(_platformCount);                           
-            }
+                OnPlatformAdded?.Invoke(_platformCount);
+            }            
         }
 
         public void DeletePlatform()

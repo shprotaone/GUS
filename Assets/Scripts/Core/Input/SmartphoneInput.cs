@@ -11,7 +11,7 @@ namespace GUS.Core.InputSys
         private Vector2 _endPosition;
         private Vector2 _swipeDelta;
 
-        private float _deadZone = 100;
+        private float _deadZone = 50;
         private float _magnitudeTrashold = 40;
 
         private bool _isTap;
@@ -30,10 +30,14 @@ namespace GUS.Core.InputSys
         {
             if(Input.touchCount > 0)
             {
-                if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    _startPosition= Input.GetTouch(0).position;
+                    //_startPosition= Input.GetTouch(0).position;
                     return EnumBind.Fire;
+                }
+
+                if(Input.GetTouch(0).phase == TouchPhase.Stationary){
+                    return EnumBind.FireHold;
                 }
             }          
 

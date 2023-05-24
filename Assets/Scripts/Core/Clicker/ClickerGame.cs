@@ -1,6 +1,4 @@
 using DG.Tweening;
-using GUS.Core;
-using GUS.Core.GameState;
 using GUS.Objects.Enemies;
 using GUS.Player;
 using GUS.Player.Movement;
@@ -17,8 +15,6 @@ public class ClickerGame : MonoBehaviour
     [SerializeField] private Slider _hpSlider;
     [SerializeField] private bool _isDynamicClicker;
     [SerializeField] private Transform _bossTransform;
-    [SerializeField] private Transform _runPos;
-    [SerializeField] private Transform _endPos;
 
     private GameObject _enemyObj;
     private Wallet _wallet;
@@ -28,7 +24,6 @@ public class ClickerGame : MonoBehaviour
     private float _hp;
 
     public float HP => _hp;
-    public Transform RunPoint => _runPos;
 
     private void OnEnable()
     {
@@ -65,8 +60,9 @@ public class ClickerGame : MonoBehaviour
     private void SetEnemy(PlayerActor actor)
     {
         //TODO перебросить в фабрику
+        _enemyObj.transform.DOMove(actor.BossPosition.position, 2);
         _enemyObj.transform.SetParent(actor.BossPosition);
-
+        
         _enemy = _enemyObj.GetComponent<IEnemy>();
         _enemy.Init(this);
     }

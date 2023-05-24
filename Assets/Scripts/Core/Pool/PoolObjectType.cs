@@ -11,6 +11,10 @@
        LeftSecondLevel,
        RightSecondLevel,       
        Clicker,
+       AfterClicker,
+       FullSecondLevel,
+       EdgeSecondLevel,
+
        Empty,
 
        Coins = 40,

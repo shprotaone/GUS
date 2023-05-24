@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: LevelSettingsJ10
   m_EditorClassIdentifier: 
   maxWorldSpeed: 15
-  acceleration: 2
-  exploreSpeed: 5
+  acceleration: 1
   steerSpeed: 13
   distanceToMovement: 2.4
-  downSlideTime: 0.5
+  downSlideTime: 1
   gravityScale: 2
   jumpHeight: 10
   gravity: -10
+  downSlideHeight: 0.2
+  forceLandingPower: 20
+  exploreSpeed: 5

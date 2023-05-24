@@ -35,7 +35,7 @@ namespace GUS.Objects.Enemies
             gameObject.SetActive(true);
             _animSpeed = _manAnimator.speed;
             _game = clicker;
-            transform.DOMove(clicker.RunPoint.position, 2);
+//transform.DOMove(clicker.RunPoint.position, 2);
         }
 
         public void Paused(bool flag)

@@ -8,6 +8,7 @@ namespace GUS.LevelBuild
     {
         private Transform _startPoint;
 
+        private LevelSettings _standartSettings;
         private PlatformBuilder _platformBuilder;
         private float _maxSpeed;
         private float _acceleration;
@@ -17,15 +18,15 @@ namespace GUS.LevelBuild
         public PlatformBuilder PlatformBuilder => _platformBuilder;
         public WorldController(Transform startPoint, IServiceLocator serviceLocator)
         {
-            LevelSettings settings = serviceLocator.Get<LevelSettings>();
+            _standartSettings = serviceLocator.Get<LevelSettings>();
             _platformBuilder = new PlatformBuilder(startPoint, serviceLocator);
-            _maxSpeed = settings.maxWorldSpeed;
-            _acceleration = settings.acceleration;
             _startPoint = startPoint;
         }
 
         public void InitStart()//TODO: Добавить свежие платформы в очередь
         {
+            _maxSpeed = _standartSettings.maxWorldSpeed;
+            _acceleration = _standartSettings.acceleration;
             _startPoint.position = Vector3.zero;
             _platformBuilder.ClearBuilder();
             _platformBuilder.CreateStartSection();

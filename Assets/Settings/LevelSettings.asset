@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxWorldSpeed: 10
   acceleration: 2
-  exploreSpeed: 5
   steerSpeed: 13
   distanceToMovement: 2.4
   downSlideTime: 1
   gravityScale: 2
   jumpHeight: 8
   gravity: -7
+  downSlideHeight: 0.2
+  forceLandingPower: 20
+  exploreSpeed: 5

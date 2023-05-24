@@ -50,11 +50,9 @@ namespace GUS.Player.Movement
 
         public void SetDistance(float distance) => _distance = distance;
 
-        public void SetGravity(float gravity, float gravityScale)
-        {
-            _gravityScale = gravityScale;
-            _gravity = gravity;
-        }
+        public void SetGravity(float gravity) => _gravity = gravity;
+
+        public void SetGravityScale(float gravityScale) => _gravityScale = gravityScale;
 
         public void Update()
         {
@@ -122,10 +120,14 @@ namespace GUS.Player.Movement
 
         private void Crunch()
         {
-            if (_movementAction == EnumBind.Down && _player.CharController.isGrounded)
+            if (_movementAction == EnumBind.Down/* && _player.CharController.isGrounded*/)
             {
                 _playerState.TransitionTo(_playerState.downslide);
             }
+            //else if(_movementAction == EnumBind.Down)
+            //{
+            //    _gravityScale = 10;
+            //}
         }
 
         private void ResetPosition()
@@ -156,6 +158,7 @@ namespace GUS.Player.Movement
             if (IsGrounded && _verticalVelocity < 0.1f)
             {
                 _verticalVelocity = -1;
+                _gravityScale = _playerState.LevelSettings.gravityScale;
             }
             else
             {

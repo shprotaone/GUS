@@ -27,8 +27,16 @@ namespace GUS.Player.Movement
             if (_inputType.Firing() == EnumBind.Fire)
             {
                 OnClick?.Invoke();
-                _animatorController.BiteActivate();
+                
                 _particleController.DamageEffect(_inputType.StartPosition);
+            }
+            else if(_inputType.Firing() == EnumBind.FireHold)
+            {
+                _animatorController.BiteActivate(true);
+            }
+            else
+            {
+                _animatorController.BiteActivate(false);
             }
         }
 

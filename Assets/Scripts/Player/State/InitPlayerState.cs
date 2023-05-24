@@ -19,6 +19,7 @@ namespace GUS.Player.State
         {
             _player.RestartPosition();
             _player.AnimatorController.RunActivate(true);
+            _player.Particles.AfterDeathDisabler();
         }
 
         public IEnumerator Execute()

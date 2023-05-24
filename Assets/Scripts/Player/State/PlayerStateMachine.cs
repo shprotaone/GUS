@@ -6,10 +6,7 @@ namespace GUS.Player.State
 {
     public class PlayerStateMachine
     {
-        private AnimatorController _animator;
-        private PlayerActor _player;
-        public IState CurrentState { get; private set; }
-        public IState ActionState { get; private set; }
+        public event Action stateChanged;
 
         public readonly InitPlayerState initState;
         public readonly IdlePlayerState startState;
@@ -23,26 +20,31 @@ namespace GUS.Player.State
         public readonly ClickerPlayerState clicker;
         public readonly PausePlayerState pauseState;
 
-        public event Action stateChanged;
+        private AnimatorController _animator;
+        private PlayerActor _player;
+
+        public IState CurrentState { get; private set; }
+        public IState ActionState { get; private set; }
+        public LevelSettings LevelSettings { get; private set; }
 
         public PlayerStateMachine(IServiceLocator service)
         {            
-            LevelSettings settings = service.Get<LevelSettings>();
+            LevelSettings = service.Get<LevelSettings>();
             _player = service.Get<PlayerActor>();
 
             initState = new InitPlayerState(_player,this);
             pauseState = new PausePlayerState(_player, this);
             //base movement in runner
-            runState = new RunPlayerState(settings,_player,this);            
-            jumpState = new JumpPlayerState(settings,_player,this);
-            downslide = new DownSlideState(settings.downSlideTime,_player,this);
+            runState = new RunPlayerState(LevelSettings, _player,this);            
+            jumpState = new JumpPlayerState(LevelSettings, _player,this);
+            downslide = new DownSlideState(LevelSettings.downSlideTime,_player,this);
             attackState = new AttackPlayerState(_player);
             deathState = new DeathPlayerState(_player);
             
             //special movement
             clicker = new ClickerPlayerState(_player,this);
             //flyState = new FlyPlayerState(settings.steerSpeed,_movement,_player,this);
-            exploreState = new ExplorePlayerState(settings.exploreSpeed,_player, this);
+            exploreState = new ExplorePlayerState(LevelSettings.exploreSpeed,_player, this);
             
         }
 
