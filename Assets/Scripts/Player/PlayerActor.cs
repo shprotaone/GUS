@@ -27,6 +27,7 @@ namespace GUS.Player
         private IWeapon _weapon;
         private IInputType _inputType;
         private IMovement _movement;
+        private AudioService _audioService;
 
         #region Properties
         public CameraRunController CameraController => _cameraController;
@@ -55,8 +56,9 @@ namespace GUS.Player
             {
                 _cameraController = cam;
             }
-
+            
             _stateController = serviceLocator.Get<GameStateController>();
+            _audioService= serviceLocator.Get<AudioService>();
             _wallet = serviceLocator.Get<Wallet>();
         }
 
@@ -67,6 +69,7 @@ namespace GUS.Player
 
         public void Death()
         {
+            _audioService.PlaySFX(_audioService.Data.death);
             _particleController.DeathEffect(true);
             StartCoroutine(_cameraController.ShakeCamera(5, 0.2f));
             _stateController.EndGame();
@@ -77,20 +80,26 @@ namespace GUS.Player
             transform.DOMove(_startPosition, 0.5f);
         }
 
-        public void SmoothSecondLevel(bool isOn)
+        public void PlayBackSound()
         {
-            if (isOn) _rigidbody.interpolation = RigidbodyInterpolation.Extrapolate;
-            else _rigidbody.interpolation = RigidbodyInterpolation.None;
+            _audioService.PlaySFX(_audioService.Data.quack);
         }
+        //public void SmoothSecondLevel(bool isOn)
+        //{
+        //    if (isOn) _rigidbody.interpolation = RigidbodyInterpolation.Extrapolate;
+        //    else _rigidbody.interpolation = RigidbodyInterpolation.None;
+        //}
 
         public void ChangeGameType(bool isRunner)
         {
             if (isRunner) _stateController.StartGame();
             else _stateController.ClickerGame();
         }
+
         public void Collect()
         {
             _wallet.AddCoin();
+            _audioService.PlaySFX(_audioService.Data.cornPickUp);
         }
 
         public void ActivatePowerUp(IPowerUp powerUp)

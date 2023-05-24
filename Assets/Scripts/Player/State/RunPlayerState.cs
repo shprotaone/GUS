@@ -1,28 +1,28 @@
 ﻿using GUS.Core;
 using GUS.Core.GameState;
 using GUS.Player.Movement;
-using System;
 using System.Collections;
 
 namespace GUS.Player.State
 {
     public class RunPlayerState : IState
     {
-        private PlayerStateMachine _playerState;
         private PlayerActor _player;
         private AnimatorController _animatorController;
         private RunMovement _movement;
         private float _steerSpeed;
 
-        public RunPlayerState(LevelSettings settings, PlayerActor player, PlayerStateMachine state)
+        public IStateMachine StateMachine {get; private set;}
+
+        public RunPlayerState(IStateMachine statemMachine, LevelSettings settings, PlayerActor player)
         {
             _movement = new RunMovement();
             
             _player = player;
             _steerSpeed = settings.steerSpeed;
-            _playerState = state;
+            StateMachine = statemMachine;
             _animatorController = player.AnimatorController;
-            _movement.Init(_player, _playerState, _steerSpeed);
+            _movement.Init(_player, (PlayerStateMachine)StateMachine, _steerSpeed);
             SetMoveSettings(settings);
         }
 

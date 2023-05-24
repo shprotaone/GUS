@@ -1,8 +1,8 @@
-﻿using DG.Tweening;
+﻿
 using GUS.Core;
+using GUS.Core.GameState;
 using GUS.Player.Movement;
 using System.Collections;
-using UnityEngine;
 
 namespace GUS.Player.State
 {
@@ -10,12 +10,13 @@ namespace GUS.Player.State
     {
         private PlayerActor _player;
         private IMovement _movement;
-
-        public DeathPlayerState(PlayerActor player)
+        public IStateMachine StateMachine { get; private set; }
+        public DeathPlayerState(IStateMachine stateMachine, PlayerActor player)
         {
             _player = player;
+            StateMachine = stateMachine;    
         }
-
+        
         public void Enter()
         {
             _movement = _player.MovementType;

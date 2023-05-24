@@ -13,7 +13,7 @@ public class ObstacleBack : MonoBehaviour
             PlayerActor player = other.GetComponent<PlayerActor>();
             if(player.MovementType is RunMovement run)
             {
-                run.ReturnPosition();
+                run.ReturnObstaclePosition();
             }
         }
     }

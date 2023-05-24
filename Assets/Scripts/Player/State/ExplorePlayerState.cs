@@ -1,4 +1,5 @@
 ﻿using GUS.Core;
+using GUS.Core.GameState;
 using GUS.Player.Movement;
 using System.Collections;
 
@@ -10,6 +11,7 @@ namespace GUS.Player.State
         private PlayerStateMachine _playerState;
         private float _steerSpeed;
         private ExploreMovement _movement;
+        public IStateMachine StateMachine => _playerState;
         public ExplorePlayerState(float steerSpeed, PlayerActor playerActor,PlayerStateMachine playerStateMachine)
         {          
             _playerActor = playerActor;

@@ -14,7 +14,8 @@ namespace GUS.Core.GameState
 
         private bool _isTimer;
 
-        public InGameState(TMP_Text stateText, IServiceLocator serviceLocator)
+        public IStateMachine StateMachine {get; private set;}
+        public InGameState(IStateMachine stateMachine, IServiceLocator serviceLocator,TMP_Text stateText)
         {
             if(serviceLocator.Get<ICamera>() is CameraRunController camera)
             {
@@ -22,8 +23,9 @@ namespace GUS.Core.GameState
             }
             _worldController = serviceLocator.Get<WorldController>();
             _wallet = serviceLocator.Get<Wallet>();
+            StateMachine = stateMachine;
         }
-
+        
         public void Enter()
         {            
             _cameraController.RunCamera();

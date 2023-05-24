@@ -24,7 +24,6 @@ namespace GUS.Core
 
         public Transform ClickerBossPos => _clickerBossPosition;
         public SceneHandler SceneHandler => _sceneHandler;
-        public GameStateMachine GameStateMachine => _gameStateMachine;
 
         public void Init(IServiceLocator serviceLocator)
         {
@@ -72,7 +71,7 @@ namespace GUS.Core
         public void InitGame()
         {
             _gameStateMachine.InitGameLoop(_gameStateMachine.initState);
-            _playerStateMachine.Initialize(_playerStateMachine.initState);
+            _playerStateMachine.InitGameLoop(_playerStateMachine.initState);
             _gameStateMachine.start.WithStartCut(true);
             _gameStateMachine.TransitionTo(_gameStateMachine.start);
         }
@@ -132,7 +131,7 @@ namespace GUS.Core
 
         public void Explore()
         {
-            _playerStateMachine.Initialize(_playerStateMachine.initState);
+            _playerStateMachine.InitGameLoop(_playerStateMachine.initState);
             _gameStateMachine.TransitionTo(_gameStateMachine.explore);
             _playerStateMachine.TransitionTo(_playerStateMachine.exploreState);
         }

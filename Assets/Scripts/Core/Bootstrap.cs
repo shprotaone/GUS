@@ -30,12 +30,14 @@ namespace GUS.Core
         [SerializeField] private ObjectPool _platformPool;
         [SerializeField] private ObjectPool _collectablesPool;
         [SerializeField] private Progressive _progressiveSystem;
+        [SerializeField] private AudioService _audioService;
         [SerializeField] private FloatingJoystick _joystick;    //кандидат на отделение
         [SerializeField] private bool _isHub;
 
         private ICamera _cameraController;
         private IServiceLocator _serviceLocator;
         private IInputType _inputType;
+        
 
         public IServiceLocator ServiceLocator => _serviceLocator;
         private void Awake()
@@ -65,6 +67,7 @@ namespace GUS.Core
         {
             _serviceLocator.Register(_cameraController);
 
+            _serviceLocator.Register(_audioService);
             _serviceLocator.Register<SceneHandler>(_sceneHandler);
             _serviceLocator.Register<FloatingJoystick>(_joystick);
             _serviceLocator.Register<UIController>(_uiController);
@@ -83,7 +86,7 @@ namespace GUS.Core
         private void RunInit()
         {
             _serviceLocator.Register(_cameraController);
-
+            _serviceLocator.Register(_audioService);
             _serviceLocator.Register<SpecialPlatformBuilder>(_specialPlatformBuilder);
             _serviceLocator.Register<UIController>(_uiController);
             _serviceLocator.Register<Wallet>(new Wallet(_serviceLocator));

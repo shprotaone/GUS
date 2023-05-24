@@ -1,11 +1,12 @@
 ﻿using GUS.Core;
+using GUS.Core.GameState;
 using GUS.Player.Movement;
 using System.Collections;
 using UnityEngine;
 
 namespace GUS.Player.State
 {
-    public class DownSlideState :IState
+    public class DownSlideState : IState
     {
         private LevelSettings _levelSettings;
         private PlayerStateMachine _playerStateMachine;
@@ -15,6 +16,8 @@ namespace GUS.Player.State
             
         private float _downSlideTime;
         private float _standartHeight;
+
+        public IStateMachine StateMachine => _playerStateMachine;
 
         public DownSlideState(float downSlideTime,  PlayerActor player, PlayerStateMachine playerStateMachine)
         {

@@ -13,9 +13,7 @@ namespace GUS.Core.UI
         [SerializeField] private UIEndGame _uiEndGame;
         [SerializeField] private UIInGame _uiInGame;
         [SerializeField] private UIStartGame _uiStartGame;
-        [SerializeField] private Button _toHubButton;
-        [SerializeField] private Button _restartButton;
-        [SerializeField] private Button _resumeButton;
+
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private GameObject _clickerPanel;
 
@@ -29,10 +27,8 @@ namespace GUS.Core.UI
         {
             _controller = serviceLocator.Get<GameStateController>();
             _uiInGame.Init(_controller);
-            _restartButton.onClick.AddListener(_controller.RestartGame);
-            _toHubButton.onClick.AddListener(_controller.SceneLoadHandler);
-            _resumeButton.onClick.AddListener(_controller.Resume);
             _uiEndGame.Init(serviceLocator);
+            _uiPause.Init(_controller);
         }
 
         public void InitHub(IServiceLocator serviceLocator)

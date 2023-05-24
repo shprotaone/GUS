@@ -1,10 +1,11 @@
 using GUS.Core;
+using GUS.Core.GameState;
 using GUS.Core.Locator;
 using System;
 
 namespace GUS.Player.State
 {
-    public class PlayerStateMachine
+    public class PlayerStateMachine : IStateMachine
     {
         public event Action stateChanged;
 
@@ -26,20 +27,22 @@ namespace GUS.Player.State
         public IState CurrentState { get; private set; }
         public IState ActionState { get; private set; }
         public LevelSettings LevelSettings { get; private set; }
+        public IState PreviousState { get; private set; }
+
 
         public PlayerStateMachine(IServiceLocator service)
         {            
             LevelSettings = service.Get<LevelSettings>();
             _player = service.Get<PlayerActor>();
 
-            initState = new InitPlayerState(_player,this);
-            pauseState = new PausePlayerState(_player, this);
+            initState = new InitPlayerState(this,_player);
+            pauseState = new PausePlayerState(this, _player);
             //base movement in runner
-            runState = new RunPlayerState(LevelSettings, _player,this);            
-            jumpState = new JumpPlayerState(LevelSettings, _player,this);
+            runState = new RunPlayerState(this, LevelSettings, _player);            
+            jumpState = new JumpPlayerState(this,LevelSettings, _player);
             downslide = new DownSlideState(LevelSettings.downSlideTime,_player,this);
-            attackState = new AttackPlayerState(_player);
-            deathState = new DeathPlayerState(_player);
+            attackState = new AttackPlayerState(this, _player);
+            deathState = new DeathPlayerState(this, _player);
             
             //special movement
             clicker = new ClickerPlayerState(_player,this);
@@ -48,7 +51,7 @@ namespace GUS.Player.State
             
         }
 
-        public void Initialize(IState state)
+        public void InitGameLoop(IState state)
         {
             CurrentState = state;
             state.Enter();

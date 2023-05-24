@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace GUS.Core.Locator
 {
@@ -21,7 +19,6 @@ namespace GUS.Core.Locator
 
         public TService Get<TService>()
         {
-            Console.WriteLine(typeof(TService).Name);
             if (services.ContainsKey(typeof(TService)))
                 return (TService)services[typeof(TService)].Single();
             else
@@ -31,6 +28,15 @@ namespace GUS.Core.Locator
         public IEnumerable<TService> GetAll<TService>()
         {
             return services[typeof(TService)].Cast<TService>();
+        }
+
+        public void Unregister<TService>(TService service)
+        {
+            Type key = typeof(TService);
+            if (services.ContainsKey(key))
+            {
+                services[key].Remove(service);
+            }
         }
     }
 }
