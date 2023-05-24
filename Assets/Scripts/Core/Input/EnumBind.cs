@@ -5,5 +5,6 @@
     Down,
     Forward,
     Fire,
+    FireHold,
     None
 }

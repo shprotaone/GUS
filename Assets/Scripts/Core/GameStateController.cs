@@ -116,7 +116,7 @@ namespace GUS.Core
             _gameStateMachine.start.WithStartCut(false);
             _gameStateMachine.TransitionTo(_gameStateMachine.start);
             
-            //_playerStateMachine.TransitionTo(_playerStateMachine.initState);
+            _playerStateMachine.TransitionTo(_playerStateMachine.initState);
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
         }
 

@@ -1,6 +1,5 @@
-﻿using DG.Tweening;
-using GUS.Core;
-using System;
+﻿using GUS.Core;
+using GUS.Player.Movement;
 using System.Collections;
 using UnityEngine;
 
@@ -8,9 +7,9 @@ namespace GUS.Player.State
 {
     public class DownSlideState :IState
     {
-        private const float downHeight = 0.2f;
+        private LevelSettings _levelSettings;
         private PlayerStateMachine _playerStateMachine;
-        private IMovement _movement;
+        private RunMovement _movement;
         private PlayerActor _player;
         private AnimatorController _animatorController;
             
@@ -19,31 +18,37 @@ namespace GUS.Player.State
 
         public DownSlideState(float downSlideTime,  PlayerActor player, PlayerStateMachine playerStateMachine)
         {
-            this._downSlideTime = downSlideTime;
-            this._player = player;
-            this._playerStateMachine = playerStateMachine;
+            _downSlideTime = downSlideTime;
+            _player = player;
+            _playerStateMachine = playerStateMachine;
             _standartHeight = _player.Collider.height;
+            _levelSettings = playerStateMachine.LevelSettings;
             _animatorController = player.AnimatorController;
         }
 
         public void Enter()
-        {
-            _movement = _player.MovementType;
-            _animatorController.CrouchActivate();
+        {           
+            _movement = _player.MovementType as RunMovement;
+
+            if (_movement.IsGrounded) _animatorController.CrouchActivate();
         }
 
         public IEnumerator Execute()
         {
-            _player.Collider.height = downHeight;
-            yield return new WaitForSeconds(_downSlideTime);
-            _player.Collider.height = _standartHeight;
+            if(!_movement.IsGrounded) _movement.SetGravityScale(_levelSettings.forceLandingPower);
+            else
+            {
+                _player.Collider.height = _levelSettings.downSlideHeight;
+                yield return new WaitForSeconds(_downSlideTime);
+                _player.Collider.height = _standartHeight;                           
+            }
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
             yield return null;
         }
 
         public void Exit()
         {
-                      
+                    
         }
 
         public void FixedUpdate()

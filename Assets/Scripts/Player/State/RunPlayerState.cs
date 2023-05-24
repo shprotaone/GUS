@@ -29,7 +29,8 @@ namespace GUS.Player.State
         public void SetMoveSettings(LevelSettings settings)
         {
             _movement.SetDistance(settings.distanceToMovement);          
-            _movement.SetGravity(settings.gravity, settings.gravityScale);
+            _movement.SetGravity(settings.gravity);
+            _movement.SetGravityScale(settings.gravityScale);
             _animatorController.ChangeAnimationSpeed(settings.maxWorldSpeed);
         }
 
@@ -37,12 +38,14 @@ namespace GUS.Player.State
         {
             _player.SetMovementType(_movement);
             _movement.CanMove(true);
-            _animatorController.RunActivate(true); 
-            _player.CameraHandler(_movement);
+            _animatorController.RunActivate(true);
+            _animatorController.BiteActivate(false);
+            _player.CameraHandler(_movement);           
         }
 
         public IEnumerator Execute()
         {
+
             yield return null;
         }
 
