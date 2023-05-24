@@ -1,4 +1,5 @@
 ﻿using GUS.Core;
+using GUS.Core.GameState;
 using System.Collections;
 
 namespace GUS.Player.State
@@ -6,11 +7,14 @@ namespace GUS.Player.State
     public class AttackPlayerState : IState
     {
         private PlayerActor _actor;
-        public AttackPlayerState(PlayerActor actor) 
+        public IStateMachine StateMachine { get; private set; }
+        public AttackPlayerState(PlayerStateMachine stateMachine,PlayerActor actor) 
         {
             _actor = actor;
-            
+            StateMachine = stateMachine;
         }
+
+        
         public void Enter()
         {
             _actor.Weapon.Fire();

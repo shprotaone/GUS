@@ -12,8 +12,9 @@ namespace GUS.Core.GameState
         private WorldController _worldController;
         private UIController _uiController;
         private ClickerGame _clicker;
+        public IStateMachine StateMachine { get; private set; }
 
-        public ClickerState(IServiceLocator serviceLocator) 
+        public ClickerState(IStateMachine stateMachine, IServiceLocator serviceLocator) 
         {
             if(serviceLocator.Get<ICamera>() is CameraRunController cam)
             {
@@ -21,8 +22,8 @@ namespace GUS.Core.GameState
             }
             _worldController = serviceLocator.Get<WorldController>();
             _uiController= serviceLocator.Get<UIController>();
-            
-        }
+            StateMachine = stateMachine;
+        }        
 
         public void Enter()
         {

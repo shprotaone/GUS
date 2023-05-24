@@ -4,11 +4,13 @@ namespace GUS.Core.GameState
 {
     public class ResultState : IState
     {
-        public ResultState() 
+        public IStateMachine StateMachine { get; private set; }
+
+        public ResultState(IStateMachine stateMachine) 
         {
-        
-        
+            StateMachine = stateMachine;
         }
+        
         public void Enter()
         {
             

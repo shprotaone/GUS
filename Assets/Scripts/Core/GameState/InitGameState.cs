@@ -11,11 +11,13 @@ namespace GUS.Core.GameState
         private Wallet _wallet;
         private TMP_Text _stateText;
 
-        public InitGameState(IServiceLocator serviecLocator, TMP_Text text) 
+        public IStateMachine StateMachine { get; private set; }
+        public InitGameState(IStateMachine stateMachine, IServiceLocator serviceLocator, TMP_Text text) 
         {           
             _stateText = text;
-            _wallet = serviecLocator.Get<Wallet>();
-        }
+            _wallet = serviceLocator.Get<Wallet>();
+            StateMachine = stateMachine;
+        }      
 
         public void Enter()
         {

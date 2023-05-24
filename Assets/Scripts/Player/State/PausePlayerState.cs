@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using GUS.Core;
+using GUS.Core.GameState;
 using System.Collections;
 
 namespace GUS.Player.State
@@ -7,13 +8,12 @@ namespace GUS.Player.State
     public class PausePlayerState : IState
     {
         private PlayerActor _player;
-        private PlayerStateMachine _playerStateMachine;
 
-        public PausePlayerState(PlayerActor player, PlayerStateMachine playerStateMachine)
+        public IStateMachine StateMachine {get;private set;}
+        public PausePlayerState(IStateMachine stateMachine, PlayerActor player)
         {
             _player = player;
-            _playerStateMachine = playerStateMachine;
-            
+            StateMachine = stateMachine;
         }
 
         public void Enter()

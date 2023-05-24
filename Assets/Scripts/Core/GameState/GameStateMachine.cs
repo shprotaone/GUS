@@ -6,9 +6,10 @@ using TMPro;
 namespace GUS.Core.GameState
 {
     [Serializable]
-    public class GameStateMachine
+    public class GameStateMachine : IStateMachine
     {
         public IState CurrentState { get; private set; }
+        public IState PreviousState {get; private set;}
 
         public readonly InitGameState initState;
         public readonly InitMapState initMapState;
@@ -24,19 +25,19 @@ namespace GUS.Core.GameState
 
         public GameStateMachine(TMP_Text text, IServiceLocator serviceLocator,bool isHub)
         {
-            initMapState = new InitMapState(serviceLocator,text);
-            explore = new ExploreState(serviceLocator);
+            initMapState = new InitMapState(this, serviceLocator,text);
+            explore = new ExploreState(this, serviceLocator);
         }
 
         public GameStateMachine(TMP_Text text,IServiceLocator serviceLocator)
         {
-            initState = new InitGameState(serviceLocator,text);
-            start = new StartState(text,serviceLocator);
-            session = new InGameState(text,serviceLocator);
-            clicker = new ClickerState(serviceLocator);
-            endGame = new EndGameState(serviceLocator);
-            result = new ResultState();
-            pause = new PauseState(serviceLocator,text);
+            initState = new InitGameState(this,serviceLocator,text);
+            start = new StartState(this,serviceLocator, text);
+            session = new InGameState(this, serviceLocator,text);
+            clicker = new ClickerState(this, serviceLocator);
+            endGame = new EndGameState(this, serviceLocator);
+            result = new ResultState(this);
+            pause = new PauseState(this, serviceLocator,text);
         }
 
         public void InitGameLoop(IState state)

@@ -176,13 +176,21 @@ namespace GUS.Player.Movement
             _canMoved = flag;
         }
 
+        public void ReturnObstaclePosition()
+        {
+            _targetPosition = _startPosition;
+            _player.PlayBackSound();
+            ResetPosition();
+            CheckLinePosition();
+            OnChangePosition?.Invoke();
+        }
+
         public void ReturnPosition()
         {
             _targetPosition = _startPosition;
             ResetPosition();
             CheckLinePosition();
             OnChangePosition?.Invoke();
-            Debug.Log("Back");
         }
     }
 }

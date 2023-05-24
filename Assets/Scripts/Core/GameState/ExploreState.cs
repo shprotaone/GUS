@@ -10,14 +10,17 @@ namespace GUS.Core.GameState
         private CameraHubController _cameraController;
         private SceneHandler _sceneHandler;
 
-        public ExploreState(IServiceLocator serviceLocator)
+        public IStateMachine StateMachine { get; private set; }
+        public ExploreState(IStateMachine stateMachine, IServiceLocator serviceLocator)
         {
             if (serviceLocator.Get<ICamera>() is CameraHubController cam)
             {
                 _cameraController = cam;
             }
             _sceneHandler = serviceLocator.Get<SceneHandler>();
+            StateMachine = stateMachine;
         }
+       
         public void Enter()
         {
             _cameraController.ExploreCamera();

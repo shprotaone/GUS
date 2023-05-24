@@ -1,4 +1,5 @@
 ﻿using GUS.Core;
+using GUS.Core.GameState;
 using GUS.Player.Movement;
 using System;
 using System.Collections;
@@ -18,7 +19,9 @@ namespace GUS.Player.State
         private float _jumpHeight;      
         private bool _inAir;
 
-        public JumpPlayerState(LevelSettings settings, PlayerActor player, PlayerStateMachine playerState)
+        public IStateMachine StateMachine => _playerState;
+
+        public JumpPlayerState(PlayerStateMachine playerState, LevelSettings settings, PlayerActor player)
         {
             this._player = player;
             _playerState = playerState;

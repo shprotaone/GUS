@@ -10,11 +10,15 @@ namespace GUS.Core.GameState
     {
         private WorldController _worldCotroller;
         private UIController _uiController;
-        public EndGameState(IServiceLocator serviceLocator)
+
+        public IStateMachine StateMachine {get; private set;}
+        public EndGameState(IStateMachine stateMachine, IServiceLocator serviceLocator)
         {
             _worldCotroller = serviceLocator.Get<WorldController>();
             _uiController= serviceLocator.Get<UIController>();
+            StateMachine = stateMachine;
         }
+
         public void Enter()
         {
             _worldCotroller.WorldStopper(true);
