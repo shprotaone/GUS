@@ -3,6 +3,7 @@ using GUS.Core.InputSys;
 using GUS.Core.InputSys.Joiystick;
 using GUS.Core.Locator;
 using GUS.Core.Pool;
+using GUS.Core.SaveSystem;
 using GUS.Core.UI;
 using GUS.LevelBuild;
 using GUS.Player;
@@ -31,24 +32,26 @@ namespace GUS.Core
         [SerializeField] private ObjectPool _collectablesPool;
         [SerializeField] private Progressive _progressiveSystem;
         [SerializeField] private AudioService _audioService;
+        [SerializeField] private JsonToFirebase _jsonToFirebase;
         [SerializeField] private FloatingJoystick _joystick;    //кандидат на отделение
         [SerializeField] private bool _isHub;
 
         private ICamera _cameraController;
         private IServiceLocator _serviceLocator;
-        private IInputType _inputType;
-        
+        private IInputType _inputType;        
 
-        public IServiceLocator ServiceLocator => _serviceLocator;
         private void Awake()
         {
             var cam = FindObjectsOfType<MonoBehaviour>().OfType<ICamera>();
             _cameraController = cam.First();
             
             Application.targetFrameRate = 75;
-            _serviceLocator = new ServiceLocator();
-            
 
+            _serviceLocator = new ServiceLocator();
+
+            _serviceLocator.Register(_jsonToFirebase);
+            _serviceLocator.Register(new StorageService(_serviceLocator));
+            
             if (!_isHub) RunInit();
            else HubInit();          
         }
@@ -57,8 +60,9 @@ namespace GUS.Core
         {          
             _stateController.Init(_serviceLocator);
             //_player.Init(_inputType, _serviceLocator);    
+            
 
-            if(_isHub) _stateController.InitHub();
+            if (_isHub) _stateController.InitHub();
             else _stateController.InitGame();
             
         }
@@ -66,7 +70,7 @@ namespace GUS.Core
         private void HubInit()
         {
             _serviceLocator.Register(_cameraController);
-
+            
             _serviceLocator.Register(_audioService);
             _serviceLocator.Register<SceneHandler>(_sceneHandler);
             _serviceLocator.Register<FloatingJoystick>(_joystick);

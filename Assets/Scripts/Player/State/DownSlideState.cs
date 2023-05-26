@@ -42,8 +42,10 @@ namespace GUS.Player.State
             else
             {
                 _player.Collider.height = _levelSettings.downSlideHeight;
+                _player.Collider.center -= new Vector3(0,0.5f,0);
                 yield return new WaitForSeconds(_downSlideTime);
-                _player.Collider.height = _standartHeight;                           
+                _player.Collider.height = _standartHeight;
+                _player.Collider.center += new Vector3(0, 0.5f, 0);
             }
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
             yield return null;

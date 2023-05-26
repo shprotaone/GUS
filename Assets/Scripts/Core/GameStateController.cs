@@ -119,7 +119,12 @@ namespace GUS.Core
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
         }
 
-        public void SceneLoadHandler()
+        public void SceneLoadToHub()
+        {
+            EndGame();
+            _sceneHandler.LoadRunScene();
+        }
+        public void SceneLoadToRun()
         {
             _sceneHandler.LoadRunScene();
         }

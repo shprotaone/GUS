@@ -1,9 +1,13 @@
 using GUS.Core.Locator;
+using GUS.Core.SaveSystem;
 using GUS.Core.UI;
 using System;
 
 public class Wallet
 {
+    private const string key = "coins";
+    private StorageService _storageService;
+
     private UIInGame _uiController;
     private int _coins;
     private float _distancePoint;
@@ -14,6 +18,7 @@ public class Wallet
     public Wallet(IServiceLocator locator)
     {
         _uiController = locator.Get<UIController>().UiInGame;
+        _storageService= locator.Get<StorageService>();
     }
     public void AddCoin()
     {
@@ -25,6 +30,13 @@ public class Wallet
     {
         _distancePoint += reward;
         _uiController.RefreshCoinsCount(_coins);
+    }
+
+    public void SaveDatas()
+    {
+        _storageService.Data.coins += _coins;
+        _storageService.Data.commonDistance += _distancePoint;
+        _storageService.Save();
     }
 
     public void ResetCounter()

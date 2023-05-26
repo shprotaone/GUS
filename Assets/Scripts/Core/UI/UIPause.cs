@@ -17,7 +17,7 @@ namespace GUS.Core.UI
         private void Start ()
         {
             _restartButton.onClick.AddListener(_controller.RestartGame);
-            _toHubButton.onClick.AddListener(_controller.SceneLoadHandler);
+            _toHubButton.onClick.AddListener(_controller.SceneLoadToHub);
             _resumeButton.onClick.AddListener(_controller.Resume);
             _settings.onClick.AddListener(PanelActivate);
         }

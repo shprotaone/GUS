@@ -31,23 +31,31 @@ public class ClickerGame : MonoBehaviour
         {
             _enemyObj = Instantiate(_settings.BossPrefab, _bossTransform);
         }
-        _enemyObj.transform.SetParent(_bossTransform);
-        _enemyObj.transform.position = _bossTransform.position;
     }
 
     public IEnumerator Init(PlayerActor actor)
     {
         _enemyObj.SetActive(true);
+        _enemyObj.transform.SetParent(_bossTransform);
+        _enemyObj.transform.position = _bossTransform.position;
+       
         actor.GameStateController.ClickerGame();
         OnClickerEnd += actor.GameStateController.StartGame;
         _wallet = actor.Wallet;
+        yield return new WaitForSeconds(0.2f);
         SetEnemy(actor);
         SetHp();
        
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         SetMovement(actor);
 
         yield return null;
+    }
+
+    public void ReturnEnemy()
+    {
+        _enemyObj.transform.SetParent(_bossTransform);
+        _enemyObj.transform.position = _bossTransform.position;
     }
 
     private void SetHp()
@@ -101,6 +109,7 @@ public class ClickerGame : MonoBehaviour
     {
         _hpSlider.value = _hp;
     }
+
     private EnemyStage GetStage()
     {
         if (_hp < _settings.stages[3]) return EnemyStage.LAST;

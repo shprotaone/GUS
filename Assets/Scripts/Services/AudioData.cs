@@ -9,4 +9,5 @@ public class AudioData : ScriptableObject
     public AudioClip damaged;
     public AudioClip cornPickUp;
     public AudioClip death;
+    public AudioClip swipeSound;
 }
