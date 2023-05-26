@@ -20,6 +20,7 @@ namespace GUS.Player.Movement
         private Vector3 _direction;
         private EnumBind _movementAction;
         private ActorRotator _rotator;
+        private AudioService _audioService;
 
         private float _distance;
         private float _speedMovement;
@@ -43,7 +44,7 @@ namespace GUS.Player.Movement
             _targetPosition = _player.transform.position;
             _currentLine = Line.Center;
             _rotator = new ActorRotator(player);
-
+            _audioService = player.AudioService;
             OnChangePosition += CheckLinePosition;
             OnChangePosition += () => _player.CameraHandler(this);
         }
@@ -97,12 +98,14 @@ namespace GUS.Player.Movement
             if (_movementAction == EnumBind.Left && _currentLine != Line.Left)
             {
                 _targetPosition.x -= _distance;
+                _audioService.PlaySFX(_audioService.Data.swipeSound);
                 OnChangePosition?.Invoke();
                 _rotator.Rotate(Line.Left);
             }
             else if (_movementAction == EnumBind.Right && _currentLine != Line.Right)
             {
                 _targetPosition.x += _distance;
+                _audioService.PlaySFX(_audioService.Data.swipeSound);
                 OnChangePosition?.Invoke();
                 _rotator.Rotate(Line.Right);
             }
@@ -115,6 +118,7 @@ namespace GUS.Player.Movement
             if (_movementAction == EnumBind.Up && _player.CharController.isGrounded)
             {
                 _playerState.TransitionTo(_playerState.jumpState);
+                _audioService.PlaySFX(_audioService.Data.swipeSound);
             }            
         }
 

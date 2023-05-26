@@ -27,7 +27,7 @@ namespace GUS.Core.UI
 
         public void Panel(bool flag) => _endGamePanel.SetActive(flag);
         public void Restart() => _gameStateController.RestartGame();
-        public void ToHub() => _gameStateController.SceneLoadHandler();
+        public void ToHub() => _gameStateController.SceneLoadToHub();
     }
 }
 

@@ -1,13 +1,16 @@
 ﻿using GUS.Core.Locator;
+using GUS.Core.SaveSystem;
 using GUS.Core.UI;
 using GUS.LevelBuild;
 using System.Collections;
+using System.Data.SqlTypes;
 using UnityEngine;
 
 namespace GUS.Core.GameState
 {
     public class EndGameState : IState
     {
+        private Wallet _wallet;
         private WorldController _worldCotroller;
         private UIController _uiController;
 
@@ -16,11 +19,13 @@ namespace GUS.Core.GameState
         {
             _worldCotroller = serviceLocator.Get<WorldController>();
             _uiController= serviceLocator.Get<UIController>();
+            _wallet = serviceLocator.Get<Wallet>();
             StateMachine = stateMachine;
         }
 
         public void Enter()
         {
+            _wallet.SaveDatas();
             _worldCotroller.WorldStopper(true);
         }
 

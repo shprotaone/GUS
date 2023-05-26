@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a437b8733e1ed43bf5554d9bfea2a2, type: 3}
+  m_Name: LevelSettings1
+  m_EditorClassIdentifier: 
+  maxWorldSpeed: 14
+  acceleration: 1
+  steerSpeed: 16
+  distanceToMovement: 2.4
+  downSlideTime: 1
+  gravityScale: 2
+  jumpHeight: 10
+  gravity: -10
+  downSlideHeight: 0.2
+  forceLandingPower: 20
+  exploreSpeed: 5

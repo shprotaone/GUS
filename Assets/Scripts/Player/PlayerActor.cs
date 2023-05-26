@@ -42,6 +42,7 @@ namespace GUS.Player
         public AnimatorController AnimatorController => _animator;
         public CapsuleCollider Collider => _capsuleCollider;
         public Transform BossPosition => _bossPosition;
+        public AudioService AudioService => _audioService;
         #endregion
         private void Start()
         {
@@ -77,7 +78,7 @@ namespace GUS.Player
 
         public void RestartPosition()
         {
-            transform.DOMove(_startPosition, 0.5f);
+            transform.DOMove(_startPosition, 0.2f);
         }
 
         public void PlayBackSound()
