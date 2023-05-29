@@ -60,7 +60,7 @@ PrefabInstance:
     - target: {fileID: 2222166184005131346, guid: 19f53aea7a27d2d45ae0740268917474, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1ce1747e68692cf4bbab5fcbcc8346f3, type: 2}
+      objectReference: {fileID: 2100000, guid: a5fe18dc5d741f34ca7bb344535983f5, type: 2}
     - target: {fileID: 7394079699928711798, guid: 19f53aea7a27d2d45ae0740268917474, type: 3}
       propertyPath: m_Name
       value: farmer_char_run_anim_16frames_30fps
@@ -134,14 +134,26 @@ PrefabInstance:
       propertyPath: _hit
       value: 
       objectReference: {fileID: 1482052448672270710}
+    - target: {fileID: 1474280116884236283, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2592376034198827010, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8cca1fa59a7d34f47be2f276ec0030ef, type: 2}
+      objectReference: {fileID: 2100000, guid: d91dd09b5d9b79a409801f2f9fc1389d, type: 2}
     - target: {fileID: 2592376034198827010, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 34eded2c00316b948959d8ce0ce059d1, type: 2}
+    - target: {fileID: 3589524783310503924, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c0842cfc0eba1d4987c61577764d034, type: 2}
+    - target: {fileID: 5014546939811042883, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1502aa67484414a43a2dce6ab234a5db, type: 2}
     - target: {fileID: 6171520035872300694, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -186,6 +198,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6305782744110011834, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 335dbcf816f250341bd215edd31c4444, type: 2}
     - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
       propertyPath: moveWithTransform
       value: 0
@@ -198,6 +214,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: duffleBag_prop_run_anim_16frames_30fps
       objectReference: {fileID: 0}
+    - target: {fileID: 7395358746809775416, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323639823562602197, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691200388541365389, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927987874393973190, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 84092bf4149008841a7f4f76d9214786, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}

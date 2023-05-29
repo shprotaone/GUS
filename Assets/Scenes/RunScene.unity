@@ -1928,13 +1928,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f238b8204f760e448300cc0a1c89c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiPause: {fileID: 544176054}
-  _uiHubController: {fileID: 0}
-  _uiEndGame: {fileID: 202050964}
-  _uiInGame: {fileID: 1534202808}
   _uiStartGame: {fileID: 587531670}
+  _uiInGame: {fileID: 1534202808}
+  _uiPause: {fileID: 544176054}
+  _uiEndGame: {fileID: 202050964}
   _pausePanel: {fileID: 1171589545}
   _clickerPanel: {fileID: 487070602}
+  _uiSettings: {fileID: 0}
+  _uiHubController: {fileID: 0}
 --- !u!114 &763624435
 MonoBehaviour:
   m_ObjectHideFlags: 0
