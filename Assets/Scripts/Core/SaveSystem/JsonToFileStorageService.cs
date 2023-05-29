@@ -39,9 +39,14 @@ namespace GUS.Core.SaveSystem
             {
                 Debug.LogError(ex.Message);
                 return;
-            }
-                      
+            }                   
         }    
+
+        public void Delete(string key)
+        {
+            File.Delete(BuildPath(key));
+            Debug.LogWarning("Сохранение удалено");
+        }
 
         private string BuildPath(string key)
         {

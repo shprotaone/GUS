@@ -36,6 +36,7 @@ namespace GUS.Core
         [SerializeField] private FloatingJoystick _joystick;    //кандидат на отделение
         [SerializeField] private bool _isHub;
 
+        private DeleteService _deleteService;
         private ICamera _cameraController;
         private IServiceLocator _serviceLocator;
         private IInputType _inputType;        
@@ -51,7 +52,8 @@ namespace GUS.Core
 
             _serviceLocator.Register(_jsonToFirebase);
             _serviceLocator.Register(new StorageService(_serviceLocator));
-            
+            _serviceLocator.Register(new DeleteService(_serviceLocator));
+
             if (!_isHub) RunInit();
            else HubInit();          
         }

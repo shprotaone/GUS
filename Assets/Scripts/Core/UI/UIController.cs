@@ -8,14 +8,18 @@ namespace GUS.Core.UI
 {
     public class UIController : MonoBehaviour
     {
-        [SerializeField] private UIPause _uiPause;
-        [SerializeField] private UiHubController _uiHubController;
-        [SerializeField] private UIEndGame _uiEndGame;
-        [SerializeField] private UIInGame _uiInGame;
+        [Header("In Game")]
         [SerializeField] private UIStartGame _uiStartGame;
-
+        [SerializeField] private UIInGame _uiInGame;
+        [SerializeField] private UIPause _uiPause;
+        [SerializeField] private UIEndGame _uiEndGame;
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private GameObject _clickerPanel;
+
+        [Header("In HUB")]
+        [SerializeField] private UISettings _uiSettings;
+        [SerializeField] private UiHubController _uiHubController;
+
 
         private GameStateController _controller;
 
@@ -35,6 +39,7 @@ namespace GUS.Core.UI
         {
             _controller = serviceLocator.Get<GameStateController>();
             _uiHubController.Init(serviceLocator);
+            _uiSettings.Init(serviceLocator);
         }
 
 

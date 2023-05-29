@@ -7,6 +7,8 @@ namespace GUS.Core.SaveSystem
 {
     public class StorageService
     {
+        private const string fileName = "Data";
+
         private JsonToFirebase _firebase;
         private PlayerData _playerData;
         private IStorageService _storageService;
@@ -22,13 +24,13 @@ namespace GUS.Core.SaveSystem
 
         public void Save()
         {
-            _storageService.Save("Data", _playerData);
+            _storageService.Save(fileName, _playerData);
             _firebase.Save(_playerData);
         }
 
         public void Load()
         {
-            _storageService.Load<PlayerData>("Data", data =>
+            _storageService.Load<PlayerData>(fileName, data =>
             {
                 _playerData = data;
             });
@@ -39,8 +41,14 @@ namespace GUS.Core.SaveSystem
                 _playerData.playerName = "Player" + (int)Random.Range(0, 500000);
                 _playerData.coins = 0;
                 _playerData.commonDistance = 0;
-                _storageService.Save("Data", _playerData);
+                _storageService.Save(fileName, _playerData);
             }
+        }
+
+        public void Delete()
+        {
+            _storageService.Delete(fileName);
+            Load();
         }
     }
 
