@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using Firebase.Auth;
 
 namespace GUS.Core.SaveSystem
 {
@@ -13,29 +14,55 @@ namespace GUS.Core.SaveSystem
     {
         private IStorageService _storageService;
         private DatabaseReference _databaseReference;
-        private List<PlayerData> _datas;
+        private FirebaseAuth _firebaseAuth;
+        private List<PlayerData> _loadData;
 
         private PlayerData _data;
-        public List<PlayerData> Datas => _datas;
-        public PlayerData Data => _data;
+        public List<PlayerData> LoadedData => _loadData;
 
         private void Start()
         {
             _databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
-            _datas = new List<PlayerData>();
+            _firebaseAuth = FirebaseAuth.DefaultInstance;
+            _loadData = new List<PlayerData>();
+        }
+
+        private void Auth(string email,string password)
+        {
+            //_auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
+            //    if (task.IsCanceled)
+            //    {
+            //        Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
+            //        return;
+            //    }
+            //    if (task.IsFaulted)
+            //    {
+            //        Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+            //        return;
+            //    }
+
+                //// Firebase user has been created.
+                //Firebase.Auth.AuthResult result = task.Result;
+                //Debug.LogFormat("Firebase user created successfully: {0} ({1})",
+                //    result.User.DisplayName, result.User.UserId);
         }
 
         public void Save(PlayerData data)
         {
             string result = JsonConvert.SerializeObject(data);
-            _databaseReference.Child("users").Child(data.playerName).SetValueAsync(result);
-            _databaseReference.Child("users").Child(data.playerName).Child("coins").SetValueAsync(data.coins);
-            _databaseReference.Child("users").Child(data.playerName).Child("distance").SetValueAsync(data.commonDistance);
+            _databaseReference.Child("users").Child(data.playerName).SetRawJsonValueAsync(result);       
+            //_databaseReference.Child("users").Child(data.playerName).Child("coins").SetValueAsync(data.coins);
+            //_databaseReference.Child("users").Child(data.playerName).Child("distance").SetValueAsync(data.commonDistance);
+        }
+
+        public void Delete(PlayerData data)
+        {
+            _databaseReference.Child("users").Child(data.playerName).RemoveValueAsync();
         }
 
         public IEnumerator Load()
         {
-            _datas.Clear();
+            _loadData.Clear();
             var users = _databaseReference.Child("users").GetValueAsync();
 
             yield return new WaitUntil(predicate: () => users.IsCompleted);
@@ -51,13 +78,24 @@ namespace GUS.Core.SaveSystem
             else
             {
                 DataSnapshot snapshot = users.Result;
-                foreach (var childs in snapshot.Children.Reverse())
+                foreach (var child in snapshot.Children.Reverse())
                 {
                     PlayerData data = new PlayerData();
-                    data = JsonConvert.DeserializeObject<PlayerData>((string)childs.Value);
-                    _datas.Add(data);  //TODO: развязать
+                    data = JsonConvert.DeserializeObject<PlayerData>(child.GetRawJsonValue());                    
+                    _loadData.Add(data);  //TODO: развязать
                 }
             }
+        }
+
+        private void HandleValueChanged(object sender, ValueChangedEventArgs args)
+        {
+            if (args.DatabaseError != null)
+            {
+                Debug.LogError(args.DatabaseError.Message);
+                return;
+            }
+
+            Debug.Log("Sorted");
         }
     }
 }

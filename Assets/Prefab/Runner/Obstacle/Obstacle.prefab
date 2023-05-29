@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 449444978758877773}
   - component: {fileID: 7343474912137082997}
   m_Layer: 0
-  m_Name: Build
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.03, y: 0.69, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.9197608, y: 0.6900001, z: 1}
+  m_Center: {x: 0.4448812, y: 2.2914609e-15, z: 0}
 --- !u!114 &449444978758877773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b120666f04a39f748aaf25523319309b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.875
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b120666f04a39f748aaf25523319309b, type: 3}
       propertyPath: m_LocalScale.y
@@ -229,7 +229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b120666f04a39f748aaf25523319309b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b120666f04a39f748aaf25523319309b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -237,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b120666f04a39f748aaf25523319309b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b120666f04a39f748aaf25523319309b, type: 3}
       propertyPath: m_LocalPosition.z
