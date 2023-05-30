@@ -27,7 +27,7 @@ namespace GUS.Objects
                 ObjectInfo obj = bonusSpawner.GetTypeBonus();
                 _currentCollectable = bonusSpawner.GetObject(obj);
 
-                if (obj.type != PoolObjectType.Empty)
+                if (obj.ObjectType != PoolObjectType.Empty)
                 {
                     _currentCollectable.transform.SetParent(transform);
                     _currentCollectable.transform.position = pos;
@@ -43,6 +43,7 @@ namespace GUS.Objects
         {
             if(_currentCollectable != null)
             {
+                Debug.Log("Удален " + _currentCollectable.GetType().Name);
                 pool.DestroyObject(_currentCollectable);
                 _currentCollectable = null;
             }

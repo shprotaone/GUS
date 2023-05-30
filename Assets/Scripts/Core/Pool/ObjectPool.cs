@@ -24,33 +24,35 @@ namespace GUS.Core.Pool
             foreach (ObjectInfo item in _objectsInfo)
             {
                 GameObject container = Instantiate(emptyGO, transform, false);
-                container.name = item.type.ToString();
 
-                pools[item.type] = new Pool(container.transform);
+                container.name = item.ObjectType.ToString();
+
+                pools[item.ObjectType] = new Pool(container.transform);
 
                 for (int i = 0; i < item.startCount; i++)
                 {
-                    GameObject go = InstantiateObject(item.type, container.transform);
-                    pools[item.type].Objects.Enqueue(go);
+                    GameObject go = InstantiateObject(item.ObjectType, container.transform);
+                    pools[item.ObjectType].Objects.Enqueue(go);
                 }
             }
 
             Destroy(emptyGO);
         }
 
-        private void FillObjects(List<RandomPart> objects)
+        private void FillObjects(List<ObjectInfo> objects)
         {
             _objectsInfo = new List<ObjectInfo>();
 
             foreach (var part in objects)
             {
-                _objectsInfo.Add(part.objectInfo);
+                part.Init();
+                _objectsInfo.Add(part);
             }            
         }
 
         private GameObject InstantiateObject(PoolObjectType type, Transform parent)
         {
-            var go = Instantiate(_objectsInfo.Find(x => x.type == type).prefab, parent);
+            var go = Instantiate(_objectsInfo.Find(x => x.ObjectType == type).prefab, parent);
             go.gameObject.SetActive(false);
             return go.gameObject;
         }

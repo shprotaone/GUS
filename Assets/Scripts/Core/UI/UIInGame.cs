@@ -9,6 +9,7 @@ namespace GUS.Core.UI
     {
         [SerializeField] private Button _pauseButton;
         [SerializeField] private Image _bonusImage;
+        [SerializeField] private Image _bonusImage2;
         [SerializeField] private TMP_Text _coinTextValue;
         [SerializeField] private TMP_Text _distanceTextValue;
 
@@ -30,16 +31,37 @@ namespace GUS.Core.UI
             _distanceTextValue.text = count.ToString();
         }
 
-        public void SetBonusImage(Sprite sprite)
+        public int SetBonusImage(Sprite sprite)
         {
-            _bonusImage.enabled = true;
-            _bonusImage.sprite = sprite;
+            if (!_bonusImage.enabled)
+            {
+                _bonusImage.enabled = true;
+                _bonusImage.sprite = sprite;
+                return 1;
+            }
+            else if(_bonusImage.enabled)
+            {
+                _bonusImage2.enabled = true;
+                _bonusImage2.sprite = sprite;
+                return 2;
+            }
+
+            return 0;
         }
 
-        public void DisableBonusImage()
+        public void DisableBonusImage(int index)
         {
-            _bonusImage.enabled = false;
-            _bonusImage.sprite = null;
+            if(index == 1)
+            {
+                _bonusImage.enabled = false;
+                _bonusImage.sprite = null;
+            }
+            else if(index == 2)
+            {
+                _bonusImage2.enabled = false;
+                _bonusImage2.sprite = null;
+            }
+            
         }
     }
 }

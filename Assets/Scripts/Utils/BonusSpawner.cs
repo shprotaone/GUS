@@ -1,7 +1,5 @@
 using GUS.Core.Pool;
-using GUS.LevelBuild;
 using GUS.Utils;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,13 +18,14 @@ public class BonusSpawner
 
     public GameObject GetObject(ObjectInfo obj)
     {
-        return _pool.GetObject(obj.type);
+        obj.prefab.TryGetComponent(out IPoolObject poolObject);
+        return _pool.GetObject(poolObject.Type);
     }
 
     public ObjectInfo GetTypeBonus()
     {
-        RandomLogic collectable = new RandomLogic(_pool.Storage.parts);
+        RandomLogic collectable = new RandomLogic(_pool);
         int index = collectable.GetDigit();
-        return _pool.Storage.parts[index].objectInfo;
+        return _pool.Storage.parts[index];
     }
 }

@@ -14,6 +14,7 @@
        AfterClicker,
        FullSecondLevel,
        EdgeSecondLevel,
+       FreeWithSpawn,
 
        Empty,
 

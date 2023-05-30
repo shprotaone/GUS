@@ -37,8 +37,8 @@ namespace GUS.Core.GameState
         {
             while(_isTimer)
             {
-                _wallet.SetDistancePoint(1);
-                yield return new WaitForSeconds(1);
+                _wallet.SetDistancePoint(-(int)_worldController.CurrentDistance);
+                yield return new WaitForFixedUpdate();
             }                       
         }
 

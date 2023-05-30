@@ -31,7 +31,7 @@ namespace GUS.TestSystems
             InitObjects();
             
             _generateButton.onClick.AddListener(Generate);
-            _platformRandomLogic = new RandomLogic(_platformStorage.parts);
+            _platformRandomLogic = new RandomLogic(_platformPool);
             
             _bonusSpawner = new BonusSpawner(_collectablesPool);
         }
@@ -59,7 +59,7 @@ namespace GUS.TestSystems
         private void SetNextPlatform()
         {
             int index = _platformRandomLogic.GetDigit();
-            _currentPlatform = _platformPool.GetObject(_platformStorage.parts[index].objectInfo.type);
+            _currentPlatform = _platformPool.GetObject(_platformStorage.parts[index].ObjectType);
             SetBonus();
         }
 
@@ -71,9 +71,9 @@ namespace GUS.TestSystems
                 Vector3 pos = _bonusSpawner.GetPos(platform.SpawnPoints);
                 ObjectInfo objInfo = _bonusSpawner.GetTypeBonus();
 
-                if (objInfo.type != PoolObjectType.Empty)
+                if (objInfo.ObjectType != PoolObjectType.Empty)
                 {
-                    _currentCollectable = _collectablesPool.GetObject(objInfo.type);
+                    _currentCollectable = _collectablesPool.GetObject(objInfo.ObjectType);
                     _currentCollectable.transform.position = pos;
                 }
                 else

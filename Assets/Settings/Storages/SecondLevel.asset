@@ -13,13 +13,18 @@ MonoBehaviour:
   m_Name: SecondLevel
   m_EditorClassIdentifier: 
   parts:
-  - objectInfo:
-      prefab: {fileID: 6198712829235060456, guid: 0ab6fd6d0e78d4d4da445ab28dc9764b, type: 3}
-      type: 8
-      startCount: 2
-    _weight: 0
-  - objectInfo:
-      prefab: {fileID: 3404807321277698910, guid: 19aa7347d4f9a3a46a0b29ded86a5f5e, type: 3}
-      type: 0
-      startCount: 5
-    _weight: 100
+  - prefab: {fileID: 3404807321277698910, guid: 19aa7347d4f9a3a46a0b29ded86a5f5e, type: 3}
+    startCount: 5
+    Weight: 0
+  - prefab: {fileID: 6198712829235060456, guid: 0ab6fd6d0e78d4d4da445ab28dc9764b, type: 3}
+    startCount: 1
+    Weight: 0
+  - prefab: {fileID: 3404807321277698910, guid: 094c39a6e81589243ac9f4b718b8bff8, type: 3}
+    startCount: 1
+    Weight: 0
+  - prefab: {fileID: 6198712829235060456, guid: 0d5e9cc88c435a442b7a03c14aede5ac, type: 3}
+    startCount: 2
+    Weight: 5
+  - prefab: {fileID: 3404807321277698910, guid: 48702a2ebd63e994098d3b2924de14bb, type: 3}
+    startCount: 5
+    Weight: 20

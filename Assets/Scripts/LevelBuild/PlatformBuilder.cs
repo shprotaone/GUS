@@ -44,7 +44,7 @@ namespace GUS.LevelBuild
 
             _bonusSpawner = new BonusSpawner(_collectablesPool);
             _platformsQueue = new Queue<Platform>();
-            _randomLogic = new RandomLogic(_platformPool.Storage.parts);
+            _randomLogic = new RandomLogic(_platformPool);
 
             _startPosition = startPosition;
         }
@@ -122,7 +122,7 @@ namespace GUS.LevelBuild
         private void NextObstaclePlatform()
         {
             int index = _randomLogic.GetDigit();
-            PoolObjectType type = _randomLogic.Parts[index].objectInfo.type;
+            PoolObjectType type = _randomLogic.Parts[index].ObjectType;
 
             if (type == _lastPlatform.Type)
             {
@@ -152,6 +152,7 @@ namespace GUS.LevelBuild
             {
                 foreach (var platform in _platformsQueue)
                 {
+                    platform.DisableBonus(_collectablesPool);
                     _platformPool.DestroyObject(platform.gameObject);                   
                 }
             }
