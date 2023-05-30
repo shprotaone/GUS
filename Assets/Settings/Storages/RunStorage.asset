@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40bbd5ded7cab6444b805b170676a8cb, type: 3}
+  m_Name: RunStorage
+  m_EditorClassIdentifier: 
+  parts:
+  - prefab: {fileID: 3404807321277698910, guid: 19aa7347d4f9a3a46a0b29ded86a5f5e, type: 3}
+    startCount: 5
+    Weight: 0
+  - prefab: {fileID: 6198712829235060456, guid: b3aec5448b2784749945d4c6d5c8a980, type: 3}
+    startCount: 2
+    Weight: 10
+  - prefab: {fileID: 6198712829235060456, guid: 5565fa8e5ef424345ba2fdae7b0b1888, type: 3}
+    startCount: 2
+    Weight: 15
+  - prefab: {fileID: 6198712829235060456, guid: 23d383d8775c63b43bc3475326a06446, type: 3}
+    startCount: 2
+    Weight: 10
+  - prefab: {fileID: 6198712829235060456, guid: e87ef09e8094623478a0e3f48b71c91e, type: 3}
+    startCount: 2
+    Weight: 15
+  - prefab: {fileID: 6198712829235060456, guid: 4e0c8cd1031bb8e4dbbe3ce92db194d3, type: 3}
+    startCount: 2
+    Weight: 15
+  - prefab: {fileID: 6198712829235060456, guid: c83e0d3f1d187b34690fa2d00eca59a6, type: 3}
+    startCount: 2
+    Weight: 12
+  - prefab: {fileID: 6198712829235060456, guid: c94f8b3ffaa1ac5469e4e4b0df9e7b11, type: 3}
+    startCount: 2
+    Weight: 13
+  - prefab: {fileID: 6198712829235060456, guid: 0d5e9cc88c435a442b7a03c14aede5ac, type: 3}
+    startCount: 2
+    Weight: 10
+  - prefab: {fileID: 6198712829235060456, guid: 0ab6fd6d0e78d4d4da445ab28dc9764b, type: 3}
+    startCount: 1
+    Weight: 0
+  - prefab: {fileID: 3404807321277698910, guid: 094c39a6e81589243ac9f4b718b8bff8, type: 3}
+    startCount: 1
+    Weight: 0

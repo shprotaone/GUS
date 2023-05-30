@@ -15,6 +15,8 @@ namespace GUS.LevelBuild
         private float _currentSpeed;
         private bool _worldIsStopped;
 
+        public float CurrentDistance { get; private set; }
+
         public PlatformBuilder PlatformBuilder => _platformBuilder;
         public WorldController(Transform startPoint, IServiceLocator serviceLocator)
         {
@@ -43,6 +45,7 @@ namespace GUS.LevelBuild
                 float step = _currentSpeed * Time.deltaTime;
                 Vector3 target = _startPoint.position - Vector3.forward;
                 _startPoint.position = Vector3.MoveTowards(_startPoint.position, target, step);
+                CurrentDistance = _startPoint.position.z;
             }           
         }
 

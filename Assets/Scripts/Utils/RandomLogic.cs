@@ -1,3 +1,4 @@
+using GUS.Core.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,14 +6,14 @@ namespace GUS.Utils
 {
     public class RandomLogic
     {
-        private List<RandomPart> _parts;
+        private List<ObjectInfo> _parts;
         private int _digit;
         private int _totalWeight;
 
-        public List<RandomPart> Parts => _parts;
-        public RandomLogic(List<RandomPart> parts)
+        public List<ObjectInfo> Parts => _parts;
+        public RandomLogic(ObjectPool pool)
         {
-            _parts = parts;
+            _parts = pool.ObjectsInfo;
             SetMaxWeight();
         }
 

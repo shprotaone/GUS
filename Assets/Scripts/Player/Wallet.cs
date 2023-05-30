@@ -12,7 +12,7 @@ public class Wallet
     private int _coins;
     private float _distancePoint;
     private float _bossCompletePoint;
-    private float _multiply = 1;
+    private int _multiply = 1;
     public int Coins => _coins;
 
     public Wallet(IServiceLocator locator)
@@ -22,7 +22,7 @@ public class Wallet
     }
     public void AddCoin()
     {
-        _coins++;
+        _coins += 1 * _multiply;
         _uiController.RefreshCoinsCount(_coins);
     }
 
@@ -49,7 +49,7 @@ public class Wallet
 
     public void SetDistancePoint(int distance)
     {
-        _distancePoint += (distance * _multiply);
+        _distancePoint = (distance);
         _uiController.RefreshDistancePointCount(_distancePoint);
     }
 

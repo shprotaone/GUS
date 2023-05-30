@@ -103,11 +103,6 @@ namespace GUS.Player
             _audioService.PlaySFX(_audioService.Data.cornPickUp);
         }
 
-        public void ActivatePowerUp(IPowerUp powerUp)
-        {
-            _powerUpHandler.Execute(powerUp);
-        }     
-
         public void CameraHandler(RunMovement movement)
         {
             _cameraController.CameraCalculate(movement);

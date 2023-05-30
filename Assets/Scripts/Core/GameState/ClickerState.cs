@@ -1,6 +1,7 @@
 ﻿using GUS.Core.Locator;
 using GUS.Core.UI;
 using GUS.LevelBuild;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -58,6 +59,11 @@ namespace GUS.Core.GameState
         public void Update()
         {
             _worldController.Move();
+        }
+
+        public void ResetMan()
+        {
+            _clicker?.ReturnEnemy();
         }
     }
 }

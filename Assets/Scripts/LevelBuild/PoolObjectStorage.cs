@@ -9,7 +9,7 @@ namespace GUS.LevelBuild
     [CreateAssetMenu]
     public class PoolObjectStorage : ScriptableObject
     {
-        public List<RandomPart> parts;
+        public List<ObjectInfo> parts;
     }
 }
 

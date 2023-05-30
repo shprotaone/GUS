@@ -9,8 +9,6 @@ namespace GUS.Objects
         [SerializeField] private Coin[] _coins;
         public PoolObjectType Type => _objectPoolType;
 
-        public ObjectPool PoolLink { get; set; }
-
         private void OnEnable()
         {
             foreach(var coin in _coins)
