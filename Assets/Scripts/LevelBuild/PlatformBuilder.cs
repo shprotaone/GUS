@@ -1,3 +1,4 @@
+using GUS.Core.Clicker;
 using GUS.Core.Locator;
 using GUS.Core.Pool;
 using GUS.Objects;
@@ -34,11 +35,13 @@ namespace GUS.LevelBuild
         private bool _isFree;
         private bool _rewardPlatform;
 
+        private IServiceLocator _serviceLocator;
         public ClickerGame NextClickerGame{ get;private set; }
         public PlatformBuilder(Transform startPosition, IServiceLocator serviceLocator)
         {
             List<ObjectPool> pools = serviceLocator.GetAll<ObjectPool>().ToList();
             _specialPlatformBuilder = serviceLocator.Get<SpecialPlatformBuilder>();
+            _serviceLocator = serviceLocator;
             _platformPool = pools[0];   //небезопасно
             _collectablesPool = pools[1];
 
@@ -109,7 +112,6 @@ namespace GUS.LevelBuild
             else if(_specialPlatformBuilder.Find(_platformCount, out PoolObjectType SpecialType))
             {
                 _nextPlatform = _platformPool.GetObject(SpecialType);
-                NextClickerGame = _nextPlatform.GetComponent<ClickerGame>();
                 _rewardPlatform = true;
                 _isFree= true;
             }
@@ -158,7 +160,7 @@ namespace GUS.LevelBuild
             }
             else
             {
-                Debug.Log("Билдер пуст");
+                
             }
             _platformCount = 0;
             _specialPlatformBuilder.ResetCount();

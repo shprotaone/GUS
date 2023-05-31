@@ -1,41 +1,31 @@
-﻿using GUS.Core.Locator;
-using GUS.Core.UI;
+﻿using GUS.Core.Clicker;
+using GUS.Core.Locator;
 using GUS.LevelBuild;
-using System;
 using System.Collections;
-using UnityEngine;
 
 namespace GUS.Core.GameState
 {
     public class ClickerState : IState
     {
-        private CameraRunController _cameraController;
         private WorldController _worldController;
-        private UIController _uiController;
         private ClickerGame _clicker;
+        private ClickerStateMachine _clickerStateMachine;
+        private IServiceLocator _serviceLocator;
         public IStateMachine StateMachine { get; private set; }
 
         public ClickerState(IStateMachine stateMachine, IServiceLocator serviceLocator) 
-        {
-            if(serviceLocator.Get<ICamera>() is CameraRunController cam)
-            {
-                _cameraController = cam;
-            }
+        {                       
+            _serviceLocator = serviceLocator;
             _worldController = serviceLocator.Get<WorldController>();
-            _uiController= serviceLocator.Get<UIController>();
             StateMachine = stateMachine;
         }        
 
         public void Enter()
         {
-            Debug.Log("Call");
-            _clicker = _worldController.PlatformBuilder.NextClickerGame;
-            _clicker.InitSlider(_uiController.GetClickerSlider());
-            _cameraController.ClickerCamera();
-            _uiController.HPSliderActivate(true);
-            _worldController.CreateOnlyFreePlatforms(true);
+            _clicker = _serviceLocator.Get<ClickerGame>();
+            _clickerStateMachine = _clicker.StateMachine;
             _clicker.Paused(false);
-
+            _worldController.CreateOnlyFreePlatforms(true);            
         }
 
         public IEnumerator Execute()
@@ -44,26 +34,24 @@ namespace GUS.Core.GameState
         }
 
         public void Exit()
-        {    
-            _clicker.Paused(true);
-            _uiController.HPSliderActivate(false);
-            //_worldController.WorldStopper(false);
+        {
+            _clicker.Paused(true);           
             _worldController.CreateOnlyFreePlatforms(false);
         }
 
         public void FixedUpdate()
         {
-           
+           _clickerStateMachine.FixedUpdate();
         }
 
         public void Update()
-        {
-            _worldController.Move();
+        {         
+            _clickerStateMachine.Update();
         }
 
         public void ResetMan()
         {
-            _clicker?.ReturnEnemy();
+            _clicker.Restart();
         }
     }
 }

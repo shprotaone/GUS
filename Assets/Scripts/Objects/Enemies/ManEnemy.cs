@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GUS.Core.Clicker;
 using UnityEngine;
 
 namespace GUS.Objects.Enemies

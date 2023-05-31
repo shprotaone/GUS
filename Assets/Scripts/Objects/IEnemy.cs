@@ -1,3 +1,5 @@
+using GUS.Core.Clicker;
+
 namespace GUS.Objects.Enemies
 {
     public interface IEnemy

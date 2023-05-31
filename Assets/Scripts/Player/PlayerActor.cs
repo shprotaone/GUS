@@ -43,6 +43,7 @@ namespace GUS.Player
         public CapsuleCollider Collider => _capsuleCollider;
         public Transform BossPosition => _bossPosition;
         public AudioService AudioService => _audioService;
+        public IServiceLocator ServiceLocator { get; private set; }
         #endregion
         private void Start()
         {
@@ -61,6 +62,7 @@ namespace GUS.Player
             _stateController = serviceLocator.Get<GameStateController>();
             _audioService= serviceLocator.Get<AudioService>();
             _wallet = serviceLocator.Get<Wallet>();
+            ServiceLocator = serviceLocator;
         }
 
         public void SetMovementType(IMovement movement)

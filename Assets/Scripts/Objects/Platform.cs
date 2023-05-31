@@ -43,7 +43,6 @@ namespace GUS.Objects
         {
             if(_currentCollectable != null)
             {
-                Debug.Log("Удален " + _currentCollectable.GetType().Name);
                 pool.DestroyObject(_currentCollectable);
                 _currentCollectable = null;
             }

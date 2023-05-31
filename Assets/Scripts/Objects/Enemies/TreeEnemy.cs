@@ -1,3 +1,4 @@
+using GUS.Core.Clicker;
 using UnityEngine;
 
 namespace GUS.Objects.Enemies

@@ -3,6 +3,7 @@ using GUS.Player.Movement;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using System;
 
 namespace GUS.Core.GameState
 {
@@ -10,6 +11,7 @@ namespace GUS.Core.GameState
     {
         [SerializeField] private CinemachineBrain _brain;
         [SerializeField] private CinemachineVirtualCamera _clickerCamera;
+        [SerializeField] private CinemachineVirtualCamera _biteCamera;
         [SerializeField] private CinemachineFreeLook _runCamera;
 
         [SerializeField] private Transform _playerTarget;
@@ -31,6 +33,7 @@ namespace GUS.Core.GameState
         public void ClickerCamera()
         {
             _clickerCamera.enabled = true;
+            _biteCamera.enabled = false;
             _runCamera.enabled = false;
         }
 
@@ -71,6 +74,23 @@ namespace GUS.Core.GameState
             {
                 DOVirtual.DelayedCall(0.5f, () => _playerTarget.DOMoveY(2.5f, _speedMovement));
             }
+        }
+
+        public void BiteCamera()
+        {
+            FOVReset();
+            _biteCamera.enabled = true;
+            _clickerCamera.enabled = false;
+        }
+
+        public void FOVIncrement(float value)
+        {
+            _biteCamera.m_Lens.FieldOfView -= value;
+        }
+
+        public void FOVReset()
+        {
+            _biteCamera.m_Lens.FieldOfView = 80;
         }
     }
 }
