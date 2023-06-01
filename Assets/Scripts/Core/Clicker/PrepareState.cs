@@ -2,12 +2,13 @@
 using GUS.Core.Locator;
 using GUS.Core.UI;
 using GUS.LevelBuild;
+using GUS.Player;
 using System.Collections;
 using UnityEngine;
 
 namespace GUS.Core.Clicker
 {
-    public class PrepareState :IState
+    public class PrepareState : IState
     {
         private IServiceLocator _serviceLocator;
         private ClickerStateMachine _clickerStateMachine;
@@ -23,12 +24,13 @@ namespace GUS.Core.Clicker
         {
             _serviceLocator = serviceLocator;
             _clickerStateMachine = stateMachine;
+            _worldController = serviceLocator.Get<WorldController>();
+            _uiController = serviceLocator.Get<UIController>();
+
             if (serviceLocator.Get<ICamera>() is CameraRunController cam)
             {
                 _cameraController = cam;
-            }
-            _worldController = serviceLocator.Get<WorldController>();
-            _uiController = serviceLocator.Get<UIController>();            
+            }          
         }
 
         public void Enter()
@@ -41,10 +43,11 @@ namespace GUS.Core.Clicker
             }
             
             _cameraController.ClickerCamera();
-            _uiController.HPSliderActivate(true);
-            _game.Paused(false);
+            _uiController.HPSliderActivate(true);                  
             _prepareTime = _game.Settings.prepareTime;
-            _clickerStateMachine.CallRoutine();            
+            _clickerStateMachine.CallRoutine();
+            _game.Enemy?.MoveToDamage(true, _prepareTime);
+            _game.Paused(false);
         }
 
         public IEnumerator Execute()

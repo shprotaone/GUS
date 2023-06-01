@@ -43,6 +43,16 @@ namespace GUS.Objects.Enemies
         {
 
         }
+
+        public void MoveToDamage(bool flag, float time)
+        {
+            
+        }
+
+        public void Move(bool flag, Vector3 pos)
+        {
+            
+        }
     }
 }
 

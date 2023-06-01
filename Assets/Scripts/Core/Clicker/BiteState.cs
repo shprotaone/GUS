@@ -5,6 +5,7 @@ using GUS.Player.Movement;
 using GUS.Player;
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 namespace GUS.Core.Clicker
 {
@@ -38,6 +39,7 @@ namespace GUS.Core.Clicker
             _actor = _serviceLocator.Get<PlayerActor>();
             if (_game == null) _game = _serviceLocator.Get<ClickerGame>();
             _clickerStateMachine.CallRoutine();
+            _game.Enemy.MoveToDamage(false,_game.Settings.prepareTime);
 
         }
 
@@ -47,23 +49,25 @@ namespace GUS.Core.Clicker
             {
                 _movement = clickerMovement;
             }
-
-            yield return new WaitForSeconds(0.2f);
+            _cameraController.BiteCamera();
+            yield return new WaitForSeconds(_game.Settings.prepareTime);
 
             _movement.CanAttack(true);
             _movement.OnClick += _game.GetDamage;
-            _movement.OnClick += () => _cameraController.FOVIncrement(1);
-            _cameraController.BiteCamera();
-
+            //_movement.OnClick += () => _cameraController.FOVIncrement(1);           
+            _actor.ChangeModelPos(0.6f, 0.2f);
+            //_actor.AnimatorController.Pause(true);
             yield return null;
         }
 
         public void Exit()
         {
             Debug.Log("Выход из Кусательного");
+            //_actor.AnimatorController.Pause(false);
             _movement.OnClick -= _game.GetDamage;
             _movement.OnClick -= () => _cameraController.FOVIncrement(10);
             _movement.CanAttack(false);
+            _actor.ChangeModelPos(-0.3f, 0.2f);
         }
 
         public void FixedUpdate()

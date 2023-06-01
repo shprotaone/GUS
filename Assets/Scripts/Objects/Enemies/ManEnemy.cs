@@ -1,19 +1,25 @@
 using DG.Tweening;
 using GUS.Core.Clicker;
+using GUS.Player;
 using UnityEngine;
 
 namespace GUS.Objects.Enemies
 {
     public class ManEnemy : MonoBehaviour, IEnemy
     {
+        private const float attackOffsetZ = 1f;
+
         [SerializeField] private Animator _manAnimator;
         [SerializeField] private Animator _bagAnimator;
         [SerializeField] private BagController _bagController;
+        [SerializeField] private float _speedMovement;
 
         private ClickerGame _game;
+        private Vector3 _standartPos;
         private int _step;
         private float _animSpeed;
         private bool _isAlive;
+        private bool _isMoving;
 
         public bool IsAlive => _isAlive;
 
@@ -35,8 +41,25 @@ namespace GUS.Objects.Enemies
             _isAlive = true;
             gameObject.SetActive(true);
             _animSpeed = _manAnimator.speed;
-            _game = clicker;
-            //transform.DOMove(clicker.RunPoint.position, 2);
+            _game = clicker;                       
+        }
+
+        public void MoveToDamage(bool flag,float time)
+        {
+            if (flag)
+            {
+                transform.DOMoveZ(_standartPos.z + attackOffsetZ, time);
+            }
+            else
+            {
+                transform.DOMoveZ(_standartPos.z - attackOffsetZ, time);
+            }
+        }
+
+        public void Move(bool flag,Vector3 pos)
+        {
+            _standartPos = pos;
+            transform.DOMove(pos, 2);
         }
 
         public void Paused(bool flag)

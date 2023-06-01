@@ -6,23 +6,20 @@ namespace GUS.Core.Clicker
 {
     public class ClickerEntryComponent : MonoBehaviour
     {
+        [SerializeField] private GameObject _enemyObj;
         [SerializeField] private BossSettings _settings;
         [SerializeField] private Transform _bossTransform;
         [SerializeField] private float _prepareTime;
         [SerializeField] private bool _isActive;
 
-        private GameObject _enemyObj;
         private ClickerGame _clicker;
 
         public bool ActivatePit => _isActive;
 
 
         private void OnEnable()
-        {
-            if (_enemyObj == null)
-            {
-                _enemyObj = Instantiate(_settings.BossPrefab, _bossTransform);
-            }
+        {                
+            _enemyObj.transform.SetParent(_bossTransform);           
         }
 
         private void OnTriggerEnter(Collider other)
@@ -30,6 +27,8 @@ namespace GUS.Core.Clicker
             if (other.TryGetComponent(out PlayerActor actor) && _isActive)
             {
                 _isActive = false;
+                _enemyObj.transform.SetParent(actor.StartBossPosition);
+                _enemyObj.transform.localPosition = Vector3.zero;
                 PrepareEnemy();
                 StartCoroutine(Initialization(actor));
             }
@@ -38,15 +37,14 @@ namespace GUS.Core.Clicker
         private IEnumerator Initialization(PlayerActor actor)
         {
             _clicker = actor.ServiceLocator.Get<ClickerGame>();
+            _enemyObj.SetActive(true);
             _clicker.OnRestart += PrepareEnemy;
             yield return StartCoroutine(_clicker.Init(_settings,_enemyObj));
         }
 
         public void PrepareEnemy()
         {
-            _enemyObj.SetActive(true);
-            _enemyObj.transform.SetParent(_bossTransform);
-            _enemyObj.transform.position = _bossTransform.position;
+            _enemyObj.SetActive(false);
         }
 
         private void OnDisable()

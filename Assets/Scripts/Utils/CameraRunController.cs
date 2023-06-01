@@ -78,7 +78,7 @@ namespace GUS.Core.GameState
 
         public void BiteCamera()
         {
-            FOVReset();
+            //FOVReset();
             _biteCamera.enabled = true;
             _clickerCamera.enabled = false;
         }

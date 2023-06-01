@@ -35,7 +35,7 @@ namespace GUS.Core.GameState
 
         public void Exit()
         {
-            _clicker.Paused(true);           
+            //_clicker.Paused(true);           
             _worldController.CreateOnlyFreePlatforms(false);
         }
 
@@ -51,7 +51,7 @@ namespace GUS.Core.GameState
 
         public void ResetMan()
         {
-            _clicker.Restart();
+            _clicker?.Restart();
         }
     }
 }

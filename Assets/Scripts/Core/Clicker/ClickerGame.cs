@@ -18,7 +18,6 @@ namespace GUS.Core.Clicker
         private ClickerStateMachine _clickerStateMachine;
         private IServiceLocator _serviceLocator;
         private PlayerActor _playerActor;
-        private GameObject _enemyGO;
 
         private BossSettings _settings;
         private IEnemy _enemy;
@@ -26,6 +25,7 @@ namespace GUS.Core.Clicker
         private int _stageIndex;
 
         public float HP => _hp;
+        public IEnemy Enemy => _enemy;
         public BossSettings Settings => _settings;
         public ClickerStateMachine StateMachine => _clickerStateMachine;
 
@@ -35,7 +35,7 @@ namespace GUS.Core.Clicker
             _gameStateController = serviceLocator.Get<GameStateController>();
             _wallet = serviceLocator.Get<Wallet>();
             _playerActor = serviceLocator.Get<PlayerActor>();
-            _serviceLocator= serviceLocator;
+            _serviceLocator = serviceLocator;
         }
 
         public IEnumerator Init(BossSettings settings,GameObject enemy)
@@ -63,11 +63,10 @@ namespace GUS.Core.Clicker
         private void SetEnemy(GameObject enemy)
         {
             //TODO перебросить в фабрику
-            enemy.transform.DOMove(_playerActor.BossPosition.position, 2);
-            enemy.transform.SetParent(_playerActor.BossPosition);
-
+            _playerActor = _serviceLocator.Get<PlayerActor>();
             _enemy = enemy.GetComponent<IEnemy>();
             _enemy.Init(this);
+            _enemy.Move(true, _playerActor.BossPosition.position);     
         }
 
 
@@ -108,6 +107,7 @@ namespace GUS.Core.Clicker
         {
             OnRestart?.Invoke();
             _clickerUI.DisableSlider();
+            StateMachine.CurrentState.Exit();
             OnRestart = null;
         }
     }
