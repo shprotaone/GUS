@@ -1,3 +1,4 @@
+using DG.Tweening;
 using GUS.Core.InputSys;
 using GUS.Player.State;
 using System;
@@ -32,16 +33,10 @@ namespace GUS.Player.Movement
                 if (_inputType.Firing() == EnumBind.Fire)
                 {
                     OnClick?.Invoke();
-
-                    _particleController.DamageEffect(_inputType.StartPosition);
-                }
-                else if (_inputType.Firing() == EnumBind.FireHold)
-                {
                     _animatorController.BiteActivate(true);
-                }
-                else
-                {
-                    _animatorController.BiteActivate(false);
+                    DOVirtual.DelayedCall(0.1f, () => _animatorController.BiteActivate(false));
+                    _particleController.DamageEffect(_inputType.StartPosition);
+                    Debug.Log("TAP");
                 }
            }
         }

@@ -36,9 +36,9 @@ namespace GUS.Core.InputSys
                     return EnumBind.Fire;
                 }
 
-                if(Input.GetTouch(0).phase == TouchPhase.Stationary){
-                    return EnumBind.FireHold;
-                }
+                //if(Input.GetTouch(0).phase == TouchPhase.Stationary){
+                //    return EnumBind.FireHold;
+                //}
             }          
 
             return EnumBind.None;

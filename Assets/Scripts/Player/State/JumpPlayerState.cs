@@ -1,10 +1,7 @@
 ﻿using GUS.Core;
 using GUS.Core.GameState;
 using GUS.Player.Movement;
-using System;
 using System.Collections;
-using TMPro;
-using UnityEngine;
 
 namespace GUS.Player.State
 {

@@ -1,6 +1,3 @@
-using DG.Tweening;
-using GUS.Player;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -10,7 +7,6 @@ namespace GUS.Player
     {
         [SerializeField] private Rig _neckRig;
         [SerializeField] private Transform _neckTarget;
-        [SerializeField] private float _biteAnimTime;
         [SerializeField] private Animator _animator;
         [SerializeField] private ParticleController _particleController;
 
@@ -24,7 +20,6 @@ namespace GUS.Player
         private int BiteID = Animator.StringToHash("Bite");
 
         private float _prevSpeed;
-        private bool _inByte;
         private void Start()
         {
             _neckTarget.position += Vector3.forward;

@@ -1,6 +1,7 @@
 using GUS.Core.GameState;
 using GUS.Core.Locator;
 using System;
+using System.Collections;
 
 namespace GUS.Core.Clicker
 {
@@ -16,7 +17,6 @@ namespace GUS.Core.Clicker
         public event Action stateChanged;
 
         private RoutineExecuter _routineExecuter;
-
 
         public ClickerStateMachine(IServiceLocator serviceLocator)
         {
@@ -37,6 +37,11 @@ namespace GUS.Core.Clicker
         public void CallRoutine()
         {
             _routineExecuter.Execute(CurrentState.Execute());
+        }
+
+        public void StopRoutine(IEnumerator routine)
+        {
+            _routineExecuter.Stop(routine);
         }
 
         public void FixedUpdate()

@@ -68,6 +68,7 @@ namespace GUS.Core.Clicker
             _movement.OnClick -= () => _cameraController.FOVIncrement(10);
             _movement.CanAttack(false);
             _actor.ChangeModelPos(-0.3f, 0.2f);
+            _clickerStateMachine.StopRoutine(Execute());
         }
 
         public void FixedUpdate()
