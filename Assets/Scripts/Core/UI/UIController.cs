@@ -13,6 +13,7 @@ namespace GUS.Core.UI
         [SerializeField] private UIInGame _uiInGame;
         [SerializeField] private UIPause _uiPause;
         [SerializeField] private UIEndGame _uiEndGame;
+        [SerializeField] private UIClickerGame _clickerGame;
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private GameObject _clickerPanel;
 
@@ -26,6 +27,7 @@ namespace GUS.Core.UI
         public UIStartGame UIStartGame => _uiStartGame;
         public UIInGame UiInGame => _uiInGame;
         public UIEndGame UIEndGame => _uiEndGame;
+        public UIClickerGame ClickerGame => _clickerGame;
 
         public void Init(IServiceLocator serviceLocator)
         {

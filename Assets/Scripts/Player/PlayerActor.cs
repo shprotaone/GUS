@@ -6,6 +6,7 @@ using GUS.Core.Locator;
 using GUS.Core.Weapon;
 using GUS.Objects.PowerUps;
 using GUS.Player.Movement;
+using System;
 using UnityEngine;
 
 namespace GUS.Player
@@ -19,6 +20,8 @@ namespace GUS.Player
         [SerializeField] private PowerUpHandler _powerUpHandler;      
         [SerializeField] private ParticleController _particleController;
         [SerializeField] private Transform _bossPosition;
+        [SerializeField] private Transform _startBossPos;
+        [SerializeField] private Transform _model;
 
         private Vector3 _startPosition;
         private GameStateController _stateController;
@@ -36,13 +39,14 @@ namespace GUS.Player
         public IInputType InputType => _inputType;
         public IWeapon Weapon => _weapon;
         public CharacterController CharController => _controller;
-        public GameStateController GameStateController => _stateController;
         public Wallet Wallet => _wallet;
         public PowerUpHandler PowerUpHandler => _powerUpHandler;
         public AnimatorController AnimatorController => _animator;
         public CapsuleCollider Collider => _capsuleCollider;
         public Transform BossPosition => _bossPosition;
+        public Transform StartBossPosition => _startBossPos;
         public AudioService AudioService => _audioService;
+        public IServiceLocator ServiceLocator { get; private set; }
         #endregion
         private void Start()
         {
@@ -61,6 +65,7 @@ namespace GUS.Player
             _stateController = serviceLocator.Get<GameStateController>();
             _audioService= serviceLocator.Get<AudioService>();
             _wallet = serviceLocator.Get<Wallet>();
+            ServiceLocator = serviceLocator;
         }
 
         public void SetMovementType(IMovement movement)
@@ -85,17 +90,6 @@ namespace GUS.Player
         {
             _audioService.PlaySFX(_audioService.Data.quack);
         }
-        //public void SmoothSecondLevel(bool isOn)
-        //{
-        //    if (isOn) _rigidbody.interpolation = RigidbodyInterpolation.Extrapolate;
-        //    else _rigidbody.interpolation = RigidbodyInterpolation.None;
-        //}
-
-        public void ChangeGameType(bool isRunner)
-        {
-            if (isRunner) _stateController.StartGame();
-            else _stateController.ClickerGame();
-        }
 
         public void Collect()
         {
@@ -106,6 +100,11 @@ namespace GUS.Player
         public void CameraHandler(RunMovement movement)
         {
             _cameraController.CameraCalculate(movement);
+        }
+
+        public void ChangeModelPos(float offset, float time)
+        {
+            _model.transform.DOLocalMoveY(offset, time);
         }
     }
 }

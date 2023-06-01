@@ -41,7 +41,7 @@ namespace GUS.Player.Movement
             _playerState = playerState;
             _speedMovement = speedMovement;            
             _canMoved = true;
-            _targetPosition = _player.transform.position;
+            //_targetPosition = _player.transform.position;
             _currentLine = Line.Center;
             _rotator = new ActorRotator(player);
             _audioService = player.AudioService;
@@ -182,7 +182,7 @@ namespace GUS.Player.Movement
 
         public void ReturnObstaclePosition()
         {
-            _targetPosition = _startPosition;
+            _targetPosition.x = _startPosition.x;
             _player.PlayBackSound();
             ResetPosition();
             CheckLinePosition();

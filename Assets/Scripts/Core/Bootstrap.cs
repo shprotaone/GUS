@@ -1,3 +1,4 @@
+using GUS.Core.Clicker;
 using GUS.Core.GameState;
 using GUS.Core.InputSys;
 using GUS.Core.InputSys.Joiystick;
@@ -34,6 +35,7 @@ namespace GUS.Core
         [SerializeField] private AudioService _audioService;
         [SerializeField] private JsonToFirebase _jsonToFirebase;
         [SerializeField] private FloatingJoystick _joystick;    //кандидат на отделение
+        [SerializeField] private RoutineExecuter _routineExecuter;
         [SerializeField] private bool _isHub;
 
         private DeleteService _deleteService;
@@ -53,6 +55,7 @@ namespace GUS.Core
             _serviceLocator.Register(_jsonToFirebase);
             _serviceLocator.Register(new StorageService(_serviceLocator));
             _serviceLocator.Register(new DeleteService(_serviceLocator));
+            _serviceLocator.Register(_routineExecuter);
 
             if (!_isHub) RunInit();
            else HubInit();          
@@ -98,6 +101,7 @@ namespace GUS.Core
             _serviceLocator.Register<Wallet>(new Wallet(_serviceLocator));
             PoolInitialization();
             _serviceLocator.Register<LevelSettings>(_levelSettings);
+            
             _serviceLocator.Register<WorldController>(new WorldController(_startPoint, _serviceLocator));
             _serviceLocator.Register<GameStateMachine>(new GameStateMachine(_stateText, _serviceLocator));
             _serviceLocator.Register<GameStateController>(_stateController);
@@ -107,13 +111,15 @@ namespace GUS.Core
             SetInput();
             PlayerInit();
             _progressiveSystem.Init(_serviceLocator);
-            _uiController.Init(_serviceLocator);        
+            _uiController.Init(_serviceLocator);
+            ClickerInit();
         }
 
-        private void FlyInit()
+        private void ClickerInit()
         {
-
+            _serviceLocator.Register(new ClickerGame(_serviceLocator));
         }
+
         private void PoolInitialization()
         {
             _serviceLocator.Register<PoolObjectStorage>(_platformStorage);

@@ -14,30 +14,36 @@ namespace GUS.Player.Movement
         private SmartphoneInput _inputType;
         private EnumBind _action;
 
+        private bool _canAttack;
+
         public void Init(PlayerActor player, PlayerStateMachine playerState, float speedMovement)
         {
             _playerStateMachine = playerState;
             _animatorController = player.AnimatorController;
             _inputType = (SmartphoneInput)player.InputType;
             _particleController = player.Particles;
+            _canAttack = false;
             
         }
         public void Fire()
-        {           
-            if (_inputType.Firing() == EnumBind.Fire)
+        {          
+            if(_canAttack )
             {
-                OnClick?.Invoke();
-                
-                _particleController.DamageEffect(_inputType.StartPosition);
-            }
-            else if(_inputType.Firing() == EnumBind.FireHold)
-            {
-                _animatorController.BiteActivate(true);
-            }
-            else
-            {
-                _animatorController.BiteActivate(false);
-            }
+                if (_inputType.Firing() == EnumBind.Fire)
+                {
+                    OnClick?.Invoke();
+
+                    _particleController.DamageEffect(_inputType.StartPosition);
+                }
+                else if (_inputType.Firing() == EnumBind.FireHold)
+                {
+                    _animatorController.BiteActivate(true);
+                }
+                else
+                {
+                    _animatorController.BiteActivate(false);
+                }
+           }
         }
 
         public void FixedUpdate()
@@ -58,6 +64,8 @@ namespace GUS.Player.Movement
         {
             Fire();
         }
+
+        public bool CanAttack(bool flag) => _canAttack = flag;
     }
 }
 

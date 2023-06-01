@@ -1,126 +1,115 @@
 using DG.Tweening;
+using GUS.Core.Locator;
+using GUS.Core.UI;
 using GUS.Objects.Enemies;
 using GUS.Player;
-using GUS.Player.Movement;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ClickerGame : MonoBehaviour
+namespace GUS.Core.Clicker
 {
-    private event Action OnClickerEnd;
-
-    [SerializeField] private BossSettings _settings;
-    [SerializeField] private Slider _hpSlider;
-    [SerializeField] private bool _isDynamicClicker;
-    [SerializeField] private Transform _bossTransform;
-
-    private GameObject _enemyObj;
-    private Wallet _wallet;
-    private ClickerMovement _clickerMovement;
-    
-    private IEnemy _enemy;
-    private float _hp;
-
-    public float HP => _hp;
-
-    private void OnEnable()
+    public class ClickerGame
     {
-        if(_enemyObj == null)
+        public event Action OnRestart;
+        private UIClickerGame _clickerUI;
+        private GameStateController _gameStateController;
+        private Wallet _wallet;
+        private ClickerStateMachine _clickerStateMachine;
+        private IServiceLocator _serviceLocator;
+        private PlayerActor _playerActor;
+
+        private BossSettings _settings;
+        private IEnemy _enemy;
+        private float _hp;
+        private int _stageIndex;
+
+        public float HP => _hp;
+        public IEnemy Enemy => _enemy;
+        public BossSettings Settings => _settings;
+        public ClickerStateMachine StateMachine => _clickerStateMachine;
+
+        public ClickerGame(IServiceLocator serviceLocator)
         {
-            _enemyObj = Instantiate(_settings.BossPrefab, _bossTransform);
+            _clickerUI = serviceLocator.Get<UIController>().ClickerGame;
+            _gameStateController = serviceLocator.Get<GameStateController>();
+            _wallet = serviceLocator.Get<Wallet>();
+            _playerActor = serviceLocator.Get<PlayerActor>();
+            _serviceLocator = serviceLocator;
         }
-    }
 
-    public IEnumerator Init(PlayerActor actor)
-    {
-        _enemyObj.SetActive(true);
-        _enemyObj.transform.SetParent(_bossTransform);
-        _enemyObj.transform.position = _bossTransform.position;
-       
-        actor.GameStateController.ClickerGame();
-        OnClickerEnd += actor.GameStateController.StartGame;
-        _wallet = actor.Wallet;
-        yield return new WaitForSeconds(0.2f);
-        SetEnemy(actor);
-        SetHp();
-       
-        yield return new WaitForSeconds(0.3f);
-        SetMovement(actor);
+        public IEnumerator Init(BossSettings settings,GameObject enemy)
+        {
+            _settings = settings;
+            _clickerStateMachine = new ClickerStateMachine(_serviceLocator);
+            _gameStateController.ClickerGame();
+            
+            //yield return new WaitForSeconds(0.2f);
+            SetEnemy(enemy);
+            _clickerUI.InitSlider(settings.MaxHP);
+            _hp = settings.MaxHP;
 
-        yield return null;
-    }
+            _stageIndex = 0;
+            _clickerStateMachine.InitGameLoop(_clickerStateMachine.prepareState);
 
-    public void ReturnEnemy()
-    {
-        _enemyObj.transform.SetParent(_bossTransform);
-        _enemyObj.transform.position = _bossTransform.position;
-    }
+            yield return null;
+        }
 
-    private void SetHp()
-    {
-        _hp = _settings.MaxHP;
-        _hpSlider.maxValue = _hp;
-        _hpSlider.value = _hp;
-    }
+        public void SetStateMachine(ClickerStateMachine stateMachine)
+        {
+            _clickerStateMachine = stateMachine;
+        }
 
-    private void SetEnemy(PlayerActor actor)
-    {
-        //TODO перебросить в фабрику
-        _enemyObj.transform.DOMove(actor.BossPosition.position, 2);
-        _enemyObj.transform.SetParent(actor.BossPosition);
+        private void SetEnemy(GameObject enemy)
+        {
+            //TODO перебросить в фабрику
+            _playerActor = _serviceLocator.Get<PlayerActor>();
+            _enemy = enemy.GetComponent<IEnemy>();
+            _enemy.Init(this);
+            _enemy.Move(true, _playerActor.BossPosition.position);     
+        }
+
+
+        public void GetDamage()
+        {
+            _hp -= _settings.damage;
+            _clickerUI.UpdateSlider(_settings.damage);
+            _enemy.Behaviour(GetStage());
+
+            if (_hp < 0)
+            {
+                _wallet.AddDistancePoint(_settings.reward);
+                _clickerStateMachine.TransitionTo(_clickerStateMachine.endState);
+                _enemy.Death();
+            }
+        }
+
+        private EnemyStage GetStage()
+        {
+            if (_stageIndex >= _settings.stages.Length) return EnemyStage.FULL;
+
+            float stageHp = _settings.stages[_stageIndex];
+            if (_hp < stageHp)
+            {
+                 _stageIndex++;
+                _clickerStateMachine.TransitionTo(_clickerStateMachine.prepareState);
+                return (EnemyStage)_stageIndex;
+            }
+            else { return EnemyStage.FULL; }
+        }
+
+        public void Paused(bool flag)
+        {
+            if (_enemy != null) _enemy.Paused(flag);
+        }   
         
-        _enemy = _enemyObj.GetComponent<IEnemy>();
-        _enemy.Init(this);
-    }
-
-    private void SetMovement(PlayerActor actor)
-    {
-        if (actor.MovementType is ClickerMovement clickerMovement)
+        public void Restart()
         {
-            _clickerMovement = clickerMovement;
-            _clickerMovement.OnClick += GetDamage;
+            OnRestart?.Invoke();
+            _clickerUI.DisableSlider();
+            StateMachine.CurrentState.Exit();
+            OnRestart = null;
         }
     }
 
-    public void InitSlider(Slider slider)
-    {
-        _hpSlider = slider;
-    }
-
-    public void GetDamage()
-    {
-        _hp -= _settings.damage;
-        RefreshSlider();
-        _enemy.Behaviour(GetStage());
-
-        if (_hp < 0)
-        {        
-            OnClickerEnd?.Invoke();
-            _wallet.AddDistancePoint(_settings.reward);
-            _clickerMovement.OnClick -= GetDamage;
-            OnClickerEnd = null;
-            _enemy.Death();
-        }
-    }
-
-    private void RefreshSlider()
-    {
-        _hpSlider.value = _hp;
-    }
-
-    private EnemyStage GetStage()
-    {
-        if (_hp < _settings.stages[3]) return EnemyStage.LAST;
-        else if (_hp < _settings.stages[2]) return EnemyStage.SECOND;
-        else if (_hp < _settings.stages[1]) return EnemyStage.FIRST;
-        else return EnemyStage.FULL;
-    }
-
-
-    public void Paused(bool flag)
-    {
-        if(_enemy!= null) _enemy.Paused(flag);
-    }
 }

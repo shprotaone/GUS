@@ -12,6 +12,7 @@ public class BagController : MonoBehaviour, IClickerProgress
     private GameObject _current;
     private void OnEnable()
     {
+        ResetState();
         _full.SetActive(true);
         _current = _full;
     }
@@ -29,5 +30,10 @@ public class BagController : MonoBehaviour, IClickerProgress
         _current?.SetActive(false);
         _current = next;
         _current.SetActive(true);
+    }
+
+    private void ResetState()
+    {
+        _current?.SetActive(false);
     }
 }

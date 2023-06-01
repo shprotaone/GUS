@@ -203,12 +203,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 335dbcf816f250341bd215edd31c4444, type: 2}
     - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
       propertyPath: moveWithTransform
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
       propertyPath: emitterVelocityMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382543945628625138, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.39215687
       objectReference: {fileID: 0}
     - target: {fileID: 6840532886344401964, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
       propertyPath: m_Name

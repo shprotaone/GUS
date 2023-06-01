@@ -60,6 +60,11 @@ namespace GUS.Player
                 _animator.speed = _prevSpeed;
             }
         }
+
+        public void ResetAnimation()
+        {
+            _animator.speed = 1;
+        }
         public void ChangeAnimationSpeed(float speed)
         {
             _animator.SetFloat(RunSpeedMultiply, speed / 10);
