@@ -14,9 +14,6 @@ namespace GUS.Core.Clicker
 
         private ClickerGame _clicker;
 
-        public bool ActivatePit => _isActive;
-
-
         private void OnEnable()
         {                
             _enemyObj.transform.SetParent(_bossTransform);           
@@ -27,8 +24,6 @@ namespace GUS.Core.Clicker
             if (other.TryGetComponent(out PlayerActor actor) && _isActive)
             {
                 _isActive = false;
-                _enemyObj.transform.SetParent(actor.StartBossPosition);
-                _enemyObj.transform.localPosition = Vector3.zero;
                 PrepareEnemy();
                 StartCoroutine(Initialization(actor));
             }

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GUS.Core.Data;
 using GUS.Core.Locator;
 using GUS.Core.UI;
 using GUS.Objects.Enemies;
@@ -6,6 +7,7 @@ using GUS.Player;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GUS.Core.Clicker
 {
@@ -17,9 +19,9 @@ namespace GUS.Core.Clicker
         private Wallet _wallet;
         private ClickerStateMachine _clickerStateMachine;
         private IServiceLocator _serviceLocator;
-        private PlayerActor _playerActor;
 
         private BossSettings _settings;
+        private BossPositions _positions;
         private IEnemy _enemy;
         private float _hp;
         private int _stageIndex;
@@ -29,12 +31,12 @@ namespace GUS.Core.Clicker
         public BossSettings Settings => _settings;
         public ClickerStateMachine StateMachine => _clickerStateMachine;
 
-        public ClickerGame(IServiceLocator serviceLocator)
+        public void Init(IServiceLocator serviceLocator)
         {
+            _positions = serviceLocator.Get<BossPositions>();
             _clickerUI = serviceLocator.Get<UIController>().ClickerGame;
             _gameStateController = serviceLocator.Get<GameStateController>();
             _wallet = serviceLocator.Get<Wallet>();
-            _playerActor = serviceLocator.Get<PlayerActor>();
             _serviceLocator = serviceLocator;
         }
 
@@ -62,11 +64,12 @@ namespace GUS.Core.Clicker
 
         private void SetEnemy(GameObject enemy)
         {
-            //TODO перебросить в фабрику
-            _playerActor = _serviceLocator.Get<PlayerActor>();
+            enemy.transform.SetParent(_positions.Start);
+            enemy.transform.localPosition = Vector3.zero;
+
             _enemy = enemy.GetComponent<IEnemy>();
             _enemy.Init(this);
-            _enemy.Move(true, _playerActor.BossPosition.position);     
+            _enemy.Move(true, _positions.Run.position);     
         }
 
 
@@ -78,7 +81,7 @@ namespace GUS.Core.Clicker
 
             if (_hp < 0)
             {
-                _wallet.AddDistancePoint(_settings.reward);
+                _wallet.AddCoins(_settings.reward);
                 _clickerStateMachine.TransitionTo(_clickerStateMachine.endState);
                 _enemy.Death();
             }

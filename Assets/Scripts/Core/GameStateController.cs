@@ -8,9 +8,8 @@ using UnityEngine.UI;
 
 namespace GUS.Core
 {
-    public class GameStateController : MonoBehaviour
+    public class GameStateController : MonoBehaviour, IStateChanger
     {
-        [SerializeField] private Transform _clickerBossPosition;
         [SerializeField] private SceneHandler _sceneHandler;
         [SerializeField] private Text _deltaText;
         [SerializeField] private Text _directionText;
@@ -18,20 +17,15 @@ namespace GUS.Core
         private GameStateMachine _gameStateMachine;
         private PlayerStateMachine _playerStateMachine;
         private RoutineExecuter _routineExecuter;
-        private IInputType _smartInput;
 
         private IState _prevPlayerState;
         private IState _prevGameState;
-
-        public Transform ClickerBossPos => _clickerBossPosition;
-        public SceneHandler SceneHandler => _sceneHandler;
 
         public void Init(IServiceLocator serviceLocator)
         {
             _gameStateMachine = serviceLocator.Get<GameStateMachine>();
             _playerStateMachine = serviceLocator.Get<PlayerStateMachine>();
             _routineExecuter = serviceLocator.Get<RoutineExecuter>();
-            _smartInput = serviceLocator.Get<IInputType>(); //для тестов
 
             if(_gameStateMachine.start!= null) // временное решение
             {
@@ -44,20 +38,12 @@ namespace GUS.Core
 
         private void Update()
         {
-            _gameStateMachine.Update();
-            _playerStateMachine.Update();
-
-            if (_smartInput is SmartphoneInput input ) 
-            {
-                _deltaText.text = input.Delta.ToString();
-                _directionText.text = input.Direction.ToString();
-            }          
+            _gameStateMachine.Update();        
         }
 
         private void FixedUpdate()
         {
             _gameStateMachine.FixedUpdate();
-            _playerStateMachine.FixedUpdate();
         }
 
         private void CallPlayerRoutine()
@@ -126,23 +112,7 @@ namespace GUS.Core
         public void SceneLoadToHub()
         {
             EndGame();
-            _sceneHandler.LoadRunScene();
-        }
-        public void SceneLoadToRun()
-        {
-            _sceneHandler.LoadRunScene();
-        }
-
-        public void InitHub()
-        {
-            _gameStateMachine.InitGameLoop(_gameStateMachine.initMapState);
-        }
-
-        public void Explore()
-        {
-            _playerStateMachine.InitGameLoop(_playerStateMachine.initState);
-            _gameStateMachine.TransitionTo(_gameStateMachine.explore);
-            _playerStateMachine.TransitionTo(_playerStateMachine.exploreState);
+            _sceneHandler.LoadOtherScene();
         }
     }
 }

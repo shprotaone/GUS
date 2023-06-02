@@ -1,5 +1,4 @@
 using GUS.Core.Locator;
-using System;
 using UnityEngine;
 
 namespace GUS.LevelBuild
@@ -18,14 +17,15 @@ namespace GUS.LevelBuild
         public float CurrentDistance { get; private set; }
 
         public PlatformBuilder PlatformBuilder => _platformBuilder;
-        public WorldController(Transform startPoint, IServiceLocator serviceLocator)
+
+        public void Init(Transform startPoint, IServiceLocator serviceLocator)
         {
             _standartSettings = serviceLocator.Get<LevelSettings>();
             _platformBuilder = new PlatformBuilder(startPoint, serviceLocator);
             _startPoint = startPoint;
         }
 
-        public void InitStart()//TODO: Добавить свежие платформы в очередь
+        public void InitStart()
         {
             _maxSpeed = _standartSettings.maxWorldSpeed;
             _acceleration = _standartSettings.acceleration;

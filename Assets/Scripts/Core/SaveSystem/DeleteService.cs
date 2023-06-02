@@ -6,7 +6,8 @@ namespace GUS.Core.SaveSystem
     {
         private JsonToFirebase _jsonToFireBase;
         private StorageService _storageService;
-        public DeleteService(IServiceLocator serviceLocator)
+
+        public void Init(IServiceLocator serviceLocator)
         {
             _jsonToFireBase = serviceLocator.Get<JsonToFirebase>();
             _storageService = serviceLocator.Get<StorageService>();

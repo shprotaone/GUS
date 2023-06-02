@@ -14,19 +14,15 @@ namespace GUS.Core.UI
 
         private GameStateController _controller;
 
-        private void Start ()
-        {
-            _restartButton.onClick.AddListener(_controller.RestartGame);
-            _toHubButton.onClick.AddListener(_controller.SceneLoadToHub);
-            _resumeButton.onClick.AddListener(_controller.Resume);
-            _settings.onClick.AddListener(PanelActivate);
-        }
-
         private void PanelActivate() => _settingsPanel.SetActive(true);
 
         public void Init(GameStateController gameState)
         {
             _controller = gameState;
+            _restartButton.onClick.AddListener(_controller.RestartGame);
+            _toHubButton.onClick.AddListener(_controller.SceneLoadToHub);
+            _resumeButton.onClick.AddListener(_controller.Resume);
+            _settings.onClick.AddListener(PanelActivate);
         }
     }
 }

@@ -1,6 +1,4 @@
 using GUS.Core.Locator;
-using System.Text;
-using UnityEditor;
 using UnityEngine;
 
 namespace GUS.Core.SaveSystem
@@ -14,12 +12,13 @@ namespace GUS.Core.SaveSystem
         private IStorageService _storageService;
 
         public PlayerData Data => _playerData;
-        public StorageService(IServiceLocator serviceLocator)
+
+        public void Init(IServiceLocator serviceLocator)
         {
             _firebase = serviceLocator.Get<JsonToFirebase>();
             _storageService = new JsonToFileStorageService();
 
-            Load();           
+            Load();
         }
 
         public void Save()

@@ -44,7 +44,7 @@ namespace GUS.Player.Movement
             //_targetPosition = _player.transform.position;
             _currentLine = Line.Center;
             _rotator = new ActorRotator(player);
-            _audioService = player.AudioService;
+            _audioService = player.ServiceLocator.Get<AudioService>();
             OnChangePosition += CheckLinePosition;
             OnChangePosition += () => _player.CameraHandler(this);
         }
@@ -57,6 +57,7 @@ namespace GUS.Player.Movement
 
         public void Update()
         {
+            Debug.Log("Input " + _inputType.GetType().Name);
             if(_inputType != null && _canMoved)
             {
                 Move();

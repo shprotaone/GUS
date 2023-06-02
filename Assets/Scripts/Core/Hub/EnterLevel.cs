@@ -10,7 +10,7 @@ public class EnterLevel : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerActor>(out PlayerActor actor))
         {
-            _sceneHandler.LoadRunScene();
+            _sceneHandler.LoadOtherScene();
         }
     }
 }

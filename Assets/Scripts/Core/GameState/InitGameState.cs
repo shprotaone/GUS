@@ -1,4 +1,5 @@
-﻿using GUS.Core.Locator;
+﻿using GUS.Core.Data;
+using GUS.Core.Locator;
 using GUS.LevelBuild;
 using System.Collections;
 using TMPro;

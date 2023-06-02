@@ -14,7 +14,7 @@ public class SceneHandler : MonoBehaviour
         _fader= FindObjectOfType<Fader>();
     }
 
-    public void LoadRunScene()
+    public void LoadOtherScene()
     {
         _sceneLoader.ChangeAdditiveScene(_runSeneRef);
     }

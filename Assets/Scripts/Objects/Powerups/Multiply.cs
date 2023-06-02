@@ -1,3 +1,4 @@
+using GUS.Core.Data;
 using GUS.Core.Pool;
 using GUS.Player;
 using System.Collections;

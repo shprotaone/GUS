@@ -22,7 +22,7 @@ namespace GUS.Core.Locator
             if (services.ContainsKey(typeof(TService)))
                 return (TService)services[typeof(TService)].Single();
             else
-                throw new InvalidOperationException("Can't resolve service " + typeof(TService));
+                throw new InvalidOperationException("Не найден сервис " + typeof(TService));
         }
 
         public IEnumerable<TService> GetAll<TService>()

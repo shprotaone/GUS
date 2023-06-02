@@ -1,11 +1,10 @@
-using GUS.Core.Locator;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace GUS.Core.UI
 {
-    public class UIInGame : MonoBehaviour
+    public class UIInGame : MonoBehaviour,ICoinView,IDistanceView
     {
         [SerializeField] private Button _pauseButton;
         [SerializeField] private Image _bonusImage;
