@@ -14,12 +14,9 @@ namespace GUS.Objects.Enemies
         [SerializeField] private BagController _bagController;
         [SerializeField] private float _speedMovement;
 
-        private ClickerGame _game;
         private Vector3 _standartPos;
-        private int _step;
         private float _animSpeed;
         private bool _isAlive;
-        private bool _isMoving;
 
         public bool IsAlive => _isAlive;
 
@@ -40,8 +37,7 @@ namespace GUS.Objects.Enemies
         {
             _isAlive = true;
             gameObject.SetActive(true);
-            _animSpeed = _manAnimator.speed;
-            _game = clicker;                       
+            _animSpeed = _manAnimator.speed;                     
         }
 
         public void MoveToDamage(bool flag,float time)

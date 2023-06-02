@@ -17,6 +17,7 @@ namespace GUS.Core
 
         private GameStateMachine _gameStateMachine;
         private PlayerStateMachine _playerStateMachine;
+        private RoutineExecuter _routineExecuter;
         private IInputType _smartInput;
 
         private IState _prevPlayerState;
@@ -29,6 +30,7 @@ namespace GUS.Core
         {
             _gameStateMachine = serviceLocator.Get<GameStateMachine>();
             _playerStateMachine = serviceLocator.Get<PlayerStateMachine>();
+            _routineExecuter = serviceLocator.Get<RoutineExecuter>();
             _smartInput = serviceLocator.Get<IInputType>(); //для тестов
 
             if(_gameStateMachine.start!= null) // временное решение
@@ -110,7 +112,8 @@ namespace GUS.Core
         }
 
         public void RestartGame()
-        {           
+        {
+            _routineExecuter.AllStop();
             _gameStateMachine.TransitionTo( _gameStateMachine.initState);
             _gameStateMachine.start.WithStartCut(false);
             _gameStateMachine.clicker.ResetMan();

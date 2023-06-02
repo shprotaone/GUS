@@ -12,4 +12,9 @@ public class RoutineExecuter : MonoBehaviour
     {
         StopCoroutine(routine);
     }
+
+    public void AllStop()
+    {
+        StopAllCoroutines();
+    }
 }

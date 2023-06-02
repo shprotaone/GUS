@@ -45,8 +45,13 @@ namespace GUS.Core.Clicker
             _cameraController.ClickerCamera();
             _uiController.HPSliderActivate(true);                  
             _prepareTime = _game.Settings.prepareTime;
-            _clickerStateMachine.CallRoutine();
-            _game.Enemy?.MoveToDamage(true, _prepareTime);
+
+            if (_game.Enemy.IsAlive)
+            {
+                _clickerStateMachine.CallRoutine();
+                _game.Enemy?.MoveToDamage(true, _prepareTime);
+            }
+
             _game.Paused(false);
         }
 

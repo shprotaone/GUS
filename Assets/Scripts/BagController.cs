@@ -19,10 +19,10 @@ public class BagController : MonoBehaviour, IClickerProgress
     public void Behaviour(EnemyStage stage)
     {
         _hit.Play();
-        if (stage == EnemyStage.FULL) Change(_first);
-        else if (stage == EnemyStage.FIRST) Change(_second);
-        else if (stage == EnemyStage.SECOND) Change(_last);
-        else if (stage == EnemyStage.LAST) _last.SetActive(false);
+        if (stage == EnemyStage.FULL) { }
+        else if (stage == EnemyStage.FIRST) Change(_first);
+        else if (stage == EnemyStage.SECOND) Change(_second);
+        else if (stage == EnemyStage.LAST) Change(_last);
     }
 
     private void Change(GameObject next)
