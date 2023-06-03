@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,7 @@ namespace GUS.Core.UI
 {
     public class UIInGame : MonoBehaviour,ICoinView,IDistanceView
     {
+        [SerializeField] private RectTransform _inGamePanel;
         [SerializeField] private Button _pauseButton;
         [SerializeField] private Image _bonusImage;
         [SerializeField] private Image _bonusImage2;
@@ -13,11 +15,13 @@ namespace GUS.Core.UI
         [SerializeField] private TMP_Text _distanceTextValue;
 
         private GameStateController _gamestateController;
-
+        private float _currentPos;
         public void Init(GameStateController gameStateController)
         {
             _gamestateController = gameStateController;
             _pauseButton.onClick.AddListener(_gamestateController.Pause);
+            _currentPos = _inGamePanel.rect.y;
+            Debug.Log(_currentPos);
         }
 
         public void RefreshCoinsCount(int count)
@@ -30,6 +34,13 @@ namespace GUS.Core.UI
             _distanceTextValue.text = count.ToString();
         }
 
+        public void Hide(bool flag)
+        {
+            if (flag) _inGamePanel.DOAnchorPosY(400, 2);
+            else _inGamePanel.DOAnchorPosY(0, 2);           
+        }
+
+        #region пока не используем
         public int SetBonusImage(Sprite sprite)
         {
             if (!_bonusImage.enabled)
@@ -62,6 +73,7 @@ namespace GUS.Core.UI
             }
             
         }
+        #endregion
     }
 }
 

@@ -22,7 +22,7 @@ namespace GUS.Player.State
             _steerSpeed = settings.steerSpeed;
             StateMachine = statemMachine;
             _animatorController = player.AnimatorController;
-            //_movement.Init(_player, (PlayerStateMachine)StateMachine, _steerSpeed);
+            _movement.Init(_player, (PlayerStateMachine)StateMachine, _steerSpeed);
             SetMoveSettings(settings);
         }
 
@@ -35,12 +35,10 @@ namespace GUS.Player.State
         }
 
         public void Enter()
-        {
-            _movement.Init(_player, (PlayerStateMachine)StateMachine, _steerSpeed);
+        {          
             _player.SetMovementType(_movement);
             _movement.CanMove(true);
             _animatorController.RunActivate(true);
-            //_animatorController.BiteActivate(false);
             _player.CameraHandler(_movement);           
         }
 

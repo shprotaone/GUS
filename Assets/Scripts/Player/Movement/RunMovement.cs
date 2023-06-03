@@ -57,7 +57,6 @@ namespace GUS.Player.Movement
 
         public void Update()
         {
-            Debug.Log("Input " + _inputType.GetType().Name);
             if(_inputType != null && _canMoved)
             {
                 Move();
@@ -184,7 +183,7 @@ namespace GUS.Player.Movement
         public void ReturnObstaclePosition()
         {
             _targetPosition.x = _startPosition.x;
-            _player.PlayBackSound();
+            _player.BackObstacle();
             ResetPosition();
             CheckLinePosition();
             OnChangePosition?.Invoke();

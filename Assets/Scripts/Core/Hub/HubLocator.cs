@@ -28,6 +28,7 @@ namespace GUS.Core.Hub
         private StorageService _storageService;
         private DeleteService _deleteService;
         private PlayerStateMachine _playerState;
+        private GameStateMachine _gameStateMachine;
 
 
         private IStateChanger _stateChanger;
@@ -61,6 +62,9 @@ namespace GUS.Core.Hub
             _hubController = new HubStateController();
             _stateChanger = _hubController;
             _deleteService = new DeleteService();
+            _playerState = new PlayerStateMachine();
+            _gameStateMachine = new GameStateMachine();
+            
         }
 
         private void Registartion()
@@ -79,12 +83,14 @@ namespace GUS.Core.Hub
             _serviceLocator.Register(_jsonToFirebase);
             _serviceLocator.Register(_deleteService);
             _serviceLocator.Register(_stateChanger);
+            _serviceLocator.Register(_playerState);
+            _serviceLocator.Register(_gameStateMachine);
         }
 
         private void Initialization()
         {
-            _serviceLocator.Register(new GameStateMachine(_testText, _serviceLocator, true));
-            _serviceLocator.Register(new PlayerStateMachine(_serviceLocator));
+            _gameStateMachine.InitHub(ServiceLocator);
+
             _inputType = _joystick;
             _storageService.Init(ServiceLocator);
             _wallet.Init(ServiceLocator);
@@ -92,7 +98,7 @@ namespace GUS.Core.Hub
             _hubController.Init(ServiceLocator);
             _player.Init(_serviceLocator);
             _deleteService.Init(ServiceLocator);
-
+            _playerState.Init(ServiceLocator);
             _hubController.Idle();
         }
     }

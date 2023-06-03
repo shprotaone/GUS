@@ -13,7 +13,6 @@ namespace GUS.Core.UI
         [SerializeField] private UIEndGame _uiEndGame;
         [SerializeField] private UIClickerGame _clickerGame;
         [SerializeField] private GameObject _pausePanel;
-        [SerializeField] private GameObject _clickerPanel;      
 
         private GameStateController _controller;
 
@@ -33,16 +32,6 @@ namespace GUS.Core.UI
         public void PausePanel(bool flag)
         {
             _pausePanel.SetActive(flag);
-        }
-
-        public Slider GetClickerSlider()
-        {
-            return _clickerPanel.GetComponentInChildren<Slider>();
-        }
-
-        public void HPSliderActivate(bool flag)
-        {
-            _clickerPanel.SetActive(flag);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GUS.Core.Clicker
 {
     public class EndState : IState
     {
-        private UIClickerGame _ui;
+        private UIController _uiController;
         private ClickerGame _game;
         private WorldController _worldController;
         private GameStateController _gameStateController;
@@ -21,7 +21,7 @@ namespace GUS.Core.Clicker
         {
             _serviceLocator = serviceLocator;       
             _worldController = serviceLocator.Get<WorldController>();
-            _ui = serviceLocator.Get<UIController>().ClickerGame;
+            _uiController = serviceLocator.Get<UIController>();
         }
 
         public void Enter()
@@ -29,7 +29,9 @@ namespace GUS.Core.Clicker
             Debug.Log("Выход в раннер");
             _gameStateController = _serviceLocator.Get<GameStateController>();
             if (_game == null) _game = _serviceLocator.Get<ClickerGame>();
-            _ui.DisableSlider();
+
+            _uiController.UiInGame.Hide(false);
+            _uiController.ClickerGame.PanelActivate(false);
         }
 
         public IEnumerator Execute()

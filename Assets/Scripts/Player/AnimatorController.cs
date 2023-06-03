@@ -58,8 +58,9 @@ namespace GUS.Player
 
         public void ResetAnimation()
         {
-            _animator.speed = 1;
+            _animator.SetFloat(RunSpeedMultiply, 1);
         }
+
         public void ChangeAnimationSpeed(float speed)
         {
             _animator.SetFloat(RunSpeedMultiply, speed / 10);

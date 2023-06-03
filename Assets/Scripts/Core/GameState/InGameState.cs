@@ -16,12 +16,9 @@ namespace GUS.Core.GameState
         private bool _isTimer;
 
         public IStateMachine StateMachine {get; private set;}
-        public InGameState(IStateMachine stateMachine, IServiceLocator serviceLocator,TMP_Text stateText)
+        public InGameState(IStateMachine stateMachine, IServiceLocator serviceLocator)
         {
-            if(serviceLocator.Get<ICamera>() is CameraRunController camera)
-            {
-                _cameraController = camera;
-            }
+            _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
             _worldController = serviceLocator.Get<WorldController>();
             _distanceData = serviceLocator.Get<DistanceData>();
             StateMachine = stateMachine;

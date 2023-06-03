@@ -21,17 +21,12 @@ namespace GUS.Core.GameState
         [SerializeField] private float _moveDistance;
         [SerializeField] private float _speedMovement;
 
+        private CinemachineVirtualCameraBase _currentCamera;
         private float _shakeTime;
-        public IEnumerator ShakeCamera(float intensity, float time)
-        {   
-            CinemachineBasicMultiChannelPerlin channelPerlin = _runCamera.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
-            channelPerlin.m_AmplitudeGain = intensity;
-            yield return new WaitForSeconds(time);
-            channelPerlin.m_AmplitudeGain = 0;
-            
-        }
+
         public void ClickerCamera()
         {
+            _currentCamera = _clickerCamera;
             _clickerCamera.enabled = true;
             _biteCamera.enabled = false;
             _runCamera.enabled = false;
@@ -39,6 +34,7 @@ namespace GUS.Core.GameState
 
         public void RunCamera()
         {
+            _currentCamera = _runCamera;
             _clickerCamera.enabled = false;
             _runCamera.enabled = true;
         }
@@ -78,7 +74,7 @@ namespace GUS.Core.GameState
 
         public void BiteCamera()
         {
-            //FOVReset();
+            _currentCamera = _biteCamera;
             _biteCamera.enabled = true;
             _clickerCamera.enabled = false;
         }
@@ -91,6 +87,20 @@ namespace GUS.Core.GameState
         public void FOVReset()
         {
             _biteCamera.m_Lens.FieldOfView = 80;
+        }
+
+        public void ShackeCameraHandle(float intensity, float time)
+        {
+            StartCoroutine(ShakeCamera(intensity, time));
+        }
+
+        private IEnumerator ShakeCamera(float intensity, float time)
+        {
+            CinemachineBasicMultiChannelPerlin channelPerlin = _currentCamera.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
+            channelPerlin.m_AmplitudeGain = intensity;
+            yield return new WaitForSeconds(time);
+            channelPerlin.m_AmplitudeGain = 0;
+
         }
     }
 }

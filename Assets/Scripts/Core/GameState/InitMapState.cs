@@ -1,7 +1,5 @@
 ﻿using GUS.Core.Locator;
 using System.Collections;
-using TMPro;
-using UnityEngine;
 
 namespace GUS.Core.GameState
 {
@@ -13,12 +11,9 @@ namespace GUS.Core.GameState
 
         public IStateMachine StateMachine {get; private set;}
 
-        public InitMapState(IStateMachine stateMachine, IServiceLocator serviceLocator, TMP_Text text)
+        public InitMapState(IStateMachine stateMachine, IServiceLocator serviceLocator)
         {
-            if(serviceLocator.Get<ICamera>() is CameraHubController cam)
-            {
-                _cameraController = cam;
-            }
+            _cameraController = serviceLocator.Get<ICamera>() as CameraHubController;
             _sceneHandler = serviceLocator.Get<SceneHandler>();
             _audioService = serviceLocator.Get<AudioService>();
             StateMachine = stateMachine;

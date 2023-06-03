@@ -45,12 +45,17 @@ namespace GUS.Core
         [SerializeField] private JsonToFirebase _jsonToFirebase;
         [SerializeField] private RoutineExecuter _routineExecuter;
 
+        private PlayerStateMachine _playerState;
+        private GameStateMachine _gameStateMachine;
+
         private DeleteService _deleteService;
         private Wallet _wallet;
         private DistanceData _distance;
         private StorageService _storageService;
         private WorldController _worldController;
         private ClickerGame _clicker;
+
+
         private IStateChanger _stateChanger;
         private ICoinView _coinView;
         private IDistanceView _distanceView;
@@ -86,6 +91,8 @@ namespace GUS.Core
             _deleteService = new DeleteService();
             _worldController = new WorldController();
             _clicker = new ClickerGame();
+            _playerState = new PlayerStateMachine();
+            _gameStateMachine = new GameStateMachine();
 
             _coinView = _uiController.UiInGame;
             _distanceView = _uiController.UiInGame;
@@ -115,16 +122,16 @@ namespace GUS.Core
             _serviceLocator.Register(_distanceView);
             _serviceLocator.Register(_stateChanger);
             _serviceLocator.Register(_bossPositions);
+            _serviceLocator.Register(_playerState);
+            _serviceLocator.Register(_gameStateMachine);
 
             RegisterPools();
             RegisterInput();
         }
 
         private void Initialization()
-        {           
-            _serviceLocator.Register(new PlayerStateMachine(_serviceLocator));
-            _serviceLocator.Register(new GameStateMachine(_stateText, _serviceLocator));
-
+        {
+            _gameStateMachine.Init(_serviceLocator);
             _wallet.Init(_serviceLocator);
             _distance.Init(_serviceLocator);
             _storageService.Init(_serviceLocator);
@@ -136,6 +143,7 @@ namespace GUS.Core
             _progressiveSystem.Init(_serviceLocator);
             _uiController.Init(_serviceLocator);
             _clicker.Init(_serviceLocator);
+            _playerState.Init(_serviceLocator);
         }
 
         private void RegisterPools()

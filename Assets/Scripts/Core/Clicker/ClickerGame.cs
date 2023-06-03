@@ -14,7 +14,7 @@ namespace GUS.Core.Clicker
     public class ClickerGame
     {
         public event Action OnRestart;
-        private UIClickerGame _clickerUI;
+        private UIController _uiController;
         private GameStateController _gameStateController;
         private Wallet _wallet;
         private ClickerStateMachine _clickerStateMachine;
@@ -34,7 +34,7 @@ namespace GUS.Core.Clicker
         public void Init(IServiceLocator serviceLocator)
         {
             _positions = serviceLocator.Get<BossPositions>();
-            _clickerUI = serviceLocator.Get<UIController>().ClickerGame;
+            _uiController = serviceLocator.Get<UIController>();
             _gameStateController = serviceLocator.Get<GameStateController>();
             _wallet = serviceLocator.Get<Wallet>();
             _serviceLocator = serviceLocator;
@@ -48,7 +48,7 @@ namespace GUS.Core.Clicker
             
             //yield return new WaitForSeconds(0.2f);
             SetEnemy(enemy);
-            _clickerUI.InitSlider(settings.MaxHP);
+            _uiController.ClickerGame.InitSlider(settings.MaxHP);
             _hp = settings.MaxHP;
 
             _stageIndex = 0;
@@ -76,7 +76,7 @@ namespace GUS.Core.Clicker
         public void GetDamage()
         {
             _hp -= _settings.damage;
-            _clickerUI.UpdateSlider(_settings.damage);
+            _uiController.ClickerGame.UpdateSlider(_settings.damage);
             _enemy.Behaviour(GetStage());
 
             if (_hp < 0)
@@ -109,7 +109,7 @@ namespace GUS.Core.Clicker
         public void Restart()
         {
             OnRestart?.Invoke();
-            _clickerUI.DisableSlider();
+            _uiController.ClickerGame.PanelActivate(false);
             StateMachine.CurrentState.Exit();
             OnRestart = null;
         }

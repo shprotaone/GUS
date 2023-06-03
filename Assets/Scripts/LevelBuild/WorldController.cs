@@ -1,4 +1,6 @@
+using DG.Tweening;
 using GUS.Core.Locator;
+using System;
 using UnityEngine;
 
 namespace GUS.LevelBuild
@@ -28,6 +30,7 @@ namespace GUS.LevelBuild
         public void InitStart()
         {
             _maxSpeed = _standartSettings.maxWorldSpeed;
+            _currentSpeed = 0;
             _acceleration = _standartSettings.acceleration;
             _startPoint.position = Vector3.zero;
             _platformBuilder.ClearBuilder();
@@ -67,12 +70,7 @@ namespace GUS.LevelBuild
             {
                 _worldIsStopped = flag;
                 _currentSpeed = 0;
-            }
-            else
-            {
-                Debug.Log("IgnoreStopping");
-            }
-            
+            }  
         }
 
         public void CreateOnlyFreePlatforms(bool flag)
@@ -84,6 +82,12 @@ namespace GUS.LevelBuild
         {
             _maxSpeed = settings.maxWorldSpeed;
             _acceleration = settings.acceleration;
+        }
+
+        public void ChangeAcceleration(float delay)
+        {
+            float prevSpeed = _currentSpeed;
+            _currentSpeed = prevSpeed / 2;
         }
     }
 }

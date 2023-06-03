@@ -54,7 +54,7 @@ namespace GUS.Core.Clicker
 
             _movement.CanAttack(true);
             _movement.OnClick += _game.GetDamage;
-            //_movement.OnClick += () => _cameraController.FOVIncrement(1);           
+            _movement.OnClick += () => _cameraController.ShackeCameraHandle(5, 0.1f);        
             _actor.ChangeModelPos(0.6f, 0.2f);
             //_actor.AnimatorController.Pause(true);
             yield return null;
@@ -65,7 +65,7 @@ namespace GUS.Core.Clicker
             Debug.Log("Выход из Кусательного");
             //_actor.AnimatorController.Pause(false);
             _movement.OnClick -= _game.GetDamage;
-            _movement.OnClick -= () => _cameraController.FOVIncrement(10);
+            _movement.OnClick -= () => _cameraController.ShackeCameraHandle(5, 0.1f);
             _movement.CanAttack(false);
             _actor.ChangeModelPos(-0.3f, 0.2f);
             _clickerStateMachine.StopRoutine(Execute());

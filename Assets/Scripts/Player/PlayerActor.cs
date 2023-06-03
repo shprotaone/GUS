@@ -6,6 +6,7 @@ using GUS.Core.Hub;
 using GUS.Core.InputSys;
 using GUS.Core.Locator;
 using GUS.Core.Weapon;
+using GUS.LevelBuild;
 using GUS.Objects.PowerUps;
 using GUS.Player.Movement;
 using GUS.Player.State;
@@ -29,10 +30,14 @@ namespace GUS.Player
         private GameStateController _stateController;
         private Wallet _wallet;
         private CameraRunController _cameraController;
+        private AudioService _audioService;
+        private WorldController _worldController;
         private IWeapon _weapon;
         private IInputType _inputType;
         private IMovement _movement;
-        private AudioService _audioService;
+
+
+        private bool _isDamage;
 
         #region Properties
         public CameraRunController CameraController => _cameraController;
@@ -55,11 +60,13 @@ namespace GUS.Player
 
         public void Init(IServiceLocator serviceLocator)
         {
+            
             _inputType = serviceLocator.Get<IInputType>();
             _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
             _stateController = serviceLocator.Get<IStateChanger>() as GameStateController;            
             _audioService= serviceLocator.Get<AudioService>();
             _wallet = serviceLocator.Get<Wallet>();
+            _worldController = serviceLocator.Get<WorldController>();
             _playerStateMachine = serviceLocator.Get<PlayerStateMachine>();
 
             ServiceLocator = serviceLocator;
@@ -74,17 +81,28 @@ namespace GUS.Player
         {
             _audioService.PlaySFX(_audioService.Data.death);
             _particleController.DeathEffect(true);
-            StartCoroutine(_cameraController.ShakeCamera(5, 0.2f));
+            _cameraController.ShackeCameraHandle(5, 0.2f);
             _stateController.EndGame();
         }  
 
         public void RestartPosition()
         {
             transform.DOMove(_startPosition, 0.2f);
+            _isDamage = false;
         }
 
-        public void PlayBackSound()
+        public void BackObstacle()
         {
+            if (!_isDamage)
+            {
+                _isDamage = true;
+                _worldController.ChangeAcceleration(1);
+            }
+            else
+            {
+                Death();
+            }
+
             _audioService.PlaySFX(_audioService.Data.quack);
         }
 
