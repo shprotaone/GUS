@@ -34,7 +34,7 @@ namespace GUS.Player.Movement
                 {
                     OnClick?.Invoke();
                     _animatorController.BiteActivate(true);
-                    DOVirtual.DelayedCall(0.1f, () => _animatorController.BiteActivate(false));
+                    DOVirtual.DelayedCall(0.05f, () => _animatorController.BiteActivate(false));
                     _particleController.DamageEffect(_inputType.StartPosition);
                     Debug.Log("TAP");
                 }

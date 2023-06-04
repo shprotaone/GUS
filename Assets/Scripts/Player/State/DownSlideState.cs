@@ -32,7 +32,7 @@ namespace GUS.Player.State
         public void Enter()
         {           
             _movement = _player.MovementType as RunMovement;
-
+            _animatorController.RunActivate(true);
             if (_movement.IsGrounded) _animatorController.CrouchActivate();
         }
 

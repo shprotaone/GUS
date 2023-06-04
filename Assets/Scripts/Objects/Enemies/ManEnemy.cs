@@ -40,6 +40,21 @@ namespace GUS.Objects.Enemies
             _animSpeed = _manAnimator.speed;                     
         }
 
+        public void SlowMo(bool flag)
+        {
+            if(flag)
+            {
+                _manAnimator.speed = _animSpeed / 2;
+                _bagAnimator.speed = _animSpeed / 2;
+            }
+            else
+            {
+                _manAnimator.speed = _animSpeed;
+                _bagAnimator.speed = _animSpeed;
+            }
+            
+        }
+
         public void MoveToDamage(bool flag,float time)
         {
             if (flag)

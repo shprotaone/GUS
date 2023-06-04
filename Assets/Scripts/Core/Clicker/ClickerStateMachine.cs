@@ -39,9 +39,9 @@ namespace GUS.Core.Clicker
             _routineExecuter.Execute(CurrentState.Execute());
         }
 
-        public void StopRoutine(IEnumerator routine)
+        public void StopRoutine()
         {
-            _routineExecuter.Stop(routine);
+            _routineExecuter.AllStop();
         }
 
         public void FixedUpdate()

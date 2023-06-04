@@ -12,6 +12,7 @@ namespace GUS.Objects.Enemies
         void MoveToDamage(bool flag, float time);
         void Death();
         void Paused(bool flag);
+        void SlowMo(bool flag);
     }
 }
 
