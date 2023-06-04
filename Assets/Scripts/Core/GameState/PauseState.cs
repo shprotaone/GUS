@@ -13,9 +13,8 @@ namespace GUS.Core.GameState
 
         public IStateMachine StateMachine {get; private set;}
 
-        public PauseState(IStateMachine stateMachine, IServiceLocator serviceLocator, TMP_Text text)
+        public PauseState(IStateMachine stateMachine, IServiceLocator serviceLocator)
         {
-            _stateText = text;
             _controller = serviceLocator.Get<UIController>();
             _audioService= serviceLocator.Get<AudioService>();
             StateMachine = stateMachine;
@@ -23,7 +22,6 @@ namespace GUS.Core.GameState
 
         public void Enter()
         {
-            _stateText.text = "Pause " + this.GetType().Name;
             _controller.PausePanel(true);
             _audioService.Pause();
         }

@@ -11,33 +11,33 @@ namespace GUS.Core.GameState
         public IState CurrentState { get; private set; }
         public IState PreviousState {get; private set;}
 
-        public readonly InitGameState initState;
-        public readonly InitMapState initMapState;
-        public readonly StartState start;
-        public readonly InGameState session;
-        public readonly ClickerState clicker;
-        public readonly EndGameState endGame;
-        public readonly ResultState result;
-        public readonly PauseState pause;
-        public readonly ExploreState explore;
+        public InitGameState initState { get; private set; }
+        public InitMapState initMapState { get; private set; }
+        public StartState start { get; private set; }
+        public InGameState session { get; private set; }
+        public ClickerState clicker { get; private set; }
+        public EndGameState endGame { get; private set; }
+        public ResultState result { get; private set; }
+        public PauseState pause { get; private set; }
+        public ExploreState explore { get; private set; }
 
         public event Action stateChanged;
 
-        public GameStateMachine(TMP_Text text, IServiceLocator serviceLocator,bool isHub)
+        public void Init(IServiceLocator serviceLocator)
         {
-            initMapState = new InitMapState(this, serviceLocator,text);
-            explore = new ExploreState(this, serviceLocator);
-        }
-
-        public GameStateMachine(TMP_Text text,IServiceLocator serviceLocator)
-        {
-            initState = new InitGameState(this,serviceLocator,text);
-            start = new StartState(this,serviceLocator, text);
-            session = new InGameState(this, serviceLocator,text);
+            initState = new InitGameState(this, serviceLocator);
+            start = new StartState(this, serviceLocator);
+            session = new InGameState(this, serviceLocator);
             clicker = new ClickerState(this, serviceLocator);
             endGame = new EndGameState(this, serviceLocator);
             result = new ResultState(this);
-            pause = new PauseState(this, serviceLocator,text);
+            pause = new PauseState(this, serviceLocator);
+        }
+
+        public void InitHub(IServiceLocator serviceLocator)
+        {
+            initMapState = new InitMapState(this, serviceLocator);
+            explore = new ExploreState(this, serviceLocator);
         }
 
         public void InitGameLoop(IState state)

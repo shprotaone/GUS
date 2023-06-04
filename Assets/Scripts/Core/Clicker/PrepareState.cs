@@ -26,11 +26,7 @@ namespace GUS.Core.Clicker
             _clickerStateMachine = stateMachine;
             _worldController = serviceLocator.Get<WorldController>();
             _uiController = serviceLocator.Get<UIController>();
-
-            if (serviceLocator.Get<ICamera>() is CameraRunController cam)
-            {
-                _cameraController = cam;
-            }          
+            _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;     
         }
 
         public void Enter()
@@ -43,7 +39,10 @@ namespace GUS.Core.Clicker
             }
             
             _cameraController.ClickerCamera();
-            _uiController.HPSliderActivate(true);                  
+
+            _uiController.UiInGame.Hide(true);
+            _uiController.ClickerGame.PanelActivate(true);           
+
             _prepareTime = _game.Settings.prepareTime;
 
             if (_game.Enemy.IsAlive)

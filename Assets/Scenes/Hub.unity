@@ -4192,9 +4192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1433391778}
-  - component: {fileID: 1433391779}
-  - component: {fileID: 1433391780}
-  - component: {fileID: 1433391781}
+  - component: {fileID: 1433391785}
   - component: {fileID: 1433391782}
   - component: {fileID: 1433391784}
   m_Layer: 0
@@ -4219,73 +4217,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1433391779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433391777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afbf9723f224cbd458f7f683bb140b7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stateText: {fileID: 1092484673}
-  _sceneHandler: {fileID: 1433391782}
-  _stateController: {fileID: 1433391780}
-  _uiController: {fileID: 1433391781}
-  _player: {fileID: 1970592579}
-  _startPoint: {fileID: 0}
-  _specialPlatformBuilder: {fileID: 0}
-  _platformStorage: {fileID: 0}
-  _collectablesStorage: {fileID: 0}
-  _levelSettings: {fileID: 11400000, guid: e0d5f89877db220478bf957613b9fffa, type: 2}
-  _platformPool: {fileID: 0}
-  _collectablesPool: {fileID: 0}
-  _progressiveSystem: {fileID: 0}
-  _audioService: {fileID: 855192332}
-  _jsonToFirebase: {fileID: 1730590546}
-  _joystick: {fileID: 1775953848}
-  _routineExecuter: {fileID: 0}
-  _isHub: 1
---- !u!114 &1433391780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433391777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b72221a20d41624f95b00ac83646f6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _clickerBossPosition: {fileID: 0}
-  _sceneHandler: {fileID: 1433391782}
-  _deltaText: {fileID: 0}
-  _directionText: {fileID: 0}
---- !u!114 &1433391781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433391777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f238b8204f760e448300cc0a1c89c49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _uiStartGame: {fileID: 0}
-  _uiInGame: {fileID: 0}
-  _uiPause: {fileID: 0}
-  _uiEndGame: {fileID: 0}
-  _clickerGame: {fileID: 0}
-  _pausePanel: {fileID: 0}
-  _clickerPanel: {fileID: 0}
-  _uiSettings: {fileID: 1679675772}
-  _uiHubController: {fileID: 1433391784}
 --- !u!114 &1433391782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4324,6 +4255,26 @@ MonoBehaviour:
   _startButton: {fileID: 1379313980}
   _settingsPanel: {fileID: 335448913}
   _shopPanel: {fileID: 1775663420}
+  _uiSettings: {fileID: 1679675772}
+--- !u!114 &1433391785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433391777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a08a07649bfbb44a644d9d3f75e1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1970592579}
+  _audioService: {fileID: 855192332}
+  _sceneHandler: {fileID: 1433391782}
+  _joystick: {fileID: 1775953848}
+  _uiHubController: {fileID: 1433391784}
+  _levelSettings: {fileID: 11400000, guid: e0d5f89877db220478bf957613b9fffa, type: 2}
+  _jsonToFirebase: {fileID: 1730590546}
 --- !u!1001 &1436942925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8261,7 +8212,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2844743994693412317}
-  m_LocalRotation: {x: 0.18153097, y: -0.4487682, z: 0.09363921, w: 0.8699916}
+  m_LocalRotation: {x: 0.18153094, y: -0.44876814, z: 0.093639195, w: 0.8699916}
   m_LocalPosition: {x: 0.2057724, y: 0, z: 0.08907223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

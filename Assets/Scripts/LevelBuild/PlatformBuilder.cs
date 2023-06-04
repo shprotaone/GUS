@@ -104,15 +104,15 @@ namespace GUS.LevelBuild
             {
                 _nextPlatform = _platformPool.GetObject(PoolObjectType.Platform);
             }
-            else if (_rewardPlatform)
-            {
-                _nextPlatform = _platformPool.GetObject(PoolObjectType.AfterClicker);
-                _rewardPlatform = false;
-            }
+            //else if (_rewardPlatform)
+            //{
+            //    //_nextPlatform = _platformPool.GetObject(PoolObjectType.AfterClicker);
+            //    _rewardPlatform = false;
+            //}
             else if(_specialPlatformBuilder.Find(_platformCount, out PoolObjectType SpecialType))
             {
                 _nextPlatform = _platformPool.GetObject(SpecialType);
-                _rewardPlatform = true;
+                //_rewardPlatform = true;
                 _isFree= true;
             }
             else

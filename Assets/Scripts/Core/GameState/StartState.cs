@@ -13,22 +13,16 @@ namespace GUS.Core.GameState
         private AudioService _audioService;
         private UIStartGame _view;
         private TMP_Text _stateText;
-        private WorldController _controller;
+        private WorldController _worldController;
 
         public IStateMachine StateMachine {get; private set;}
 
-        public StartState(IStateMachine stateMachine,IServiceLocator serviceLocator,TMP_Text stateText)
+        public StartState(IStateMachine stateMachine,IServiceLocator serviceLocator)
         {
             _view = serviceLocator.Get<UIController>().UIStartGame;
-            _stateText = stateText;
-            _controller = serviceLocator.Get<WorldController>();
+            _worldController = serviceLocator.Get<WorldController>();
             _audioService= serviceLocator.Get<AudioService>();
-            
-            if (serviceLocator.Get<ICamera>() is CameraRunController camera)
-            {
-                _cameraController = camera;
-            }
-
+            _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
             StateMachine = stateMachine;
         }
 
@@ -40,8 +34,7 @@ namespace GUS.Core.GameState
         public void Enter()
         {
             _audioService.StopMusic();
-            _stateText.text = "Enter to " + this.GetType().Name;
-            _controller.InitStart();
+            _worldController.InitStart();
             _cameraController.RunCamera();
             _audioService.PlayMusic(_audioService.Data.runner);
         }
@@ -65,7 +58,7 @@ namespace GUS.Core.GameState
 
         public void Update()
         {
-            _controller.Move();
+            _worldController.Move();
         }
 
         public void WithStartCut(bool flag) => _view.WithIntro(flag);

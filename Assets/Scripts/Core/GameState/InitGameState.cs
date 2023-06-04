@@ -1,4 +1,5 @@
-﻿using GUS.Core.Locator;
+﻿using GUS.Core.Data;
+using GUS.Core.Locator;
 using GUS.LevelBuild;
 using System.Collections;
 using TMPro;
@@ -12,9 +13,8 @@ namespace GUS.Core.GameState
         private TMP_Text _stateText;
 
         public IStateMachine StateMachine { get; private set; }
-        public InitGameState(IStateMachine stateMachine, IServiceLocator serviceLocator, TMP_Text text) 
+        public InitGameState(IStateMachine stateMachine, IServiceLocator serviceLocator) 
         {           
-            _stateText = text;
             _wallet = serviceLocator.Get<Wallet>();
             StateMachine = stateMachine;
         }      

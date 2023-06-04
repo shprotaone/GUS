@@ -1,4 +1,5 @@
-﻿using GUS.Core.Locator;
+﻿using GUS.Core.Data;
+using GUS.Core.Locator;
 using GUS.LevelBuild;
 using System.Collections;
 using TMPro;
@@ -10,19 +11,16 @@ namespace GUS.Core.GameState
     {
         private CameraRunController _cameraController;
         private WorldController _worldController;
-        private Wallet _wallet;
+        private DistanceData _distanceData;
 
         private bool _isTimer;
 
         public IStateMachine StateMachine {get; private set;}
-        public InGameState(IStateMachine stateMachine, IServiceLocator serviceLocator,TMP_Text stateText)
+        public InGameState(IStateMachine stateMachine, IServiceLocator serviceLocator)
         {
-            if(serviceLocator.Get<ICamera>() is CameraRunController camera)
-            {
-                _cameraController = camera;
-            }
+            _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
             _worldController = serviceLocator.Get<WorldController>();
-            _wallet = serviceLocator.Get<Wallet>();
+            _distanceData = serviceLocator.Get<DistanceData>();
             StateMachine = stateMachine;
         }
         
@@ -37,7 +35,7 @@ namespace GUS.Core.GameState
         {
             while(_isTimer)
             {
-                _wallet.SetDistancePoint(-(int)_worldController.CurrentDistance);
+                _distanceData.Set(-(int)_worldController.CurrentDistance);
                 yield return new WaitForFixedUpdate();
             }                       
         }

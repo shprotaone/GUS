@@ -1,6 +1,4 @@
 using GUS.Core.Locator;
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,12 +13,6 @@ namespace GUS.Core.UI
         [SerializeField] private UIEndGame _uiEndGame;
         [SerializeField] private UIClickerGame _clickerGame;
         [SerializeField] private GameObject _pausePanel;
-        [SerializeField] private GameObject _clickerPanel;
-
-        [Header("In HUB")]
-        [SerializeField] private UISettings _uiSettings;
-        [SerializeField] private UiHubController _uiHubController;
-
 
         private GameStateController _controller;
 
@@ -37,27 +29,9 @@ namespace GUS.Core.UI
             _uiPause.Init(_controller);
         }
 
-        public void InitHub(IServiceLocator serviceLocator)
-        {
-            _controller = serviceLocator.Get<GameStateController>();
-            _uiHubController.Init(serviceLocator);
-            _uiSettings.Init(serviceLocator);
-        }
-
-
         public void PausePanel(bool flag)
         {
             _pausePanel.SetActive(flag);
-        }
-
-        public Slider GetClickerSlider()
-        {
-            return _clickerPanel.GetComponentInChildren<Slider>();
-        }
-
-        public void HPSliderActivate(bool flag)
-        {
-            _clickerPanel.SetActive(flag);
         }
     }
 }

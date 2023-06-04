@@ -1,9 +1,8 @@
-﻿using GUS.Core.Locator;
-using GUS.Core.SaveSystem;
+﻿using GUS.Core.Data;
+using GUS.Core.Locator;
 using GUS.Core.UI;
 using GUS.LevelBuild;
 using System.Collections;
-using System.Data.SqlTypes;
 using UnityEngine;
 
 namespace GUS.Core.GameState
@@ -25,7 +24,7 @@ namespace GUS.Core.GameState
 
         public void Enter()
         {
-            _wallet.SaveDatas();
+            _wallet.Save();
             _worldCotroller.WorldStopper(true);
         }
 
