@@ -53,6 +53,11 @@ namespace GUS.Objects.Enemies
         {
             
         }
+
+        public void SlowMo(bool flag)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 

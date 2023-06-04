@@ -41,7 +41,8 @@ namespace GUS.Core.Clicker
             _cameraController.ClickerCamera();
 
             _uiController.UiInGame.Hide(true);
-            _uiController.ClickerGame.PanelActivate(true);           
+            _uiController.ClickerGame.PanelActivate(true);      
+            _uiController.ClickerGame.SliderActivate(true);
 
             _prepareTime = _game.Settings.prepareTime;
 

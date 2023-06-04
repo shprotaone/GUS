@@ -26,6 +26,7 @@ namespace GUS.Core.Clicker
         private float _hp;
         private int _stageIndex;
 
+        public bool IsActive { get; private set; }
         public float HP => _hp;
         public IEnemy Enemy => _enemy;
         public BossSettings Settings => _settings;
@@ -42,6 +43,7 @@ namespace GUS.Core.Clicker
 
         public IEnumerator Init(BossSettings settings,GameObject enemy)
         {
+            IsActive = true;
             _settings = settings;
             _clickerStateMachine = new ClickerStateMachine(_serviceLocator);
             _gameStateController.ClickerGame();
@@ -81,7 +83,6 @@ namespace GUS.Core.Clicker
 
             if (_hp < 0)
             {
-                _wallet.AddCoins(_settings.reward);
                 _clickerStateMachine.TransitionTo(_clickerStateMachine.endState);
                 _enemy.Death();
             }
@@ -110,8 +111,15 @@ namespace GUS.Core.Clicker
         {
             OnRestart?.Invoke();
             _uiController.ClickerGame.PanelActivate(false);
+            _uiController.ClickerGame.SliderActivate(false);
             StateMachine.CurrentState.Exit();
             OnRestart = null;
+        }
+
+        public void Complete()
+        {
+            IsActive = false;
+            _wallet.AddCoins(_settings.reward);
         }
     }
 

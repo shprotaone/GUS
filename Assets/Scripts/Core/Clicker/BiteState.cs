@@ -25,12 +25,8 @@ namespace GUS.Core.Clicker
         {
             _serviceLocator = serviceLocator;
             _clickerStateMachine = stateMachine;
-            _worldController = serviceLocator.Get<WorldController>();           
-
-            if (serviceLocator.Get<ICamera>() is CameraRunController cam)
-            {
-                _cameraController = cam;
-            }
+            _worldController = serviceLocator.Get<WorldController>();
+            _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
         }
 
         public void Enter()
@@ -45,17 +41,19 @@ namespace GUS.Core.Clicker
 
         public IEnumerator Execute()
         {
-            if (_actor.MovementType is ClickerMovement clickerMovement)
-            {
-                _movement = clickerMovement;
-            }
+            if (!_game.IsActive) yield break;
+
+            _movement = _actor.MovementType as ClickerMovement;
             _cameraController.BiteCamera();
             yield return new WaitForSeconds(_game.Settings.prepareTime);
 
             _movement.CanAttack(true);
             _movement.OnClick += _game.GetDamage;
-            _movement.OnClick += () => _cameraController.ShackeCameraHandle(5, 0.1f);        
-            _actor.ChangeModelPos(0.6f, 0.2f);
+            _movement.OnClick += () => _cameraController.ShackeCameraHandle(5, 0.1f);
+
+             _actor.ChangeModelPos(0.6f, 0.2f);
+            _game.Enemy.SlowMo(true);
+
             //_actor.AnimatorController.Pause(true);
             yield return null;
         }
@@ -68,7 +66,8 @@ namespace GUS.Core.Clicker
             _movement.OnClick -= () => _cameraController.ShackeCameraHandle(5, 0.1f);
             _movement.CanAttack(false);
             _actor.ChangeModelPos(-0.3f, 0.2f);
-            _clickerStateMachine.StopRoutine(Execute());
+            _game.Enemy.SlowMo(false);
+            _clickerStateMachine.StopRoutine();
         }
 
         public void FixedUpdate()

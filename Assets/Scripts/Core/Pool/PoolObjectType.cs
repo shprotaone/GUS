@@ -18,8 +18,10 @@
 
        Empty,
 
-       Coins = 40,
+       Coin = 40,
        Magnet,
-       Multiply
+       Multiply,
+
+       CoinUI = 100
     }
 }
