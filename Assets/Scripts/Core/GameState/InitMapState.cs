@@ -21,7 +21,7 @@ namespace GUS.Core.GameState
 
         public void Enter()
         {
-            _cameraController.MapCamera();
+            _cameraController.IdleCamera();
             _audioService.PlayMusic(_audioService.Data.mainMenu);
         }
 

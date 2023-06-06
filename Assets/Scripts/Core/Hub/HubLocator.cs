@@ -22,6 +22,7 @@ namespace GUS.Core.Hub
         [SerializeField] private UiHubController _uiHubController;
         [SerializeField] private LevelSettings _levelSettings;
         [SerializeField] private JsonToFirebase _jsonToFirebase;
+        [SerializeField] private BuildsSystem _buildSystem;
 
         private Wallet _wallet;
         private HubStateController _hubController;
@@ -100,6 +101,7 @@ namespace GUS.Core.Hub
             _deleteService.Init(ServiceLocator);
             _playerState.Init(ServiceLocator);
             _hubController.Idle();
+            _buildSystem.Init(ServiceLocator);
         }
     }
 }

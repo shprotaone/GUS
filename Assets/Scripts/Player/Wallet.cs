@@ -20,6 +20,7 @@ namespace GUS.Core.Data
         {
             _coinView = locator.Get<ICoinView>();
             _storageService = locator.Get<StorageService>();
+            _coins = _storageService.Data.coins;
         }
 
         public void AddOne()
@@ -34,9 +35,16 @@ namespace GUS.Core.Data
             _coinView.RefreshCoinsCount(_coins);
         }
 
+        public void DecreaseCoins(int amount)
+        {
+            _coins -= amount;
+            _coinView.RefreshCoinsCount(_coins);
+            Save();
+        }
+
         public void Save()
         {
-            _storageService.Data.coins += _coins;
+            _storageService.Data.coins = _coins;
             _storageService.Save();
         }
 

@@ -1,5 +1,5 @@
 
-public enum BuildEnum
+public enum BuildNameEnum
 {
     House,
     Mill,

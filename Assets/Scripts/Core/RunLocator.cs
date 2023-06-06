@@ -99,10 +99,10 @@ namespace GUS.Core
         }
 
         private void Registration()
-        {
+        {                      
+            _serviceLocator.Register(_storageService);
             _serviceLocator.Register(_wallet);
             _serviceLocator.Register(_distance);
-            _serviceLocator.Register(_storageService);
             _serviceLocator.Register(_deleteService);
             _serviceLocator.Register(_jsonToFirebase);
             _serviceLocator.Register(_routineExecuter);
@@ -130,9 +130,9 @@ namespace GUS.Core
         private void Initialization()
         {
             _gameStateMachine.Init(_serviceLocator);
-            _wallet.Init(_serviceLocator);
-            _distance.Init(_serviceLocator);
             _storageService.Init(_serviceLocator);
+            _wallet.Init(_serviceLocator);
+            _distance.Init(_serviceLocator);       
             _deleteService.Init(_serviceLocator);
             _platformPool.InitPool(_platformStorage);
             _collectablesPool.InitPool(_collectablesStorage);

@@ -1,4 +1,5 @@
 using GUS.Core.Locator;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GUS.Core.SaveSystem
@@ -40,6 +41,7 @@ namespace GUS.Core.SaveSystem
                 _playerData.playerName = "Player" + (int)Random.Range(0, 500000);
                 _playerData.coins = 0;
                 _playerData.commonDistance = 0;
+                _playerData.buildDatas = new List<BuildData>();
                 _storageService.Save(fileName, _playerData);
             }
         }
