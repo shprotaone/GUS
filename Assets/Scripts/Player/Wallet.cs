@@ -8,7 +8,6 @@ namespace GUS.Core.Data
     public class Wallet : IData
     {
         private StorageService _storageService;
-
         private ICoinView _coinView;
 
         private int _coins;

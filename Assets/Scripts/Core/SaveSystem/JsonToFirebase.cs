@@ -50,9 +50,7 @@ namespace GUS.Core.SaveSystem
         public void Save(PlayerData data)
         {
             string result = JsonConvert.SerializeObject(data);
-            //_databaseReference.Child("users").Child(data.playerName).SetRawJsonValueAsync(result);       
-            //_databaseReference.Child("users").Child(data.playerName).Child("coins").SetValueAsync(data.coins);
-            //_databaseReference.Child("users").Child(data.playerName).Child("distance").SetValueAsync(data.commonDistance);
+            _databaseReference.Child("users").Child(data.playerName).SetRawJsonValueAsync(result);
         }
 
         public void Delete(PlayerData data)

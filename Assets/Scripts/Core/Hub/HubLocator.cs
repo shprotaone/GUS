@@ -61,6 +61,7 @@ namespace GUS.Core.Hub
             _storageService = new StorageService();
             _hubController = new HubStateController();
             _stateChanger = _hubController;
+            _inputType = _joystick;
             _deleteService = new DeleteService();
             _playerState = new PlayerStateMachine();
             _gameStateMachine = new GameStateMachine();
@@ -73,6 +74,7 @@ namespace GUS.Core.Hub
             _serviceLocator.Register(_audioService);
             _serviceLocator.Register(_sceneHandler);
             _serviceLocator.Register(_joystick);
+            _serviceLocator.Register(_inputType);
             _serviceLocator.Register(_uiHubController);
             _serviceLocator.Register(_wallet);
             _serviceLocator.Register(_levelSettings);
@@ -90,13 +92,11 @@ namespace GUS.Core.Hub
         private void Initialization()
         {
             _gameStateMachine.InitHub(ServiceLocator);
-
-            _inputType = _joystick;
             _storageService.Init(ServiceLocator);
             _wallet.Init(ServiceLocator);
             _uiHubController.Init(ServiceLocator);          
             _hubController.Init(ServiceLocator);
-            _player.Init(_serviceLocator);
+            _player.Init(_serviceLocator,true);
             _deleteService.Init(ServiceLocator);
             _playerState.Init(ServiceLocator);
             _hubController.Idle();

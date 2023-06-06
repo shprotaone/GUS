@@ -1,18 +1,14 @@
 using GUS.Core.GameState;
-using GUS.Core.InputSys;
 using GUS.Core.Locator;
 using GUS.Player.State;
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GUS.Core
 {
     public class GameStateController : MonoBehaviour, IStateChanger
     {
         [SerializeField] private SceneHandler _sceneHandler;
-        [SerializeField] private Text _deltaText;
-        [SerializeField] private Text _directionText;
 
         private GameStateMachine _gameStateMachine;
         private PlayerStateMachine _playerStateMachine;
@@ -20,6 +16,8 @@ namespace GUS.Core
 
         private IState _prevPlayerState;
         private IState _prevGameState;
+
+        public bool SecondChance { get; private set; }
 
         public void Init(IServiceLocator serviceLocator)
         {
@@ -58,10 +56,11 @@ namespace GUS.Core
 
         public void InitGame()
         {
+            SecondChance = true;
             _gameStateMachine.InitGameLoop(_gameStateMachine.initState);
             _playerStateMachine.InitGameLoop(_playerStateMachine.initState);
             _gameStateMachine.start.WithStartCut(true);
-            _gameStateMachine.TransitionTo(_gameStateMachine.start);
+            _gameStateMachine.TransitionTo(_gameStateMachine.start);           
         }
 
         public void ClickerGame()
@@ -99,6 +98,7 @@ namespace GUS.Core
 
         public void RestartGame()
         {
+            SecondChance = true;
             _routineExecuter.AllStop();
             _gameStateMachine.TransitionTo( _gameStateMachine.initState);
             _gameStateMachine.start.WithStartCut(false);
@@ -107,6 +107,20 @@ namespace GUS.Core
             
             _playerStateMachine.TransitionTo(_playerStateMachine.initState);
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
+        }
+
+        public void SecondChanceGame()
+        {
+            SecondChance = false;
+            _gameStateMachine.start.WithStartCut(false);
+            _gameStateMachine.TransitionTo(_gameStateMachine.session);
+            _playerStateMachine.TransitionTo(_playerStateMachine.initState);
+            _playerStateMachine.TransitionTo(_playerStateMachine.runState);            
+        }
+
+        public void Result()
+        {
+            _gameStateMachine.TransitionTo(_gameStateMachine.result);
         }
 
         public void SceneLoadToHub()

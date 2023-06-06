@@ -13,6 +13,7 @@ namespace GUS.Core.UI
         [SerializeField] private UIEndGame _uiEndGame;
         [SerializeField] private UIClickerGame _uiClickerGame;
         [SerializeField] private GameObject _pausePanel;
+        [SerializeField] private SaveMe _saveMePanel;
 
         private GameStateController _controller;
 
@@ -26,13 +27,24 @@ namespace GUS.Core.UI
             _controller = serviceLocator.Get<GameStateController>();
             _uiInGame.Init(_controller);
             _uiEndGame.Init(serviceLocator);
-            _uiPause.Init(_controller);
+            _uiPause.Init(_controller,serviceLocator);
             _uiClickerGame.Init(serviceLocator);
+            _saveMePanel.Init(serviceLocator);
         }
 
         public void PausePanel(bool flag)
         {
             _pausePanel.SetActive(flag);
+            _uiPause.Show();
+        }
+
+        public void SaveMe(bool flag)
+        {
+            if(flag) 
+            { 
+                _saveMePanel.gameObject.SetActive(true);
+                _saveMePanel.Execute();
+            }
         }
     }
 }

@@ -21,19 +21,22 @@ namespace GUS.Core.SaveSystem
             _loadButton.onClick.AddListener(Activate);
         }
 
+        private void OnEnable()
+        {
+            StartCoroutine(LoadRoutine());
+        }
         private void Activate()
         {
             //_slots = _content.GetComponentsInChildren<Slot>().ToList();
-            StartCoroutine(LoadRoutine());
+            _tableParent.gameObject.SetActive(true);
         }
 
         private IEnumerator LoadRoutine()
         {
+            yield return new WaitForSeconds(1);
             yield return _fromFireBase.Load();
             List<PlayerData> list = _fromFireBase.LoadedData.OrderByDescending(dist => dist.commonDistance).ToList();
-
             SetSlots(list);
-            _tableParent.gameObject.SetActive(true);
             yield return null;
         }
 

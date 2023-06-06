@@ -23,7 +23,7 @@ namespace GUS.Player.State
         {
             _movement = new ExploreMovement();
             _movement.Init(_playerActor, _playerState, _steerSpeed);
-            _playerActor?.SetMovementType(_movement);
+            _playerActor.SetMovementType(_movement);
         }
 
         public IEnumerator Execute()
@@ -43,7 +43,11 @@ namespace GUS.Player.State
 
         public void Update()
         {
-            _movement.Update();
+            if(_movement != null)
+            {
+                _movement.Update();
+                _playerActor.AnimatorController.RunActivate(_movement.IsMove);
+            }            
         }
     }
 }

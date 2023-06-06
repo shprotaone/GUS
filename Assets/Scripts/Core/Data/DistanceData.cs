@@ -8,10 +8,10 @@ namespace GUS.Core.Data
     {
         private StorageService _storageService;
         private IDistanceView _distanceView;
-        private float _distance;
+        private float _value;
 
         public StorageService StorageService => _storageService;
-
+        public float Value => _value;
         public void Init(IServiceLocator serviceLocator)
         {
             _storageService = serviceLocator.Get<StorageService>();
@@ -20,19 +20,19 @@ namespace GUS.Core.Data
 
         public void Reset()
         {
-            _distance = 0;
-            _distanceView.RefreshDistancePointCount(_distance);
+            _value = 0;
+            _distanceView.RefreshDistancePointCount(_value);
         }
 
         public void Set(int distance)
         {
-            _distance = (distance);
-            _distanceView.RefreshDistancePointCount(_distance);
+            _value = (distance);
+            _distanceView.RefreshDistancePointCount(_value);
         }
 
         public void Save()
         {
-            _storageService.Data.commonDistance += _distance;
+            _storageService.Data.commonDistance += _value;
             _storageService.Save();
         }
     }

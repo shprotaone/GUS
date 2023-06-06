@@ -1,3 +1,4 @@
+using GUS.Core.InputSys;
 using GUS.Core.InputSys.Joiystick;
 using GUS.Player.State;
 using UnityEngine;
@@ -19,15 +20,13 @@ namespace GUS.Player.Movement
         private float turnSmoothVelocity;
 
         private bool _canMove;
-
+        public bool IsMove { get; private set; }
         public void Init(PlayerActor player, PlayerStateMachine playerState, float speedMovement)
         {
             _playActor = player;
-            if (player.InputType is FloatingJoystick)
-            {
-                _inputType = (FloatingJoystick)player.InputType;
-                _inputType.gameObject.SetActive(true);
-            }
+            _inputType = _playActor.ServiceLocator.Get<IInputType>() as FloatingJoystick;
+            _inputType.gameObject.SetActive(true);
+
             _playerState = playerState;
             _speedMovement = speedMovement;
             _camera = Camera.main;
@@ -67,7 +66,11 @@ namespace GUS.Player.Movement
 
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 _playActor.CharController.Move(moveDir * _speedMovement * Time.deltaTime);
-                Debug.Log("Call from Explore");
+                IsMove = true;
+            }
+            else
+            {
+                IsMove = false;
             }
         }
 

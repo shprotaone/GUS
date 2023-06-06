@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class UIClickerGame : MonoBehaviour
 {
+    [SerializeField] private GameObject _tutorialPanel;
     [SerializeField] private GameObject _clickerPanel;
     [SerializeField] private RectTransform _corn;
     [SerializeField] private CoinAnimationHandler _coinAnimationHandler;
@@ -24,28 +25,33 @@ public class UIClickerGame : MonoBehaviour
 
     public void InitSlider(float health)
     {
-        _slider.gameObject.SetActive(true);
-        _slider.maxValue = health;
-        _slider.value = health;
+        //_slider.gameObject.SetActive(true);
+        //_slider.maxValue = health;
+        //_slider.value = health;
     }
 
     public void UpdateSlider(float value)
     {
-        _slider.value -= value;
+        //_slider.value -= value;
         UpscaleCorn();
     }
 
     public void PanelActivate(bool flag) => _clickerPanel.SetActive(flag);
-    public void SliderActivate(bool flag) => _slider.gameObject.SetActive(flag);
+    public void SliderActivate(bool flag)
+    {
+        //_slider.gameObject.SetActive(flag);
+    }
+
 
     private void UpscaleCorn()
     {
-        _corn.DOPunchScale(_scaleStep, 0.3f).SetEase(Ease.OutElastic);
-
-        if (_corn.localScale.x < 2.5f)
+        _corn.DOPunchScale(_scaleStep, 0.3f).SetEase(Ease.OutElastic).OnComplete(() =>
         {
-            _corn.localScale += _scaleStep;
-        }        
+            if (_corn.localScale.x < 2.5f)
+            {
+                _corn.localScale += _scaleStep;
+            }
+        });                    
     }
 
     public void EndClicker()
@@ -60,5 +66,18 @@ public class UIClickerGame : MonoBehaviour
         sequence.Play();      
     }
 
-    
+    public void TutorialPanel(bool flag)
+    {
+        Sequence sequence = DOTween.Sequence();
+
+        if (flag)
+        {
+            sequence.Append(_tutorialPanel.transform.DOLocalMoveX(0, 1));
+            sequence.AppendInterval(3);
+            sequence.Append(_tutorialPanel.transform.DOLocalMoveX(-1200, 1));
+            sequence.Append(DOVirtual.DelayedCall(0,() =>_clickerPanel.SetActive(false)));
+        }
+
+        sequence.Play();
+    }
 }

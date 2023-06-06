@@ -30,7 +30,7 @@ namespace GUS.Core.GameState
             session = new InGameState(this, serviceLocator);
             clicker = new ClickerState(this, serviceLocator);
             endGame = new EndGameState(this, serviceLocator);
-            result = new ResultState(this);
+            result = new ResultState(this,serviceLocator);
             pause = new PauseState(this, serviceLocator);
         }
 

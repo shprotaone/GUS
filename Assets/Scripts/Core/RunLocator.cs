@@ -35,7 +35,6 @@ namespace GUS.Core
 
         [Header("Вспомогательные")]
         [SerializeField] private UIController _uiController;
-        [SerializeField] private TMP_Text _stateText;
         [SerializeField] private Transform _startPoint;
         [SerializeField] private GameStateController _stateController;        
         [SerializeField] private BossPositions _bossPositions;
@@ -114,7 +113,6 @@ namespace GUS.Core
             _serviceLocator.Register(_uiController);
             _serviceLocator.Register(_levelSettings);
             _serviceLocator.Register(_stateController);
-            _serviceLocator.Register(_stateText);
             _serviceLocator.Register(_progressiveSystem);
             _serviceLocator.Register(_player);
             _serviceLocator.Register(_clicker);
@@ -139,7 +137,7 @@ namespace GUS.Core
             _platformPool.InitPool(_platformStorage);
             _collectablesPool.InitPool(_collectablesStorage);
             _worldController.Init(_startPoint, _serviceLocator);
-            _player.Init(_serviceLocator);
+            _player.Init(_serviceLocator,false);
             _progressiveSystem.Init(_serviceLocator);
             _uiController.Init(_serviceLocator);
             _clicker.Init(_serviceLocator);

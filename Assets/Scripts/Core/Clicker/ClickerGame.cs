@@ -77,6 +77,7 @@ namespace GUS.Core.Clicker
 
         public void GetDamage()
         {
+            DisablePanel();
             _hp -= _settings.damage;
             _uiController.ClickerGame.UpdateSlider(_settings.damage);
             _enemy.Behaviour(GetStage());
@@ -96,7 +97,7 @@ namespace GUS.Core.Clicker
             if (_hp < stageHp)
             {
                  _stageIndex++;
-                _clickerStateMachine.TransitionTo(_clickerStateMachine.prepareState);
+                //_clickerStateMachine.TransitionTo(_clickerStateMachine.prepareState);
                 return (EnemyStage)_stageIndex;
             }
             else { return EnemyStage.FULL; }
@@ -111,7 +112,7 @@ namespace GUS.Core.Clicker
         {
             OnRestart?.Invoke();
             _uiController.ClickerGame.PanelActivate(false);
-            _uiController.ClickerGame.SliderActivate(false);
+            //_uiController.ClickerGame.SliderActivate(false);
             StateMachine.CurrentState.Exit();
             OnRestart = null;
         }
@@ -120,6 +121,11 @@ namespace GUS.Core.Clicker
         {
             IsActive = false;
             _wallet.AddCoins(_settings.reward);
+        }
+
+        private void DisablePanel()
+        {
+            _uiController.ClickerGame.TutorialPanel(false);
         }
     }
 
