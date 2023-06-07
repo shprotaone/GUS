@@ -24,13 +24,13 @@ namespace GUS.Core.GameState
         public void Enter()
         {
             _cameraController.ExploreCamera();
-            
+            _sceneHandler.FadeInHandle();
         }
 
         public IEnumerator Execute()
         {
             yield return new WaitForSeconds(1);
-            _sceneHandler.FadeInHandle();
+            
             yield return null;
         }
 

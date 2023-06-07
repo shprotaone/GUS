@@ -8,6 +8,8 @@ public class Coin : MonoBehaviour
     [SerializeField] private Collider _collider;
     [SerializeField] private GameObject _model;
     [SerializeField] private ParticleSystem _getParticle;
+
+    private Vector3 _startPos;
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent(out PlayerActor actor))
@@ -16,8 +18,6 @@ public class Coin : MonoBehaviour
         }
         else if(other.TryGetComponent(out Magnet magnet))
         {
-            Debug.Log(other.gameObject.name);
-            //Magnet magnet = other.GetComponentInChildren<Magnet>();
             MoveToMagnet(magnet);
         }       
     }
@@ -25,6 +25,7 @@ public class Coin : MonoBehaviour
     private void OnEnable()
     {
         gameObject.SetActive(true);
+        _startPos = transform.localPosition;
     }
 
     private IEnumerator Delay(PlayerActor actor)
@@ -43,5 +44,10 @@ public class Coin : MonoBehaviour
     private void MoveToMagnet(Magnet magnet)
     {
         transform.DOMove(magnet.transform.position, magnet.MoveTime);
+    }
+
+    private void OnDisable()
+    {
+        transform.localPosition = _startPos;
     }
 }

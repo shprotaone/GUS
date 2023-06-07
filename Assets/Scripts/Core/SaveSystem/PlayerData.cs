@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace GUS.Core.SaveSystem
 {
@@ -12,21 +13,9 @@ namespace GUS.Core.SaveSystem
         public int coins;
         [JsonProperty(PropertyName = "dist")]
         public float commonDistance;
+        public List<BuildData> buildDatas;
 
         public PlayerData() { }
-        public PlayerData(string playerName, int coins, float distance)
-        {
-            this.playerName = playerName;
-            this.coins = coins;
-            this.commonDistance = distance;
-        }
-
-        public PlayerData(PlayerData data)
-        {
-            this.playerName = data.playerName;
-            this.coins = data.coins;
-            this.commonDistance = data.commonDistance;
-        }
     }
 }
 

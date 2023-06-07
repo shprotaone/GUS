@@ -16,6 +16,7 @@ namespace GUS.Core.Clicker
         private GameStateController _gameStateController;
         private ClickerStateMachine _clickerStateMachine;
         private IServiceLocator _serviceLocator;
+        private CameraRunController _cameraController;
         public IStateMachine StateMachine { get; private set; }
         public EndState(ClickerStateMachine stateMachine, IServiceLocator serviceLocator)
         {
@@ -23,6 +24,7 @@ namespace GUS.Core.Clicker
             _clickerStateMachine = stateMachine;
             _worldController = serviceLocator.Get<WorldController>();
             _uiController = serviceLocator.Get<UIController>();
+            _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
         }
 
         public void Enter()
@@ -34,19 +36,22 @@ namespace GUS.Core.Clicker
             _uiController.UiInGame.Hide(false);
             _uiController.ClickerGame.SliderActivate(false);
             _uiController.ClickerGame.EndClicker();
-            
+            _clickerStateMachine.CallRoutine();
         }
 
         public IEnumerator Execute()
         {
+            _cameraController.ClickerCamera();
+            yield return new WaitForSeconds(2);
+            _cameraController.RunCamera();
+            _gameStateController.StartGame();
+            _clickerStateMachine.StopRoutine();
             yield return null;
         }
 
         public void Exit()
         {
-            Debug.Log("Выход из выхода в раннер");
-            _clickerStateMachine.StopRoutine();
-            _gameStateController.StartGame();
+
         }
 
         public void FixedUpdate()

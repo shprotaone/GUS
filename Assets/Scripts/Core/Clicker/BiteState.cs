@@ -5,7 +5,7 @@ using GUS.Player.Movement;
 using GUS.Player;
 using System.Collections;
 using UnityEngine;
-using DG.Tweening;
+using GUS.Core.UI;
 
 namespace GUS.Core.Clicker
 {
@@ -17,8 +17,8 @@ namespace GUS.Core.Clicker
                
         private ClickerGame _game;
         private ClickerMovement _movement;
-
         private ClickerStateMachine _clickerStateMachine;
+        private UIClickerGame _uiClicker;
         private IServiceLocator _serviceLocator;
         public IStateMachine StateMachine { get; private set; }
         public BiteState(ClickerStateMachine stateMachine, IServiceLocator serviceLocator)
@@ -27,6 +27,7 @@ namespace GUS.Core.Clicker
             _clickerStateMachine = stateMachine;
             _worldController = serviceLocator.Get<WorldController>();
             _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
+            _uiClicker = serviceLocator.Get<UIController>().ClickerGame;
         }
 
         public void Enter()
@@ -47,6 +48,7 @@ namespace GUS.Core.Clicker
             _cameraController.BiteCamera();
             yield return new WaitForSeconds(_game.Settings.prepareTime);
 
+            _uiClicker.TutorialPanel(true);
             _movement.CanAttack(true);
             _movement.OnClick += _game.GetDamage;
             _movement.OnClick += () => _cameraController.ShackeCameraHandle(5, 0.1f);

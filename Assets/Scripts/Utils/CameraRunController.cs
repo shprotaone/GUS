@@ -22,6 +22,7 @@ namespace GUS.Core.GameState
         [SerializeField] private float _speedMovement;
 
         private CinemachineVirtualCameraBase _currentCamera;
+        private CinemachineVirtualCameraBase _prevCamera;
         private float _shakeTime;
 
         public void ClickerCamera()
@@ -36,6 +37,7 @@ namespace GUS.Core.GameState
         {
             _currentCamera = _runCamera;
             _clickerCamera.enabled = false;
+            _biteCamera.enabled = false;
             _runCamera.enabled = true;
         }
 

@@ -9,7 +9,7 @@ namespace GUS.Core.GameState
 {
     public class EndGameState : IState
     {
-        private Wallet _wallet;
+        private GameStateController _gameStateController;
         private WorldController _worldCotroller;
         private UIController _uiController;
 
@@ -18,26 +18,28 @@ namespace GUS.Core.GameState
         {
             _worldCotroller = serviceLocator.Get<WorldController>();
             _uiController= serviceLocator.Get<UIController>();
-            _wallet = serviceLocator.Get<Wallet>();
+            _gameStateController = serviceLocator.Get<GameStateController>();
             StateMachine = stateMachine;
         }
 
         public void Enter()
-        {
-            _wallet.Save();
+        {           
             _worldCotroller.WorldStopper(true);
+            _uiController.UiInGame.Hide(true);
         }
 
         public IEnumerator Execute()
         {
             yield return new WaitForSeconds(1);
-            _uiController.UIEndGame.Panel(true);
+            if (_gameStateController.SecondChance) _uiController.SaveMe(true);
+            else _gameStateController.Result();
+            
             yield return null;
         }
 
         public void Exit()
         {
-            _uiController.UIEndGame.Panel(false);
+            _uiController.UiInGame.Hide(false);
             _worldCotroller.WorldStopper(false);
         }
 

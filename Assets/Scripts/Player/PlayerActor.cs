@@ -58,7 +58,7 @@ namespace GUS.Player
             _startPosition= transform.position;
         }
 
-        public void Init(IServiceLocator serviceLocator)
+        public void Init(IServiceLocator serviceLocator,bool hub)
         {
             
             _inputType = serviceLocator.Get<IInputType>();
@@ -66,9 +66,9 @@ namespace GUS.Player
             _stateController = serviceLocator.Get<IStateChanger>() as GameStateController;            
             _audioService= serviceLocator.Get<AudioService>();
             _wallet = serviceLocator.Get<Wallet>();
-            _worldController = serviceLocator.Get<WorldController>();
             _playerStateMachine = serviceLocator.Get<PlayerStateMachine>();
 
+            if(!hub) { _worldController = serviceLocator.Get<WorldController>(); }
             ServiceLocator = serviceLocator;
         }
 

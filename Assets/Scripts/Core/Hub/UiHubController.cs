@@ -17,13 +17,14 @@ namespace GUS.Core
 
         [SerializeField] private Button _settings;
         [SerializeField] private Button _shop;
-        [SerializeField] private Button _exploreMode;
+        [SerializeField] private Button _buildMode;
         [SerializeField] private Button _startButton;
 
         [SerializeField] private GameObject _settingsPanel;
         [SerializeField] private GameObject _shopPanel;
 
         [SerializeField] private UISettings _uiSettings;
+        [SerializeField] private UIBuild _uiBuild;
 
         private HubStateController _controller;
         private StorageService _storage;
@@ -31,7 +32,7 @@ namespace GUS.Core
         {
             _settings.onClick.AddListener(Settings);
             _shop.onClick.AddListener(ShopPanel);
-            _exploreMode.onClick.AddListener(ExploreHandle);
+            _buildMode.onClick.AddListener(Build);
             _startButton.onClick.AddListener(StartHandle);
 
         }
@@ -44,12 +45,16 @@ namespace GUS.Core
 
             _storage = locator.Get<StorageService>();
             _uiSettings.Init(locator);
+            _uiBuild.Init(locator);
             _storage.Load();
             _coinText.text = _storage.Data.coins.ToString();
             _nameText.text = _storage.Data.playerName.ToString();
         }
 
-        public void ExploreHandle() => _controller.Explore();
+        public void Build()
+        {
+            _uiBuild.Activate(true);
+        }
         public void StartHandle() => _controller.SceneLoadToRun();
         public void Settings() => _settingsPanel.SetActive(true);
         public void ShopPanel() => _shopPanel.SetActive(true);

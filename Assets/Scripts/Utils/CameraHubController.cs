@@ -5,17 +5,24 @@ using UnityEngine;
 public class CameraHubController : MonoBehaviour,ICamera
 {
     [SerializeField] private CinemachineFreeLook _hubWalkCamera;
-    [SerializeField] private CinemachineVirtualCamera _hubMapCamera;
+    [SerializeField] private CinemachineVirtualCamera _idleCamera;
+    [SerializeField] private CinemachineVirtualCamera _mapCamera;
 
     public void ExploreCamera()
     {
         _hubWalkCamera.enabled = true;
-        _hubMapCamera.enabled = false;
+        _mapCamera.enabled = false;
+    }
+
+    public void IdleCamera()
+    {
+        _idleCamera.enabled = true;
+        _hubWalkCamera.enabled = false;
     }
 
     public void MapCamera()
     {
-        _hubMapCamera.enabled = true;
-        _hubWalkCamera.enabled = false;
+        _mapCamera.enabled = true;
+        _idleCamera.enabled = false;
     }
 }
