@@ -117,17 +117,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8965814278515063897, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
   m_PrefabInstance: {fileID: 8738687803495173558}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3001981488003957374 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5831915243694460872, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
-  m_PrefabInstance: {fileID: 8738687803495173558}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3404807321277698910 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6198712829235060456, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
   m_PrefabInstance: {fileID: 8738687803495173558}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5360871762987412805
+--- !u!114 &-6040264887776305388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,21 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf3dd0277faa59419531c2f9af5f113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPoints:
-  - {fileID: 5225920094672555460}
-  - {fileID: 8557070483062446013}
-  - {fileID: 3001981488003957374}
+  _spawnPoints: []
   _objectPoolType: 0
   _beginPoint: {fileID: 372381312345813487}
   _endPoint: {fileID: 372381312331468582}
-  _isSpawning: 0
---- !u!4 &5225920094672555460 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3584932247596613746, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
-  m_PrefabInstance: {fileID: 8738687803495173558}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8557070483062446013 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1118823474277947915, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
-  m_PrefabInstance: {fileID: 8738687803495173558}
-  m_PrefabAsset: {fileID: 0}
+  _isSpawning: 1

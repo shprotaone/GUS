@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SecondLevel
   m_EditorClassIdentifier: 
   parts:
+  - prefab: {fileID: 1580771902757491979, guid: 22e5f6d1c8e540048bbf5fda01a08661, type: 3}
+    startCount: 1
+    Weight: 100
   - prefab: {fileID: 3404807321277698910, guid: 19aa7347d4f9a3a46a0b29ded86a5f5e, type: 3}
     startCount: 5
     Weight: 0
@@ -22,6 +25,3 @@ MonoBehaviour:
   - prefab: {fileID: 6198712829235060456, guid: 0d5e9cc88c435a442b7a03c14aede5ac, type: 3}
     startCount: 2
     Weight: 5
-  - prefab: {fileID: 3404807321277698910, guid: 48702a2ebd63e994098d3b2924de14bb, type: 3}
-    startCount: 5
-    Weight: 20

@@ -45,6 +45,7 @@ namespace GUS.Player.Movement
             _currentLine = Line.Center;
             _rotator = new ActorRotator(player);
             _audioService = player.ServiceLocator.Get<AudioService>();
+            OnChangePosition += _player.Particles.SlideEffect;
             OnChangePosition += CheckLinePosition;
             OnChangePosition += () => _player.CameraHandler(this);
         }
@@ -197,5 +198,6 @@ namespace GUS.Player.Movement
             OnChangePosition?.Invoke();
         }
     }
+
 }
 

@@ -8,6 +8,7 @@ namespace GUS.Player
     {
         [SerializeField] private ParticleSystem _afterDeath;
         [SerializeField] private ParticleSystem _deathParticle;
+        [SerializeField] private ParticleSystem _slideEffect;
 
         private Camera _camera;
 
@@ -22,6 +23,11 @@ namespace GUS.Player
                 _deathParticle.gameObject.SetActive(true);
                 _deathParticle.Play();
             }           
+        }
+
+        public void SlideEffect()
+        {
+            _slideEffect.Play();
         }
 
         public void DamageEffect(Vector3 position)
