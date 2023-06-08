@@ -9,6 +9,7 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
 {
     private const float stadartColliderRadius = 0.5f;
     [SerializeField] private GameObject _model;
+    [SerializeField] private GameObject _spritePower;
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private PoolObjectType _poolObjectType;
     [SerializeField] private SphereCollider _collider;
@@ -33,6 +34,8 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
         if(_objectPool == null)
         {
             _objectPool = GetComponentInParent<ObjectPool>();
+            _model.SetActive(true);
+            _spritePower.SetActive(true);
             _canTake = true;
         }
     }
@@ -55,6 +58,7 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
     private IEnumerator Activate(PowerUpHandler handler)
     {
         _model.SetActive(false);
+        _spritePower.SetActive(false);
         transform.SetParent(handler.PowerUpParent);
         transform.position = handler.PowerUpParent.transform.position;
 

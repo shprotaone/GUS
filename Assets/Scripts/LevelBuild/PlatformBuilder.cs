@@ -80,7 +80,7 @@ namespace GUS.LevelBuild
 
                 if (_lastPlatform == null)
                 {
-                    _lastPos = _beginWorldTransform.position;
+                    _lastPos = _beginWorldTransform.position + _offset;
                     _lastPlatform = currentPlatform;
                 }
                 else
