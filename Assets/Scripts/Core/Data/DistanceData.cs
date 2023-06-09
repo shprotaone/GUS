@@ -30,7 +30,7 @@ namespace GUS.Core.Data
             _distanceView.RefreshDistancePointCount(_value);
         }
 
-        public void Save()
+        public void UpdateCoins()
         {
             _storageService.Data.commonDistance += _value;
             _storageService.Save();
