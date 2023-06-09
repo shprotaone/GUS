@@ -51,7 +51,7 @@ namespace GUS.Core.Clicker
 
         public void Exit()
         {
-
+            //сюда не заходит в end? 
         }
 
         public void FixedUpdate()

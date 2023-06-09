@@ -27,18 +27,19 @@ namespace GUS.Core.GameState
 
         public void ClickerCamera()
         {
+            _currentCamera.enabled= false;
             _currentCamera = _clickerCamera;
-            _clickerCamera.enabled = true;
-            _biteCamera.enabled = false;
-            _runCamera.enabled = false;
+            _currentCamera.enabled= true;
         }
 
         public void RunCamera()
         {
+            if(_currentCamera != null)
+            {
+                _currentCamera.enabled = false;
+            }
             _currentCamera = _runCamera;
-            _clickerCamera.enabled = false;
-            _biteCamera.enabled = false;
-            _runCamera.enabled = true;
+            _currentCamera.enabled = true;
         }
 
         public void CameraCalculate(RunMovement movement)
@@ -76,9 +77,9 @@ namespace GUS.Core.GameState
 
         public void BiteCamera()
         {
+            _currentCamera.enabled = false;
             _currentCamera = _biteCamera;
-            _biteCamera.enabled = true;
-            _clickerCamera.enabled = false;
+            _currentCamera.enabled = true;
         }
 
         public void FOVIncrement(float value)
