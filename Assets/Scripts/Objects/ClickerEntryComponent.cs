@@ -24,6 +24,7 @@ namespace GUS.Core.Clicker
             if (other.TryGetComponent(out PlayerActor actor) && _isActive)
             {
                 _isActive = false;
+                actor.MovementType.CanMove(false);
                 PrepareEnemy();
                 StartCoroutine(Initialization(actor));
             }

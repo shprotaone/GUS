@@ -16,7 +16,7 @@ namespace GUS.LevelBuild
         private const int countStartPlatform = 5;
         public const int RangeZ = -50;
 
-        private Transform _startPosition;
+        private Transform _beginWorldTransform;
         private Vector3 _offset = new Vector3(0, 0, -20);
                 
         private GameObject _nextPlatform;
@@ -49,7 +49,7 @@ namespace GUS.LevelBuild
             _platformsQueue = new Queue<Platform>();
             _randomLogic = new RandomLogic(_platformPool);
 
-            _startPosition = startPosition;
+            _beginWorldTransform = startPosition;
         }
 
         public void CreateStartSection()
@@ -71,7 +71,7 @@ namespace GUS.LevelBuild
         {
             float nextPlatformOffset;
             
-            if (_platformsQueue.Count < 7)
+            if (_platformsQueue.Count < 10)
             {
                 SetNextPlatform();
 
@@ -80,7 +80,7 @@ namespace GUS.LevelBuild
 
                 if (_lastPlatform == null)
                 {
-                    _lastPos = _startPosition.position + _offset;
+                    _lastPos = _beginWorldTransform.position + _offset;
                     _lastPlatform = currentPlatform;
                 }
                 else
@@ -89,9 +89,9 @@ namespace GUS.LevelBuild
                 }
                 
                 Vector3 instantiatePos = _lastPos;
-                _nextPlatform.transform.SetParent(_startPosition);
+                _nextPlatform.transform.SetParent(_beginWorldTransform);
                 nextPlatformOffset = currentPlatform.PlatformLenght;
-                _nextPlatform.transform.position = instantiatePos + new Vector3(0,0,nextPlatformOffset);
+                _nextPlatform.transform.position = instantiatePos + new Vector3(0, 0, nextPlatformOffset);
 
                 _platformsQueue.Enqueue(currentPlatform);
                 _lastPlatform = currentPlatform;              

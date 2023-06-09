@@ -15,6 +15,7 @@
        FullSecondLevel,
        EdgeSecondLevel,
        FreeWithSpawn,
+       Test,
 
        Empty,
 

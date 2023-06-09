@@ -7,7 +7,6 @@ namespace GUS.Objects.PowerUps
 {
     public class PowerUpHandler : MonoBehaviour
     {
-
         [SerializeField] private UIInGame _view;
         [SerializeField] private Transform _powerUpParent;
         [SerializeField] private PlayerActor _playerActor;
@@ -21,15 +20,15 @@ namespace GUS.Objects.PowerUps
         public void Execute(IPowerUp powerUp)
         {
             //index = _view.SetBonusImage(powerUp.Sprite);
-            _particle = powerUp.Particle;
-            _particle.transform.position = this.transform.position;
-            _particle.Play();
+            //_particle = powerUp.Particle;
+            //_particle.transform.position = this.transform.position;
+            //_particle.Play();
             powerUp.Execute(this);            
         }
 
         public void Disable()
         {
-            _particle.Stop();
+            //_particle.Stop();
             //_view.DisableBonusImage();   
         }
     }

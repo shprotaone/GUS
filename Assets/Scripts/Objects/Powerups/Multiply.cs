@@ -9,6 +9,7 @@ namespace GUS.Objects.PowerUps
     public class Multiply : MonoBehaviour, IPowerUp,IPoolObject
     {
         [SerializeField] private GameObject _model;
+        [SerializeField] private GameObject _sprite;
         [SerializeField] private ParticleSystem _particleSystem;
         [SerializeField] private PoolObjectType _poolType;
         [SerializeField] private Sprite _bonusSprite;
@@ -30,6 +31,8 @@ namespace GUS.Objects.PowerUps
             if (_objectPool == null)
             {
                 _objectPool = GetComponentInParent<ObjectPool>();
+                _model.SetActive(true);
+                _sprite.SetActive(true);
                 _canTake = true;
             }
         }
@@ -52,6 +55,7 @@ namespace GUS.Objects.PowerUps
         private IEnumerator Activate(PowerUpHandler handler)
         {
             _model.SetActive(false);
+            _sprite.SetActive(false);
             transform.SetParent(handler.transform);
             transform.position = handler.transform.position;
             _wallet.SetMultiply(true);

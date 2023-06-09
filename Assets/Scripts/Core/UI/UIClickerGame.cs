@@ -45,13 +45,7 @@ public class UIClickerGame : MonoBehaviour
 
     private void UpscaleCorn()
     {
-        _corn.DOPunchScale(_scaleStep, 0.3f).SetEase(Ease.OutElastic).OnComplete(() =>
-        {
-            if (_corn.localScale.x < 2.5f)
-            {
-                _corn.localScale += _scaleStep;
-            }
-        });                    
+        _corn.localScale += _scaleStep;
     }
 
     public void EndClicker()
@@ -75,7 +69,7 @@ public class UIClickerGame : MonoBehaviour
             sequence.Append(_tutorialPanel.transform.DOLocalMoveX(0, 1));
             sequence.AppendInterval(3);
             sequence.Append(_tutorialPanel.transform.DOLocalMoveX(-1200, 1));
-            sequence.Append(DOVirtual.DelayedCall(0,() =>_clickerPanel.SetActive(false)));
+            sequence.Append(DOVirtual.DelayedCall(0,() => _tutorialPanel.SetActive(false)));
         }
 
         sequence.Play();
