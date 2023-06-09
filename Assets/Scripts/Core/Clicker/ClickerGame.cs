@@ -45,6 +45,7 @@ namespace GUS.Core.Clicker
         {
             IsActive = true;
             _settings = settings;
+            _uiController.ClickerGame.ResetClickerUI();
             _clickerStateMachine = new ClickerStateMachine(_serviceLocator);
             _gameStateController.ClickerGame();
             

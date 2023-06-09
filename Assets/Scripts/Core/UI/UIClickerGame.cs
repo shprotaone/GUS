@@ -14,6 +14,7 @@ public class UIClickerGame : MonoBehaviour
     [SerializeField] private Slider _slider;
     [SerializeField] private float _scaler;
 
+    private Vector3 _startPosCorn;
     private Vector3 _scaleStep;
     private ClickerGame _clickerGame;
 
@@ -21,6 +22,7 @@ public class UIClickerGame : MonoBehaviour
     {
         _scaleStep = Vector3.one / _scaler;
         _clickerGame = serviceLocator.Get<ClickerGame>();
+        _startPosCorn = _corn.position;
     }
 
     public void InitSlider(float health)
@@ -73,5 +75,12 @@ public class UIClickerGame : MonoBehaviour
         }
 
         sequence.Play();
+    }
+
+    public void ResetClickerUI()
+    {
+        _corn.position = _startPosCorn;
+        _corn.localScale= Vector3.one;
+        _corn.gameObject.SetActive(true);
     }
 }
