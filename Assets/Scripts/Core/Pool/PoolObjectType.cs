@@ -18,7 +18,8 @@
        Test,
        Tractors,
        ScarecrowShuffle,
-
+       HiveAndStack,
+       FenceWithHole,
 
 
        Empty,
