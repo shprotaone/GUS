@@ -15,7 +15,9 @@
        FullSecondLevel,
        EdgeSecondLevel,
        FreeWithSpawn,
+       MotherPlat,
        Test,
+       
 
        Empty,
 
