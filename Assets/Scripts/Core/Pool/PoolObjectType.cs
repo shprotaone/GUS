@@ -15,9 +15,11 @@
        FullSecondLevel,
        EdgeSecondLevel,
        FreeWithSpawn,
-       MotherPlat,
        Test,
-       
+       Tractors,
+       ScarecrowShuffle,
+
+
 
        Empty,
 
