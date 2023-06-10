@@ -8,32 +8,29 @@ namespace GUS.Objects.PowerUps
 {
     public class Multiply : MonoBehaviour, IPowerUp,IPoolObject
     {
-        [SerializeField] private GameObject _model;
-        [SerializeField] private GameObject _sprite;
+        [SerializeField] private Collectable _collectable;
         [SerializeField] private ParticleSystem _particleSystem;
-        [SerializeField] private PoolObjectType _poolType;
         [SerializeField] private Sprite _bonusSprite;
-        [SerializeField] private float _duration;
 
+        private GameObject _model;
         private Wallet _wallet;
-        private PowerUpHandler _handler;
         private ObjectPool _objectPool;
 
         private bool _canTake;
-        public float Duration => _duration;
+        public float Duration => _collectable.time;
         public Sprite Sprite => _bonusSprite;
-        public PoolObjectType Type => _poolType;
-
-        public ParticleSystem Particle => _particleSystem;
+        public PoolObjectType Type => PoolObjectType.Multiply;
 
         private void OnEnable()
         {
+            if (_model == null) _model = Instantiate(_collectable.model,this.transform);
+
+            _model.SetActive(true);
+            _canTake = true;
+
             if (_objectPool == null)
             {
-                _objectPool = GetComponentInParent<ObjectPool>();
-                _model.SetActive(true);
-                _sprite.SetActive(true);
-                _canTake = true;
+                _objectPool = GetComponentInParent<ObjectPool>();                            
             }
         }
 
@@ -41,33 +38,38 @@ namespace GUS.Objects.PowerUps
         {
             if(other.TryGetComponent(out PlayerActor actor)&& _canTake)
             {
-                _handler = actor.PowerUpHandler;
                 _wallet = actor.Wallet;
+                transform.SetParent(actor.transform);
+                actor.PowerUpHandler.Execute(this);
                 _canTake = false;
-                _handler.Execute(this);
             }
         }
+
         public void Execute(PowerUpHandler handler)
         {
-            StopCoroutine(Activate(handler));
-            StartCoroutine(Activate(handler));
+            StopCoroutine(Activate());
+            StartCoroutine(Activate());
         }
-        private IEnumerator Activate(PowerUpHandler handler)
+
+        private IEnumerator Activate()
         {
+            Debug.Log("Activate");
             _model.SetActive(false);
-            _sprite.SetActive(false);
-            transform.SetParent(handler.transform);
-            transform.position = handler.transform.position;
             _wallet.SetMultiply(true);
 
-            yield return new WaitForSeconds(_duration);
+            yield return new WaitForSeconds(_collectable.time);
 
+            Debug.Log("Deactivate");
             _canTake = true;
             _wallet.SetMultiply(false);
-            _handler.Disable();
             _objectPool.DestroyObject(this.gameObject);
+            
         }
 
+        public void SetUp(float duration)
+        {
+            _collectable.time = duration;
+        }
     }
 }
 

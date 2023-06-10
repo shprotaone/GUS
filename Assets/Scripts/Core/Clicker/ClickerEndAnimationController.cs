@@ -13,8 +13,7 @@ namespace GUS.Core.Clicker
 
         public ClickerEndAnimationController(IServiceLocator serviceLocator) 
         {
-                List<ObjectPool> pools = serviceLocator.GetAll<ObjectPool>().ToList();
-                _pool = pools[1];
+            _pool = serviceLocator.Get<RunLocator>().GetPool(PoolTypeEnum.Platform);
 
             _coins = new List<GameObject>();
 

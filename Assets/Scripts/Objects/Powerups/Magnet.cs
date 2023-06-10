@@ -8,34 +8,30 @@ using UnityEngine;
 public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
 {
     private const float stadartColliderRadius = 0.5f;
-    [SerializeField] private GameObject _model;
-    [SerializeField] private GameObject _spritePower;
-    [SerializeField] private ParticleSystem _particleSystem;
-    [SerializeField] private PoolObjectType _poolObjectType;
+
+    [SerializeField] private Collectable _collectable;
     [SerializeField] private SphereCollider _collider;
     [SerializeField] private Sprite _sprite;
     [SerializeField] private float _moveTime;
     [SerializeField] private float _magnetRadius;
-    [SerializeField] private float _duration;
 
-    private PowerUpHandler _handler;
+    private GameObject _model;
     private ObjectPool _objectPool;
     private bool _canTake;
+
     public bool IsActive { get; private set; }
-    public float Duration => _duration;
+    public float Duration => _collectable.time;
     public float MoveTime => _moveTime;
     public Sprite Sprite => _sprite;
-    public PoolObjectType Type => _poolObjectType;
-
-    public ParticleSystem Particle => _particleSystem;
+    public PoolObjectType Type => PoolObjectType.Magnet;
 
     private void OnEnable()
     {
+        if(_model == null) _model = Instantiate(_collectable.model,this.transform);
         if(_objectPool == null)
         {
             _objectPool = GetComponentInParent<ObjectPool>();
             _model.SetActive(true);
-            _spritePower.SetActive(true);
             _canTake = true;
         }
     }
@@ -44,36 +40,38 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
     {
         if (other.TryGetComponent(out PlayerActor actor) && _canTake)
         {
-            _handler = actor.PowerUpHandler;
-            _handler.Execute(this);
             _canTake = false;
+            actor.PowerUpHandler.Execute(this);
+            transform.SetParent(actor.transform);
         }
     }
+
     public void Execute(PowerUpHandler handler)
     {
-        StopCoroutine(Activate(handler));
-        StartCoroutine(Activate(handler));
+        StopCoroutine(Activate());
+        StartCoroutine(Activate());
     }
 
-    private IEnumerator Activate(PowerUpHandler handler)
+    private IEnumerator Activate()
     {
         _model.SetActive(false);
-        _spritePower.SetActive(false);
-        transform.SetParent(handler.PowerUpParent);
-        transform.position = handler.PowerUpParent.transform.position;
 
         _collider.radius = _magnetRadius;
         _collider.enabled = true;
               
         IsActive = true;
 
-        yield return new WaitForSeconds(_duration);
+        yield return new WaitForSeconds(Duration);
 
         _collider.radius = stadartColliderRadius;
         _model.SetActive(true);
-        _handler.Disable();
         _canTake = true;
         _objectPool.DestroyObject(this.gameObject);
+    }
+
+    public void SetUp(float duration)
+    {
+        _collectable.time = duration;
     }
 
     private void OnDrawGizmos()

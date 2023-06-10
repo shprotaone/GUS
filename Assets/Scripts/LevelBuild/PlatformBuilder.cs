@@ -1,3 +1,4 @@
+using GUS.Core;
 using GUS.Core.Clicker;
 using GUS.Core.Locator;
 using GUS.Core.Pool;
@@ -38,12 +39,13 @@ namespace GUS.LevelBuild
         private IServiceLocator _serviceLocator;
         public ClickerGame NextClickerGame{ get;private set; }
         public PlatformBuilder(Transform startPosition, IServiceLocator serviceLocator)
-        {
-            List<ObjectPool> pools = serviceLocator.GetAll<ObjectPool>().ToList();
+        {            
             _specialPlatformBuilder = serviceLocator.Get<SpecialPlatformBuilder>();
             _serviceLocator = serviceLocator;
-            _platformPool = pools[0];   //небезопасно
-            _collectablesPool = pools[1];
+
+            RunLocator runLoc = _serviceLocator.Get<RunLocator>();
+            _platformPool = runLoc.GetPool(PoolTypeEnum.Platform);
+            _collectablesPool = runLoc.GetPool(PoolTypeEnum.Collectable);
 
             _bonusSpawner = new BonusSpawner(_collectablesPool);
             _platformsQueue = new Queue<Platform>();

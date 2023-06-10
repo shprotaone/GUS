@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace GUS.Player
@@ -9,6 +10,8 @@ namespace GUS.Player
         [SerializeField] private ParticleSystem _afterDeath;
         [SerializeField] private ParticleSystem _deathParticle;
         [SerializeField] private ParticleSystem _slideEffect;
+        [SerializeField] private ParticleSystem _magnet;
+        [SerializeField] private ParticleSystem _multiply;
 
         private Camera _camera;
 
@@ -28,6 +31,34 @@ namespace GUS.Player
         public void SlideEffect()
         {
             _slideEffect.Play();
+        }
+
+        public IEnumerator MagnetEffect(float delay)
+        {
+            float timer = delay;
+            _magnet.Play();
+            while(timer > 0)
+            {
+                yield return new WaitForSeconds(1);
+                timer--;
+            }
+
+            _magnet.Stop();
+            yield return null;
+        }
+
+        public IEnumerator MultiplyEffect(float delay)
+        {
+            float timer = delay;
+            _multiply.Play();
+            while (timer > 0)
+            {
+                yield return new WaitForSeconds(1);
+                timer--;
+            }
+
+            _multiply.Stop();
+            yield return null;
         }
 
         public void DamageEffect(Vector3 position)

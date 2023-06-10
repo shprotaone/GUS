@@ -14,6 +14,7 @@ namespace GUS.Core.SaveSystem
         [JsonProperty(PropertyName = "dist")]
         public float commonDistance;
         public List<BuildData> buildDatas;
+        public List<BonusData> bonusDatas;
 
         public PlayerData() { }
     }

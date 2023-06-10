@@ -8,6 +8,5 @@ namespace GUS.Core.Locator
         public void Register<TService>(TService service);
         public void Unregister<TService>(TService service);
         public TService Get<TService>();
-        public IEnumerable<TService> GetAll<TService>();
     }
 }
