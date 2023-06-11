@@ -52,7 +52,7 @@ namespace GUS.Core.UI
             }
             _panel.gameObject.SetActive(false);
             _gameStateController.Result();
-
+            _isActive = true;
             yield break; 
         }
 

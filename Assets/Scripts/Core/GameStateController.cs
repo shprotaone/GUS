@@ -51,6 +51,7 @@ namespace GUS.Core
 
         private void CallGameStateRoutine()
         {
+            StopCoroutine(_gameStateMachine.CurrentState.Execute());
             StartCoroutine(_gameStateMachine.CurrentState.Execute());
         }
 

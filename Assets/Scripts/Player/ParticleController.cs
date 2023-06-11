@@ -25,6 +25,8 @@ namespace GUS.Player
             {
                 _deathParticle.gameObject.SetActive(true);
                 _deathParticle.Play();
+                _magnet.Stop();
+                _multiply.Stop();
             }           
         }
 
