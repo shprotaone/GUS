@@ -10,10 +10,10 @@ public class BonusSpawner
     {
         _pool = pool;
     }
-    public Vector3 GetPos(List<Transform> spawnPoints)
+    public Transform GetPos(List<Transform> spawnPoints)
     {
         int index = Random.Range(0, spawnPoints.Count);
-        return spawnPoints[index].position;
+        return spawnPoints[index];
     }
 
     public GameObject GetObject(ObjectInfo obj)

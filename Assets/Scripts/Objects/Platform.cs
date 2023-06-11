@@ -13,6 +13,7 @@ namespace GUS.Objects
         [SerializeField] private Transform _endPoint;
         [SerializeField] private bool _isSpawning = true;
 
+        private Transform _parent;
         private GameObject _currentCollectable;
         public PoolObjectType Type => _objectPoolType;
         public List<Transform> SpawnPoints => _spawnPoints;
@@ -23,14 +24,14 @@ namespace GUS.Objects
         {           
             if (SpawnPoints.Count > 0 && _isSpawning)
             {
-                Vector3 pos = bonusSpawner.GetPos(SpawnPoints);
+                _parent = bonusSpawner.GetPos(SpawnPoints);
                 ObjectInfo obj = bonusSpawner.GetTypeBonus();
-                _currentCollectable = bonusSpawner.GetObject(obj);
+                _currentCollectable = bonusSpawner.GetObject(obj);              
 
                 if (obj.ObjectType != PoolObjectType.Empty)
                 {
-                    _currentCollectable.transform.SetParent(transform);
-                    _currentCollectable.transform.position = pos;
+                    _currentCollectable.transform.SetParent(_parent);
+                    _currentCollectable.transform.position = _parent.position;
                 }
                 else
                 {
@@ -41,7 +42,9 @@ namespace GUS.Objects
 
         public void DisableBonus(ObjectPool pool)
         {
-            if(_currentCollectable != null)
+            if (_parent == null) return;
+
+            if(_parent.childCount > 0)
             {
                 pool.DestroyObject(_currentCollectable);
                 _currentCollectable = null;
