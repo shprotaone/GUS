@@ -16,6 +16,15 @@
        EdgeSecondLevel,
        FreeWithSpawn,
        Test,
+       Tractors,
+       ScarecrowShuffle,
+       HiveAndStack,
+       FenceWithHole,
+       Trap,
+       FenceLine,
+       HoleWithTractor,
+       ScareTrac,
+
 
        Empty,
 
