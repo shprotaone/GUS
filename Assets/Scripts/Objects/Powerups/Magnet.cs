@@ -14,13 +14,15 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
     [SerializeField] private Sprite _sprite;
     [SerializeField] private float _moveTime;
     [SerializeField] private float _magnetRadius;
+    [SerializeField] private float _duration;
 
     private GameObject _model;
     private ObjectPool _objectPool;
     private bool _canTake;
+    private float _workTime;
 
     public bool IsActive { get; private set; }
-    public float Duration => _collectable.time;
+    public float Duration => _duration;
     public float MoveTime => _moveTime;
     public Sprite Sprite => _sprite;
     public PoolObjectType Type => PoolObjectType.Magnet;
@@ -54,6 +56,7 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
 
     private IEnumerator Activate()
     {
+        Debug.Log("Magnet " + _duration);
         _model.SetActive(false);
 
         _collider.radius = _magnetRadius;
@@ -71,7 +74,7 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
 
     public void SetUp(float duration)
     {
-        _collectable.time = duration;
+        _duration = duration;
     }
 
     private void OnDrawGizmos()

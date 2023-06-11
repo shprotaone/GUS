@@ -1,11 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class Collectable : ScriptableObject
+namespace GUS.Objects.PowerUps
 {
-    public GameObject model;
-    public float time;
-
+    [CreateAssetMenu]
+    public class Collectable : ScriptableObject
+    {
+        public string nameCollectable;
+        public string descriptionCollectable;
+        public PowerUpEnum powerUpEnum;
+        public GameObject model;
+        public Sprite icon;
+        public int[] costs;
+        public int[] value;
+    }
 }
+

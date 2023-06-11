@@ -132,20 +132,22 @@ namespace GUS.Core
 
         private void Initialization()
         {
-            _gameStateMachine.Init(_serviceLocator);
             _storageService.Init(_serviceLocator);
+            _collectableFactory.Init(_collectablesStorage, _serviceLocator);
+
+            _gameStateMachine.Init(_serviceLocator);       
             _wallet.Init(_serviceLocator);
             _distance.Init(_serviceLocator);       
-            _deleteService.Init(_serviceLocator);           
-            _platformPool.InitPool(_platformStorage);
-            _collectablesPool.InitPool(_collectablesStorage);
+            _deleteService.Init(_serviceLocator);
+            _collectablesPool.InitPool(_collectablesStorage);           
+            _platformPool.InitPool(_platformStorage);            
             _worldController.Init(_startPoint, _serviceLocator);
             _player.Init(_serviceLocator,false);
             _progressiveSystem.Init(_serviceLocator);
             _uiController.Init(_serviceLocator);
             _clicker.Init(_serviceLocator);
             _playerState.Init(_serviceLocator);
-            _collectableFactory.Init(_serviceLocator);
+            
         }
 
         private void RegisterPools()

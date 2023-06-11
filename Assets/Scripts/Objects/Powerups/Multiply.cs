@@ -11,13 +11,15 @@ namespace GUS.Objects.PowerUps
         [SerializeField] private Collectable _collectable;
         [SerializeField] private ParticleSystem _particleSystem;
         [SerializeField] private Sprite _bonusSprite;
+        [SerializeField] private float _duration;
 
         private GameObject _model;
         private Wallet _wallet;
         private ObjectPool _objectPool;
 
         private bool _canTake;
-        public float Duration => _collectable.time;
+        private float _workTime;
+        public float Duration => _duration;
         public Sprite Sprite => _bonusSprite;
         public PoolObjectType Type => PoolObjectType.Multiply;
 
@@ -53,13 +55,12 @@ namespace GUS.Objects.PowerUps
 
         private IEnumerator Activate()
         {
-            Debug.Log("Activate");
+            Debug.Log("Multi " + _duration);
             _model.SetActive(false);
             _wallet.SetMultiply(true);
 
-            yield return new WaitForSeconds(_collectable.time);
+            yield return new WaitForSeconds(_duration);
 
-            Debug.Log("Deactivate");
             _canTake = true;
             _wallet.SetMultiply(false);
             _objectPool.DestroyObject(this.gameObject);
@@ -68,7 +69,7 @@ namespace GUS.Objects.PowerUps
 
         public void SetUp(float duration)
         {
-            _collectable.time = duration;
+            _duration = duration;
         }
     }
 }

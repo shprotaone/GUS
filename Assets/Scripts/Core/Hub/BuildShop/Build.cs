@@ -4,7 +4,7 @@ public class Build : MonoBehaviour
 {
     [SerializeField] private BuildContainer _container;
     [SerializeField] private GameObject[] _parts;
-    [SerializeField] private BuildSlot _view;
+    [SerializeField] private BuildSlotView _view;
 
     private BuildsSystem _buildSystem;
     private BuildData _buildData;

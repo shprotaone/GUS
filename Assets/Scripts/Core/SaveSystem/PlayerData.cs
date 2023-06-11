@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace GUS.Core.SaveSystem
+namespace GUS.Core.Data
 {
     [Serializable]
     public class PlayerData
@@ -15,6 +15,8 @@ namespace GUS.Core.SaveSystem
         public float commonDistance;
         public List<BuildData> buildDatas;
         public List<BonusData> bonusDatas;
+
+        //TODO: »нкапсул€ци€? 
 
         public PlayerData() { }
     }

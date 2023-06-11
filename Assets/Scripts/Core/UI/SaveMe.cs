@@ -76,8 +76,11 @@ namespace GUS.Core.UI
 
         public void DecreaseTime()
         {
-            _currentTime--;
-            _timerText.text = _currentTime.ToString();
+            if(_currentTime > 0)
+            {
+                _currentTime--;
+                _timerText.text = _currentTime.ToString();
+            }         
         }
     }
 }
