@@ -68,7 +68,7 @@ namespace GUS.TestSystems
             Platform platform = _currentPlatform.GetComponent<Platform>();
             if(platform.SpawnPoints.Count > 0)
             {
-                Vector3 pos = _bonusSpawner.GetPos(platform.SpawnPoints);
+                Vector3 pos = _bonusSpawner.GetPos(platform.SpawnPoints).position;
                 ObjectInfo objInfo = _bonusSpawner.GetTypeBonus();
 
                 if (objInfo.ObjectType != PoolObjectType.Empty)

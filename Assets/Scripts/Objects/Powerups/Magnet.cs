@@ -64,8 +64,9 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
               
         IsActive = true;
 
-        yield return new WaitForSeconds(Duration);
+        yield return new WaitForSeconds(_duration);
 
+        Debug.Log("Disabled");
         _collider.radius = stadartColliderRadius;
         _model.SetActive(true);
         _canTake = true;

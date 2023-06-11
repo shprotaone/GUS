@@ -38,6 +38,7 @@ namespace GUS.Player
         public IEnumerator MagnetEffect(float delay)
         {
             float timer = delay;
+            _magnet.gameObject.SetActive(true);
             _magnet.Play();
             while(timer > 0)
             {
@@ -46,12 +47,14 @@ namespace GUS.Player
             }
 
             _magnet.Stop();
+            _magnet.gameObject.SetActive(false);
             yield return null;
         }
 
         public IEnumerator MultiplyEffect(float delay)
         {
             float timer = delay;
+            _multiply.gameObject.SetActive(true);
             _multiply.Play();
             while (timer > 0)
             {
@@ -60,6 +63,7 @@ namespace GUS.Player
             }
 
             _multiply.Stop();
+            _multiply.gameObject.SetActive(false);
             yield return null;
         }
 
