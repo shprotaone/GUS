@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7760709586247813672}
   - component: {fileID: 6637267728883910029}
   - component: {fileID: 8933092843214008647}
+  - component: {fileID: 7771530410000867787}
+  - component: {fileID: 851547870795470371}
   m_Layer: 0
   m_Name: scarecrow
   m_TagString: Untagged
@@ -31,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6637267728883910029
 MeshFilter:
@@ -83,3 +85,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7771530410000867787
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6987410605354602642}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9359254, y: 5.0903754, z: 1.4171872}
+  m_Center: {x: -0.04445678, y: 0.59553814, z: 0}
+--- !u!114 &851547870795470371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6987410605354602642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7158c6ce022b3a4691f642ef1a44f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPoints: []
   _objectPoolType: 16
-  _beginPoint: {fileID: 7316825406168869937}
+  _beginPoint: {fileID: 1147470312229317993}
   _endPoint: {fileID: 8055423290997053977}
   _isSpawning: 1
 --- !u!1001 &776401444220804230
@@ -121,6 +121,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 516d3908ffed7564c8624dc0f5408222, type: 3}
+--- !u!4 &1147470312229317993 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 372381312345813487, guid: 516d3908ffed7564c8624dc0f5408222, type: 3}
+  m_PrefabInstance: {fileID: 776401444220804230}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5970443418181143096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6349251218990175934, guid: 516d3908ffed7564c8624dc0f5408222, type: 3}
@@ -700,11 +705,6 @@ PrefabInstance:
 --- !u!4 &4088548816138144608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6349251218990175934, guid: 516d3908ffed7564c8624dc0f5408222, type: 3}
-  m_PrefabInstance: {fileID: 6962674032087014878}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7316825406168869937 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 372381312345813487, guid: 516d3908ffed7564c8624dc0f5408222, type: 3}
   m_PrefabInstance: {fileID: 6962674032087014878}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7701272018910139711
