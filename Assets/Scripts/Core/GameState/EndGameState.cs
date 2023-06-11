@@ -34,7 +34,7 @@ namespace GUS.Core.GameState
             if (_gameStateController.SecondChance) _uiController.SaveMe(true);
             else _gameStateController.Result();
             
-            yield return null;
+            yield break;
         }
 
         public void Exit()

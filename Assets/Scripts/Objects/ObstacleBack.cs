@@ -16,7 +16,7 @@ public class ObstacleBack : MonoBehaviour
             {
                 run.ReturnObstaclePosition();
                 _isActive = false;
-                DOVirtual.DelayedCall(0.2f, () => _isActive = true);
+                DOVirtual.DelayedCall(0.5f, () => _isActive = true);
             }
         }
     }

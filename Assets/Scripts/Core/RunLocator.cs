@@ -10,6 +10,7 @@ using GUS.Core.UI;
 using GUS.LevelBuild;
 using GUS.Player;
 using GUS.Player.State;
+using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -43,6 +44,7 @@ namespace GUS.Core
         [SerializeField] private AudioService _audioService;
         [SerializeField] private JsonToFirebase _jsonToFirebase;
         [SerializeField] private RoutineExecuter _routineExecuter;
+        [SerializeField] private CollectableFactory _collectableFactory;
 
         private PlayerStateMachine _playerState;
         private GameStateMachine _gameStateMachine;
@@ -53,7 +55,6 @@ namespace GUS.Core
         private StorageService _storageService;
         private WorldController _worldController;
         private ClickerGame _clicker;
-
 
         private IStateChanger _stateChanger;
         private ICoinView _coinView;
@@ -99,7 +100,8 @@ namespace GUS.Core
         }
 
         private void Registration()
-        {                      
+        {              
+            _serviceLocator.Register(this);
             _serviceLocator.Register(_storageService);
             _serviceLocator.Register(_wallet);
             _serviceLocator.Register(_distance);
@@ -122,26 +124,30 @@ namespace GUS.Core
             _serviceLocator.Register(_bossPositions);
             _serviceLocator.Register(_playerState);
             _serviceLocator.Register(_gameStateMachine);
-
+           
             RegisterPools();
+            _serviceLocator.Register(_collectableFactory);
             RegisterInput();
         }
 
         private void Initialization()
         {
-            _gameStateMachine.Init(_serviceLocator);
             _storageService.Init(_serviceLocator);
+            _collectableFactory.Init(_collectablesStorage, _serviceLocator);
+
+            _gameStateMachine.Init(_serviceLocator);       
             _wallet.Init(_serviceLocator);
             _distance.Init(_serviceLocator);       
             _deleteService.Init(_serviceLocator);
-            _platformPool.InitPool(_platformStorage);
-            _collectablesPool.InitPool(_collectablesStorage);
+            _collectablesPool.InitPool(_collectablesStorage);           
+            _platformPool.InitPool(_platformStorage);            
             _worldController.Init(_startPoint, _serviceLocator);
             _player.Init(_serviceLocator,false);
             _progressiveSystem.Init(_serviceLocator);
             _uiController.Init(_serviceLocator);
             _clicker.Init(_serviceLocator);
             _playerState.Init(_serviceLocator);
+            
         }
 
         private void RegisterPools()
@@ -168,6 +174,18 @@ namespace GUS.Core
             }
           
             _serviceLocator.Register(_inputType);
+        }
+
+        public ObjectPool GetPool(PoolTypeEnum type)
+        {
+            if(type == PoolTypeEnum.Platform)
+            {
+                return _platformPool;
+            }
+            else
+            {
+                return _collectablesPool;
+            }
         }
     }
 }

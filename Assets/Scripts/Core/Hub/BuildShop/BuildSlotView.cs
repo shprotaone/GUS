@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildSlot : MonoBehaviour
+public class BuildSlotView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _cost;
     [SerializeField] private Button _buy;
