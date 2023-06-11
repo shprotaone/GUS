@@ -52,7 +52,7 @@ namespace GUS.Core.UI
             }
             _panel.gameObject.SetActive(false);
             _gameStateController.Result();
-
+            _isActive = true;
             yield break; 
         }
 
@@ -76,8 +76,11 @@ namespace GUS.Core.UI
 
         public void DecreaseTime()
         {
-            _currentTime--;
-            _timerText.text = _currentTime.ToString();
+            if(_currentTime > 0)
+            {
+                _currentTime--;
+                _timerText.text = _currentTime.ToString();
+            }         
         }
     }
 }

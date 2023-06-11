@@ -10,6 +10,7 @@ using GUS.Player;
 using GUS.Core.Data;
 using GUS.Core.UI;
 using GUS.Core.SaveSystem;
+using GUS.Core.Hub.BonusShop;
 
 namespace GUS.Core.Hub
 {
@@ -23,6 +24,7 @@ namespace GUS.Core.Hub
         [SerializeField] private LevelSettings _levelSettings;
         [SerializeField] private JsonToFirebase _jsonToFirebase;
         [SerializeField] private BuildsSystem _buildSystem;
+        [SerializeField] private ShopSystem _shopSystem;
 
         private Wallet _wallet;
         private HubStateController _hubController;
@@ -88,6 +90,7 @@ namespace GUS.Core.Hub
             _serviceLocator.Register(_stateChanger);
             _serviceLocator.Register(_playerState);
             _serviceLocator.Register(_gameStateMachine);
+            _serviceLocator.Register(_shopSystem);
         }
 
         private void Initialization()
@@ -102,6 +105,7 @@ namespace GUS.Core.Hub
             _playerState.Init(ServiceLocator);
             _hubController.Idle();
             _buildSystem.Init(ServiceLocator);
+            _shopSystem.Init(ServiceLocator);
         }
     }
 }

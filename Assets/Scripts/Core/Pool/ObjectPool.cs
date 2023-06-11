@@ -7,6 +7,7 @@ namespace GUS.Core.Pool
 {
     public class ObjectPool : MonoBehaviour
     {
+        [SerializeField] private PoolTypeEnum _poolType;
         private List<ObjectInfo> _objectsInfo;
         private Dictionary<PoolObjectType, Pool> pools;
 

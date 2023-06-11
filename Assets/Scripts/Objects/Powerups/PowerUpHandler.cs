@@ -1,6 +1,5 @@
 using GUS.Core.UI;
 using GUS.Player;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GUS.Objects.PowerUps
@@ -8,28 +7,31 @@ namespace GUS.Objects.PowerUps
     public class PowerUpHandler : MonoBehaviour
     {
         [SerializeField] private UIInGame _view;
-        [SerializeField] private Transform _powerUpParent;
-        [SerializeField] private PlayerActor _playerActor;
 
-        private ParticleSystem _particle;
-        public Transform PowerUpParent => _powerUpParent;
+        private ParticleController _particleSystem;
+        private float _delay;
+
         private void Start()
         {
-
+            _particleSystem = GetComponentInParent<PlayerActor>().Particles;;
         }
+        /// <summary>
+        /// Вызов эффекта у игрока
+        /// </summary>
+        /// <param name="powerUp"></param>
         public void Execute(IPowerUp powerUp)
         {
-            //index = _view.SetBonusImage(powerUp.Sprite);
-            //_particle = powerUp.Particle;
-            //_particle.transform.position = this.transform.position;
-            //_particle.Play();
-            powerUp.Execute(this);            
-        }
+            powerUp.Execute(this);
+            _delay = powerUp.Duration;
 
-        public void Disable()
-        {
-            //_particle.Stop();
-            //_view.DisableBonusImage();   
+            if (powerUp is Magnet)
+            {              
+                StartCoroutine(_particleSystem.MagnetEffect(_delay));
+            }
+            else if(powerUp is Multiply)
+            {
+                StartCoroutine(_particleSystem.MultiplyEffect(_delay));
+            }          
         }
     }
 }

@@ -6,7 +6,8 @@ public class TractorController : MonoBehaviour
     [SerializeField] private float _speed;
 
     private Vector3 _startPos;
-    private void Start()
+
+    private void OnEnable()
     {
         _startPos = transform.localPosition;
     }
@@ -17,6 +18,6 @@ public class TractorController : MonoBehaviour
 
     private void OnDisable()
     {
-        transform.localPosition= _startPos;
+        transform.localPosition = _startPos;
     }
 }

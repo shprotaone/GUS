@@ -46,7 +46,6 @@ namespace GUS.Core
             _storage = locator.Get<StorageService>();
             _uiSettings.Init(locator);
             _uiBuild.Init(locator);
-            _storage.Load();
             _coinText.text = _storage.Data.coins.ToString();
             _nameText.text = _storage.Data.playerName.ToString();
         }

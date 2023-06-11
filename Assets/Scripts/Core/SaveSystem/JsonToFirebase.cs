@@ -7,6 +7,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using Firebase.Auth;
+using GUS.Core.Data;
 
 namespace GUS.Core.SaveSystem
 {
@@ -50,7 +51,7 @@ namespace GUS.Core.SaveSystem
         public void Save(PlayerData data)
         {
             string result = JsonConvert.SerializeObject(data);
-            _databaseReference.Child("users").Child(data.playerName).SetRawJsonValueAsync(result);
+            //_databaseReference.Child("users").Child(data.playerName).SetRawJsonValueAsync(result);
         }
 
         public void Delete(PlayerData data)

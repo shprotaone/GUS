@@ -2,7 +2,6 @@
 using GUS.Core;
 using GUS.Core.Data;
 using GUS.Core.GameState;
-using GUS.Core.Hub;
 using GUS.Core.InputSys;
 using GUS.Core.Locator;
 using GUS.Core.Weapon;
@@ -35,7 +34,6 @@ namespace GUS.Player
         private IWeapon _weapon;
         private IInputType _inputType;
         private IMovement _movement;
-
 
         private bool _isDamage;
 
