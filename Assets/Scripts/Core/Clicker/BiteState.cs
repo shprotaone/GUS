@@ -57,7 +57,7 @@ namespace GUS.Core.Clicker
             _movement.OnClick += BiteSound;
             _movement.OnClick += _game.GetDamage;
             _movement.OnClick += () => _cameraController.ShackeCameraHandle(5, 0.1f);
-
+            _uiClicker.FocusActivate();
              _actor.ChangeModelPos(0.6f, 0.2f);
             _game.Enemy.SlowMo(true);
 
@@ -75,6 +75,7 @@ namespace GUS.Core.Clicker
             _movement.CanAttack(false);
             _actor.ChangeModelPos(-0.3f, 0.2f);
             _game.Enemy.SlowMo(false);
+            _uiClicker.FocusDeactivate();
             _clickerStateMachine.StopRoutine();
         }
 

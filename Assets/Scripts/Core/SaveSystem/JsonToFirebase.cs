@@ -21,7 +21,7 @@ namespace GUS.Core.SaveSystem
         private PlayerData _data;
         public List<PlayerData> LoadedData => _loadData;
 
-        private void Start()
+        private void Awake()
         {
             _databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
             _firebaseAuth = FirebaseAuth.DefaultInstance;
@@ -51,7 +51,7 @@ namespace GUS.Core.SaveSystem
         public void Save(PlayerData data)
         {
             string result = JsonConvert.SerializeObject(data);
-            //_databaseReference.Child("users").Child(data.playerName).SetRawJsonValueAsync(result);
+            _databaseReference.Child("users").Child(data.playerName).SetRawJsonValueAsync(result);
         }
 
         public void Delete(PlayerData data)

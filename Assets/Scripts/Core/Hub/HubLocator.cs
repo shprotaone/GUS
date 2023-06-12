@@ -113,7 +113,7 @@ namespace GUS.Core.Hub
 
         private void OnDisable()
         {
-            
+            _audioService.StopMusic();
         }
     }
 }

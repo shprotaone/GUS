@@ -10,6 +10,7 @@ public class UIClickerGame : MonoBehaviour
     [SerializeField] private GameObject _tutorialPanel;
     [SerializeField] private GameObject _clickerPanel;
     [SerializeField] private RectTransform _corn;
+    [SerializeField] private Image _focus;
     [SerializeField] private CoinAnimationHandler _coinAnimationHandler;
     [SerializeField] private Slider _slider;
     [SerializeField] private float _scaler;
@@ -44,6 +45,17 @@ public class UIClickerGame : MonoBehaviour
         //_slider.gameObject.SetActive(flag);
     }
 
+    public void FocusActivate()
+    {
+        _focus.gameObject.SetActive(true);
+        _focus.DOFade(1, 3);
+    }
+
+    public void FocusDeactivate()
+    {
+        _focus.gameObject.SetActive(false);
+        _focus.DOFade(0, 1);
+    }
 
     private void UpscaleCorn()
     {
@@ -53,7 +65,7 @@ public class UIClickerGame : MonoBehaviour
     public void EndClicker()
     {
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(_corn.DOAnchorPos(new Vector3(0, -500, 0), 1));
+        sequence.Append(_corn.DOAnchorPos(Vector3.zero, 1));
         sequence.Append(_corn.DOScale(Vector3.one * 4,1)).SetEase(Ease.OutSine);
         sequence.Append(DOVirtual.DelayedCall(0, () =>_corn.gameObject.SetActive(false)));
         sequence.Append(DOVirtual.DelayedCall(0, () => _coinAnimationHandler.Animate()));

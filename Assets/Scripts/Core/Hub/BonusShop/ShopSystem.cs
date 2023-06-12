@@ -1,4 +1,5 @@
-﻿using GUS.Core.Data;
+﻿using DG.Tweening;
+using GUS.Core.Data;
 using GUS.Core.Locator;
 using GUS.Core.SaveSystem;
 using GUS.Objects.PowerUps;
@@ -62,6 +63,8 @@ namespace GUS.Core.Hub.BonusShop
                 }
                 _storageService.Data.bonusDatas = _bonusData;
                 _storageService.Save();
+
+                DOVirtual.DelayedCall(1,() => UpdateSlots());
             }
         }
 
