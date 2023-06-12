@@ -14,6 +14,7 @@ namespace GUS.Core.Clicker
         private PlayerActor _actor;
         private CameraRunController _cameraController;
         private WorldController _worldController;
+        private AudioService _audioService;
                
         private ClickerGame _game;
         private ClickerMovement _movement;
@@ -27,6 +28,7 @@ namespace GUS.Core.Clicker
             _clickerStateMachine = stateMachine;
             _worldController = serviceLocator.Get<WorldController>();
             _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
+            _audioService = serviceLocator.Get<AudioService>();
             _uiClicker = serviceLocator.Get<UIController>().ClickerGame;
         }
 
@@ -34,10 +36,11 @@ namespace GUS.Core.Clicker
         {
             Debug.Log("Кусательный");
             _actor = _serviceLocator.Get<PlayerActor>();
+            
             if (_game == null) _game = _serviceLocator.Get<ClickerGame>();
             _clickerStateMachine.CallRoutine();
-            _game.Enemy.MoveToDamage(false,_game.Settings.prepareTime);
 
+            _game.Enemy.MoveToDamage(false,_game.Settings.prepareTime);
         }
 
         public IEnumerator Execute()
@@ -48,8 +51,10 @@ namespace GUS.Core.Clicker
             _cameraController.BiteCamera();
             yield return new WaitForSeconds(_game.Settings.prepareTime);
 
+            _audioService.PlaySFX(_audioService.Data.slowMo);
             _uiClicker.TutorialPanel(true);
             _movement.CanAttack(true);
+            _movement.OnClick += BiteSound;
             _movement.OnClick += _game.GetDamage;
             _movement.OnClick += () => _cameraController.ShackeCameraHandle(5, 0.1f);
 
@@ -64,6 +69,7 @@ namespace GUS.Core.Clicker
         {
             Debug.Log("Выход из Кусательного");
             //_actor.AnimatorController.Pause(false);
+            _movement.OnClick -= BiteSound;
             _movement.OnClick -= _game.GetDamage;
             _movement.OnClick -= () => _cameraController.ShackeCameraHandle(5, 0.1f);
             _movement.CanAttack(false);
@@ -80,6 +86,11 @@ namespace GUS.Core.Clicker
         public void Update()
         {
             _worldController.Move();
+        }
+
+        private void BiteSound()
+        {
+            _audioService.PlaySFX(_audioService.Data.bite);
         }
     }
 }

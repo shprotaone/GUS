@@ -110,6 +110,11 @@ namespace GUS.Player
             _audioService.PlaySFX(_audioService.Data.cornPickUp);
         }
 
+        public void CollectBonus()
+        {
+            _audioService.PlaySFX(_audioService.Data.collectBonus);
+        }
+
         public void CameraHandler(RunMovement movement)
         {
             _cameraController.CameraCalculate(movement);

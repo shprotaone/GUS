@@ -10,7 +10,7 @@ namespace GUS.Player.Movement
     {
         public event Action OnClick;
         private PlayerStateMachine _playerStateMachine;
-        private AnimatorController _animatorController;
+        private AnimatorController _animatorController; //анимации и партиклы вынести отсюда? 
         private ParticleController _particleController;
         private SmartphoneInput _inputType;
         private EnumBind _action;
