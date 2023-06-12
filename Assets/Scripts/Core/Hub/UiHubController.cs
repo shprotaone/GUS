@@ -4,6 +4,7 @@ using GUS.Core.Hub;
 using GUS.Core.Locator;
 using GUS.Core.SaveSystem;
 using GUS.Core.UI;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ namespace GUS.Core
         [SerializeField] private Button _buildMode;
         [SerializeField] private Button _startButton;
 
+        [SerializeField] private GameObject _mainPanel;
         [SerializeField] private GameObject _settingsPanel;
         [SerializeField] private GameObject _shopPanel;
 
@@ -32,7 +34,7 @@ namespace GUS.Core
         {
             _settings.onClick.AddListener(Settings);
             _shop.onClick.AddListener(ShopPanel);
-            _buildMode.onClick.AddListener(Build);
+            _buildMode.onClick.AddListener(BuildShop);
             _startButton.onClick.AddListener(StartHandle);
 
         }
@@ -50,17 +52,26 @@ namespace GUS.Core
             _nameText.text = _storage.Data.playerName.ToString();
         }
 
-        public void Build()
+        public void BuildShop()
         {
             _uiBuild.Activate(true);
+            MainPanel(false);
         }
         public void StartHandle() => _controller.SceneLoadToRun();
         public void Settings() => _settingsPanel.SetActive(true);
-        public void ShopPanel() => _shopPanel.SetActive(true);
+        public void ShopPanel() 
+        {
+            _shopPanel.SetActive(true);           
+        } 
 
         public void RefreshCoinsCount(int count)
         {
             _coinText.text = count.ToString();
+        }
+
+        public void MainPanel(bool flag)
+        {
+            _mainPanel.SetActive(flag);
         }
     }
 }

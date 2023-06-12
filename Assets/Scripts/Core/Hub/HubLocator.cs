@@ -56,6 +56,8 @@ namespace GUS.Core.Hub
             Create();
             Registartion();
             Initialization();
+
+            _audioService.PlayMusic(_audioService.Data.mainMenu);
         }
 
         private void Create()
@@ -91,13 +93,14 @@ namespace GUS.Core.Hub
             _serviceLocator.Register(_playerState);
             _serviceLocator.Register(_gameStateMachine);
             _serviceLocator.Register(_shopSystem);
+            _serviceLocator.Register(_buildSystem);
         }
 
         private void Initialization()
         {
             _gameStateMachine.InitHub(ServiceLocator);
             _storageService.Init(ServiceLocator);
-            _wallet.Init(ServiceLocator);
+            _wallet.Init(ServiceLocator);           
             _uiHubController.Init(ServiceLocator);          
             _hubController.Init(ServiceLocator);
             _player.Init(_serviceLocator,true);
@@ -106,6 +109,11 @@ namespace GUS.Core.Hub
             _hubController.Idle();
             _buildSystem.Init(ServiceLocator);
             _shopSystem.Init(ServiceLocator);
+        }
+
+        private void OnDisable()
+        {
+            
         }
     }
 }

@@ -7,10 +7,13 @@ using UnityEngine;
 
 public class BuildsSystem : MonoBehaviour
 {
+    public event Action OnBuyed;
+
     [SerializeField] private Build[] _builds;
 
     private Wallet _wallet;
     private StorageService _storageService;
+    private AudioService _audioService;
 
     private List<BuildData> _buildsData;
 
@@ -18,6 +21,7 @@ public class BuildsSystem : MonoBehaviour
     {
         _wallet = serviceLocator.Get<Wallet>();
         _storageService= serviceLocator.Get<StorageService>();
+        _audioService= serviceLocator.Get<AudioService>();
 
         _buildsData = _storageService.Data.buildDatas;
         LoadListBuild();
@@ -56,6 +60,8 @@ public class BuildsSystem : MonoBehaviour
                 _builds[i].RefreshData();
             }
         }
+        OnBuyed?.Invoke();
+        _audioService.PlaySFX(_audioService.Data.buySound);
         
         _storageService.Save();
     }

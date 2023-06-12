@@ -22,7 +22,7 @@ namespace GUS.Core.Hub
 
         public void Idle ()
         {
-            _gameStateMachine.InitGameLoop(_gameStateMachine.initMapState);
+            _gameStateMachine.InitGameLoop(_gameStateMachine.initMapState);            
             _playerActor.AnimatorController.RunActivate(false);
         }
 

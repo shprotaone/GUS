@@ -5,6 +5,7 @@ namespace GUS.Core.GameState
 {
     public class InitMapState : IState
     {
+        private UiHubController _uiController;
         private AudioService _audioService;
         private CameraHubController _cameraController;
         private SceneHandler _sceneHandler;
@@ -16,13 +17,15 @@ namespace GUS.Core.GameState
             _cameraController = serviceLocator.Get<ICamera>() as CameraHubController;
             _sceneHandler = serviceLocator.Get<SceneHandler>();
             _audioService = serviceLocator.Get<AudioService>();
+            _uiController= serviceLocator.Get<UiHubController>();
             StateMachine = stateMachine;
         }
 
         public void Enter()
         {
             _cameraController.IdleCamera();
-            _audioService.PlayMusic(_audioService.Data.mainMenu);
+            _uiController.MainPanel(true);
+            //_audioService.PlayMusic(_audioService.Data.mainMenu);
         }
 
         public IEnumerator Execute()
@@ -32,7 +35,7 @@ namespace GUS.Core.GameState
 
         public void Exit()
         {
-            _audioService.StopMusic();
+            //_audioService.StopMusic();
             _sceneHandler.FadeOutHandle();
         }
 

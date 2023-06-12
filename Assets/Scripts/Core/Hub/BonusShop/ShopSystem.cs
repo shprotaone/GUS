@@ -18,6 +18,7 @@ namespace GUS.Core.Hub.BonusShop
         private Wallet _wallet;
         private StorageService _storageService;
         private List<BonusData> _bonusData;
+        private AudioService _audioService;
         public Wallet Wallet => _wallet;
 
         public void Init(IServiceLocator serviceLocator)
@@ -25,6 +26,7 @@ namespace GUS.Core.Hub.BonusShop
             _wallet = serviceLocator.Get<Wallet>();
             _storageService = serviceLocator.Get<StorageService>();
             _coins.text = _wallet.Coins.ToString();
+            _audioService= serviceLocator.Get<AudioService>();
 
             LoadList();
             InitSlots();         
@@ -78,6 +80,7 @@ namespace GUS.Core.Hub.BonusShop
                 }
             }
 
+            _audioService.PlaySFX(_audioService.Data.buySound);
             _coins.text = _wallet.Coins.ToString();
             _storageService.Save();
             UpdateSlots();
