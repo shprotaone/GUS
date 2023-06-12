@@ -9,6 +9,7 @@ namespace GUS.Core.GameState
     {
         private CameraHubController _cameraController;
         private SceneHandler _sceneHandler;
+        private UiHubController _uiHubController;
 
         public IStateMachine StateMachine { get; private set; }
         public ExploreState(IStateMachine stateMachine, IServiceLocator serviceLocator)
@@ -17,6 +18,7 @@ namespace GUS.Core.GameState
             {
                 _cameraController = cam;
             }
+            _uiHubController= serviceLocator.Get<UiHubController>();
             _sceneHandler = serviceLocator.Get<SceneHandler>();
             StateMachine = stateMachine;
         }
@@ -25,6 +27,7 @@ namespace GUS.Core.GameState
         {
             _cameraController.ExploreCamera();
             _sceneHandler.FadeInHandle();
+            _uiHubController.MainPanel(true);
         }
 
         public IEnumerator Execute()

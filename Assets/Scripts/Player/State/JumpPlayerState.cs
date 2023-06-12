@@ -31,6 +31,7 @@ namespace GUS.Player.State
             _movement = (RunMovement)_player.MovementType;
             JumpMeth();
             _animatorController.JumpActivate();
+            _animatorController.RunActivate(true);
         }
 
         public IEnumerator Execute()

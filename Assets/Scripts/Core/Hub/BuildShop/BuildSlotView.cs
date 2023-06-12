@@ -18,7 +18,7 @@ public class BuildSlotView : MonoBehaviour
         _buildsSystem = buildSystem;
         BuildName = buildData.nameEnum;
         BuildState = buildData.state;
-        RefreshProgress(BuildState);
+        RefreshProgress(BuildState,(int)buildData.state);
 
         _buy.onClick.AddListener(Buy);
     }
@@ -28,7 +28,7 @@ public class BuildSlotView : MonoBehaviour
         _buildsSystem.Buy(BuildName, _currentCost);
     }
 
-    public void RefreshProgress(BuildStateEnum buildState)
+    public void RefreshProgress(BuildStateEnum buildState,int step)
     {
         if (buildState == BuildStateEnum.None) return;
 
@@ -37,7 +37,7 @@ public class BuildSlotView : MonoBehaviour
             _progressImages[i].color = Color.blue;
         }
 
-        if (buildState == BuildStateEnum.FinishState) _buy.interactable = false;
+        if ((int)buildState >= step) _buy.interactable = false;
     }
 
     public void SetCost(int cost)

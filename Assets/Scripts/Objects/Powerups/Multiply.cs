@@ -9,7 +9,6 @@ namespace GUS.Objects.PowerUps
     public class Multiply : MonoBehaviour, IPowerUp,IPoolObject
     {
         [SerializeField] private Collectable _collectable;
-        [SerializeField] private ParticleSystem _particleSystem;
         [SerializeField] private Sprite _bonusSprite;
         [SerializeField] private float _duration;
 
@@ -42,6 +41,7 @@ namespace GUS.Objects.PowerUps
             {
                 _wallet = actor.Wallet;
                 transform.SetParent(actor.transform);
+                actor.CollectBonus();
                 actor.PowerUpHandler.Execute(this);
                 _canTake = false;
             }

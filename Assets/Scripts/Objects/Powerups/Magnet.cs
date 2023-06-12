@@ -43,6 +43,7 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
         if (other.TryGetComponent(out PlayerActor actor) && _canTake)
         {
             _canTake = false;
+            actor.CollectBonus();
             actor.PowerUpHandler.Execute(this);
             transform.SetParent(actor.transform);
         }

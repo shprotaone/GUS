@@ -31,6 +31,7 @@
        Coin = 40,
        Magnet,
        Multiply,
+       CoinCob,
 
        CoinUI = 100
     }

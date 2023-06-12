@@ -162,7 +162,7 @@ namespace GUS.Player.Movement
 
             if (IsGrounded && _verticalVelocity < 0.1f)
             {
-                _verticalVelocity = -1;
+                _verticalVelocity = -1;                
                 _gravityScale = _playerState.LevelSettings.gravityScale;
             }
             else
