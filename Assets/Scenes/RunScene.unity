@@ -1081,11 +1081,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parts:
-  - stageCount: 45
+  - stageCount: 15
     settings: {fileID: 11400000, guid: 7dea793b4d7b56c4089df5e7510ff319, type: 2}
-  - stageCount: 90
+  - stageCount: 25
     settings: {fileID: 11400000, guid: 332f93c6475285e4ca5142c73978fe04, type: 2}
-  - stageCount: 135
+  - stageCount: 40
+    settings: {fileID: 11400000, guid: e88e62754a1d0124b906e09d98dc1130, type: 2}
+  - stageCount: 75
+    settings: {fileID: 11400000, guid: 98a5f69cdacba7e479d50771a18346f6, type: 2}
+  - stageCount: 100
     settings: {fileID: 11400000, guid: 31c95b67da25e924093dbe58a23196b4, type: 2}
 --- !u!1 &236431186
 GameObject:
@@ -7305,7 +7309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _specials:
-  - platformIndex: 100
+  - platformIndex: 60
     type: 8
 --- !u!1 &1853105642
 GameObject:

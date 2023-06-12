@@ -215,7 +215,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf3dd0277faa59419531c2f9af5f113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPoints: []
+  _spawnPoints:
+  - {fileID: 4253124461816569556}
+  - {fileID: 577654710666815744}
+  - {fileID: 6695098130913386783}
   _objectPoolType: 14
   _beginPoint: {fileID: 2651339246020052642}
   _endPoint: {fileID: 19698228858317521}
@@ -2290,7 +2293,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 859985303367997343, guid: ee6c78c1b2e6e93489472b06186a91d7, type: 3}
       propertyPath: _time
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 859985303367997343, guid: ee6c78c1b2e6e93489472b06186a91d7, type: 3}
       propertyPath: _speed
@@ -2497,6 +2500,11 @@ PrefabInstance:
 --- !u!4 &2651339246020052642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8613721536830725529, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
+  m_PrefabInstance: {fileID: 5999187120306953019}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4253124461816569556 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7514052359822460399, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
   m_PrefabInstance: {fileID: 5999187120306953019}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7472012827806551702 stripped
