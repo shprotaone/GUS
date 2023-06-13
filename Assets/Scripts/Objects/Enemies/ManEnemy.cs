@@ -44,8 +44,8 @@ namespace GUS.Objects.Enemies
         {
             if(flag)
             {
-                _manAnimator.speed = _animSpeed / 2;
-                _bagAnimator.speed = _animSpeed / 2;
+                _manAnimator.speed = _animSpeed / _speedMovement;
+                _bagAnimator.speed = _animSpeed / _speedMovement;
             }
             else
             {

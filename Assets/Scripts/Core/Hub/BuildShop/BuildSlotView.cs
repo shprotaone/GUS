@@ -18,7 +18,7 @@ public class BuildSlotView : MonoBehaviour
         _buildsSystem = buildSystem;
         BuildName = buildData.nameEnum;
         BuildState = buildData.state;
-        RefreshProgress(BuildState,(int)buildData.state);
+        //RefreshProgress(BuildState,(int)buildData.state);
 
         _buy.onClick.AddListener(Buy);
     }
