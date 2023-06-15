@@ -1,4 +1,5 @@
-﻿using GUS.Core.Pool;
+﻿using Cysharp.Threading.Tasks;
+using GUS.Core.Pool;
 using GUS.Player;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace GUS.Objects
         [SerializeField] private Transform _beginPoint;
         [SerializeField] private Transform _endPoint;
         [SerializeField] private bool _isSpawning = true;
+        [SerializeField] private int _countBonuses;
 
         private Transform _parent;
         private GameObject _currentCollectable;
@@ -20,24 +22,47 @@ namespace GUS.Objects
         public Transform EndPoint => _endPoint;
         public float PlatformLenght => Vector3.Distance(_beginPoint.position, _endPoint.position) / 2;
 
-        public void SetBonus(BonusSpawner bonusSpawner)
-        {           
-            if (SpawnPoints.Count > 0 && _isSpawning)
+        public async void SetBonus(BonusSpawner bonusSpawner)
+        {
+            for (int i = 0; i < _countBonuses; i++)
             {
-                _parent = bonusSpawner.GetPos(SpawnPoints);
-                ObjectInfo obj = bonusSpawner.GetTypeBonus();
-                _currentCollectable = bonusSpawner.GetObject(obj);              
+                if (SpawnPoints.Count > 0 && _isSpawning)
+                {
+                    await FindPosition(bonusSpawner);
+                    if(_parent!= null) SpawnBonus(bonusSpawner);
+                }
+            }            
+        }
 
-                if (obj.ObjectType != PoolObjectType.Empty)
-                {
-                    _currentCollectable.transform.SetParent(_parent);
-                    _currentCollectable.transform.position = _parent.position;
-                }
-                else
-                {
-                    Debug.Log("Пустой объект");
-                }
+        private void SpawnBonus(BonusSpawner bonusSpawner)
+        {
+            ObjectInfo obj = bonusSpawner.GetTypeBonus();
+            _currentCollectable = bonusSpawner.GetObject(obj);
+
+            if (obj.ObjectType != PoolObjectType.Empty)
+            {
+                _currentCollectable.transform.SetParent(_parent);
+                _currentCollectable.transform.position = _parent.position;
             }
+            else
+            {
+                Debug.Log("Пустой объект");
+            }
+        }
+        private async UniTask FindPosition(BonusSpawner bonusSpawner)
+        {
+            //int counter = 0;
+
+
+            //while (_parent == null)
+            //{
+            //    _parent = bonusSpawner.GetPos(SpawnPoints);      
+            //    counter++;
+            //    if (counter > 10) break;
+            //}
+            //Debug.Log("Сделано попыток" + counter);
+            _parent = bonusSpawner.GetPos(SpawnPoints);
+            await UniTask.Yield();
         }
 
         public void DisableBonus(ObjectPool pool)
@@ -49,6 +74,11 @@ namespace GUS.Objects
                 pool.DestroyObject(_currentCollectable);
                 _currentCollectable = null;
             }
+        }
+
+        private void OnDestroy()
+        {
+            Debug.Log("Destroy? " + gameObject.name);
         }
     }
 }
