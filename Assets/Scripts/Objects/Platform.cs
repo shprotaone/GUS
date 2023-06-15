@@ -51,16 +51,7 @@ namespace GUS.Objects
         }
         private async UniTask FindPosition(BonusSpawner bonusSpawner)
         {
-            //int counter = 0;
 
-
-            //while (_parent == null)
-            //{
-            //    _parent = bonusSpawner.GetPos(SpawnPoints);      
-            //    counter++;
-            //    if (counter > 10) break;
-            //}
-            //Debug.Log("Сделано попыток" + counter);
             _parent = bonusSpawner.GetPos(SpawnPoints);
             await UniTask.Yield();
         }
