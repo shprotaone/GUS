@@ -43,12 +43,12 @@ namespace GUS.Core.SaveSystem
 
         public void SetSlots(List<PlayerData> data)
         {
-            for (int i = 0; i < data.Count; i++)
+            for (int i = 0; i < _slots.Count; i++)
             {
                 if (data[i] == null) return;
 
                 _slots[i].gameObject.SetActive(true);
-                _slots[i].Set(data[i].playerName, data[i].commonDistance.ToString());
+                _slots[i].Set(data[i].playerName, data[i].commonDistance.ToString());           
             }
         }
     }

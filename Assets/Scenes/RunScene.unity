@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0
   m_LinearFogStart: 27
   m_LinearFogEnd: 50
-  m_AmbientSkyColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
+  m_AmbientSkyColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
   m_AmbientEquatorColor: {r: 0.29613832, g: 0.822786, b: 0.9911022, a: 1}
   m_AmbientGroundColor: {r: 0.2917707, g: 0.76052475, b: 0.75294244, a: 1}
   m_AmbientIntensity: 0
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.213
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1393434694913847706}
-  m_IndirectSpecularColor: {r: 0.049145088, g: 0.12810595, b: 0.21042879, a: 0.213}
+  m_IndirectSpecularColor: {r: 0.049290635, g: 0.12925465, b: 0.21044023, a: 0.213}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8559,7 +8559,7 @@ MonoBehaviour:
   _player: {fileID: 464896665}
   _platformPool: {fileID: 193489787}
   _collectablesPool: {fileID: 658742040}
-  _platformStorage: {fileID: 11400000, guid: 9d25a40de1325dd4b8d2f5777ba352a4, type: 2}
+  _platformStorage: {fileID: 11400000, guid: c346c2e11c9397145810252ae240cf46, type: 2}
   _collectablesStorage: {fileID: 11400000, guid: 5d4ca77e28da6324b9a7cafda1e83791, type: 2}
   _levelSettings: {fileID: 11400000, guid: e0d5f89877db220478bf957613b9fffa, type: 2}
   _specialPlatformBuilder: {fileID: 1810050563}
@@ -11266,7 +11266,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1520389531}
-  - component: {fileID: 1520389532}
   m_Layer: 17
   m_Name: PostProcessing
   m_TagString: Untagged
@@ -11289,23 +11288,6 @@ Transform:
   m_Father: {fileID: 1744816749}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1520389532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520389530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: e187632982ed1174f8c1203a0c0699ce, type: 2}
 --- !u!1 &1534202806
 GameObject:
   m_ObjectHideFlags: 0
@@ -12382,7 +12364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _specials:
-  - platformIndex: 60
+  - platformIndex: 1
     type: 8
 --- !u!1 &1853105642
 GameObject:
@@ -14047,14 +14029,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393434694913847708}
-  m_LocalRotation: {x: 0.4536725, y: -0, z: -0, w: 0.8911685}
+  m_LocalRotation: {x: -0.9515064, y: -0, z: -0, w: -0.307629}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1744816749}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 53.959, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -215.83301, y: 0, z: 0}
 --- !u!1 &1393434694913847708
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,14 +15,13 @@ public class SceneLoader : MonoBehaviour
     private AsyncOperationHandle<SceneInstance> _handle;
     private void Start()
     {
-        _handle = Addressables.LoadSceneAsync(_hubSceneRef, LoadSceneMode.Additive);
-        Application.targetFrameRate = -1;
+        _handle = Addressables.LoadSceneAsync(_hubSceneRef,LoadSceneMode.Additive,true);
+        Application.targetFrameRate = 75;
     }
 
     public void ChangeAdditiveScene(AssetReference reference)
     {
-        StartCoroutine(DelayRoutine(reference));
-        
+        StartCoroutine(DelayRoutine(reference));       
     }
 
     private IEnumerator DelayRoutine(AssetReference reference)
@@ -41,7 +40,8 @@ public class SceneLoader : MonoBehaviour
     {       
         if (obj.Status == AsyncOperationStatus.Succeeded)
         {            
-            Debug.Log(obj.Result.Scene.name);                        
+            Debug.Log(obj.Result.Scene.name);    
+            
         }
         else
         {
@@ -50,7 +50,8 @@ public class SceneLoader : MonoBehaviour
 
         if(obj.IsDone) { 
             
-            _fader.FadeIn(); 
+            _fader.FadeIn();
+            SceneManager.SetActiveScene(obj.Result.Scene);
         }
         yield return null;   //плохое решение
     }
