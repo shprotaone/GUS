@@ -8,9 +8,10 @@ namespace GUS.Player.State
     public class ExplorePlayerState : IState
     {
         private PlayerActor _playerActor;
-        private PlayerStateMachine _playerState;
-        private float _steerSpeed;
+        private PlayerStateMachine _playerState;      
         private ExploreMovement _movement;
+
+        private float _steerSpeed;
         public IStateMachine StateMachine => _playerState;
         public ExplorePlayerState(float steerSpeed, PlayerActor playerActor,PlayerStateMachine playerStateMachine)
         {          

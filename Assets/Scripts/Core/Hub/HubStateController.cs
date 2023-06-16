@@ -1,7 +1,9 @@
-﻿using GUS.Core.GameState;
+﻿using Cysharp.Threading.Tasks;
+using GUS.Core.GameState;
 using GUS.Core.Locator;
 using GUS.Player;
 using GUS.Player.State;
+using UnityEngine;
 
 namespace GUS.Core.Hub
 {
@@ -11,6 +13,7 @@ namespace GUS.Core.Hub
         private GameStateMachine _gameStateMachine;
         private SceneHandler _sceneHandler;
         private PlayerActor _playerActor;
+        private Vector3 _startPos;
 
         public void Init(IServiceLocator serviceLocator)
         {
@@ -22,7 +25,7 @@ namespace GUS.Core.Hub
 
         public void Idle ()
         {
-            _gameStateMachine.InitGameLoop(_gameStateMachine.initMapState);            
+            _gameStateMachine.InitGameLoop(_gameStateMachine.idleHubState);               
             _playerActor.AnimatorController.RunActivate(false);
         }
 
@@ -30,6 +33,18 @@ namespace GUS.Core.Hub
         {
             _gameStateMachine.TransitionTo(_gameStateMachine.explore);
             _playerStateMachine.InitGameLoop(_playerStateMachine.exploreState);
+        }
+
+        public async UniTask ResetPosition()
+        {
+            _playerActor.gameObject.transform.position = _startPos;
+            _playerActor.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+            await UniTask.Yield();
+        }
+        
+        public void SetStartPosition(Vector3 startPos)
+        {
+            _startPos = startPos;
         }
 
         public void SceneLoadToRun()

@@ -26,7 +26,6 @@ public class Build : MonoBehaviour
         UpdateLayers();
         _view.RefreshProgress(_buildData.state,StepCount);
         _view.SetCost(_container.costs[(int)_buildData.state]);
-
     }
 
     private void UpdateLayers()
@@ -37,7 +36,6 @@ public class Build : MonoBehaviour
         {           
             _parts[i].SetActive(true);
             if(i > 0) _parts[i - 1].SetActive(false);
-            Debug.Log(i);
         }
     }
 }

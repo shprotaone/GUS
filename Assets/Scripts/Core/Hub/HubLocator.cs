@@ -11,18 +11,25 @@ using GUS.Core.Data;
 using GUS.Core.UI;
 using GUS.Core.SaveSystem;
 using GUS.Core.Hub.BonusShop;
+using Sirenix.OdinInspector;
 
 namespace GUS.Core.Hub
 {
     public class HubLocator : MonoBehaviour
     {
+        [Title("Стартовые настройки игрока")]
+        [SerializeField] private Transform _startPos;
         [SerializeField] private PlayerActor _player;
+        [SerializeField] private LevelSettings _levelSettings;
+
+        [Title("Сервисы")]
         [SerializeField] private AudioService _audioService;
         [SerializeField] private SceneHandler _sceneHandler;
         [SerializeField] private FloatingJoystick _joystick;
-        [SerializeField] private UiHubController _uiHubController;
-        [SerializeField] private LevelSettings _levelSettings;
+        [SerializeField] private UiHubController _uiHubController;       
         [SerializeField] private JsonToFirebase _jsonToFirebase;
+
+        [Title("Магазины")]
         [SerializeField] private BuildsSystem _buildSystem;
         [SerializeField] private ShopSystem _shopSystem;
 
@@ -32,7 +39,6 @@ namespace GUS.Core.Hub
         private DeleteService _deleteService;
         private PlayerStateMachine _playerState;
         private GameStateMachine _gameStateMachine;
-
 
         private IStateChanger _stateChanger;
         private ICamera _cameraController;
@@ -47,7 +53,6 @@ namespace GUS.Core.Hub
         {
             var cam = FindObjectsOfType<MonoBehaviour>().OfType<ICamera>();
             _cameraController = cam.First();
-            _coinView = _uiHubController;
             _serviceLocator = new ServiceLocator();
         }
 
@@ -97,12 +102,15 @@ namespace GUS.Core.Hub
         }
 
         private void Initialization()
-        {
+        {           
             _gameStateMachine.InitHub(ServiceLocator);
             _storageService.Init(ServiceLocator);
             _wallet.Init(ServiceLocator);           
-            _uiHubController.Init(ServiceLocator);          
+            _uiHubController.Init(ServiceLocator);
+
+            _hubController.SetStartPosition(_startPos.position);
             _hubController.Init(ServiceLocator);
+
             _player.Init(_serviceLocator,true);
             _deleteService.Init(ServiceLocator);
             _playerState.Init(ServiceLocator);

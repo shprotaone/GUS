@@ -7,14 +7,11 @@ namespace GUS.Player.Movement
 {
     public class ExploreMovement : IMovement
     {
-        private PlayerStateMachine _playerState;
         private PlayerActor _playActor;
         private FloatingJoystick _inputType;
-
         private Camera _camera;
-        private Vector3 _direction;
-        private EnumBind _movementAction;
         private EnumBind _action;
+
         private float _speedMovement;
         private float turnSmoothTime = 0.1f;
         private float turnSmoothVelocity;
@@ -24,10 +21,8 @@ namespace GUS.Player.Movement
         public void Init(PlayerActor player, PlayerStateMachine playerState, float speedMovement)
         {
             _playActor = player;
-            _inputType = _playActor.ServiceLocator.Get<IInputType>() as FloatingJoystick;
-            _inputType.gameObject.SetActive(true);
+            _inputType = _playActor.ServiceLocator.Get<IInputType>() as FloatingJoystick;           
 
-            _playerState = playerState;
             _speedMovement = speedMovement;
             _camera = Camera.main;
             _canMove = true;

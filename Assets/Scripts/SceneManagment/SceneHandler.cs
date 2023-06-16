@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using GUS.SceneManagment;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -18,18 +20,22 @@ public class SceneHandler : MonoBehaviour
     {
         _sceneLoader.ChangeAdditiveScene(_runSeneRef);
     }
-
-    public void FadeInHandle()
+    /// <summary>
+    /// Появление
+    /// </summary>
+    public async UniTask FadeInHandle()
     {
         if(_fader != null)
         {
-            _fader?.FadeIn();
+            await _fader.FadeIn();
         }
     }
-    public void FadeOutHandle()
-    {
-        if(_fader != null) StartCoroutine(_fader.FadeOut());
-    }
-    
 
+    /// <summary>
+    /// Затемнение
+    /// </summary>
+    public async UniTask FadeOutHandle()
+    {       
+        if(_fader != null) await _fader.FadeOut();
+    }    
 }
