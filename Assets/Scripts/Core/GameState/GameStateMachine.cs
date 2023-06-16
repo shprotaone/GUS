@@ -11,15 +11,18 @@ namespace GUS.Core.GameState
         public IState CurrentState { get; private set; }
         public IState PreviousState {get; private set;}
 
-        public InitGameState initState { get; private set; }
-        public InitMapState initMapState { get; private set; }
+        //Runner
+        public InitGameState initState { get; private set; }    
         public StartState start { get; private set; }
         public InGameState session { get; private set; }
         public ClickerState clicker { get; private set; }
         public EndGameState endGame { get; private set; }
         public ResultState result { get; private set; }
         public PauseState pause { get; private set; }
-        public ExploreState explore { get; private set; }
+        //HUB
+        public IdleHubState idleHubState { get; private set; }
+        public ExploreHubState explore { get; private set; }
+        public ShopHubState shopState { get; private set; }
 
         public event Action stateChanged;
 
@@ -36,8 +39,9 @@ namespace GUS.Core.GameState
 
         public void InitHub(IServiceLocator serviceLocator)
         {
-            initMapState = new InitMapState(this, serviceLocator);
-            explore = new ExploreState(this, serviceLocator);
+            idleHubState = new IdleHubState(this, serviceLocator);
+            explore = new ExploreHubState(this, serviceLocator);
+            shopState = new ShopHubState(this, serviceLocator);
         }
 
         public void InitGameLoop(IState state)

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UISettings : MonoBehaviour
 {
+    [SerializeField] private GameObject _panel;
     [SerializeField] private Button _resetProgress;
     [SerializeField] private Button _languageButton;
 
@@ -17,6 +18,11 @@ public class UISettings : MonoBehaviour
     public void Init(IServiceLocator serviceLocator)
     {
         _deleteService = serviceLocator.Get<DeleteService>();
+    }
+
+    public void Activate(bool flag)
+    {
+        _panel.SetActive(flag);
     }
 
     public void DeleteData()

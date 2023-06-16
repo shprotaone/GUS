@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace GUS.SceneManagment
         [SerializeField] private CanvasGroup _canvasGroup;
         void Start()
         {    
-            FadeIn();
+            //FadeIn();
         }
 
         public IEnumerator FadeOut()
@@ -21,10 +22,12 @@ namespace GUS.SceneManagment
             yield return null;
         }
 
-        public void FadeIn()
+        public async UniTask FadeIn()
         {       
             _canvasGroup.alpha = 1;
             _canvasGroup.DOFade(0,_time);
+            await UniTask.Yield();
+
         }
     }
 }

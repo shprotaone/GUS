@@ -2,10 +2,6 @@ using GUS.Core.Data;
 using GUS.Core.GameState;
 using GUS.Core.Hub;
 using GUS.Core.Locator;
-using GUS.Core.UI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,9 +47,9 @@ public class UIBuild : MonoBehaviour
         _walletText.text = _wallet.Coins.ToString();
     }
 
-    private void Close()
-    {
-        _controller.Idle();
+    private async void Close()
+    {       
+        await _cameraController.IdleCamera();
         _panel.gameObject.SetActive(false);
     }
 

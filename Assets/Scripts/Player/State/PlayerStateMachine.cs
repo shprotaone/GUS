@@ -10,7 +10,7 @@ namespace GUS.Player.State
         public event Action stateChanged;
 
         public InitPlayerState initState { get; private set; }
-        public IdlePlayerState startState { get; private set; }
+        public IdlePlayerState idleState { get; private set; }
         public RunPlayerState runState { get; private set; }
         public JumpPlayerState jumpState { get; private set; }
         public AttackPlayerState attackState { get; private set; }
@@ -21,7 +21,6 @@ namespace GUS.Player.State
         public ClickerPlayerState clicker { get; private set; }
         public PausePlayerState pauseState { get; private set; }
 
-        private AnimatorController _animator;
         private PlayerActor _player;
 
         public IState CurrentState { get; private set; }
@@ -45,7 +44,9 @@ namespace GUS.Player.State
 
             //special movement
             clicker = new ClickerPlayerState(_player, this);
+
             //flyState = new FlyPlayerState(settings.steerSpeed,_movement,_player,this);
+            idleState = new IdlePlayerState(service);
             exploreState = new ExplorePlayerState(LevelSettings.exploreSpeed, _player, this);
         }
 

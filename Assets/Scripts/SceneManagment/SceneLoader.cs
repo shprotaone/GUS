@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using GUS.SceneManagment;
 using System.Collections;
 using UnityEngine;
@@ -36,27 +37,27 @@ public class SceneLoader : MonoBehaviour
         yield return ChangeScene(_handle);
 
     }
-    private IEnumerator ChangeScene(AsyncOperationHandle<SceneInstance> obj)
-    {       
+    private async UniTask ChangeScene(AsyncOperationHandle<SceneInstance> obj)
+    {
         if (obj.Status == AsyncOperationStatus.Succeeded)
-        {            
-            Debug.Log(obj.Result.Scene.name);    
-            
+        {
+            Debug.Log(obj.Result.Scene.name);
+
         }
         else
         {
             Debug.LogError("Ассет не найден");
         }
 
-        if(obj.IsDone) { 
-            
-            _fader.FadeIn();
+        if (obj.IsDone)
+        {
+
+            await _fader.FadeIn();
             SceneManager.SetActiveScene(obj.Result.Scene);
         }
-        yield return null;   //плохое решение
+        await UniTask.Yield();
     }
-
-    private IEnumerator PrevSceneUnload()
+    private async UniTask PrevSceneUnload()
     {
         Addressables.UnloadSceneAsync(_handle).Completed += op =>
         {
@@ -66,6 +67,6 @@ public class SceneLoader : MonoBehaviour
             }
         };
 
-        yield return null;
+        await UniTask.Yield();
     }
 }
