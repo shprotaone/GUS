@@ -1,17 +1,23 @@
-﻿using GUS.Core.Locator;
+﻿using GUS.Core.Hub.BonusShop;
+using GUS.Core.Locator;
 using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace GUS.Core
 {
     public class UIShop : MonoBehaviour
     {
-        internal void Activate(bool v)
+        [SerializeField] private GameObject _shopPanel;
+        
+
+        public void Activate(bool flag)
         {
-            
+            _shopPanel.SetActive(flag);
         }
 
-        internal void Init(IServiceLocator locator)
+        public void Init(IServiceLocator locator)
         {
             
         }
