@@ -4,9 +4,9 @@ using System;
 public class BuildData
 {
     public BuildNameEnum nameEnum;
-    public BuildStateEnum state;
+    public int state;
 
-    public BuildData (BuildNameEnum name, BuildStateEnum state)
+    public BuildData (BuildNameEnum name, int state)
     {
         this.nameEnum = name;
         this.state = state;

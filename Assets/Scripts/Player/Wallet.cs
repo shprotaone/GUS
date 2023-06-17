@@ -22,6 +22,7 @@ namespace GUS.Core.Data
             _storageService = locator.Get<StorageService>();
 
             _coins = _storageService.Data.coins;
+            _coinView.RefreshCoinsCount(_coins);
         }
 
         public void AddOne()

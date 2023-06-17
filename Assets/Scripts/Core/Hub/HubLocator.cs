@@ -1,9 +1,6 @@
 ﻿using GUS.Core.GameState;
 using GUS.Core.InputSys.Joiystick;
 using GUS.Core.Locator;
-using System.Linq;
-using TMPro;
-using UnityEngine;
 using GUS.Core.InputSys;
 using GUS.Player.State;
 using GUS.Player;
@@ -11,6 +8,10 @@ using GUS.Core.Data;
 using GUS.Core.UI;
 using GUS.Core.SaveSystem;
 using GUS.Core.Hub.BonusShop;
+using GUS.Core.Hub.BuildShop;
+using System.Linq;
+using TMPro;
+using UnityEngine;
 using Sirenix.OdinInspector;
 
 namespace GUS.Core.Hub
@@ -72,6 +73,7 @@ namespace GUS.Core.Hub
             _hubController = new HubStateController();
             _stateChanger = _hubController;
             _inputType = _joystick;
+            _coinView = _uiHubController.CoinView;
             _deleteService = new DeleteService();
             _playerState = new PlayerStateMachine();
             _gameStateMachine = new GameStateMachine();
@@ -104,24 +106,18 @@ namespace GUS.Core.Hub
         private void Initialization()
         {           
             _gameStateMachine.InitHub(ServiceLocator);
-            _storageService.Init(ServiceLocator);
-            _wallet.Init(ServiceLocator);           
-            _uiHubController.Init(ServiceLocator);
-
+            _storageService.Init(ServiceLocator);                      
+            _uiHubController.Init(ServiceLocator);            
             _hubController.SetStartPosition(_startPos.position);
             _hubController.Init(ServiceLocator);
 
+            _wallet.Init(ServiceLocator);
             _player.Init(_serviceLocator,true);
             _deleteService.Init(ServiceLocator);
             _playerState.Init(ServiceLocator);
             _hubController.Idle();
             _buildSystem.Init(ServiceLocator);
             _shopSystem.Init(ServiceLocator);
-        }
-
-        private void OnDisable()
-        {
-            _audioService.StopMusic();
         }
     }
 }

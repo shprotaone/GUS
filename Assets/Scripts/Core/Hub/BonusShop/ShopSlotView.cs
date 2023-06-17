@@ -31,7 +31,7 @@ namespace GUS.Core.Hub.BonusShop
             _icon.sprite = _collectable.icon;
 
             UpdateData(bonusData);
-            
+            CheckState();
             _buy.onClick.AddListener(Buy);
         }
 
@@ -45,12 +45,12 @@ namespace GUS.Core.Hub.BonusShop
         private void Buy()
         {
             _shopSystem.Buy(_collectable.powerUpEnum, _currentCost, _bonusData.state);
-            CheckActive();
+            CheckState();
             UpdateCost();
             RefreshProgress(_bonusData.state);
         }
 
-        private void CheckActive()
+        private void CheckState()
         {
             if (_shopSystem.Wallet.Coins < _currentCost)
             {
@@ -66,6 +66,12 @@ namespace GUS.Core.Hub.BonusShop
         {
             _currentCost = _collectable.costs[_bonusData.state];
             _costText.text = _currentCost.ToString();
+
+            if(_bonusData.state >= _collectable.costs.Length)
+            {
+                _buy.interactable = false;
+                _costText.text = "";
+            }
         }
 
         private void RefreshProgress(int index)

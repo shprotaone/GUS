@@ -3,20 +3,17 @@ using GUS.Core.Data;
 using GUS.Core.Locator;
 using GUS.Core.SaveSystem;
 using GUS.Objects.PowerUps;
-using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 namespace GUS.Core.Hub.BonusShop
 {
     public class ShopSystem :MonoBehaviour
-    {
-        [SerializeField] private TMP_Text _coins;
-        [SerializeField] private List<ShopSlotView> _slotView;
+    {       
         [SerializeField] private List<Collectable> _collectables;
 
         private Wallet _wallet;
+        private UIShop _shopView;
         private StorageService _storageService;
         private List<BonusData> _bonusData;
         private AudioService _audioService;
@@ -25,29 +22,13 @@ namespace GUS.Core.Hub.BonusShop
         public void Init(IServiceLocator serviceLocator)
         {
             _wallet = serviceLocator.Get<Wallet>();
-            _storageService = serviceLocator.Get<StorageService>();
-            _coins.text = _wallet.Coins.ToString();
+            _storageService = serviceLocator.Get<StorageService>();         
             _audioService= serviceLocator.Get<AudioService>();
+            _shopView = serviceLocator.Get<UiHubController>().UIShop;
 
             LoadList();
-            InitSlots();         
-        }
-
-        private void InitSlots()
-        {
-            for (int i = 0; i < _collectables.Count; i++)
-            {
-                 _slotView[i].Init(this, _collectables[i], _bonusData[i]);
-            }
-        }
-
-        private void UpdateSlots() 
-        {
-            for (int i = 0; i < _collectables.Count; i++)
-            {
-                _slotView[i].UpdateData(_bonusData[i]);
-            }
-        }
+            _shopView.InitSlots(this,_collectables, _bonusData);
+        }   
 
         private void LoadList()
         {
@@ -64,7 +45,7 @@ namespace GUS.Core.Hub.BonusShop
                 _storageService.Data.bonusDatas = _bonusData;
                 _storageService.Save();
 
-                DOVirtual.DelayedCall(1,() => UpdateSlots());
+                DOVirtual.DelayedCall(1,() => _shopView.UpdateSlots(_collectables, _bonusData));
             }
         }
 
@@ -84,9 +65,8 @@ namespace GUS.Core.Hub.BonusShop
             }
 
             _audioService.PlaySFX(_audioService.Data.buySound);
-            _coins.text = _wallet.Coins.ToString();
             _storageService.Save();
-            UpdateSlots();
+            _shopView.UpdateSlots(_collectables,_bonusData);
         }
     }
 }

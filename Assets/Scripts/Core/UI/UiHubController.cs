@@ -1,4 +1,5 @@
 ﻿using GUS.Core.Locator;
+using GUS.Core.UI;
 using UnityEngine;
 
 namespace GUS.Core
@@ -10,10 +11,12 @@ namespace GUS.Core
         [SerializeField] private UIBuild _uiBuild;
         [SerializeField] private UIShop _uiShop;
         [SerializeField] private UIExplore _uiExplore;
+        [SerializeField] private CoinView _coinView;
 
         public UIMainHub UIMainHub { get { return _uiHub; } }
         public UIBuild UIBuild { get { return _uiBuild;} }
         public UIShop UIShop { get { return _uiShop; } }
+        public CoinView CoinView { get { return _coinView;} }
 
 
         public void Init(IServiceLocator locator)
@@ -21,8 +24,8 @@ namespace GUS.Core
             _uiHub.Init(locator);
             _uiSettings.Init(locator);
             _uiBuild.Init(locator);
-            _uiShop.Init(locator);
             _uiExplore.Init(locator);
+            _uiShop.Init(locator);
         }
 
         public void BuildActivate(bool flag) => _uiBuild.Activate(flag);

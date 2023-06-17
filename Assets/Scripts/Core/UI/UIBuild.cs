@@ -1,60 +1,72 @@
-using GUS.Core.Data;
 using GUS.Core.GameState;
 using GUS.Core.Hub;
+using GUS.Core.Hub.BuildShop;
 using GUS.Core.Locator;
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIBuild : MonoBehaviour
+namespace GUS.Core.UI
 {
-    [SerializeField] private RectTransform _panel;
-    [SerializeField] private Button _explore;
-    [SerializeField] private Button _close;
-    [SerializeField] private TMP_Text _walletText;
-
-    private Wallet _wallet;
-    private BuildsSystem _buildSystem;
-    private HubStateController _controller;
-    private CameraHubController _cameraController;
-    public void Init(IServiceLocator serviceLocator)
+    public class UIBuild : MonoBehaviour
     {
-        _controller = serviceLocator.Get<HubStateController>();
-        _cameraController = serviceLocator.Get<ICamera>() as CameraHubController;
-        _wallet = serviceLocator.Get<Wallet>();
-        _buildSystem = serviceLocator.Get<BuildsSystem>();
-        _buildSystem.OnBuyed += RefreshWallet;
+        [SerializeField] private RectTransform _panel;
+        [SerializeField] private BuildSlotView[] _views;
+        [SerializeField] private Button _explore;
+        [SerializeField] private Button _close;
 
-        _close.onClick.AddListener(Close);
-        _explore.onClick.AddListener(Explore);
-    }
+        private HubStateController _controller;
+        private CameraHubController _cameraController;
+        private CoinView _coinView;
+        private UiHubController _uiHubController;
+        public void Init(IServiceLocator serviceLocator)
+        {
+            _controller = serviceLocator.Get<HubStateController>();
+            _cameraController = serviceLocator.Get<ICamera>() as CameraHubController;
+            _coinView = serviceLocator.Get<ICoinView>() as CoinView;
+            _uiHubController = serviceLocator.Get<UiHubController>();
+            _close.onClick.AddListener(Close);
+            _explore.onClick.AddListener(Explore);
+        }
 
-    public void Activate(bool flag)
-    {
-        _panel.gameObject.SetActive(flag);
-        RefreshWallet();
-        _cameraController.MapCamera();
-    }
+        public void Activate(bool flag)
+        {
+            _panel.gameObject.SetActive(flag);
+            _coinView.Activate(flag);
+            _cameraController.MapCamera();
+            _uiHubController.UIMainHub.UpPanelActivate(false);
+        }
 
-    private void Explore()
-    {
-        _controller.Explore();
-        _panel.gameObject.SetActive(false);
-    }
+        public void InitSlots(BuildsSystem buildSystem, List<BuildData> data)
+        {
+            for (int i = 0; i < _views.Length; i++)
+            {
+                _views[i].Init(buildSystem, data[i]);
+                Refresh(buildSystem.Builds[i], data[i], i);
+            }
+        }
 
-    private void RefreshWallet()//TODO: есть интерфейс, вернуть!
-    {
-        _walletText.text = _wallet.Coins.ToString();
-    }
+        public void Refresh(Build builds, BuildData data, int index)
+        {
+            _views[index].RefreshProgress(data.state, builds.StepCount);
+            _views[index].SetCost(builds.Container.costs[(int)data.state]);
+        }
 
-    private async void Close()
-    {       
-        await _cameraController.IdleCamera();
-        _panel.gameObject.SetActive(false);
-    }
+        private void Explore()
+        {
+            _controller.Explore();
+            _panel.gameObject.SetActive(false);
+            _coinView.Activate(false);
+        }
 
-    private void OnDisable()
-    {
-        _buildSystem.OnBuyed -= RefreshWallet;
+        private async void Close()
+        {
+            await _cameraController.IdleCamera();
+            _panel.gameObject.SetActive(false);
+            _uiHubController.UIMainHub.UpPanelActivate(true);
+            _coinView.Activate(false);
+        }
+
     }
 }
+
