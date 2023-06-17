@@ -2,47 +2,58 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildSlotView : MonoBehaviour
+namespace GUS.Core.Hub.BuildShop
 {
-    [SerializeField] private TMP_Text _cost;
-    [SerializeField] private Button _buy;
-    [SerializeField] private Image[] _progressImages;
-
-    private int _currentCost;
-    private BuildsSystem _buildsSystem;
-    public BuildNameEnum BuildName { get; private set; }
-    public BuildStateEnum BuildState { get; private set; }
-
-    public void Init(BuildsSystem buildSystem, BuildData buildData)
+    public class BuildSlotView : MonoBehaviour
     {
-        _buildsSystem = buildSystem;
-        BuildName = buildData.nameEnum;
-        BuildState = buildData.state;
-        //RefreshProgress(BuildState,(int)buildData.state);
+        [SerializeField] private TMP_Text _cost;
+        [SerializeField] private Button _buy;
+        [SerializeField] private Image[] _progressImages;
 
-        _buy.onClick.AddListener(Buy);
-    }
+        private int _currentCost;
+        private BuildsSystem _buildsSystem;
+        public BuildNameEnum BuildName { get; private set; }
+        public int BuildState { get; private set; }
 
-    private void Buy()
-    {
-        _buildsSystem.Buy(BuildName, _currentCost);
-    }
-
-    public void RefreshProgress(BuildStateEnum buildState,int step)
-    {
-        if (buildState == BuildStateEnum.None) return;
-
-        for (int i = 0; i < (int)buildState; i++)
+        public void Init(BuildsSystem buildSystem, BuildData buildData)
         {
-            _progressImages[i].color = Color.blue;
+            _buildsSystem = buildSystem;
+            BuildName = buildData.nameEnum;
+            BuildState = buildData.state;
+            
+            _buy.onClick.AddListener(Buy);
         }
 
-        if ((int)buildState >= step) _buy.interactable = false;
-    }
+        private void Buy()
+        {
+            _buildsSystem.Buy(BuildName, _currentCost);
+        }
 
-    public void SetCost(int cost)
-    {
-        _cost.text= cost.ToString();
-        _currentCost = cost;
+        public void RefreshProgress(int buildState, int step)
+        {
+            if (buildState == 0) return;
+
+            for (int i = 0; i < (int)buildState; i++)
+            {
+                _progressImages[i].color = Color.blue;
+            }
+
+            if (buildState >= step) _buy.interactable = false;
+            CheckButtonState();
+        }
+
+        private void CheckButtonState()
+        {
+            if (_buildsSystem.Wallet.Coins < _currentCost) _buy.interactable = false;
+            else _buy.interactable = true;
+        }
+
+        public void SetCost(int cost)
+        {
+            _cost.text = cost.ToString();
+            _currentCost = cost;
+            CheckButtonState();
+        }
     }
 }
+
