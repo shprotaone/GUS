@@ -9,7 +9,9 @@ using GUS.LevelBuild;
 using GUS.Objects.PowerUps;
 using GUS.Player.Movement;
 using GUS.Player.State;
+using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace GUS.Player
@@ -24,6 +26,9 @@ namespace GUS.Player
         [SerializeField] private ParticleController _particleController;
         [SerializeField] private Transform _model;
 
+        [Title("Настройки")]
+        [SerializeField] private float _speedPenaltyObstacle;
+        [SerializeField] private float _timeResetDamage;
         private PlayerStateMachine _playerStateMachine;
         private Vector3 _startPosition;
         private GameStateController _stateController;
@@ -94,7 +99,8 @@ namespace GUS.Player
             if (!_isDamage)
             {
                 _isDamage = true;
-                _worldController.ChangeAcceleration(1);
+                StartCoroutine(DamageRestoreDelay());
+                _worldController.ChangeAcceleration(_speedPenaltyObstacle);
             }
             else
             {
@@ -139,6 +145,19 @@ namespace GUS.Player
             {
                 _playerStateMachine.FixedUpdate();
             }
+        }
+
+        private IEnumerator DamageRestoreDelay()
+        {
+            float time = _timeResetDamage;
+
+            while(time > 0)
+            {
+                time--;
+                yield return new WaitForSeconds(time);
+            }
+            _isDamage = false;
+            Debug.Log("Take damage again");
         }
     }
 }

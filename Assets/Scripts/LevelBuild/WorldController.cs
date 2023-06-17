@@ -84,10 +84,10 @@ namespace GUS.LevelBuild
             _acceleration = settings.acceleration;
         }
 
-        public void ChangeAcceleration(float delay)
+        public void ChangeAcceleration(float penalty)
         {
             float prevSpeed = _currentSpeed;
-            _currentSpeed = prevSpeed / 2;
+            _currentSpeed = prevSpeed * penalty;
         }
     }
 }
