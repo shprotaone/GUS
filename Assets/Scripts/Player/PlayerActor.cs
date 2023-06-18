@@ -157,7 +157,6 @@ namespace GUS.Player
                 yield return new WaitForSeconds(time);
             }
             _isDamage = false;
-            Debug.Log("Take damage again");
         }
     }
 }

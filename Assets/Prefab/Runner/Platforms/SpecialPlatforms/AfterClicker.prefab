@@ -270,6 +270,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coins
       objectReference: {fileID: 0}
+    - target: {fileID: 7273452436351614314, guid: 19d7da8ae7c1b894c8e9db7a39f6887a, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273452436351614314, guid: 19d7da8ae7c1b894c8e9db7a39f6887a, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273452436351614314, guid: 19d7da8ae7c1b894c8e9db7a39f6887a, type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273452436351614314, guid: 19d7da8ae7c1b894c8e9db7a39f6887a, type: 3}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273452436351614314, guid: 19d7da8ae7c1b894c8e9db7a39f6887a, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273452436351614314, guid: 19d7da8ae7c1b894c8e9db7a39f6887a, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273452436351614314, guid: 19d7da8ae7c1b894c8e9db7a39f6887a, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.3254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273452436351614314, guid: 19d7da8ae7c1b894c8e9db7a39f6887a, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7520858854609319896, guid: 19d7da8ae7c1b894c8e9db7a39f6887a, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -541,6 +573,7 @@ MonoBehaviour:
   _beginPoint: {fileID: 372381312345813487}
   _endPoint: {fileID: 372381312331468582}
   _isSpawning: 0
+  _countBonuses: 0
 --- !u!4 &5225920094672555460 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3584932247596613746, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
