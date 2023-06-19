@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 283256813683436885}
   - component: {fileID: 8104400242231918712}
   - component: {fileID: 3985027562342778072}
+  - component: {fileID: 5324671674826908033}
   m_Layer: 0
   m_Name: FenceInHub
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5324671674826908033
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803189718038019539}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0030099493, y: 0.0015088648, z: 0.00027781274}
+  m_Center: {x: -3.4924597e-10, y: 0.00075443235, z: 7.275957e-12}
