@@ -4,6 +4,7 @@ using GUS.Core.Locator;
 using GUS.Core.UI;
 using GUS.Objects.Enemies;
 using GUS.Player;
+using GUS.Player.Movement;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -18,7 +19,9 @@ namespace GUS.Core.Clicker
         private GameStateController _gameStateController;
         private Wallet _wallet;
         private ClickerStateMachine _clickerStateMachine;
+        private PlayerActor _actor;
         private IServiceLocator _serviceLocator;
+        private ClickerMovement _movement;
 
         private BossSettings _settings;
         private BossPositions _positions;
@@ -38,25 +41,27 @@ namespace GUS.Core.Clicker
             _uiController = serviceLocator.Get<UIController>();
             _gameStateController = serviceLocator.Get<GameStateController>();
             _wallet = serviceLocator.Get<Wallet>();
+            _actor = serviceLocator.Get<PlayerActor>();
             _serviceLocator = serviceLocator;
         }
 
         public IEnumerator Init(BossSettings settings,GameObject enemy)
         {
+            Debug.Log("Инициализатор ClickerGame");
+
             IsActive = true;
             _settings = settings;
             _uiController.ClickerGame.ResetClickerUI();
             _clickerStateMachine = new ClickerStateMachine(_serviceLocator);
             _gameStateController.ClickerGame();
-            
-            //yield return new WaitForSeconds(0.2f);
+
             SetEnemy(enemy);
             _uiController.ClickerGame.InitSlider(settings.MaxHP);
             _hp = settings.MaxHP;
 
             _stageIndex = 0;
             _clickerStateMachine.InitGameLoop(_clickerStateMachine.prepareState);
-
+           
             yield return null;
         }
 
@@ -74,7 +79,6 @@ namespace GUS.Core.Clicker
             _enemy.Init(this);
             _enemy.Move(true, _positions.Run.position);     
         }
-
 
         public void GetDamage()
         {

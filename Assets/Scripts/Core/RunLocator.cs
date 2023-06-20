@@ -2,17 +2,15 @@ using GUS.Core.Clicker;
 using GUS.Core.Data;
 using GUS.Core.GameState;
 using GUS.Core.InputSys;
-using GUS.Core.InputSys.Joiystick;
 using GUS.Core.Locator;
 using GUS.Core.Pool;
 using GUS.Core.SaveSystem;
 using GUS.Core.UI;
 using GUS.LevelBuild;
 using GUS.Player;
+using GUS.Player.Movement;
 using GUS.Player.State;
-using System.Collections;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using SystemInfo = UnityEngine.Device.SystemInfo;
 
@@ -55,6 +53,7 @@ namespace GUS.Core
         private StorageService _storageService;
         private WorldController _worldController;
         private ClickerGame _clicker;
+        private ClickerMovement _clickerMovement;
 
         private IStateChanger _stateChanger;
         private ICoinView _coinView;
@@ -93,6 +92,7 @@ namespace GUS.Core
             _clicker = new ClickerGame();
             _playerState = new PlayerStateMachine();
             _gameStateMachine = new GameStateMachine();
+            _clickerMovement = new ClickerMovement();
 
             _coinView = _uiController.UiInGame;
             _distanceView = _uiController.UiInGame;
@@ -124,6 +124,7 @@ namespace GUS.Core
             _serviceLocator.Register(_bossPositions);
             _serviceLocator.Register(_playerState);
             _serviceLocator.Register(_gameStateMachine);
+            
            
             RegisterPools();
             _serviceLocator.Register(_collectableFactory);
@@ -172,7 +173,8 @@ namespace GUS.Core
             {
                 Debug.LogWarning("Устройство не опознано" + SystemInfo.deviceType);
             }
-          
+
+            _serviceLocator.Register(_clickerMovement);
             _serviceLocator.Register(_inputType);
         }
 

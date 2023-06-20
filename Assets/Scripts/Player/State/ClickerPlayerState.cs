@@ -14,16 +14,12 @@ namespace GUS.Player.State
         public ClickerPlayerState(PlayerActor actor, PlayerStateMachine playerState)
         {
             _playerStateMachine = playerState;
-            _actor = actor;
-            _clickerMovement = new ClickerMovement();                     
+            _actor = actor;                               
         }
         
         public void Enter()
-        {
-            _actor.RestartPosition();
-            _actor.SetMovementType(_clickerMovement);
+        {            
             _actor.AnimatorController.RunActivate(true);
-            _clickerMovement.Init(_actor, _playerStateMachine, 0);
         }
 
         public IEnumerator Execute()
@@ -43,7 +39,10 @@ namespace GUS.Player.State
 
         public void Update()
         {
-            _clickerMovement.Update();
+            if(_clickerMovement!= null)
+            {
+                _clickerMovement.Update();
+            }        
         }
     }
 }

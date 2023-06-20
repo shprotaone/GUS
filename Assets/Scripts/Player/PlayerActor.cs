@@ -137,6 +137,11 @@ namespace GUS.Player
             {
                 _playerStateMachine.Update();
             }
+
+            if(_movement!= null)
+            {
+                _movement.Update();
+            }
         }
 
         private void FixedUpdate()

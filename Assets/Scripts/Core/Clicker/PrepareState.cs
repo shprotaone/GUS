@@ -3,6 +3,7 @@ using GUS.Core.Locator;
 using GUS.Core.UI;
 using GUS.LevelBuild;
 using GUS.Player;
+using GUS.Player.Movement;
 using System.Collections;
 using UnityEngine;
 
@@ -15,8 +16,8 @@ namespace GUS.Core.Clicker
         private CameraRunController _cameraController;
         private WorldController _worldController;
         private UIController _uiController;
-        private ClickerGame _game;
-        private RoutineExecuter _routineExecuter;
+        private ClickerGame _game;        
+        private PlayerActor _playerActor;
 
         private float _prepareTime;
         public IStateMachine StateMachine {get; private set;}
@@ -26,12 +27,15 @@ namespace GUS.Core.Clicker
             _clickerStateMachine = stateMachine;
             _worldController = serviceLocator.Get<WorldController>();
             _uiController = serviceLocator.Get<UIController>();
-            _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;     
+            _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
+            _playerActor= serviceLocator.Get<PlayerActor>();
+            
         }
 
         public void Enter()
         {
             Debug.Log("Подготовительный");
+            
             if(_game == null)
             {
                 _game = _serviceLocator.Get<ClickerGame>();
@@ -51,7 +55,6 @@ namespace GUS.Core.Clicker
                 _clickerStateMachine.CallRoutine();
                 _game.Enemy?.MoveToDamage(true, _prepareTime);
             }
-
             _game.Paused(false);
         }
 
@@ -74,6 +77,7 @@ namespace GUS.Core.Clicker
         {
             //_clicker.Paused(true);
             //_worldController.CreateOnlyFreePlatforms(false);
+            //_playerActor.MovementType.CanMove(true);
         }
 
         public void FixedUpdate()

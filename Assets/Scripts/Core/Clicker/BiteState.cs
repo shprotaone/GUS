@@ -30,13 +30,17 @@ namespace GUS.Core.Clicker
             _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
             _audioService = serviceLocator.Get<AudioService>();
             _uiClicker = serviceLocator.Get<UIController>().ClickerGame;
+            _actor= serviceLocator.Get<PlayerActor>();
+            
         }
 
         public void Enter()
         {
-            Debug.Log("Кусательный");
-            _actor = _serviceLocator.Get<PlayerActor>();
-            
+            Debug.Log("Кусательный");           
+            _movement = _serviceLocator.Get<ClickerMovement>();
+            _movement.Init(_actor, null, 0);
+            _actor.SetMovementType(_movement);
+
             if (_game == null) _game = _serviceLocator.Get<ClickerGame>();
             _clickerStateMachine.CallRoutine();
 
@@ -47,7 +51,6 @@ namespace GUS.Core.Clicker
         {
             if (!_game.IsActive) yield break;
 
-            _movement = _actor.MovementType as ClickerMovement;
             _cameraController.BiteCamera();
             yield return new WaitForSeconds(_game.Settings.prepareTime);
 
@@ -87,6 +90,7 @@ namespace GUS.Core.Clicker
         public void Update()
         {
             _worldController.Move();
+            _movement.Update();
         }
 
         private void BiteSound()

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using GUS.Player;
 using System.Collections;
 using UnityEngine;
@@ -24,18 +25,21 @@ namespace GUS.Core.Clicker
             if (other.TryGetComponent(out PlayerActor actor) && _isActive)
             {
                 _isActive = false;
-                actor.MovementType.CanMove(false);
                 PrepareEnemy();
-                StartCoroutine(Initialization(actor));
+                actor.MovementType.CanMove(false);
+                actor.RestartPosition();
+                Initialization(actor);
+                Debug.Log("Начинается кликер");
             }
         }
 
-        private IEnumerator Initialization(PlayerActor actor)
+        private void Initialization(PlayerActor actor)
         {
+            Debug.Log("Инициализатор Entry");
             _clicker = actor.ServiceLocator.Get<ClickerGame>();
             _enemyObj.SetActive(true);
             _clicker.OnRestart += PrepareEnemy;
-            yield return StartCoroutine(_clicker.Init(_settings,_enemyObj));
+            StartCoroutine(_clicker.Init(_settings,_enemyObj));          
         }
 
         public void PrepareEnemy()

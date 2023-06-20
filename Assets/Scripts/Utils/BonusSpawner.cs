@@ -15,7 +15,6 @@ public class BonusSpawner
         int index = Random.Range(0, spawnPoints.Count);
         if (spawnPoints[index].childCount > 0)
         {
-            Debug.Log("Место уже занято");
             return null;
         }
         return spawnPoints[index];

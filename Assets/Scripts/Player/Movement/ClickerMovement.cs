@@ -9,7 +9,6 @@ namespace GUS.Player.Movement
     public class ClickerMovement : IMovement
     {
         public event Action OnClick;
-        private PlayerStateMachine _playerStateMachine;
         private AnimatorController _animatorController; //анимации и партиклы вынести отсюда? 
         private ParticleController _particleController;
         private SmartphoneInput _inputType;
@@ -19,7 +18,6 @@ namespace GUS.Player.Movement
 
         public void Init(PlayerActor player, PlayerStateMachine playerState, float speedMovement)
         {
-            _playerStateMachine = playerState;
             _animatorController = player.AnimatorController;
             _inputType = (SmartphoneInput)player.InputType;
             _particleController = player.Particles;
