@@ -66,10 +66,5 @@ namespace GUS.Objects
                 _currentCollectable = null;
             }
         }
-
-        private void OnDestroy()
-        {
-            Debug.Log("Destroy? " + gameObject.name);
-        }
     }
 }

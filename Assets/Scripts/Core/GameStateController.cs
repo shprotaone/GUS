@@ -49,11 +49,17 @@ namespace GUS.Core
             StartCoroutine(_playerStateMachine.CurrentState.Execute());
         }
 
+        private void StopPlayerStateRoutine()
+        {
+            StopCoroutine(_playerStateMachine.CurrentState.Execute());
+        }
+
         private void CallGameStateRoutine()
         {
             StopCoroutine(_gameStateMachine.CurrentState.Execute());
             StartCoroutine(_gameStateMachine.CurrentState.Execute());
         }
+
 
         public void InitGame()
         {
@@ -66,6 +72,7 @@ namespace GUS.Core
 
         public void ClickerGame()
         {
+            StopAllCoroutines();
             _gameStateMachine.TransitionTo(_gameStateMachine.clicker);
             _playerStateMachine.TransitionTo(_playerStateMachine.clicker);
         }

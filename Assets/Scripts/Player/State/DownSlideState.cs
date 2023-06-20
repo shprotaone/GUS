@@ -1,4 +1,5 @@
-﻿using GUS.Core;
+﻿using DG.Tweening;
+using GUS.Core;
 using GUS.Core.GameState;
 using GUS.Player.Movement;
 using System.Collections;
@@ -38,9 +39,11 @@ namespace GUS.Player.State
 
         public IEnumerator Execute()
         {
-            if(!_movement.IsGrounded) _movement.SetGravityScale(_levelSettings.forceLandingPower);
+            
+            if (!_movement.IsGrounded) _movement.SetGravityScale(_levelSettings.forceLandingPower);
             else
             {
+                _player.Particles.SlideEffect();
                 _player.Collider.height = _levelSettings.downSlideHeight;
                 _player.Collider.center -= new Vector3(0,0.5f,0);
                 yield return new WaitForSeconds(_downSlideTime);
@@ -53,7 +56,7 @@ namespace GUS.Player.State
 
         public void Exit()
         {
-                    
+
         }
 
         public void FixedUpdate()

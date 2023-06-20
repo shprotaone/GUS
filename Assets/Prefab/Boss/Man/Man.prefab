@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &159040811596034784
 Transform:
   m_ObjectHideFlags: 0
@@ -127,6 +127,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 159040811596034784}
     m_Modifications:
+    - target: {fileID: 1298155891806748484, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: _sticker
+      value: 
+      objectReference: {fileID: 3925948263694377012}
+    - target: {fileID: 1298155891806748484, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: _emissionName
+      value: _Emission
+      objectReference: {fileID: 0}
     - target: {fileID: 1474280116884236283, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -191,12 +199,29 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8825315961420169651, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.691
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825315961420169651, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825315961420169651, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.97
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
 --- !u!4 &1848644053169061650 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6171520035872300694, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
+  m_PrefabInstance: {fileID: 5476965654292095364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3925948263694377012 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8825315961420169648, guid: ec64d0e3d3250f642a4a1764f009e857, type: 3}
   m_PrefabInstance: {fileID: 5476965654292095364}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6773957931745468096 stripped
