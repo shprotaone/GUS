@@ -35,6 +35,7 @@ namespace GUS.Core.Hub
         [SerializeField] private ShopSystem _shopSystem;
 
         private Wallet _wallet;
+        private HonkCoinWallet _honkWallet;
         private HubStateController _hubController;
         private StorageService _storageService;
         private DeleteService _deleteService;
@@ -46,6 +47,7 @@ namespace GUS.Core.Hub
         private IServiceLocator _serviceLocator;
         private IInputType _inputType;
         private ICoinView _coinView;
+        private IHonkCoinView _honkCoinView;
 
         private TMP_Text _testText;
 
@@ -71,9 +73,11 @@ namespace GUS.Core.Hub
             _wallet = new Wallet();
             _storageService = new StorageService();
             _hubController = new HubStateController();
+            _honkWallet = new HonkCoinWallet();
             _stateChanger = _hubController;
             _inputType = _joystick;
             _coinView = _uiHubController.CoinView;
+            _honkCoinView= _uiHubController.HonkCoinView;
             _deleteService = new DeleteService();
             _playerState = new PlayerStateMachine();
             _gameStateMachine = new GameStateMachine();
@@ -89,10 +93,12 @@ namespace GUS.Core.Hub
             _serviceLocator.Register(_inputType);
             _serviceLocator.Register(_uiHubController);
             _serviceLocator.Register(_wallet);
+            _serviceLocator.Register(_honkWallet);
             _serviceLocator.Register(_levelSettings);
             _serviceLocator.Register(_hubController);
             _serviceLocator.Register(_player);
             _serviceLocator.Register(_coinView);
+            _serviceLocator.Register(_honkCoinView);
             _serviceLocator.Register(_storageService);
             _serviceLocator.Register(_jsonToFirebase);
             _serviceLocator.Register(_deleteService);
@@ -112,6 +118,7 @@ namespace GUS.Core.Hub
             _hubController.Init(ServiceLocator);
 
             _wallet.Init(ServiceLocator);
+            _honkWallet.Init(ServiceLocator);
             _player.Init(_serviceLocator,true);
             _deleteService.Init(ServiceLocator);
             _playerState.Init(ServiceLocator);

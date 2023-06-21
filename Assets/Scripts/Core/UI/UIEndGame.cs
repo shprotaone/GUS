@@ -20,6 +20,7 @@ namespace GUS.Core.UI
         private GameStateController _gameStateController;
 
         private Wallet _wallet;
+        private HonkCoinWallet _honkCoinWallet;
         private DistanceData _distance;
 
 
@@ -34,6 +35,7 @@ namespace GUS.Core.UI
         {
             _gameStateController = serviceLocator.Get<GameStateController>();
             _wallet = serviceLocator.Get<Wallet>();
+            _honkCoinWallet= serviceLocator.Get<HonkCoinWallet>();
             _distance= serviceLocator.Get<DistanceData>();
         }
 
@@ -42,7 +44,9 @@ namespace GUS.Core.UI
             if (flag)
             {
                 _distanceText.text = _distance.Value.ToString();
-                _cornText.text = _wallet.Coins.ToString();   
+                _cornText.text = _wallet.Coins.ToString(); 
+                _honkText.text = _honkCoinWallet.Value.ToString();
+                
             }
 
             _panel.gameObject.SetActive(flag);
@@ -57,7 +61,8 @@ namespace GUS.Core.UI
         public void Save()
         {
             _wallet.AddCoinsToData();
-            _distance.UpdateDistance();
+            _honkCoinWallet.AddCoinsToData();
+            _distance.UpdateData();
             Debug.Log("SAVE");
         }
     }

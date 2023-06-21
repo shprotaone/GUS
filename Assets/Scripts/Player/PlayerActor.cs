@@ -33,6 +33,7 @@ namespace GUS.Player
         private Vector3 _startPosition;
         private GameStateController _stateController;
         private Wallet _wallet;
+        private HonkCoinWallet _honkWallet;
         private CameraRunController _cameraController;
         private AudioService _audioService;
         private WorldController _worldController;
@@ -69,6 +70,7 @@ namespace GUS.Player
             _stateController = serviceLocator.Get<IStateChanger>() as GameStateController;            
             _audioService= serviceLocator.Get<AudioService>();
             _wallet = serviceLocator.Get<Wallet>();
+            _honkWallet= serviceLocator.Get<HonkCoinWallet>();
             _playerStateMachine = serviceLocator.Get<PlayerStateMachine>();
 
             if(!hub) { _worldController = serviceLocator.Get<WorldController>(); }
@@ -113,6 +115,12 @@ namespace GUS.Player
         public void Collect()
         {
             _wallet.AddOne();
+            _audioService.PlaySFX(_audioService.Data.cornPickUp);
+        }
+
+        public void CollectHonkCoin()
+        {
+            _honkWallet.AddCoin(1);
             _audioService.PlaySFX(_audioService.Data.cornPickUp);
         }
 

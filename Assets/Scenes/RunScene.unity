@@ -8216,7 +8216,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712804944}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
@@ -9795,8 +9795,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.116309166, y: 0.82427233, z: -0.18334064, w: 0.5229087}
-  m_LocalPosition: {x: -2.7489533, y: 2.6805887, z: 1.2946658}
+  m_LocalRotation: {x: 0.2672649, y: 0.0011240378, z: -0.00031175686, w: 0.9636224}
+  m_LocalPosition: {x: -0.008222222, y: 5.469431, z: -3.5243955}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11415,6 +11415,7 @@ MonoBehaviour:
   _multiplyImage: {fileID: 230832443}
   _coinTextValue: {fileID: 918602764}
   _distanceTextValue: {fileID: 461198985}
+  _honkTextValue: {fileID: 0}
 --- !u!114 &1536425107 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 148117541367796968, guid: e6f3974009adf9f47b750a924865a907, type: 3}
@@ -12345,6 +12346,7 @@ MonoBehaviour:
   _adsReviveButton: {fileID: 1399711761}
   _timerText: {fileID: 1136028472}
   _timer: 5
+  _costRevive: 10
 --- !u!1 &1744816748
 GameObject:
   m_ObjectHideFlags: 0
@@ -13644,7 +13646,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 141832393074072293}
-  m_LocalRotation: {x: 0.116309166, y: 0.82427233, z: -0.18334064, w: 0.5229087}
+  m_LocalRotation: {x: 0.2672649, y: 0.0011240378, z: -0.00031175686, w: 0.9636224}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.31678656, y: 0.31678656, z: 0.31678656}
   m_ConstrainProportionsScale: 0
@@ -13684,7 +13686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 141832393065795949}
-  m_PathPosition: 1.203769
+  m_PathPosition: 2.489847
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0
@@ -13723,7 +13725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: -0.1014883, z: 0}
+  m_TrackedObjectOffset: {x: 0, y: 1.991489, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0

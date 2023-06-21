@@ -44,7 +44,7 @@ namespace GUS.Core.Hub.BuildShop
 
         private void CheckButtonState()
         {
-            if (_buildsSystem.Wallet.Coins < _currentCost) _buy.interactable = false;
+            if (_buildsSystem.HonkWallet.Value < _currentCost) _buy.interactable = false;
             else _buy.interactable = true;
         }
 

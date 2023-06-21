@@ -1,3 +1,4 @@
+using GUS.Core.Data;
 using GUS.Core.GameState;
 using GUS.Core.Hub;
 using GUS.Core.Hub.BuildShop;
@@ -17,13 +18,13 @@ namespace GUS.Core.UI
 
         private HubStateController _controller;
         private CameraHubController _cameraController;
-        private CoinView _coinView;
+        private HonkCoinView _coinView;
         private UiHubController _uiHubController;
         public void Init(IServiceLocator serviceLocator)
         {
             _controller = serviceLocator.Get<HubStateController>();
             _cameraController = serviceLocator.Get<ICamera>() as CameraHubController;
-            _coinView = serviceLocator.Get<ICoinView>() as CoinView;
+            _coinView = serviceLocator.Get<IHonkCoinView>() as HonkCoinView;
             _uiHubController = serviceLocator.Get<UiHubController>();
             _close.onClick.AddListener(Close);
             _explore.onClick.AddListener(Explore);

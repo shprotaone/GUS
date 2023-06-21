@@ -64,19 +64,28 @@ namespace GUS.Core.Hub.BonusShop
 
         private void UpdateCost()
         {
-            _currentCost = _collectable.costs[_bonusData.state];
-            _costText.text = _currentCost.ToString();
-
-            if(_bonusData.state >= _collectable.costs.Length)
+            if (_collectable.powerUpEnum != PowerUpEnum.HonkCoin) 
             {
-                _buy.interactable = false;
-                _costText.text = "";
+                _currentCost = _collectable.costs[_bonusData.state];
+                
+                if (_bonusData.state >= _collectable.costs.Length)
+                {
+                    _buy.interactable = false;
+                    _costText.text = "";
+                }
             }
+            else
+            {
+                _currentCost = _collectable.costs[0];
+            }
+
+            _costText.text = _currentCost.ToString();           
         }
 
         private void RefreshProgress(int index)
         {
             if (index == 0) return;
+            if (_collectable.powerUpEnum == PowerUpEnum.HonkCoin) return;
 
             for (int i = 0; i < index; i++)
             {

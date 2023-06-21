@@ -18,9 +18,13 @@ namespace GUS.Core
         [SerializeField] private GameObject _shopPanel;
 
         private CoinView _coinView;
+        private HonkCoinView _honkCoinView;
+
         public void Init(IServiceLocator locator)
         {
             _coinView = locator.Get<ICoinView>() as CoinView;
+            _honkCoinView = locator.Get<IHonkCoinView>() as HonkCoinView;
+
             _close.onClick.AddListener(Close);
         }
 
@@ -28,6 +32,7 @@ namespace GUS.Core
         {
             _shopPanel.SetActive(flag);
             _coinView.Activate(flag);
+            _honkCoinView.Activate(flag);
         }
 
         public void InitSlots(ShopSystem shop, List<Collectable> collectables, List<BonusData> bonusData)
@@ -49,6 +54,7 @@ namespace GUS.Core
         private void Close()
         {
             _coinView.Activate(false);
+            _honkCoinView.Activate(false);
             _shopPanel.gameObject.SetActive(false);
         }
     }
