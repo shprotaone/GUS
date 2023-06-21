@@ -64,7 +64,7 @@ namespace GUS.Core.UI
 
         public void HonkRevive()
         {
-            _honkCoinWallet.RemoveCoin(_costRevive);
+            _honkCoinWallet.RemoveCoinFromData(_costRevive);
             _panel.gameObject.SetActive(false);
             _gameStateController.SecondChanceGame();
             StopAllCoroutines();
@@ -91,7 +91,8 @@ namespace GUS.Core.UI
 
         private void CheckAvailable()
         {
-            if (_honkCoinWallet.Value > _costRevive) _honkReviveButton.interactable = true;
+            _honkCoinWallet.LoadCurrentValue();
+            if (_honkCoinWallet.ValueInStorage > _costRevive) _honkReviveButton.interactable = true;
             else _honkReviveButton.interactable = false;
         }
     }

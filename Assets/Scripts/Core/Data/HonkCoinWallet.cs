@@ -9,7 +9,10 @@ namespace GUS.Core.Data
         private IHonkCoinView _view;
 
         private int _value;
+        private int _valueInStorage;
         public int Value => _value;
+        public int ValueInStorage => _valueInStorage;
+
         public StorageService StorageService => _storageService;
 
         public void Init(IServiceLocator serviceLocator)
@@ -34,6 +37,13 @@ namespace GUS.Core.Data
             UpdateData();
         }
 
+        public void RemoveCoinFromData(int value)
+        {
+            _valueInStorage -= value;
+            _storageService.Data.honkCoins = _valueInStorage;
+            _storageService.Save();
+        }
+
         public void AddCoinsToData()
         {
             _storageService.Data.honkCoins += _value;
@@ -50,6 +60,11 @@ namespace GUS.Core.Data
         {
             _storageService.Data.honkCoins = _value;
             _storageService.Save();
+        }
+
+        public void LoadCurrentValue()
+        {
+            _valueInStorage = _storageService.Data.honkCoins;
         }
     }
 }

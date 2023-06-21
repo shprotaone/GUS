@@ -12,11 +12,13 @@ namespace GUS.Core
         [SerializeField] private UIShop _uiShop;
         [SerializeField] private UIExplore _uiExplore;
         [SerializeField] private CoinView _coinView;
+        [SerializeField] private HonkCoinView _honkCoinView;
 
         public UIMainHub UIMainHub { get { return _uiHub; } }
         public UIBuild UIBuild { get { return _uiBuild;} }
         public UIShop UIShop { get { return _uiShop; } }
         public CoinView CoinView { get { return _coinView;} }
+        public HonkCoinView HonkCoinView { get { return _honkCoinView;} }
 
 
         public void Init(IServiceLocator locator)

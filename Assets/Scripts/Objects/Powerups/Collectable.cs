@@ -8,6 +8,7 @@ namespace GUS.Objects.PowerUps
         public string nameCollectable;
         public string descriptionCollectable;
         public PowerUpEnum powerUpEnum;
+        public CoinType coinType;
         public GameObject model;
         public Sprite icon;
         public int[] costs;

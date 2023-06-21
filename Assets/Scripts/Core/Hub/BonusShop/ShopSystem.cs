@@ -13,6 +13,7 @@ namespace GUS.Core.Hub.BonusShop
         [SerializeField] private List<Collectable> _collectables;
 
         private Wallet _wallet;
+        private HonkCoinWallet _honkWallet;
         private UIShop _shopView;
         private StorageService _storageService;
         private List<BonusData> _bonusData;
@@ -22,6 +23,7 @@ namespace GUS.Core.Hub.BonusShop
         public void Init(IServiceLocator serviceLocator)
         {
             _wallet = serviceLocator.Get<Wallet>();
+            _honkWallet= serviceLocator.Get<HonkCoinWallet>();
             _storageService = serviceLocator.Get<StorageService>();         
             _audioService= serviceLocator.Get<AudioService>();
             _shopView = serviceLocator.Get<UiHubController>().UIShop;
@@ -56,17 +58,26 @@ namespace GUS.Core.Hub.BonusShop
             _wallet.DecreaseCoins(cost);
            
             foreach (var bonus in _bonusData)
-            {
+            {               
                 if(powerUpEnum == bonus.powerUp)
                 {
-                    bonus.Increase(1,powerTime);   
-                    
+                    bonus.Increase(1,powerTime);                     
                 }
+            }
+
+            if (powerUpEnum == PowerUpEnum.HonkCoin)
+            {
+                _honkWallet.AddCoin(1);
+                _honkWallet.UpdateData();
+            }
+            else
+            {
+                _shopView.UpdateSlots(_collectables, _bonusData);
             }
 
             _audioService.PlaySFX(_audioService.Data.buySound);
             _storageService.Save();
-            _shopView.UpdateSlots(_collectables,_bonusData);
+            
         }
     }
 }

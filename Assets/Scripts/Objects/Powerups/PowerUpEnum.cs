@@ -1,5 +1,6 @@
 public enum PowerUpEnum
 {
    Magnet,
-   Multiply
+   Multiply,
+   HonkCoin
 }
