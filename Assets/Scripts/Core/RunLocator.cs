@@ -54,6 +54,7 @@ namespace GUS.Core
         private WorldController _worldController;
         private ClickerGame _clicker;
         private ClickerMovement _clickerMovement;
+        private DistanceMutiplier _distanceMutiplier;
 
         private IStateChanger _stateChanger;
         private ICoinView _coinView;
@@ -93,6 +94,7 @@ namespace GUS.Core
             _playerState = new PlayerStateMachine();
             _gameStateMachine = new GameStateMachine();
             _clickerMovement = new ClickerMovement();
+            _distanceMutiplier = new DistanceMutiplier();
 
             _coinView = _uiController.UiInGame;
             _distanceView = _uiController.UiInGame;
@@ -124,6 +126,7 @@ namespace GUS.Core
             _serviceLocator.Register(_bossPositions);
             _serviceLocator.Register(_playerState);
             _serviceLocator.Register(_gameStateMachine);
+            _serviceLocator.Register(_distanceMutiplier);
             
            
             RegisterPools();
@@ -140,14 +143,18 @@ namespace GUS.Core
             _wallet.Init(_serviceLocator);
             _distance.Init(_serviceLocator);       
             _deleteService.Init(_serviceLocator);
+
             _collectablesPool.InitPool(_collectablesStorage);           
-            _platformPool.InitPool(_platformStorage);            
+            _platformPool.InitPool(_platformStorage);
+
+            _distanceMutiplier.Init(_serviceLocator);
             _worldController.Init(_startPoint, _serviceLocator);
             _player.Init(_serviceLocator,false);
             _progressiveSystem.Init(_serviceLocator);
             _uiController.Init(_serviceLocator);
             _clicker.Init(_serviceLocator);
             _playerState.Init(_serviceLocator);
+            
             
         }
 

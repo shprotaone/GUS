@@ -1,12 +1,14 @@
 ﻿using GUS.Core.Locator;
 using GUS.Core.SaveSystem;
 using GUS.Core.UI;
+using UnityEngine;
 
 namespace GUS.Core.Data
 {
-    public class DistanceData :IData
+    public class DistanceData : IData
     {
         private StorageService _storageService;
+        private DistanceMutiplier _distanceMutiplier;
         private IDistanceView _distanceView;
         private float _value;
 
@@ -16,6 +18,8 @@ namespace GUS.Core.Data
         {
             _storageService = serviceLocator.Get<StorageService>();
             _distanceView = serviceLocator.Get<IDistanceView>();
+            _distanceMutiplier = serviceLocator.Get<DistanceMutiplier>();
+            Debug.Log("Мульти " + _distanceMutiplier.Multiplier);
         }
 
         public void Reset()
@@ -26,11 +30,11 @@ namespace GUS.Core.Data
 
         public void Set(int distance)
         {
-            _value = (distance);
+            _value = distance * _distanceMutiplier.Multiplier;
             _distanceView.RefreshDistancePointCount(_value);
         }
 
-        public void UpdateCoins()
+        public void UpdateDistance()
         {
             _storageService.Data.commonDistance += _value;
             _storageService.Save();

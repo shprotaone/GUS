@@ -11,6 +11,7 @@ namespace GUS.Core.UI
         [SerializeField] private Button _pauseButton;
         [SerializeField] private Image _bonusImage;
         [SerializeField] private Image _bonusImage2;
+        [SerializeField] private Image _multiplyImage;
         [SerializeField] private TMP_Text _coinTextValue;
         [SerializeField] private TMP_Text _distanceTextValue;
 
@@ -35,6 +36,21 @@ namespace GUS.Core.UI
         {
             if (flag) _inGamePanel.DOAnchorPosY(400, 2);
             else _inGamePanel.DOAnchorPosY(0, 2);           
+        }
+
+        public void SetMultiplyImage(int val)
+        {
+            switch (val)
+            {
+                case 1: _multiplyImage.color= Color.white; break;
+                case 2: _multiplyImage.color = Color.green; break;
+                case 3: _multiplyImage.color = Color.blue; break;
+                case 4: _multiplyImage.color = Color.cyan; break;
+                case 5: _multiplyImage.color = Color.magenta; break;
+                case 6: _multiplyImage.color = Color.yellow; break;
+                case 7: _multiplyImage.color = Color.red; break;
+                default: _multiplyImage.color = Color.black; break;
+            }
         }
 
         #region пока не используем

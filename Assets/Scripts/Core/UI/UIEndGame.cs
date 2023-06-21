@@ -57,7 +57,7 @@ namespace GUS.Core.UI
         public void Save()
         {
             _wallet.AddCoinsToData();
-            _distance.UpdateCoins();
+            _distance.UpdateDistance();
             Debug.Log("SAVE");
         }
     }

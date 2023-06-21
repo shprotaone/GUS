@@ -41,7 +41,7 @@ namespace GUS.Core.Data
         {
             _coins -= amount;
             _coinView.RefreshCoinsCount(_coins);
-            UpdateCoins();
+            UpdateDistance();
         }
 
         public void AddCoinsToData()
@@ -50,7 +50,7 @@ namespace GUS.Core.Data
             _storageService.Save();
         }
 
-        public void UpdateCoins()
+        public void UpdateDistance()
         {
             _storageService.Data.coins = _coins;
             _storageService.Save();
