@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GUS.Core.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace GUS.Core.UI
         [SerializeField] private Image _multiplyImage;
         [SerializeField] private TMP_Text _coinTextValue;
         [SerializeField] private TMP_Text _distanceTextValue;
+        [SerializeField] private TMP_Text _honkTextValue;
 
         private GameStateController _gamestateController;
         public void Init(GameStateController gameStateController)

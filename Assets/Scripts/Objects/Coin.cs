@@ -3,51 +3,55 @@ using GUS.Player;
 using System.Collections;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+namespace GUS.Objects
 {
-    [SerializeField] private Collider _collider;
-    [SerializeField] private GameObject _model;
-    [SerializeField] private ParticleSystem _getParticle;
-
-    private Vector3 _startPos;
-    private void OnTriggerEnter(Collider other)
+    public class Coin : MonoBehaviour
     {
-        if(other.TryGetComponent(out PlayerActor actor))
+        [SerializeField] private Collider _collider;
+        [SerializeField] private GameObject _model;
+        [SerializeField] private ParticleSystem _getParticle;
+
+        private Vector3 _startPos;
+        private void OnTriggerEnter(Collider other)
         {
-            StartCoroutine(Delay(actor));
+            if (other.TryGetComponent(out PlayerActor actor))
+            {
+                StartCoroutine(Delay(actor));
+            }
+            else if (other.TryGetComponent(out Magnet magnet))
+            {
+                MoveToMagnet(magnet);
+            }
         }
-        else if(other.TryGetComponent(out Magnet magnet))
+
+        private void OnEnable()
         {
-            MoveToMagnet(magnet);
-        }       
-    }
+            gameObject.SetActive(true);
+            _startPos = transform.localPosition;
+        }
 
-    private void OnEnable()
-    {
-        gameObject.SetActive(true);
-        _startPos = transform.localPosition;
-    }
+        private IEnumerator Delay(PlayerActor actor)
+        {
+            _model.SetActive(false);
+            _collider.enabled = false;
+            _getParticle.Play();
+            actor.Collect();
 
-    private IEnumerator Delay(PlayerActor actor)
-    {
-        _model.SetActive(false);
-        _collider.enabled = false;
-        _getParticle.Play();
-        actor.Collect();
+            yield return new WaitForSeconds(0.5f);
+            _model.SetActive(true);
+            _collider.enabled = true;
+            gameObject.SetActive(false);
+        }
 
-        yield return new WaitForSeconds(0.5f);
-        _model.SetActive(true);
-        _collider.enabled = true;
-        gameObject.SetActive(false);
-    }
+        private void MoveToMagnet(Magnet magnet)
+        {
+            transform.DOMove(magnet.transform.position, magnet.MoveTime);
+        }
 
-    private void MoveToMagnet(Magnet magnet)
-    {
-        transform.DOMove(magnet.transform.position, magnet.MoveTime);
-    }
-
-    private void OnDisable()
-    {
-        transform.localPosition = _startPos;
+        private void OnDisable()
+        {
+            transform.localPosition = _startPos;
+        }
     }
 }
+

@@ -1,3 +1,4 @@
+using GUS.Core.Data;
 using GUS.Core.Locator;
 using System;
 using System.Collections;
@@ -16,8 +17,11 @@ namespace GUS.Core.UI
         [SerializeField] private TMP_Text _timerText;
 
         [SerializeField] private int _timer = 5;
+        [SerializeField] private int _costRevive = 10;
 
         private GameStateController _gameStateController;
+        private HonkCoinWallet _honkCoinWallet;
+
         private int _currentTime;
         private bool _isActive = true;
         private void Start()
@@ -29,6 +33,7 @@ namespace GUS.Core.UI
         public void Init(IServiceLocator serviceLocator)
         {
             _gameStateController = serviceLocator.Get<GameStateController>();
+            _honkCoinWallet = serviceLocator.Get<HonkCoinWallet>();
         }
 
         public void Execute()
@@ -36,6 +41,7 @@ namespace GUS.Core.UI
             if(_isActive) 
             {
                 _panel.gameObject.SetActive(true);
+                CheckAvailable();
                 StartCoroutine(TimerCoroutine());
             }            
         }
@@ -58,7 +64,7 @@ namespace GUS.Core.UI
 
         public void HonkRevive()
         {
-            Debug.Log("Restart");
+            _honkCoinWallet.RemoveCoin(_costRevive);
             _panel.gameObject.SetActive(false);
             _gameStateController.SecondChanceGame();
             StopAllCoroutines();
@@ -81,6 +87,12 @@ namespace GUS.Core.UI
                 _currentTime--;
                 _timerText.text = _currentTime.ToString();
             }         
+        }
+
+        private void CheckAvailable()
+        {
+            if (_honkCoinWallet.Value > _costRevive) _honkReviveButton.interactable = true;
+            else _honkReviveButton.interactable = false;
         }
     }
 }

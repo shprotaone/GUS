@@ -32,6 +32,7 @@
        Magnet,
        Multiply,
        CoinCob,
+       HonkCoin,
 
        CoinUI = 100
     }

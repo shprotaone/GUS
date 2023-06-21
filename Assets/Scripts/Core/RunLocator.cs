@@ -49,6 +49,7 @@ namespace GUS.Core
 
         private DeleteService _deleteService;
         private Wallet _wallet;
+        private HonkCoinWallet _honkWallet;
         private DistanceData _distance;
         private StorageService _storageService;
         private WorldController _worldController;
@@ -58,6 +59,7 @@ namespace GUS.Core
 
         private IStateChanger _stateChanger;
         private ICoinView _coinView;
+        private IHonkCoinView _honkCoinView;
         private IDistanceView _distanceView;
         private ICamera _cameraController;
         private IServiceLocator _serviceLocator;
@@ -95,6 +97,7 @@ namespace GUS.Core
             _gameStateMachine = new GameStateMachine();
             _clickerMovement = new ClickerMovement();
             _distanceMutiplier = new DistanceMutiplier();
+            _honkWallet = new HonkCoinWallet();
 
             _coinView = _uiController.UiInGame;
             _distanceView = _uiController.UiInGame;
@@ -106,6 +109,7 @@ namespace GUS.Core
             _serviceLocator.Register(this);
             _serviceLocator.Register(_storageService);
             _serviceLocator.Register(_wallet);
+            _serviceLocator.Register(_honkWallet);
             _serviceLocator.Register(_distance);
             _serviceLocator.Register(_deleteService);
             _serviceLocator.Register(_jsonToFirebase);
@@ -121,6 +125,7 @@ namespace GUS.Core
             _serviceLocator.Register(_player);
             _serviceLocator.Register(_clicker);
             _serviceLocator.Register(_coinView);
+            _serviceLocator.Register(_honkCoinView);
             _serviceLocator.Register(_distanceView);
             _serviceLocator.Register(_stateChanger);
             _serviceLocator.Register(_bossPositions);
@@ -141,6 +146,7 @@ namespace GUS.Core
 
             _gameStateMachine.Init(_serviceLocator);       
             _wallet.Init(_serviceLocator);
+            _honkWallet.Init(_serviceLocator);
             _distance.Init(_serviceLocator);       
             _deleteService.Init(_serviceLocator);
 

@@ -11,10 +11,13 @@ namespace GUS.Core.Data
         public string playerName;
         [JsonProperty(PropertyName = "coin")]
         public int coins;
+        [JsonProperty(PropertyName = "honkCoin")]
+        public int honkCoins;
         [JsonProperty(PropertyName = "dist")]
         public float commonDistance;
         public List<BuildData> buildDatas;
         public List<BonusData> bonusDatas;
+        
 
         //TODO: »нкапсул€ци€? 
 

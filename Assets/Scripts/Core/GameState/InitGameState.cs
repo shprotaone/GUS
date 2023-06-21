@@ -10,12 +10,14 @@ namespace GUS.Core.GameState
     {
         private WorldController _worldController;
         private Wallet _wallet;
+        private HonkCoinWallet _honkCoinWallet;
         private TMP_Text _stateText;
 
         public IStateMachine StateMachine { get; private set; }
         public InitGameState(IStateMachine stateMachine, IServiceLocator serviceLocator) 
         {           
             _wallet = serviceLocator.Get<Wallet>();
+            _honkCoinWallet = serviceLocator.Get<HonkCoinWallet>();
             StateMachine = stateMachine;
         }      
 
@@ -23,6 +25,7 @@ namespace GUS.Core.GameState
         {
             //_stateText.text = "Enter to " + this.GetType().Name;
             _wallet.ResetCounter();
+            _honkCoinWallet.ResetCounter();
         }
 
         public IEnumerator Execute()
