@@ -22,7 +22,9 @@ public class BagController : MonoBehaviour, IClickerProgress
         _full.SetActive(true);
         _current = _full;
         _currentMaterial = _current.GetComponentInChildren<MeshRenderer>().material;
+        _currentMaterial.SetColor(_emissionName, Color.black);
     }
+
     public void Behaviour(EnemyStage stage)
     {
         _hit.Play();
@@ -40,6 +42,7 @@ public class BagController : MonoBehaviour, IClickerProgress
         _current = next;
         _current.SetActive(true);
         _currentMaterial = _current.GetComponentInChildren<MeshRenderer>().material;
+        _currentMaterial.SetColor(_emissionName, Color.black);
     }
 
     private void ResetState()
@@ -52,5 +55,11 @@ public class BagController : MonoBehaviour, IClickerProgress
         _currentMaterial.SetColor(_emissionName, Color.white);
         await UniTask.Delay(100);
         _currentMaterial.SetColor(_emissionName, Color.black);
+    }
+
+    private void OnDisable()
+    {
+        
+        Debug.Log("Check");
     }
 }

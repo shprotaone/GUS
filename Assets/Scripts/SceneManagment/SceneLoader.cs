@@ -20,21 +20,21 @@ public class SceneLoader : MonoBehaviour
         Application.targetFrameRate = 75;
     }
 
-    public void ChangeAdditiveScene(AssetReference reference)
+    public async void ChangeAdditiveScene(AssetReference reference)
     {
-        StartCoroutine(DelayRoutine(reference));       
+        await DelayRoutine(reference);       
     }
 
-    private IEnumerator DelayRoutine(AssetReference reference)
+    private async UniTask DelayRoutine(AssetReference reference)
     {      
-        yield return _fader.FadeOut();
-        yield return PrevSceneUnload();
+        await _fader.FadeOut();
+        await PrevSceneUnload();
         
         _handle = Addressables.LoadSceneAsync(reference, LoadSceneMode.Additive);
         if (!_handle.IsDone)
-            yield return _handle;
+            await _handle;
 
-        yield return ChangeScene(_handle);
+        await ChangeScene(_handle);
 
     }
     private async UniTask ChangeScene(AsyncOperationHandle<SceneInstance> obj)

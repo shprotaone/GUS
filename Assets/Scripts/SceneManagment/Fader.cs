@@ -8,24 +8,24 @@ namespace GUS.SceneManagment
 {
     public class Fader : MonoBehaviour
     {
-        [SerializeField] private float _time;
+        [SerializeField] private int _time;
         [SerializeField] private CanvasGroup _canvasGroup;
         void Start()
-        {    
-            //FadeIn();
+        {
+            _canvasGroup.alpha = 1;
         }
 
-        public IEnumerator FadeOut()
+        public async UniTask FadeOut()
         {
-            _canvasGroup.DOFade(1,_time);
-            yield return new WaitForSeconds(_time);
-            yield return null;
+            _canvasGroup.DOFade(1,_time/1000);
+            await UniTask.Delay(_time);
+            await UniTask.Yield();
         }
 
         public async UniTask FadeIn()
         {       
             _canvasGroup.alpha = 1;
-            _canvasGroup.DOFade(0,_time);
+            _canvasGroup.DOFade(0,_time/1000);
             await UniTask.Yield();
 
         }
