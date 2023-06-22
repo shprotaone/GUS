@@ -31,8 +31,8 @@ namespace GUS.Player.State
 
         public void Exit()
         {
-            if(_movement is RunMovement move)
-                move.ReturnPosition();
+            //if(_movement is RunMovement move)
+            //    move.ReturnPosition();
 
             _player.Particles.DeathEffect(false);
         }

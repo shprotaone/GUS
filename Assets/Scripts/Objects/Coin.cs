@@ -45,7 +45,7 @@ namespace GUS.Objects
 
         private void MoveToMagnet(Magnet magnet)
         {
-            transform.DOMove(magnet.transform.position, magnet.MoveTime);
+            transform.DOMove(magnet.transform.position, magnet.MoveTime);    
         }
 
         private void OnDisable()

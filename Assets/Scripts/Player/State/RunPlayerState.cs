@@ -15,13 +15,12 @@ namespace GUS.Player.State
         public IStateMachine StateMachine {get; private set;}
 
         public RunPlayerState(IStateMachine statemMachine, LevelSettings settings, PlayerActor player)
-        {
-            _movement = new RunMovement();
-            
+        {       
             _player = player;
             _steerSpeed = settings.steerSpeed;
             StateMachine = statemMachine;
             _animatorController = player.AnimatorController;
+            _movement = player.ServiceLocator.Get<RunMovement>();
             _movement.Init(_player, (PlayerStateMachine)StateMachine, _steerSpeed);
             SetMoveSettings(settings);
         }
@@ -37,7 +36,8 @@ namespace GUS.Player.State
         public void Enter()
         {          
             _player.SetMovementType(_movement);
-            _movement.CanMove(true);
+            _player.ResetDeath();
+            _movement.CanMove(true);           
             _animatorController.RunActivate(true);
             _player.CameraHandler(_movement);           
         }

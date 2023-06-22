@@ -44,6 +44,7 @@ namespace GUS.Core.Clicker
             _cameraController.ClickerCamera();
             yield return new WaitForSeconds(2);
             _cameraController.RunCamera();
+            _game.Complete();
             _gameStateController.StartGame();
             _clickerStateMachine.StopRoutine();
             yield return null;

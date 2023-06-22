@@ -1,5 +1,6 @@
 ﻿using GUS.Core;
 using GUS.Core.GameState;
+using GUS.Player.Movement;
 using System.Collections;
 using UnityEngine;
 
@@ -18,9 +19,9 @@ namespace GUS.Player.State
 
         public void Enter()
         {
-            _player.RestartPosition();
             _player.AnimatorController.RunActivate(true);
             _player.Particles.AfterDeathDisabler();
+            _player.ResetDeath();
         }
 
         public IEnumerator Execute()

@@ -9,6 +9,7 @@ namespace GUS.Objects
     public class Platform : MonoBehaviour, IPoolObject
     {
         [SerializeField] private List<Transform> _spawnPoints;
+        [SerializeField] private List<GameObject> _obstacles;
         [SerializeField] private PoolObjectType _objectPoolType;
         [SerializeField] private Transform _beginPoint;
         [SerializeField] private Transform _endPoint;
@@ -29,9 +30,25 @@ namespace GUS.Objects
                 if (SpawnPoints.Count > 0 && _isSpawning)
                 {
                     await FindPosition(bonusSpawner);
-                    if(_parent!= null) SpawnBonus(bonusSpawner);
+                    if (_parent != null) SpawnBonus(bonusSpawner);
                 }
-            }            
+            }
+
+            Reactivate();
+        }
+
+        private void Reactivate()
+        {
+            if (_obstacles.Count != 0)
+            {
+                foreach (GameObject obstacle in _obstacles)
+                {
+                    if (!obstacle.activeInHierarchy)
+                    {
+                        obstacle.SetActive(true);
+                    }
+                }
+            }
         }
 
         private void SpawnBonus(BonusSpawner bonusSpawner)
