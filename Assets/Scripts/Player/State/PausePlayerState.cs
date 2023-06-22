@@ -13,12 +13,14 @@ namespace GUS.Player.State
         public PausePlayerState(IStateMachine stateMachine, PlayerActor player)
         {
             _player = player;
+            
             StateMachine = stateMachine;
         }
 
         public void Enter()
         {
             _player.AnimatorController.Pause(true);
+            _player.MovementType.CanMove(false);
         }
 
         public IEnumerator Execute()
@@ -29,6 +31,7 @@ namespace GUS.Player.State
         public void Exit()
         {
             _player.AnimatorController.Pause(false);
+            _player.MovementType.CanMove(true);
         }
 
         public void FixedUpdate()

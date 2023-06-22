@@ -14,7 +14,7 @@ namespace GUS.LevelBuild
     public class PlatformBuilder
     {
         public event Action<int> OnPlatformAdded;
-        private const int countStartPlatform = 5;
+        private const int countStartPlatform = 2;
         public const int RangeZ = -50;
 
         private Transform _beginWorldTransform;
@@ -63,7 +63,7 @@ namespace GUS.LevelBuild
             }
 
             _isFree = false;
-            for (int i = 0; i < countStartPlatform + 5; i++)
+            for (int i = 0; i < countStartPlatform; i++)
             {
                 CreateNextPlatform();
             }
@@ -73,7 +73,7 @@ namespace GUS.LevelBuild
         {
             float nextPlatformOffset;
             
-            if (_platformsQueue.Count < 5)
+            if (_platformsQueue.Count < 3)
             {
                 SetNextPlatform();
 

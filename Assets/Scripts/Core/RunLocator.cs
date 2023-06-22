@@ -55,6 +55,7 @@ namespace GUS.Core
         private WorldController _worldController;
         private ClickerGame _clicker;
         private ClickerMovement _clickerMovement;
+        private RunMovement _runMovement;
         private DistanceMutiplier _distanceMutiplier;
 
         private IStateChanger _stateChanger;
@@ -96,6 +97,7 @@ namespace GUS.Core
             _playerState = new PlayerStateMachine();
             _gameStateMachine = new GameStateMachine();
             _clickerMovement = new ClickerMovement();
+            _runMovement= new RunMovement();
             _distanceMutiplier = new DistanceMutiplier();
             _honkWallet = new HonkCoinWallet();
 
@@ -124,6 +126,7 @@ namespace GUS.Core
             _serviceLocator.Register(_progressiveSystem);
             _serviceLocator.Register(_player);
             _serviceLocator.Register(_clicker);
+            _serviceLocator.Register(_runMovement);
             _serviceLocator.Register(_coinView);
             _serviceLocator.Register(_honkCoinView);
             _serviceLocator.Register(_distanceView);

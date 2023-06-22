@@ -1,29 +1,30 @@
 ﻿using GUS.Core.Data;
 using GUS.Core.Locator;
-using GUS.LevelBuild;
+using GUS.Player;
+using GUS.Player.Movement;
 using System.Collections;
-using TMPro;
 
 namespace GUS.Core.GameState
 {
     public class InitGameState : IState
     {
-        private WorldController _worldController;
         private Wallet _wallet;
         private HonkCoinWallet _honkCoinWallet;
-        private TMP_Text _stateText;
-
+        private PlayerActor _playerActor;
+        private RunMovement _run;
         public IStateMachine StateMachine { get; private set; }
         public InitGameState(IStateMachine stateMachine, IServiceLocator serviceLocator) 
         {           
             _wallet = serviceLocator.Get<Wallet>();
             _honkCoinWallet = serviceLocator.Get<HonkCoinWallet>();
+            _run = serviceLocator.Get<RunMovement>();
             StateMachine = stateMachine;
         }      
 
         public void Enter()
         {
-            //_stateText.text = "Enter to " + this.GetType().Name;
+           _run.ReturnPosition();
+            
             _wallet.ResetCounter();
             _honkCoinWallet.ResetCounter();
         }

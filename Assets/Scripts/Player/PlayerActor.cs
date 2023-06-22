@@ -42,6 +42,7 @@ namespace GUS.Player
         private IMovement _movement;
 
         private bool _isDamage;
+        private bool _isDeath = false;
 
         #region Properties
         public CameraRunController CameraController => _cameraController;
@@ -77,17 +78,23 @@ namespace GUS.Player
             ServiceLocator = serviceLocator;
         }
 
-        public void SetMovementType(IMovement movement)
-        {
-            _movement = movement;
-        }
+        public void ResetDeath() => _isDeath = false;
+        public void SetMovementType(IMovement movement) => _movement = movement;
 
         public void Death()
         {
-            _audioService.PlaySFX(_audioService.Data.death);
-            _particleController.DeathEffect(true);
-            _cameraController.ShackeCameraHandle(5, 0.2f);
-            _stateController.EndGame();
+            if (!_isDeath)
+            {
+                _isDeath = true;
+                _audioService.PlaySFX(_audioService.Data.death);
+                _particleController.DeathEffect(true);
+                _cameraController.ShackeCameraHandle(5, 0.2f);
+                _stateController.EndGame();
+            }
+            else
+            {
+                Debug.Log("Уже умер");
+            }           
         }  
 
         public void RestartPosition()
@@ -171,5 +178,8 @@ namespace GUS.Player
             }
             _isDamage = false;
         }
+
+        
+        
     }
 }

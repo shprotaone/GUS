@@ -1,4 +1,5 @@
 using GUS.Core.Pool;
+using GUS.Objects;
 using GUS.Objects.PowerUps;
 using GUS.Player;
 using System.Collections;
@@ -46,6 +47,18 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
             actor.CollectBonus();
             actor.PowerUpHandler.Execute(this);
             transform.SetParent(actor.transform);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.TryGetComponent(out Coin coin))
+        {
+            if(Vector3.Distance(transform.position,coin.transform.position) <= 5)
+            {
+                coin.transform.position = transform.position;
+                Debug.Log("Collect");
+            }
         }
     }
 

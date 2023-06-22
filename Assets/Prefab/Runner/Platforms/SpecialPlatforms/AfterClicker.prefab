@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588280230968110838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.84, z: 4.49}
+  m_LocalPosition: {x: 0, y: 1.2, z: 4.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -427,6 +427,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1013304238218516409, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013304238218516409, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
       propertyPath: m_LocalPosition.z
       value: -3.95
       objectReference: {fileID: 0}
@@ -569,6 +573,7 @@ MonoBehaviour:
   - {fileID: 5225920094672555460}
   - {fileID: 8557070483062446013}
   - {fileID: 3001981488003957374}
+  _obstacles: []
   _objectPoolType: 9
   _beginPoint: {fileID: 372381312345813487}
   _endPoint: {fileID: 372381312331468582}

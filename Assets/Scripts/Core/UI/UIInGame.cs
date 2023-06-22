@@ -36,8 +36,8 @@ namespace GUS.Core.UI
 
         public void Hide(bool flag)
         {
-            if (flag) _inGamePanel.DOAnchorPosY(400, 2);
-            else _inGamePanel.DOAnchorPosY(0, 2);           
+            if (flag) _inGamePanel.DOAnchorPosY(400, 1);
+            else _inGamePanel.DOAnchorPosY(0, 1);           
         }
 
         public void SetMultiplyImage(int val)

@@ -122,7 +122,7 @@ namespace GUS.Core
             SecondChance = false;
             _gameStateMachine.start.WithStartCut(false);
             _gameStateMachine.TransitionTo(_gameStateMachine.session);
-            _playerStateMachine.TransitionTo(_playerStateMachine.initState);
+            //_playerStateMachine.TransitionTo(_playerStateMachine.initState);
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);            
         }
 

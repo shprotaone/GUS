@@ -13,6 +13,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using GUS.Player.Movement;
 
 namespace GUS.Core.Hub
 {
@@ -41,6 +42,7 @@ namespace GUS.Core.Hub
         private DeleteService _deleteService;
         private PlayerStateMachine _playerState;
         private GameStateMachine _gameStateMachine;
+        private RunMovement _runMovement;
 
         private IStateChanger _stateChanger;
         private ICamera _cameraController;
@@ -74,6 +76,7 @@ namespace GUS.Core.Hub
             _storageService = new StorageService();
             _hubController = new HubStateController();
             _honkWallet = new HonkCoinWallet();
+            _runMovement= new RunMovement();
             _stateChanger = _hubController;
             _inputType = _joystick;
             _coinView = _uiHubController.CoinView;
@@ -97,6 +100,7 @@ namespace GUS.Core.Hub
             _serviceLocator.Register(_levelSettings);
             _serviceLocator.Register(_hubController);
             _serviceLocator.Register(_player);
+            _serviceLocator.Register(_runMovement);
             _serviceLocator.Register(_coinView);
             _serviceLocator.Register(_honkCoinView);
             _serviceLocator.Register(_storageService);
