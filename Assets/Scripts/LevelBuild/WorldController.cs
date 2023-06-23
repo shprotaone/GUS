@@ -17,6 +17,7 @@ namespace GUS.LevelBuild
         private bool _worldIsStopped;
 
         public float CurrentDistance { get; private set; }
+        public float CurrentSpeed => _currentSpeed;
 
         public PlatformBuilder PlatformBuilder => _platformBuilder;
 

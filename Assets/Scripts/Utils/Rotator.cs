@@ -3,14 +3,25 @@ using UnityEngine;
 
 public class Rotator : MonoBehaviour
 {
-    [SerializeField] private bool _isVertical;
-    [SerializeField] private float _rotateSpeed;
+    [SerializeField] private RotatorDirection _dir;
+    [SerializeField] private float _rotateSpeedMult;
+    [SerializeField] private float _duration;
 
 
     private void OnEnable()
     {
-        if (!_isVertical) this.gameObject.transform.DOLocalRotate(Vector3.up * _rotateSpeed, 1).SetLoops(-1,LoopType.Incremental).SetEase(Ease.Linear);
-        else this.gameObject.transform.DOLocalRotate(Vector3.forward * _rotateSpeed, 1).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
+        switch (_dir)
+        {
+            case RotatorDirection.X:
+                this.gameObject.transform.DOLocalRotate(Vector3.right * _rotateSpeedMult, _duration).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
+                break;
+            case RotatorDirection.Y:
+                this.gameObject.transform.DOLocalRotate(Vector3.up * _rotateSpeedMult, _duration).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
+                break;
+            case RotatorDirection.Z:
+                this.gameObject.transform.DOLocalRotate(Vector3.forward * _rotateSpeedMult, _duration).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
+                break;
+        }
     }
 
     private void OnDisable()

@@ -17,4 +17,6 @@ public class LevelSettings : ScriptableObject
     public float forceLandingPower;
     [Header("”правление в хабе")]
     public float exploreSpeed;
+    [Range(0f, 1f)]
+    public float tractorSpeedMult;
 }
