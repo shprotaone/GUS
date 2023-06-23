@@ -1,8 +1,9 @@
 using DG.Tweening;
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class TractorController : MonoBehaviour, IDynamicObstacle
+public class BarrelController : MonoBehaviour,IDynamicObstacle
 {
     [SerializeField] private float _speedMultilpy;
     [SerializeField] private float _speed;
@@ -13,15 +14,16 @@ public class TractorController : MonoBehaviour, IDynamicObstacle
     {
         _startPos = transform.localPosition;
     }
+
+    public void Init(float speed, float mult)
+    {
+        _speedMultilpy = speed * mult;
+        Debug.Log("BarrelSpeed " + _speed * _speedMultilpy);
+    }
+
     public void Move()
     {
         transform.DOMoveZ(_speed * _speedMultilpy, _time).SetEase(Ease.Linear);
-    }
-
-    public void Init(float speed,float mult)
-    {
-        _speedMultilpy = speed * mult;
-        Debug.Log("TractorSpeed " + _speed * _speedMultilpy);
     }
 
     private void OnDisable()

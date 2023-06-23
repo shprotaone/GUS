@@ -63,7 +63,6 @@ namespace GUS.Objects.PowerUps
 
             _canTake = true;
             _wallet.SetMultiply(false);
-            Debug.Log("Desactivate");
             _objectPool.DestroyObject(this.gameObject);
             
         }

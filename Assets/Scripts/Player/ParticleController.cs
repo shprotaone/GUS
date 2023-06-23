@@ -26,7 +26,6 @@ namespace GUS.Player
                 _deathParticle.gameObject.SetActive(true);
                 _deathParticle.Play();
                 _magnet.Stop();
-                _multiply.Stop();
             }           
         }
 
@@ -54,16 +53,16 @@ namespace GUS.Player
         public IEnumerator MultiplyEffect(float delay)
         {
             float timer = delay;
-            _multiply.gameObject.SetActive(true);
-            _multiply.Play();
+            _deathParticle.gameObject.SetActive(true);
+            _deathParticle.Play();
             while (timer > 0)
             {
                 yield return new WaitForSeconds(1);
                 timer--;
             }
 
-            _multiply.Stop();
-            _multiply.gameObject.SetActive(false);
+            _deathParticle.Stop();
+            _deathParticle.gameObject.SetActive(false);
             yield return null;
         }
 

@@ -45,6 +45,7 @@ namespace GUS.Player
         private bool _isDeath = false;
 
         #region Properties
+        public WorldController WorldController => _worldController;
         public CameraRunController CameraController => _cameraController;
         public ParticleController Particles => _particleController;
         public IMovement MovementType => _movement;

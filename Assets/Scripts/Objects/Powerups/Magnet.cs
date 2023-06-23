@@ -57,7 +57,6 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
             if(Vector3.Distance(transform.position,coin.transform.position) <= 5)
             {
                 coin.transform.position = transform.position;
-                Debug.Log("Collect");
             }
         }
     }
@@ -80,7 +79,6 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
 
         yield return new WaitForSeconds(_duration);
 
-        Debug.Log("Disabled");
         _collider.radius = stadartColliderRadius;
         _model.SetActive(true);
         _canTake = true;
