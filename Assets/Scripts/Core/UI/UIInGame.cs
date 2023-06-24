@@ -11,8 +11,6 @@ namespace GUS.Core.UI
     {
         [SerializeField] private RectTransform _inGamePanel;
         [SerializeField] private Button _pauseButton;
-        [SerializeField] private Image _bonusImage;
-        [SerializeField] private Image _bonusImage2;
         [SerializeField] private Image _multiplyImage;
         [SerializeField] private TMP_Text _coinTextValue;
         [SerializeField] private TMP_Text _distanceTextValue;
@@ -21,10 +19,15 @@ namespace GUS.Core.UI
         [Title("Ресурсы для мультипликатора")]
         [SerializeField] private Sprite[] _sprites;
 
+        [Title("Бонусы")]
+        [SerializeField] private BonusSlotView[] _bonusSlotViews;
+
         private GameStateController _gamestateController;
-        public void Init(GameStateController gameStateController)
+        private PauseHandle _pauseHandle;
+        public void Init(GameStateController gameStateController,PauseHandle pauseHandle)
         {
             _gamestateController = gameStateController;
+            _pauseHandle = pauseHandle;
             _pauseButton.onClick.AddListener(_gamestateController.Pause);
         }
 
@@ -47,53 +50,27 @@ namespace GUS.Core.UI
         public void SetMultiplyImage(int val)
         {
             _multiplyImage.sprite = _sprites[val];
-            //switch (val)
-            //{
-            //    case 1: _multiplyImage.color= Color.white; break;
-            //    case 2: _multiplyImage.color = Color.green; break;
-            //    case 3: _multiplyImage.color = Color.blue; break;
-            //    case 4: _multiplyImage.color = Color.cyan; break;
-            //    case 5: _multiplyImage.color = Color.magenta; break;
-            //    case 6: _multiplyImage.color = Color.yellow; break;
-            //    case 7: _multiplyImage.color = Color.red; break;
-            //    default: _multiplyImage.color = Color.black; break;
-            //}
         }
 
-        #region пока не используем
-        public int SetBonusImage(Sprite sprite)
+        public void ActivateBonusView(IPowerUp powerUp)
         {
-            if (!_bonusImage.enabled)
+            foreach (var view in _bonusSlotViews)
             {
-                _bonusImage.enabled = true;
-                _bonusImage.sprite = sprite;
-                return 1;
+                if(view.Type == PowerUpEnum.Empty || view.Type == powerUp.PowerUpEnum)
+                {
+                    view.SetBonus(powerUp.Sprite, powerUp.Duration, powerUp.PowerUpEnum,_pauseHandle);                   
+                    return;
+                }
             }
-            else if(_bonusImage.enabled)
-            {
-                _bonusImage2.enabled = true;
-                _bonusImage2.sprite = sprite;
-                return 2;
-            }
-
-            return 0;
         }
 
-        public void DisableBonusImage(int index)
+        public void DesactivateBonuses()
         {
-            if(index == 1)
+            foreach (var view in _bonusSlotViews)
             {
-                _bonusImage.enabled = false;
-                _bonusImage.sprite = null;
+                view.Disable();
             }
-            else if(index == 2)
-            {
-                _bonusImage2.enabled = false;
-                _bonusImage2.sprite = null;
-            }
-            
         }
-        #endregion
     }
 }
 

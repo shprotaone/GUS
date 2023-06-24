@@ -12,7 +12,6 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
 
     [SerializeField] private Collectable _collectable;
     [SerializeField] private SphereCollider _collider;
-    [SerializeField] private Sprite _sprite;
     [SerializeField] private float _moveTime;
     [SerializeField] private float _magnetRadius;
     [SerializeField] private float _duration;
@@ -25,8 +24,9 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
     public bool IsActive { get; private set; }
     public float Duration => _duration;
     public float MoveTime => _moveTime;
-    public Sprite Sprite => _sprite;
+    public Sprite Sprite => _collectable.icon;
     public PoolObjectType Type => PoolObjectType.Magnet;
+    public PowerUpEnum PowerUpEnum => PowerUpEnum.Magnet;
 
     private void OnEnable()
     {
@@ -79,10 +79,7 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
 
         yield return new WaitForSeconds(_duration);
 
-        _collider.radius = stadartColliderRadius;
-        _model.SetActive(true);
-        _canTake = true;
-        _objectPool.DestroyObject(this.gameObject);
+        Disable();
     }
 
     public void SetUp(float duration)
@@ -94,5 +91,14 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, _magnetRadius);
+    }
+
+    public void Disable()
+    {
+        StopAllCoroutines();
+        _collider.radius = stadartColliderRadius;
+        _model.SetActive(true);
+        _canTake = true;
+        _objectPool.DestroyObject(this.gameObject);
     }
 }

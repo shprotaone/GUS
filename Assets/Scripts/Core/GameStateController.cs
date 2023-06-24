@@ -49,11 +49,6 @@ namespace GUS.Core
             StartCoroutine(_playerStateMachine.CurrentState.Execute());
         }
 
-        private void StopPlayerStateRoutine()
-        {
-            StopCoroutine(_playerStateMachine.CurrentState.Execute());
-        }
-
         private void CallGameStateRoutine()
         {
             StopCoroutine(_gameStateMachine.CurrentState.Execute());
@@ -135,6 +130,16 @@ namespace GUS.Core
         {
             EndGame();
             _sceneHandler.LoadOtherScene();
+        }
+
+        /// <summary>
+        /// Это ужасное временное решение
+        /// </summary>
+        /// <param name="flag"></param>
+        public void TimePause(bool flag)
+        {
+            if (flag) { Time.timeScale = 0; }
+            else { Time.timeScale = 1; }
         }
     }
 }
