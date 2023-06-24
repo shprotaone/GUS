@@ -1,5 +1,6 @@
 using DG.Tweening;
 using GUS.Core.Data;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,9 @@ namespace GUS.Core.UI
         [SerializeField] private TMP_Text _coinTextValue;
         [SerializeField] private TMP_Text _distanceTextValue;
         [SerializeField] private TMP_Text _honkTextValue;
+
+        [Title("Ресурсы для мультипликатора")]
+        [SerializeField] private Sprite[] _sprites;
 
         private GameStateController _gamestateController;
         public void Init(GameStateController gameStateController)
@@ -42,17 +46,18 @@ namespace GUS.Core.UI
 
         public void SetMultiplyImage(int val)
         {
-            switch (val)
-            {
-                case 1: _multiplyImage.color= Color.white; break;
-                case 2: _multiplyImage.color = Color.green; break;
-                case 3: _multiplyImage.color = Color.blue; break;
-                case 4: _multiplyImage.color = Color.cyan; break;
-                case 5: _multiplyImage.color = Color.magenta; break;
-                case 6: _multiplyImage.color = Color.yellow; break;
-                case 7: _multiplyImage.color = Color.red; break;
-                default: _multiplyImage.color = Color.black; break;
-            }
+            _multiplyImage.sprite = _sprites[val];
+            //switch (val)
+            //{
+            //    case 1: _multiplyImage.color= Color.white; break;
+            //    case 2: _multiplyImage.color = Color.green; break;
+            //    case 3: _multiplyImage.color = Color.blue; break;
+            //    case 4: _multiplyImage.color = Color.cyan; break;
+            //    case 5: _multiplyImage.color = Color.magenta; break;
+            //    case 6: _multiplyImage.color = Color.yellow; break;
+            //    case 7: _multiplyImage.color = Color.red; break;
+            //    default: _multiplyImage.color = Color.black; break;
+            //}
         }
 
         #region пока не используем
