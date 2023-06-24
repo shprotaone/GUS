@@ -34,38 +34,33 @@ namespace GUS.Player
             _slideEffect.Play();
         }
 
-        public IEnumerator MagnetEffect(float delay)
+        public void BonusEffectEnable(PowerUpEnum powerUp,float delay)
+        {
+            if(powerUp == PowerUpEnum.Magnet)
+            {
+                StartCoroutine(ParticleRoutine(delay,_magnet));
+            }
+            else if(powerUp == PowerUpEnum.Multiply)
+            {
+                StartCoroutine(ParticleRoutine(delay, _deathParticle));
+            }         
+        }
+
+        private IEnumerator ParticleRoutine(float delay,ParticleSystem particles)
         {
             float timer = delay;
-            _magnet.gameObject.SetActive(true);
-            _magnet.Play();
+            particles.gameObject.SetActive(true);
+            particles.Play();
             while(timer > 0)
             {
                 yield return new WaitForSeconds(1);
                 timer--;
             }
 
-            _magnet.Stop();
-            _magnet.gameObject.SetActive(false);
+            particles.Stop();
+            particles.gameObject.SetActive(false);
             yield return null;
         }
-
-        public IEnumerator MultiplyEffect(float delay)
-        {
-            float timer = delay;
-            _deathParticle.gameObject.SetActive(true);
-            _deathParticle.Play();
-            while (timer > 0)
-            {
-                yield return new WaitForSeconds(1);
-                timer--;
-            }
-
-            _deathParticle.Stop();
-            _deathParticle.gameObject.SetActive(false);
-            yield return null;
-        }
-
         public void DamageEffect(Vector3 position)
         {
             //Ray ray = _camera.ScreenPointToRay(position);
@@ -88,6 +83,11 @@ namespace GUS.Player
         public void AfterDeathDisabler()
         {
             _afterDeath.gameObject.SetActive(false);
+        }
+
+        public void DisablePowerUpParticle(PowerUpEnum powerUp)
+        {
+            if (powerUp == PowerUpEnum.Magnet) _magnet.Stop();
         }
     }
 }

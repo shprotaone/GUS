@@ -18,13 +18,14 @@ namespace GUS.Core.GameState
             _wallet = serviceLocator.Get<Wallet>();
             _honkCoinWallet = serviceLocator.Get<HonkCoinWallet>();
             _run = serviceLocator.Get<RunMovement>();
+            _playerActor= serviceLocator.Get<PlayerActor>();
             StateMachine = stateMachine;
         }      
 
         public void Enter()
         {
            _run.ReturnPosition();
-            
+            _playerActor.PowerUpHandler.ResetPoweraUps();
             _wallet.ResetCounter();
             _honkCoinWallet.ResetCounter();
         }

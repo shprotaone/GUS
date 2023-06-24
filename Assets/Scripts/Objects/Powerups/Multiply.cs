@@ -9,7 +9,6 @@ namespace GUS.Objects.PowerUps
     public class Multiply : MonoBehaviour, IPowerUp,IPoolObject
     {
         [SerializeField] private Collectable _collectable;
-        [SerializeField] private Sprite _bonusSprite;
         [SerializeField] private float _duration;
 
         private GameObject _model;
@@ -19,8 +18,9 @@ namespace GUS.Objects.PowerUps
         private bool _canTake;
         private float _workTime;
         public float Duration => _duration;
-        public Sprite Sprite => _bonusSprite;
+        public Sprite Sprite => _collectable.icon;
         public PoolObjectType Type => PoolObjectType.Multiply;
+        public PowerUpEnum PowerUpEnum => PowerUpEnum.Multiply;
 
         private void OnEnable()
         {
@@ -61,15 +61,20 @@ namespace GUS.Objects.PowerUps
 
             yield return new WaitForSeconds(_duration);
 
-            _canTake = true;
-            _wallet.SetMultiply(false);
-            _objectPool.DestroyObject(this.gameObject);
-            
+            Disable();            
         }
 
         public void SetUp(float duration)
         {
             _duration = duration;
+        }
+
+        public void Disable()
+        {
+            StopAllCoroutines();
+            _canTake = true;
+            _wallet.SetMultiply(false);
+            _objectPool.DestroyObject(this.gameObject);
         }
     }
 }

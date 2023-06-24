@@ -37,6 +37,7 @@ namespace GUS.Core
         [SerializeField] private Transform _startPoint;
         [SerializeField] private GameStateController _stateController;        
         [SerializeField] private BossPositions _bossPositions;
+        
 
         [Header("Сервисы")]
         [SerializeField] private AudioService _audioService;
@@ -57,6 +58,7 @@ namespace GUS.Core
         private ClickerMovement _clickerMovement;
         private RunMovement _runMovement;
         private DistanceMutiplier _distanceMutiplier;
+        private PauseHandle _pauseHandle;
 
         private IStateChanger _stateChanger;
         private ICoinView _coinView;
@@ -100,6 +102,7 @@ namespace GUS.Core
             _runMovement= new RunMovement();
             _distanceMutiplier = new DistanceMutiplier();
             _honkWallet = new HonkCoinWallet();
+            _pauseHandle = new PauseHandle();
 
             _coinView = _uiController.UiInGame;
             _distanceView = _uiController.UiInGame;
@@ -135,6 +138,7 @@ namespace GUS.Core
             _serviceLocator.Register(_playerState);
             _serviceLocator.Register(_gameStateMachine);
             _serviceLocator.Register(_distanceMutiplier);
+            _serviceLocator.Register(_pauseHandle);
             
            
             RegisterPools();
