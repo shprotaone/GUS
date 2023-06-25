@@ -1,0 +1,59 @@
+using Cysharp.Threading.Tasks;
+using GUS.Core.Locator;
+using GUS.Core.UI;
+using GUS.LevelBuild;
+using GUS.Player;
+using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
+
+namespace GUS.Core.Tutorial
+{
+    public class Step1Run : MonoBehaviour, IStepTrigger
+    {
+        [SerializeField] private int _stepIndex;
+        private UITutorial _view;
+        private WorldController _worldContrtoller;
+        private PlayerActor _player;
+        private bool _isActive = true;
+
+        public void Init(IServiceLocator serviceLocator)
+        {
+            _view = serviceLocator.Get<UIController>().Tutorial;
+            _worldContrtoller = serviceLocator.Get<WorldController>();
+        }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out PlayerActor actor) && _isActive)
+            {
+                _isActive = false;
+                _view.Init();
+                Execute(actor);
+            }
+        }
+
+        private void Execute(PlayerActor actor)
+        {
+            _player = actor;
+            _view.CallStep(_stepIndex);
+            _view.OnWaiter += Waiter;
+            _worldContrtoller.WorldStopper(true);
+            _player.AnimatorController.Pause(true);
+            _player.MovementType.CanMove(false);            
+        }
+
+        public void Waiter()
+        {
+            if (_player.InputType.Movement() == EnumBind.Up)
+            {
+                _player.MovementType.CanMove(true);
+                _worldContrtoller.WorldStopper(false);
+                _player.AnimatorController.Pause(false);
+                _player.MovementType.CallMove(EnumBind.Up);
+                _view.CurrentViewStep.Disable();
+                _view.OnWaiter-= Waiter;
+            }
+        }
+    }
+}
+

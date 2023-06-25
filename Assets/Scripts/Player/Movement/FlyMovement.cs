@@ -29,7 +29,7 @@ namespace GUS.Player.Movement
         {
             if (_canMove)
             {
-                Move();
+                Move(false);
                 Fire();
             }          
         }
@@ -49,7 +49,7 @@ namespace GUS.Player.Movement
             
         }      
 
-        public void Move()  //спуск работает не корректно
+        public void Move(bool withForce)  //спуск работает не корректно
         {
             //float tmpDist = Time.deltaTime * _speedMovement;
             //Vector3 movement = Vector3.MoveTowards(_playActor.transform.position, _target, tmpDist) - _playActor.transform.position;
@@ -89,6 +89,11 @@ namespace GUS.Player.Movement
         }
 
         public void FixedUpdate()
+        {
+            
+        }
+
+        public void CallMove(EnumBind enumBind)
         {
             
         }

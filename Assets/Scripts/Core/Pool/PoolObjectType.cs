@@ -24,6 +24,7 @@
        FenceLine,
        HoleWithTractor,
        ScareTrac,
+       Tutorial,
 
 
        Empty,

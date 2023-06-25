@@ -10,9 +10,10 @@ namespace GUS.Player
         void Init(PlayerActor player, PlayerStateMachine playerState, float speedMovement);
         public void Update();
         public void FixedUpdate();
-        public void Move();
+        public void Move(bool withForce);
         public void Fire();
         public void CanMove(bool flag);
+        public void CallMove(EnumBind enumBind);
 
     }
 }

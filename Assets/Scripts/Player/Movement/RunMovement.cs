@@ -60,9 +60,9 @@ namespace GUS.Player.Movement
         {
             if(_inputType != null && _canMoved)
             {
-                Move();
+                Move(false);
                 Jump();
-                Crunch();
+                DownSlide();
                 Fire();
             }
         }
@@ -88,9 +88,9 @@ namespace GUS.Player.Movement
             //}
         }
 
-        public void Move()
+        public void Move(bool withForce)
         {
-            _movementAction = _inputType.Movement();
+            if(!withForce) _movementAction = _inputType.Movement();
             float tmpDist = Time.deltaTime * _speedMovement;
 
             _direction.x = Mathf.Lerp(_player.transform.position.x, _targetPosition.x, tmpDist) - _player.transform.position.x;
@@ -123,7 +123,7 @@ namespace GUS.Player.Movement
             }            
         }
 
-        private void Crunch()
+        private void DownSlide()
         {
             if (_movementAction == EnumBind.Down/* && _player.CharController.isGrounded*/)
             {
@@ -192,6 +192,22 @@ namespace GUS.Player.Movement
             ResetPosition();
             CheckLinePosition();
             OnChangePosition?.Invoke();
+        }
+
+        public void CallMove(EnumBind enumBind)
+        {
+            _movementAction = enumBind;
+            switch (enumBind)
+            {
+                case EnumBind.Up:               
+                    Jump();
+                    break;
+                case EnumBind.Down: 
+                    DownSlide(); 
+                    break;
+                default: Move(true);
+                    break;
+            }            
         }
     }
 

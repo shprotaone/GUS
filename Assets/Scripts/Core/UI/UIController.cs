@@ -1,4 +1,5 @@
 using GUS.Core.Locator;
+using GUS.Core.Tutorial;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ namespace GUS.Core.UI
         [SerializeField] private UIPause _uiPause;
         [SerializeField] private UIEndGame _uiEndGame;
         [SerializeField] private UIClickerGame _uiClickerGame;
+        [SerializeField] private UITutorial _uiTutorial;
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private SaveMe _saveMePanel;
 
@@ -22,6 +24,7 @@ namespace GUS.Core.UI
         public UIInGame UiInGame => _uiInGame;
         public UIEndGame UIEndGame => _uiEndGame;
         public UIClickerGame ClickerGame => _uiClickerGame;
+        public UITutorial Tutorial => _uiTutorial;
 
         public void Init(IServiceLocator serviceLocator)
         {

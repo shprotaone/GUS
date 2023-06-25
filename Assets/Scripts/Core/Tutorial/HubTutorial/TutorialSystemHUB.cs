@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GUS.Core.Tutorial
 {
-    public class TutorialSystem : MonoBehaviour
+    public class TutorialSystemHUB : MonoBehaviour
     {
         [SerializeField] private Canvas _tutorialCanvas;
 

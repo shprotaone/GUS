@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358cb6e6aa4d34c4ba6e26eb3959ccde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isVertical: 0
-  _rotateSpeed: 50
+  _dir: 0
+  _rotateSpeedMult: 0
+  _duration: 0
 --- !u!1 &8334463661797651625
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +295,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 716876202929141278, guid: 640fba9a058c721448396e6cfa467934, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6613594622287841793, guid: 640fba9a058c721448396e6cfa467934, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

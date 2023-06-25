@@ -30,6 +30,7 @@ namespace GUS.LevelBuild
         private ObjectPool _platformPool;
         private ObjectPool _collectablesPool;
         private SpecialPlatformBuilder _specialPlatformBuilder;
+        private RunLocator _runLocator;
         private BonusSpawner _bonusSpawner;
 
         private int _platformCount = 0;
@@ -43,9 +44,9 @@ namespace GUS.LevelBuild
             _specialPlatformBuilder = serviceLocator.Get<SpecialPlatformBuilder>();
             _serviceLocator = serviceLocator;
 
-            RunLocator runLoc = _serviceLocator.Get<RunLocator>();
-            _platformPool = runLoc.GetPool(PoolTypeEnum.Platform);
-            _collectablesPool = runLoc.GetPool(PoolTypeEnum.Collectable);
+            _runLocator = _serviceLocator.Get<RunLocator>();
+            _platformPool = _runLocator.GetPool(PoolTypeEnum.Platform);
+            _collectablesPool = _runLocator.GetPool(PoolTypeEnum.Collectable);
 
             _bonusSpawner = new BonusSpawner(_collectablesPool);
             _platformsQueue = new Queue<Platform>();

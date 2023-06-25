@@ -3,7 +3,7 @@
     public interface ITutorialStep
     {
         void ShowText(string text);
-        void Activate(TutorialSystem tutorial);
+        void Activate(TutorialSystemHUB tutorial);
         void Deactivate();
         void Next();
     }

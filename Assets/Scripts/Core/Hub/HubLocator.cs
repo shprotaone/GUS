@@ -33,7 +33,7 @@ namespace GUS.Core.Hub
         [SerializeField] private FloatingJoystick _joystick;
         [SerializeField] private UiHubController _uiHubController;       
         [SerializeField] private JsonToFirebase _jsonToFirebase;
-        [SerializeField] private TutorialSystem _tutorialSystem;
+        [SerializeField] private TutorialSystemHUB _tutorialSystem;
 
         [Title("Магазины")]
         [SerializeField] private BuildsSystem _buildSystem;

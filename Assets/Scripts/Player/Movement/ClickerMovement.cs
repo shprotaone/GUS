@@ -43,7 +43,7 @@ namespace GUS.Player.Movement
         {
             
         }       
-        public void Move()
+        public void Move(bool withForce)
         {
             
         }
@@ -59,6 +59,11 @@ namespace GUS.Player.Movement
         }
 
         public bool CanAttack(bool flag) => _canAttack = flag;
+
+        public void CallMove(EnumBind enumBind)
+        {
+            
+        }
     }
 }
 
