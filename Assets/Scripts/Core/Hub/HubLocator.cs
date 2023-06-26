@@ -20,8 +20,6 @@ namespace GUS.Core.Hub
 {
     public class HubLocator : MonoBehaviour
     {
-        [SerializeField] private bool isTutorialActive;
-
         [Title("Стартовые настройки игрока")]
         [SerializeField] private Transform _startPos;
         [SerializeField] private PlayerActor _player;
@@ -125,7 +123,7 @@ namespace GUS.Core.Hub
             _uiHubController.Init(ServiceLocator);            
             _hubController.SetStartPosition(_startPos.position);
             _hubController.Init(ServiceLocator);
-            _tutorialSystem.Init(isTutorialActive);
+            _tutorialSystem.Init(ServiceLocator);
 
             _wallet.Init(ServiceLocator);
             _honkWallet.Init(ServiceLocator);

@@ -7,6 +7,7 @@ namespace GUS.Core.Tutorial
     public class Step1 : MonoBehaviour, ITutorialStep
     {
         [SerializeField] private GameObject[] _hideObjects;
+        [SerializeField] private GameObject _show;
         private TutorialSystemHUB _tutorial;
 
         public void ShowText(string text)
@@ -17,6 +18,7 @@ namespace GUS.Core.Tutorial
         public void Activate(TutorialSystemHUB tutorial)
         {
             _tutorial = tutorial;
+            _show.SetActive(true);
             foreach (var obj in _hideObjects)
             {
                 obj.SetActive(false);
@@ -25,7 +27,7 @@ namespace GUS.Core.Tutorial
 
         public void Deactivate()
         {
-
+            _show.SetActive(false);
         }
 
         public void Next()

@@ -19,7 +19,6 @@ namespace GUS.Core
 {
     public class RunLocator : MonoBehaviour
     {
-        public bool isTutorial;
         [Header("Игрок")]
         [SerializeField] private PlayerActor _player;
 
@@ -215,7 +214,7 @@ namespace GUS.Core
 
         private void CheckTutorial()
         {
-            if (isTutorial)
+            if (!_storageService.Data._tutorialSteps[1])
             {
                 _tutorial = new TutorialSystemRun();
                 _serviceLocator.Register(_tutorial);

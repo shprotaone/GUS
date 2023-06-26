@@ -7,14 +7,21 @@ namespace GUS.Core.Tutorial
     public class TutorialStepView : MonoBehaviour
     {
         [SerializeField] private Image _arrowImage;
+        [SerializeField] private Animator _animator;
+        [SerializeField] private Animator _handAnimator;
+
         public void Enable()
         {
-            _arrowImage.gameObject.SetActive(true);
+            gameObject.SetActive(true);
+            _animator.enabled = true;
+            _handAnimator.enabled = true;
         }
 
         public void Disable()
         {
-            _arrowImage.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+            _handAnimator.enabled = false;
+            _animator.enabled= false;
         }
 
     }

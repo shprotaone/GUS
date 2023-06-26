@@ -9,6 +9,8 @@ namespace GUS.Core.InputSys
     /// </summary>
     public interface IInputType
     {
+        bool BlockInput { get; }
+        void Blocker(bool flag);
         EnumBind Movement();
     }
 }

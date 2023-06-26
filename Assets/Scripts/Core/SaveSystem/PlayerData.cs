@@ -17,6 +17,8 @@ namespace GUS.Core.Data
         public float commonDistance;
         public List<BuildData> buildDatas;
         public List<BonusData> bonusDatas;
+        public List<bool> _tutorialSteps;
+
         
 
         //TODO: »нкапсул€ци€? 

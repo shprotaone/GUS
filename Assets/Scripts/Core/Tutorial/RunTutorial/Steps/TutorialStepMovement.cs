@@ -4,21 +4,24 @@ using GUS.Core.UI;
 using GUS.LevelBuild;
 using GUS.Player;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace GUS.Core.Tutorial
 {
-    public class Step1Run : MonoBehaviour, IStepTrigger
+    public class TutorialStepMovement : MonoBehaviour, IStepTrigger
     {
         [SerializeField] private int _stepIndex;
+        [SerializeField] private EnumBind _direction;
+
         private UITutorial _view;
         private WorldController _worldContrtoller;
         private PlayerActor _player;
+        private TutorialSystemRun _tutorialRun;
         private bool _isActive = true;
 
         public void Init(IServiceLocator serviceLocator)
         {
             _view = serviceLocator.Get<UIController>().Tutorial;
+            _tutorialRun= serviceLocator.Get<TutorialSystemRun>();
             _worldContrtoller = serviceLocator.Get<WorldController>();
         }
 
@@ -39,19 +42,35 @@ namespace GUS.Core.Tutorial
             _view.OnWaiter += Waiter;
             _worldContrtoller.WorldStopper(true);
             _player.AnimatorController.Pause(true);
-            _player.MovementType.CanMove(false);            
+            _player.InputType.Blocker(false);
+            _player.MovementType.CanMove(false);
         }
 
         public void Waiter()
         {
-            if (_player.InputType.Movement() == EnumBind.Up)
+            if (_player.InputType.Movement() == _direction)
             {
                 _player.MovementType.CanMove(true);
+                _player.InputType.Blocker(false);
+
                 _worldContrtoller.WorldStopper(false);
+
                 _player.AnimatorController.Pause(false);
-                _player.MovementType.CallMove(EnumBind.Up);
+                _player.MovementType.CallMove(_direction);
+                _player.InputType.Blocker(true);
+
                 _view.CurrentViewStep.Disable();
+                CheckLastStep();
                 _view.OnWaiter-= Waiter;
+            }
+        }
+
+        private void CheckLastStep()
+        {
+            if(_stepIndex == _tutorialRun.TutorialSteps - 1)
+            {
+                _tutorialRun.EndTutorial();
+                Debug.Log("END");
             }
         }
     }

@@ -6,13 +6,20 @@ namespace GUS.Core.InputSys
     public class Keyboard : IInputType
     {
         private bool _isHold;
+
+        public bool BlockInput { get; private set; }
+
         public void SetHold(bool isHold)
         {
             _isHold = isHold;
         }
 
+        public void Blocker(bool flag) => BlockInput = flag;
+
         public EnumBind Movement()
         {
+            if (BlockInput) return EnumBind.None;
+
             if (!_isHold)
             {
                 if (Input.GetKeyDown(KeyCode.A))

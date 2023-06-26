@@ -7,9 +7,11 @@ namespace GUS.Core.Tutorial
     public class TutorialPlatform : Platform
     {
         private IStepTrigger[] _triggers;
+        public int TriggerCount { get;private set; }
         public void Init(IServiceLocator serviceLocator)
         {
             _triggers = GetComponentsInChildren<IStepTrigger>();
+            TriggerCount= _triggers.Length;
             Debug.Log("Yeah");
             foreach(var trigger in _triggers)
             {
