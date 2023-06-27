@@ -89,6 +89,7 @@ namespace GUS.LevelBuild
         {
             float prevSpeed = _currentSpeed;
             _currentSpeed = prevSpeed * penalty;
+            Debug.Log(_currentSpeed);
         }
     }
 }

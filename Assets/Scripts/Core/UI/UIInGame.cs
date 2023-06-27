@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using GUS.Core.Data;
+using GUS.Core.Locator;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -15,6 +17,10 @@ namespace GUS.Core.UI
         [SerializeField] private TMP_Text _coinTextValue;
         [SerializeField] private TMP_Text _distanceTextValue;
         [SerializeField] private TMP_Text _honkTextValue;
+        
+        [Title("Нотификация болшого количества монет")]
+        [SerializeField] private RectTransform _bigRewardNotify;
+        [SerializeField] private TMP_Text _valueReward;
 
         [Title("Ресурсы для мультипликатора")]
         [SerializeField] private Sprite[] _sprites;
@@ -24,10 +30,14 @@ namespace GUS.Core.UI
 
         private GameStateController _gamestateController;
         private PauseHandle _pauseHandle;
-        public void Init(GameStateController gameStateController,PauseHandle pauseHandle)
+        private Wallet _wallet;
+        private Vector2 _notifyStartPos;
+
+        public void Init(IServiceLocator serviceLocator, GameStateController gameStateController)
         {
             _gamestateController = gameStateController;
-            _pauseHandle = pauseHandle;
+            _wallet = serviceLocator.Get<Wallet>();
+            _wallet.OnBigRewardNotify += CallBigCornNotify;
             _pauseButton.onClick.AddListener(_gamestateController.Pause);
         }
 
@@ -39,6 +49,16 @@ namespace GUS.Core.UI
         public void RefreshDistancePointCount(float count)
         {
             _distanceTextValue.text = count.ToString();
+        }
+
+        public async void CallBigCornNotify(float value)
+        {
+            _valueReward.text = "+" + value.ToString();
+            _bigRewardNotify.gameObject.SetActive(true);
+            _bigRewardNotify.DOAnchorPosX(0, 1).SetEase(Ease.OutSine);
+            await UniTask.Delay(3000);
+            _bigRewardNotify.gameObject.SetActive(false);
+            _bigRewardNotify.anchoredPosition = new Vector2(600,-500);
         }
 
         public void Hide(bool flag)
@@ -70,6 +90,11 @@ namespace GUS.Core.UI
             {
                 view.Disable();
             }
+        }
+
+        private void OnDisable()
+        {
+            _wallet.OnBigRewardNotify -= CallBigCornNotify;
         }
     }
 }

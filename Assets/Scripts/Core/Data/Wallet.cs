@@ -7,6 +7,8 @@ namespace GUS.Core.Data
 {
     public class Wallet : IData
     {
+        public event Action<float> OnBigRewardNotify;
+
         private StorageService _storageService;
         private ICoinView _coinView;
 
@@ -34,6 +36,7 @@ namespace GUS.Core.Data
         public void AddCoins(int reward)
         {
             _coins += reward;
+            OnBigRewardNotify?.Invoke(reward);
             _coinView.RefreshCoinsCount(_coins);
         }
 

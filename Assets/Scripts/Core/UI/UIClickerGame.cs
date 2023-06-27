@@ -19,6 +19,9 @@ public class UIClickerGame : MonoBehaviour
     private Vector3 _scaleStep;
     private ClickerGame _clickerGame;
 
+    private Color _alphaColor;
+    private float _aplhaFocus = 0;
+
     public void Init(IServiceLocator serviceLocator)
     {
         //_scaleStep = Vector3.one / _scaler;
@@ -36,6 +39,7 @@ public class UIClickerGame : MonoBehaviour
     public void UpdateSlider(float value)
     {
         _slider.value -= value;
+        FocusBehaviour();
         //UpscaleCorn();
     }
 
@@ -48,7 +52,14 @@ public class UIClickerGame : MonoBehaviour
     public void FocusActivate()
     {
         _focus.gameObject.SetActive(true);
-        _focus.DOFade(1, 3);
+    }
+
+    private void FocusBehaviour()
+    {
+        _alphaColor = _focus.color;
+        _aplhaFocus += 0.02f;
+        _alphaColor.a = _aplhaFocus;
+        _focus.color = _alphaColor;
     }
 
     public void FocusDeactivate()

@@ -8,6 +8,7 @@ namespace GUS.Core.InputSys.Joiystick
     {
         public event Action OnActive;
         public bool BlockInput { get; private set; }
+        public bool IsActive { get; private set; }
 
         protected override void Start()
         {
@@ -19,6 +20,7 @@ namespace GUS.Core.InputSys.Joiystick
         {
             background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
             background.gameObject.SetActive(true);
+            IsActive = true;
             OnActive?.Invoke();
             base.OnPointerDown(eventData);
         }
@@ -26,6 +28,7 @@ namespace GUS.Core.InputSys.Joiystick
         public override void OnPointerUp(PointerEventData eventData)
         {
             background.gameObject.SetActive(false);
+            IsActive = false;
             base.OnPointerUp(eventData);
         }
 
