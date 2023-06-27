@@ -56,10 +56,4 @@ public class BagController : MonoBehaviour, IClickerProgress
         await UniTask.Delay(100);
         _currentMaterial.SetColor(_emissionName, Color.black);
     }
-
-    private void OnDisable()
-    {
-        
-        Debug.Log("Check");
-    }
 }

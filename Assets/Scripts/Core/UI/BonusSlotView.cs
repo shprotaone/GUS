@@ -24,15 +24,12 @@ namespace GUS.Core.UI
             _bonusImage.sprite = sprite;
             _bonusSlider.maxValue = maxTime;
             _bonusSlider.value = maxTime;
-            _pauseHandle = pauseHandle;
             _type = type;
             
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();
-            StartBonusAnim(maxTime,_cancellationTokenSource.Token);
-            _pauseHandle.AddToPausedList(this);
-            
+            StartBonusAnim(maxTime,_cancellationTokenSource.Token);           
         }
 
         public void SetPaused(bool paused)
@@ -72,7 +69,6 @@ namespace GUS.Core.UI
             if (!token.IsCancellationRequested)
             {
                 gameObject.SetActive(false);
-                _pauseHandle.RemoveFromPausedList(this);
                 _type = PowerUpEnum.Empty;
             }
             

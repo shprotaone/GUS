@@ -31,7 +31,7 @@ namespace GUS.Core.UI
         {
             _controller = serviceLocator.Get<GameStateController>();
             _pauseHandle = serviceLocator.Get<PauseHandle>();
-            _uiInGame.Init(_controller,_pauseHandle);
+            _uiInGame.Init(serviceLocator, _controller);
             _uiEndGame.Init(serviceLocator);
             _uiPause.Init(_controller,serviceLocator);
             _uiClickerGame.Init(serviceLocator);
