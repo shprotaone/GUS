@@ -14,6 +14,7 @@ namespace GUS.Core.UI
         [SerializeField] private UIEndGame _uiEndGame;
         [SerializeField] private UIClickerGame _uiClickerGame;
         [SerializeField] private UITutorial _uiTutorial;
+        [SerializeField] private GameObject _tutorialCanvas;
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private SaveMe _saveMePanel;
 
@@ -51,6 +52,8 @@ namespace GUS.Core.UI
                 _saveMePanel.Execute();
             }
         }
+
+        public void TuttorialCanvas(bool flag) => _tutorialCanvas.SetActive(flag);
     }
 }
 

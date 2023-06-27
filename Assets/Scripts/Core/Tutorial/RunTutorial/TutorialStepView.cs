@@ -10,14 +10,14 @@ namespace GUS.Core.Tutorial
         [SerializeField] private Animator _animator;
         [SerializeField] private Animator _handAnimator;
 
-        public void Enable()
+        public virtual void Enable()
         {
             gameObject.SetActive(true);
             _animator.enabled = true;
             _handAnimator.enabled = true;
         }
 
-        public void Disable()
+        public virtual void Disable()
         {
             gameObject.SetActive(false);
             _handAnimator.enabled = false;

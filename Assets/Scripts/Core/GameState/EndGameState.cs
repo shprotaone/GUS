@@ -25,6 +25,7 @@ namespace GUS.Core.GameState
         public void Enter()
         {           
             _worldCotroller.WorldStopper(true);
+            _uiController.UiInGame.DesactivateBonuses();
             _uiController.UiInGame.Hide(true);
         }
 

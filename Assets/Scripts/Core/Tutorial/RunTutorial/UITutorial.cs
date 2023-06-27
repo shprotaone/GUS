@@ -29,9 +29,10 @@ namespace GUS.Core.Tutorial
 
         public async void CallEndPanel()
         {
-            _endPanel.DOAnchorPosX(0, 1).SetEase(Ease.InCirc);
+            _endPanel.DOAnchorPosX(-490, 1).SetEase(Ease.InCirc);
             await UniTask.Delay(3000);
-            _tutorialCanvas.gameObject.SetActive(false);
+            _endPanel.gameObject.SetActive(false);
+            //_tutorialCanvas.gameObject.SetActive(false);
         }
 
         private void Update()

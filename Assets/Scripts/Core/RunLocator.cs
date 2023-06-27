@@ -217,6 +217,7 @@ namespace GUS.Core
             if (!_storageService.Data._tutorialSteps[1])
             {
                 _tutorial = new TutorialSystemRun();
+                _uiController.TuttorialCanvas(true);
                 _serviceLocator.Register(_tutorial);
                 _tutorial.Init(_serviceLocator,_startPoint);
             }

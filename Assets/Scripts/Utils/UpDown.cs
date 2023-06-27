@@ -18,7 +18,6 @@ public class UpDown : MonoBehaviour
     {
         if(!_isRect) transform.DOLocalMoveY(_power, 1).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
         else _rect.DOAnchorPos(_toPosRect, 1).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
-
     }
 
     private void OnDisable()

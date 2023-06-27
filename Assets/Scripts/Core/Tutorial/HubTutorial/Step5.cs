@@ -1,26 +1,31 @@
+using Cysharp.Threading.Tasks;
 using GUS.Core.InputSys.Joiystick;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GUS.Core.Tutorial
 {
     public class Step5 : MonoBehaviour, ITutorialStep
     {
-        [SerializeField] private GameObject _hideExit;
+        [SerializeField] private Button _hideExit;
         [SerializeField] private GameObject[] _showHiddenObjects;
         [SerializeField] private GameObject _showHand;
+        [SerializeField] private GameObject _showExitHand;
         [SerializeField] private FloatingJoystick _joystick;
 
         private TutorialSystemHUB _tutorialSystem;
         private bool _flag = true;
-        public void Activate(TutorialSystemHUB tutorial)
+        public async void Activate(TutorialSystemHUB tutorial)
         {
             _tutorialSystem = tutorial;
-            _hideExit.SetActive(false);
+            _hideExit.gameObject.SetActive(false);
             _joystick.OnActive += Deactivate;
+
+            await UniTask.Delay(1000);
             _showHand.SetActive(true);
         }
 
-        public void Deactivate()
+        public async void Deactivate()
         {
             if(_flag)
             {
@@ -32,9 +37,13 @@ namespace GUS.Core.Tutorial
                 {
                     go.SetActive(true);
                 }
-
-                _tutorialSystem.Complete();
+               
                 _joystick.OnActive -= Deactivate;
+
+                await UniTask.Delay(5000);
+                _showExitHand.SetActive(true);
+
+                _hideExit.onClick.AddListener(ExitTutorial);
             }                  
         }
 
@@ -46,6 +55,12 @@ namespace GUS.Core.Tutorial
         public void ShowText(string text)
         {
             
+        }
+
+        private void ExitTutorial()
+        {
+            _tutorialSystem.Complete();
+            _showExitHand.SetActive(false);
         }
     }
 }
