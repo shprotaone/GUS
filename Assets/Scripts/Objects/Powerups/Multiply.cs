@@ -9,6 +9,7 @@ namespace GUS.Objects.PowerUps
     public class Multiply : MonoBehaviour, IPowerUp,IPoolObject
     {
         [SerializeField] private Collectable _collectable;
+        [SerializeField] private bool _destroyable;
         [SerializeField] private float _duration;
 
         private GameObject _model;
@@ -74,7 +75,11 @@ namespace GUS.Objects.PowerUps
             StopAllCoroutines();
             _canTake = true;
             _wallet.SetMultiply(false);
-            _objectPool.DestroyObject(this.gameObject);
+
+            if (_destroyable) Destroy(gameObject);
+            else _objectPool.DestroyObject(this.gameObject);
+
+
         }
     }
 }

@@ -69,6 +69,7 @@ namespace GUS.Core.Tutorial
         {
             if(_stepIndex == _tutorialRun.TutorialSteps - 1)
             {
+                _view.CallEndPanel();
                 _tutorialRun.EndTutorial();
                 Debug.Log("END");
             }

@@ -1,12 +1,8 @@
 using Cysharp.Threading.Tasks;
 using GUS.Core.Locator;
-using GUS.Core.Pool;
 using GUS.Core.SaveSystem;
 using GUS.LevelBuild;
-using GUS.Objects;
 using GUS.Player;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GUS.Core.Tutorial
@@ -45,7 +41,6 @@ namespace GUS.Core.Tutorial
             _player.MovementType.CanMove(true);
             _storageService.Data._tutorialSteps[1] = true;
             _storageService.Save();
-
         }
     }
 }

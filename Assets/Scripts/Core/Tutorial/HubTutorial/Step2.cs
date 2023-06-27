@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,16 +13,18 @@ namespace GUS.Core.Tutorial
 
         private TutorialSystemHUB _tutorial;
 
-        public void Activate(TutorialSystemHUB tutorial)
+        public async void Activate(TutorialSystemHUB tutorial)
         {
-            _tutorial = tutorial;
-            _showHand.SetActive(true);
+            _tutorial = tutorial;           
             _mainCanvas.sortingOrder = 100;
             _click.onClick.AddListener(Next);
             foreach(var obj in _hideObjects)
             {
                 obj.SetActive(false);
             }
+
+            await UniTask.Delay(2000);
+            _showHand.SetActive(true);
         }
 
         public void Deactivate()

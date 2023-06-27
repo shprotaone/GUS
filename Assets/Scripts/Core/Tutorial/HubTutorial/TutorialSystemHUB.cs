@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using GUS.Core.Locator;
 using GUS.Core.SaveSystem;
 using System;
@@ -23,7 +24,7 @@ namespace GUS.Core.Tutorial
 
             if (!_storageService.Data._tutorialSteps[0])
             {
-                _tutorialCanvas?.gameObject.SetActive(true);             
+                _tutorialCanvas?.gameObject.SetActive(true);              
                 _steps[0].Activate(this);
                 _storageService.Data._tutorialSteps[0] = true;
                 _storageService.Save();
@@ -54,8 +55,9 @@ namespace GUS.Core.Tutorial
             _isActive = false;
         }
 
-        internal void Complete()
+        public void Complete()
         {
+            _steps[_tutorialStep].Deactivate();
             _storageService.Data._tutorialSteps[2] = true;
             _storageService.Save();
         }

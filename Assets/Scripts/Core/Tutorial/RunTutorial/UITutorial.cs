@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using System;
 using UnityEngine;
 
 namespace GUS.Core.Tutorial
@@ -8,6 +10,7 @@ namespace GUS.Core.Tutorial
         public event Action OnWaiter;
 
         [SerializeField] private Canvas _tutorialCanvas;
+        [SerializeField] private RectTransform _endPanel;
         [SerializeField] private TutorialStepView[] _steps;
 
         private TutorialStepView _currentViewStep;
@@ -22,6 +25,13 @@ namespace GUS.Core.Tutorial
         {
             _currentViewStep = _steps[index];
             _currentViewStep.Enable();
+        }
+
+        public async void CallEndPanel()
+        {
+            _endPanel.DOAnchorPosX(0, 1).SetEase(Ease.InCirc);
+            await UniTask.Delay(3000);
+            _tutorialCanvas.gameObject.SetActive(false);
         }
 
         private void Update()
