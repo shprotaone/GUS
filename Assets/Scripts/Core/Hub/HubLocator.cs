@@ -91,6 +91,7 @@ namespace GUS.Core.Hub
 
         private void Registartion()
         {
+            _serviceLocator.Register(_tutorialSystem);
             _serviceLocator.Register(_cameraController);
             _serviceLocator.Register(_audioService);
             _serviceLocator.Register(_sceneHandler);
@@ -113,7 +114,7 @@ namespace GUS.Core.Hub
             _serviceLocator.Register(_gameStateMachine);
             _serviceLocator.Register(_shopSystem);
             _serviceLocator.Register(_buildSystem);
-            _serviceLocator.Register(_tutorialSystem);
+            
         }
 
         private void Initialization()
