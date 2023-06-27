@@ -2,6 +2,7 @@ using GUS.Core;
 using GUS.Core.Clicker;
 using GUS.Core.Locator;
 using GUS.Core.Pool;
+using GUS.Core.SaveSystem;
 using GUS.Objects;
 using GUS.Utils;
 using System;
@@ -15,7 +16,7 @@ namespace GUS.LevelBuild
     {
         public event Action<int> OnPlatformAdded;
         private const int countStartPlatform = 2;
-        public const int RangeZ = -50;
+        public const int RangeZ = -70;
 
         private Transform _beginWorldTransform;
         private Vector3 _offset = new Vector3(0, 0, -20);
@@ -30,9 +31,11 @@ namespace GUS.LevelBuild
         private ObjectPool _platformPool;
         private ObjectPool _collectablesPool;
         private SpecialPlatformBuilder _specialPlatformBuilder;
+        private RunLocator _runLocator;
         private BonusSpawner _bonusSpawner;
 
         private int _platformCount = 0;
+        private bool _isTutorial;
         private bool _isFree;
         private bool _rewardPlatform;
 
@@ -43,9 +46,10 @@ namespace GUS.LevelBuild
             _specialPlatformBuilder = serviceLocator.Get<SpecialPlatformBuilder>();
             _serviceLocator = serviceLocator;
 
-            RunLocator runLoc = _serviceLocator.Get<RunLocator>();
-            _platformPool = runLoc.GetPool(PoolTypeEnum.Platform);
-            _collectablesPool = runLoc.GetPool(PoolTypeEnum.Collectable);
+            _runLocator = _serviceLocator.Get<RunLocator>();
+            _platformPool = _runLocator.GetPool(PoolTypeEnum.Platform);
+            _collectablesPool = _runLocator.GetPool(PoolTypeEnum.Collectable);
+            _isTutorial = _serviceLocator.Get<StorageService>().Data._tutorialSteps[1];
 
             _bonusSpawner = new BonusSpawner(_collectablesPool);
             _platformsQueue = new Queue<Platform>();
@@ -56,6 +60,14 @@ namespace GUS.LevelBuild
 
         public void CreateStartSection()
         {
+            if (!_isTutorial)
+            {
+                _isFree= true;
+                CreateNextPlatform();
+                _isFree= false;
+                CreateNextPlatform();
+            }
+
             _isFree = true;
             for (int i = 0; i < countStartPlatform; i++)
             {
@@ -111,16 +123,21 @@ namespace GUS.LevelBuild
                 _nextPlatform = _platformPool.GetObject(PoolObjectType.AfterClicker);
                 _rewardPlatform = false;
             }
-            else if(_specialPlatformBuilder.Find(_platformCount, out PoolObjectType SpecialType))
+            else if(_specialPlatformBuilder.Find(_platformCount, out PoolObjectType specialType))
             {
-                _nextPlatform = _platformPool.GetObject(SpecialType);
-                _rewardPlatform = true;
-                _isFree= true;
+                CallSpecialPlatform(_platformCount, specialType, true, true);
             }
             else
             {
                 NextObstaclePlatform();        
             }
+        }
+
+        private void CallSpecialPlatform(int platformCount, PoolObjectType specialType, bool withReward, bool freeZone)
+        {
+            _nextPlatform = _platformPool.GetObject(specialType);
+            _rewardPlatform = withReward;
+            _isFree = freeZone;
         }
 
         private void NextObstaclePlatform()

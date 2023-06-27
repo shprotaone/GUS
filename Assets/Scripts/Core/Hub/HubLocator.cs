@@ -14,6 +14,7 @@ using TMPro;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using GUS.Player.Movement;
+using GUS.Core.Tutorial;
 
 namespace GUS.Core.Hub
 {
@@ -30,6 +31,7 @@ namespace GUS.Core.Hub
         [SerializeField] private FloatingJoystick _joystick;
         [SerializeField] private UiHubController _uiHubController;       
         [SerializeField] private JsonToFirebase _jsonToFirebase;
+        [SerializeField] private TutorialSystemHUB _tutorialSystem;
 
         [Title("Магазины")]
         [SerializeField] private BuildsSystem _buildSystem;
@@ -89,6 +91,7 @@ namespace GUS.Core.Hub
 
         private void Registartion()
         {
+            _serviceLocator.Register(_tutorialSystem);
             _serviceLocator.Register(_cameraController);
             _serviceLocator.Register(_audioService);
             _serviceLocator.Register(_sceneHandler);
@@ -111,6 +114,7 @@ namespace GUS.Core.Hub
             _serviceLocator.Register(_gameStateMachine);
             _serviceLocator.Register(_shopSystem);
             _serviceLocator.Register(_buildSystem);
+            
         }
 
         private void Initialization()
@@ -120,6 +124,7 @@ namespace GUS.Core.Hub
             _uiHubController.Init(ServiceLocator);            
             _hubController.SetStartPosition(_startPos.position);
             _hubController.Init(ServiceLocator);
+            _tutorialSystem.Init(ServiceLocator);
 
             _wallet.Init(ServiceLocator);
             _honkWallet.Init(ServiceLocator);

@@ -14,7 +14,7 @@ namespace GUS.Core.Hub.BuildShop
 
         [SerializeField] private Build[] _builds;
 
-        private HonkCoinWallet _honkWallet;
+        private Wallet _wallet;
         private StorageService _storageService;
         private AudioService _audioService;
         private UIBuild _uiBuild;
@@ -22,10 +22,10 @@ namespace GUS.Core.Hub.BuildShop
         private List<BuildData> _buildsData;
 
         public Build[] Builds => _builds;
-        public HonkCoinWallet HonkWallet => _honkWallet;
+        public Wallet Wallet => _wallet;
         public void Init(IServiceLocator serviceLocator)
         {
-            _honkWallet = serviceLocator.Get<HonkCoinWallet>();
+            _wallet = serviceLocator.Get<Wallet>();
             _storageService = serviceLocator.Get<StorageService>();
             _audioService = serviceLocator.Get<AudioService>();
             _uiBuild = serviceLocator.Get<UiHubController>().UIBuild;
@@ -58,9 +58,9 @@ namespace GUS.Core.Hub.BuildShop
         public void Buy(BuildNameEnum buildName, int cost)
         {
             int index = 0;
-            if (_honkWallet.Value < cost) return;
+            if (_wallet.Coins < cost) return;
 
-            _honkWallet.RemoveCoin(cost);
+            _wallet.DecreaseCoins(cost);
             for (int i = 0; i < _buildsData.Count; i++)
             {
                 if (_buildsData[i].nameEnum == buildName)

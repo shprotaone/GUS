@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40bbd5ded7cab6444b805b170676a8cb, type: 3}
+  m_Name: TutorialTest
+  m_EditorClassIdentifier: 
+  parts:
+  - prefab: {fileID: 700142177006661668, guid: bb84491cb2b05d343899bafa82187691, type: 3}
+    startCount: 5
+    Weight: 0
+  - prefab: {fileID: 6198712829235060456, guid: 0ab6fd6d0e78d4d4da445ab28dc9764b, type: 3}
+    startCount: 1
+    Weight: 0
+  - prefab: {fileID: 6198712829235060456, guid: 0d5e9cc88c435a442b7a03c14aede5ac, type: 3}
+    startCount: 2
+    Weight: 5
+  - prefab: {fileID: 700142177006661668, guid: a05d4d74b33332d44a99136ccaba7fe3, type: 3}
+    startCount: 2
+    Weight: 5
+  - prefab: {fileID: 2488613025966106362, guid: e60d85ed27d6d3146b7594656daf5d8b, type: 3}
+    startCount: 1
+    Weight: 0
+  - prefab: {fileID: 3404807321277698910, guid: 094c39a6e81589243ac9f4b718b8bff8, type: 3}
+    startCount: 1
+    Weight: 0

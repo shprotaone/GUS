@@ -12,6 +12,7 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
 
     [SerializeField] private Collectable _collectable;
     [SerializeField] private SphereCollider _collider;
+    [SerializeField] private bool _destroyable;
     [SerializeField] private float _moveTime;
     [SerializeField] private float _magnetRadius;
     [SerializeField] private float _duration;
@@ -99,6 +100,8 @@ public class Magnet : MonoBehaviour,IPowerUp, IPoolObject
         _collider.radius = stadartColliderRadius;
         _model.SetActive(true);
         _canTake = true;
-        _objectPool.DestroyObject(this.gameObject);
+
+        if (_destroyable) Destroy(gameObject);
+        else _objectPool.DestroyObject(this.gameObject);
     }
 }

@@ -15,7 +15,6 @@ namespace GUS.Core.GameState
         private AudioService _audioService;
         private UIStartGame _view;
         private UIInGame _inGameView;
-        private TMP_Text _stateText;
         private WorldController _worldController;
 
         public IStateMachine StateMachine {get; private set;}

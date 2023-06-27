@@ -10,6 +10,15 @@ namespace GUS.LevelBuild
 
         private int count = 0;
 
+        public void SetTutorial()
+        {
+            _specials.Insert(0, new SpecialPlatformKey
+            {
+                platformIndex = 0,
+                type = PoolObjectType.Tutorial
+            });
+        }
+
         public bool Find(int index, out PoolObjectType type)
         {
             if (_specials.Count > count && _specials[count].platformIndex == index)

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1933567233095583405}
+  - component: {fileID: 432155087548569292}
   m_Layer: 0
   m_Name: MagnetModel
   m_TagString: Untagged
@@ -33,6 +34,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &432155087548569292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106124048202544474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37cfe34f55fd8724bbac9a1b70799462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _power: 0.15
 --- !u!1 &8278111983416288917
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,8 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358cb6e6aa4d34c4ba6e26eb3959ccde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isVertical: 1
-  _rotateSpeed: 50
+  _dir: 2
+  _rotateSpeedMult: 50
+  _duration: 1
 --- !u!1001 &1362101878584044690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208,22 +223,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7035806552496931629, guid: f6b6ac340d7247541ba63fedae2b8e6b, type: 3}
   m_PrefabInstance: {fileID: 1362101878584044690}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8649387478079681797 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7705628608408213911, guid: f6b6ac340d7247541ba63fedae2b8e6b, type: 3}
-  m_PrefabInstance: {fileID: 1362101878584044690}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &583382228687313577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8649387478079681797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 358cb6e6aa4d34c4ba6e26eb3959ccde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isVertical: 0
-  _rotateSpeed: 50

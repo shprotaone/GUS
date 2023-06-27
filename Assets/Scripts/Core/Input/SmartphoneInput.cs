@@ -21,6 +21,8 @@ namespace GUS.Core.InputSys
         public float Direction { get; private set; }
         public float Delta { get; private set; }
 
+        public bool BlockInput { get; private set; }
+
         public SmartphoneInput()
         {
             ResetSwipe();
@@ -46,6 +48,8 @@ namespace GUS.Core.InputSys
 
         public EnumBind Movement()
         {
+            if (BlockInput) return EnumBind.None;
+
             TouchInput();
             CheckDirection();
 
@@ -150,5 +154,9 @@ namespace GUS.Core.InputSys
             }
         }
 
+        public void Blocker(bool flag)
+        {
+            BlockInput = flag;
+        }
     }
 }

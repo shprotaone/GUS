@@ -5,6 +5,7 @@ using GUS.Core.InputSys;
 using GUS.Core.Locator;
 using GUS.Core.Pool;
 using GUS.Core.SaveSystem;
+using GUS.Core.Tutorial;
 using GUS.Core.UI;
 using GUS.LevelBuild;
 using GUS.Player;
@@ -59,6 +60,7 @@ namespace GUS.Core
         private RunMovement _runMovement;
         private DistanceMutiplier _distanceMutiplier;
         private PauseHandle _pauseHandle;
+        private TutorialSystemRun _tutorial;
 
         private IStateChanger _stateChanger;
         private ICoinView _coinView;
@@ -150,7 +152,7 @@ namespace GUS.Core
         {
             _storageService.Init(_serviceLocator);
             _collectableFactory.Init(_collectablesStorage, _serviceLocator);
-
+            
             _gameStateMachine.Init(_serviceLocator);       
             _wallet.Init(_serviceLocator);
             _honkWallet.Init(_serviceLocator);
@@ -158,7 +160,7 @@ namespace GUS.Core
             _deleteService.Init(_serviceLocator);
 
             _collectablesPool.InitPool(_collectablesStorage);           
-            _platformPool.InitPool(_platformStorage);
+            _platformPool.InitPool(_platformStorage);           
 
             _distanceMutiplier.Init(_serviceLocator);
             _worldController.Init(_startPoint, _serviceLocator);
@@ -167,8 +169,8 @@ namespace GUS.Core
             _uiController.Init(_serviceLocator);
             _clicker.Init(_serviceLocator);
             _playerState.Init(_serviceLocator);
-            
-            
+
+            CheckTutorial();
         }
 
         private void RegisterPools()
@@ -208,6 +210,18 @@ namespace GUS.Core
             {
                 return _collectablesPool;
             }
+        }
+
+        private void CheckTutorial()
+        {
+            if (!_storageService.Data._tutorialSteps[1])
+            {
+                _tutorial = new TutorialSystemRun();
+                _uiController.TuttorialCanvas(true);
+                _serviceLocator.Register(_tutorial);
+                _tutorial.Init(_serviceLocator,_startPoint);
+            }
+                                              
         }
     }
 }

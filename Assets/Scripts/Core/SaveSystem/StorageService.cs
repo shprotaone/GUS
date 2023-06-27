@@ -44,6 +44,13 @@ namespace GUS.Core.SaveSystem
                 _playerData.commonDistance = 0;
                 _playerData.buildDatas = new List<BuildData>();
                 _playerData.bonusDatas = new List<BonusData>();
+
+                _playerData._tutorialSteps = new List<bool>();
+                for(int i = 0; i< 3; i++)
+                {
+                    _playerData._tutorialSteps.Add(false);
+                }
+
                 _storageService.Save(fileName, _playerData);
             }
         }

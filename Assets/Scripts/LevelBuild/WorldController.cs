@@ -67,11 +67,11 @@ namespace GUS.LevelBuild
 
         public void WorldStopper(bool flag)
         {
-            if(_worldIsStopped)
-            {
-                _worldIsStopped = flag;
-                _currentSpeed = 0;
-            }  
+            _worldIsStopped = flag;
+
+            if (flag) _currentSpeed = 0;
+            else _currentSpeed = _maxSpeed;
+
         }
 
         public void CreateOnlyFreePlatforms(bool flag)
