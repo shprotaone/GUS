@@ -106,7 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3177e663b8d28498259014e090db53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dynObstacles: []
+  _dynObstacles:
+  - {fileID: 1579193263294827062}
   _isActive: 1
 --- !u!65 &8741486445537253040
 BoxCollider:
@@ -1731,6 +1732,10 @@ PrefabInstance:
     - target: {fileID: 859985303367997343, guid: ee6c78c1b2e6e93489472b06186a91d7, type: 3}
       propertyPath: _speed
       value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 859985303367997343, guid: ee6c78c1b2e6e93489472b06186a91d7, type: 3}
+      propertyPath: _speedMultilpy
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277565912718351505, guid: ee6c78c1b2e6e93489472b06186a91d7, type: 3}
       propertyPath: m_StaticEditorFlags

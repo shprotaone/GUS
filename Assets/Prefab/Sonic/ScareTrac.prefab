@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dynObstacles:
-  - {fileID: 0}
+  - {fileID: 1014903609988506618}
   _isActive: 1
 --- !u!65 &269997752363248743
 BoxCollider:
@@ -2130,6 +2130,10 @@ PrefabInstance:
     - target: {fileID: 859985303367997343, guid: ee6c78c1b2e6e93489472b06186a91d7, type: 3}
       propertyPath: _speed
       value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 859985303367997343, guid: ee6c78c1b2e6e93489472b06186a91d7, type: 3}
+      propertyPath: _speedMultilpy
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277565912718351505, guid: ee6c78c1b2e6e93489472b06186a91d7, type: 3}
       propertyPath: m_StaticEditorFlags
