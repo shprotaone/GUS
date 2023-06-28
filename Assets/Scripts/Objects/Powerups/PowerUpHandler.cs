@@ -31,17 +31,28 @@ namespace GUS.Objects.PowerUps
         /// <param name="powerUp"></param>
         public void Execute(IPowerUp powerUp)
         {
-            _powerUps.Add(powerUp);
+            if (!FindActivePowerUp(powerUp))
+            {
+                _powerUps.Add(powerUp);
+            }
+
             powerUp.Execute(this);
+
             _delay = powerUp.Duration;
             _view.ActivateBonusView(powerUp);
-            _cancellationTokenSource = new CancellationTokenSource();
-            _particleController.BonusEffectEnable(powerUp.PowerUpEnum, _delay);
 
-            if (powerUp is Multiply)
-            {                
-                MaterialChanger(_cancellationTokenSource.Token);
-            }
+            //Cancel();
+            //_cancellationTokenSource = new CancellationTokenSource();
+            //_particleController.BonusEffectEnable(powerUp.PowerUpEnum, _delay);
+
+            //if (powerUp is Multiply)
+            //{                
+            //    MaterialChanger(_cancellationTokenSource.Token);
+            //}
+            //else if (powerUp is Magnet) 
+            //{
+
+            //}
         }
 
         private async void MaterialChanger(CancellationToken token)
@@ -52,12 +63,22 @@ namespace GUS.Objects.PowerUps
             {
                 await UniTask.Delay((int)_delay * 1000,false,PlayerLoopTiming.Update,token);
                 _particleController.BonusEffectEnable(PowerUpEnum.Multiply, 1);
+                _renderer.material = _standartMaterial;
             }
             catch (OperationCanceledException)
             {
                 _renderer.material = _standartMaterial;
+            }           
+        }
+
+        private bool FindActivePowerUp(IPowerUp powerUp)
+        {
+            foreach (var item in _powerUps)
+            {
+                if (item == powerUp) return true;
             }
-            _renderer.material = _standartMaterial;
+
+            return false;
         }
 
         public void ResetPoweraUps()
@@ -67,13 +88,18 @@ namespace GUS.Objects.PowerUps
                 powerup.Disable();
             }
 
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = null;
+            Cancel();
 
             _particleController.DisablePowerUpParticle(PowerUpEnum.Magnet);
             _powerUps.Clear();
             _view.DesactivateBonuses();
+        }
+
+        private void Cancel()
+        {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = null;
         }
     }
 }

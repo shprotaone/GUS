@@ -13,17 +13,16 @@ namespace GUS.Core.UI
     {
         [SerializeField] private RectTransform _inGamePanel;
         [SerializeField] private Button _pauseButton;
-        [SerializeField] private Image _multiplyImage;
+        
         [SerializeField] private TMP_Text _coinTextValue;
         [SerializeField] private TMP_Text _distanceTextValue;
         [SerializeField] private TMP_Text _honkTextValue;
+        [SerializeField] private MultiplicatorViewer _multiplicatorViewer;
         
         [Title("Нотификация болшого количества монет")]
         [SerializeField] private RectTransform _bigRewardNotify;
         [SerializeField] private TMP_Text _valueReward;
 
-        [Title("Ресурсы для мультипликатора")]
-        [SerializeField] private Sprite[] _sprites;
 
         [Title("Бонусы")]
         [SerializeField] private BonusSlotView[] _bonusSlotViews;
@@ -31,12 +30,14 @@ namespace GUS.Core.UI
         private GameStateController _gamestateController;
         private PauseHandle _pauseHandle;
         private Wallet _wallet;
-        private Vector2 _notifyStartPos;
+
+        public MultiplicatorViewer MultiplicatorViewer => _multiplicatorViewer;
 
         public void Init(IServiceLocator serviceLocator, GameStateController gameStateController)
         {
             _gamestateController = gameStateController;
             _wallet = serviceLocator.Get<Wallet>();
+            _multiplicatorViewer.Init(serviceLocator);
             _wallet.OnBigRewardNotify += CallBigCornNotify;
             _pauseButton.onClick.AddListener(_gamestateController.Pause);
         }
@@ -67,18 +68,13 @@ namespace GUS.Core.UI
             else _inGamePanel.DOAnchorPosY(0, 1);           
         }
 
-        public void SetMultiplyImage(int val)
-        {
-            _multiplyImage.sprite = _sprites[val];
-        }
-
         public void ActivateBonusView(IPowerUp powerUp)
         {
             foreach (var view in _bonusSlotViews)
             {
                 if(view.Type == PowerUpEnum.Empty || view.Type == powerUp.PowerUpEnum)
                 {
-                    view.SetBonus(powerUp.Sprite, powerUp.Duration, powerUp.PowerUpEnum,_pauseHandle);                   
+                    view.SetBonus(powerUp.Sprite, powerUp.Duration, powerUp.PowerUpEnum);                   
                     return;
                 }
             }

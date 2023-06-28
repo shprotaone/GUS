@@ -14,16 +14,15 @@ namespace GUS.Core.UI
 
         private PowerUpEnum _type = PowerUpEnum.Empty;
         private CancellationTokenSource _cancellationTokenSource;
-        private PauseHandle _pauseHandle;
         public PowerUpEnum Type => _type;
 
         public bool IsPaused {get;private set;}
 
-        public void SetBonus(Sprite sprite, float maxTime, PowerUpEnum type,PauseHandle pauseHandle)
+        public void SetBonus(Sprite sprite, float maxTime, PowerUpEnum type)
         {
             _bonusImage.sprite = sprite;
             _bonusSlider.maxValue = maxTime;
-            _bonusSlider.value = maxTime;
+            _bonusSlider.value = maxTime;          
             _type = type;
             
             _cancellationTokenSource?.Cancel();
@@ -41,6 +40,7 @@ namespace GUS.Core.UI
         {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
+            transform.localScale = Vector3.zero;
             _cancellationTokenSource = null;
             gameObject.SetActive(false);
             _type = PowerUpEnum.Empty;
@@ -51,6 +51,7 @@ namespace GUS.Core.UI
         {           
             float duration = value;
             gameObject.SetActive(true);
+            transform.localScale = Vector3.one;
             while (duration > 0)
             {
                 if (!IsPaused) duration -= _sliderStep / 10;

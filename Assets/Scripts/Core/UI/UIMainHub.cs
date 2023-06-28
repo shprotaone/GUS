@@ -14,6 +14,7 @@ public class UIMainHub : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private TMP_Text _commonDistance;
     [SerializeField] private TMP_Text _playerName;
+    [SerializeField] private MultiplicatorViewer _multiplicatorViewer;
     [Title("")]
     [SerializeField] private RectTransform _upPanel;
     [SerializeField] private RectTransform _downPanel;
@@ -22,6 +23,7 @@ public class UIMainHub : MonoBehaviour
     [SerializeField] private Button _shop;
     [SerializeField] private Button _build;
     [SerializeField] private Button _settings;
+    
 
     private HubStateController _stateController;
     private StorageService _storageService;
@@ -32,6 +34,7 @@ public class UIMainHub : MonoBehaviour
         _stateController = serviceLocator.Get<IStateChanger>() as HubStateController;
         _storageService = serviceLocator.Get<StorageService>();
         _uiHubController = serviceLocator.Get<UiHubController>();
+        _multiplicatorViewer.Init(serviceLocator);
 
         _settings.onClick.AddListener(Settings);
         _shop.onClick.AddListener(ShopPanel);

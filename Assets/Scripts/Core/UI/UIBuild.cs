@@ -15,6 +15,7 @@ namespace GUS.Core.UI
         [SerializeField] private BuildSlotView[] _views;
         [SerializeField] private Button _explore;
         [SerializeField] private Button _close;
+        [SerializeField] private MultiplicatorViewer _multiplicatorViewer;
 
         private HubStateController _controller;
         private CameraHubController _cameraController;
@@ -26,6 +27,7 @@ namespace GUS.Core.UI
             _cameraController = serviceLocator.Get<ICamera>() as CameraHubController;
             _coinView = serviceLocator.Get<ICoinView>() as CoinView;
             _uiHubController = serviceLocator.Get<UiHubController>();
+            _multiplicatorViewer.Init(serviceLocator);
             _close.onClick.AddListener(Close);
             _explore.onClick.AddListener(Explore);
         }
