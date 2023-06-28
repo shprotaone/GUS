@@ -20,7 +20,6 @@ namespace GUS.Core
         public CoinView CoinView { get { return _coinView;} }
         public HonkCoinView HonkCoinView { get { return _honkCoinView;} }
 
-
         public void Init(IServiceLocator locator)
         {
             _uiHub.Init(locator);

@@ -161,14 +161,14 @@ namespace GUS.Core
 
             _collectablesPool.InitPool(_collectablesStorage);           
             _platformPool.InitPool(_platformStorage);           
-
-            _distanceMutiplier.Init(_serviceLocator);
+          
             _worldController.Init(_startPoint, _serviceLocator);
             _player.Init(_serviceLocator,false);
             _progressiveSystem.Init(_serviceLocator);
             _uiController.Init(_serviceLocator);
             _clicker.Init(_serviceLocator);
             _playerState.Init(_serviceLocator);
+            _distanceMutiplier.Init(_serviceLocator);
 
             CheckTutorial();
         }

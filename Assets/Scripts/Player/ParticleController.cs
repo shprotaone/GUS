@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -38,28 +39,22 @@ namespace GUS.Player
         {
             if(powerUp == PowerUpEnum.Magnet)
             {
-                StartCoroutine(ParticleRoutine(delay,_magnet));
+                ParticleRoutine(delay,_magnet);
             }
             else if(powerUp == PowerUpEnum.Multiply)
             {
-                StartCoroutine(ParticleRoutine(delay, _deathParticle));
+                ParticleRoutine(delay, _deathParticle);
             }         
         }
 
-        private IEnumerator ParticleRoutine(float delay,ParticleSystem particles)
+        private async void ParticleRoutine(float delay,ParticleSystem particles)
         {
-            float timer = delay;
             particles.gameObject.SetActive(true);
             particles.Play();
-            while(timer > 0)
-            {
-                yield return new WaitForSeconds(1);
-                timer--;
-            }
+            await UniTask.Delay((int)delay * 1000);
 
             particles.Stop();
             particles.gameObject.SetActive(false);
-            yield return null;
         }
         public void DamageEffect(Vector3 position)
         {
@@ -86,8 +81,9 @@ namespace GUS.Player
         }
 
         public void DisablePowerUpParticle(PowerUpEnum powerUp)
-        {
+        {           
             if (powerUp == PowerUpEnum.Magnet) _magnet.Stop();
+            _magnet.gameObject.SetActive(false);
         }
     }
 }

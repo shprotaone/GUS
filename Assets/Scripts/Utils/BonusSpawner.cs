@@ -6,9 +6,12 @@ using UnityEngine;
 public class BonusSpawner
 {
     private ObjectPool _pool;
+    private BonusSpawnCatcher _spawnCatcher;
+
     public BonusSpawner(ObjectPool pool)
     {
         _pool = pool;
+        _spawnCatcher = new BonusSpawnCatcher();
     }
     public Transform GetPos(List<Transform> spawnPoints)
     {
@@ -23,6 +26,7 @@ public class BonusSpawner
     public GameObject GetObject(ObjectInfo obj)
     {
         obj.prefab.TryGetComponent(out IPoolObject poolObject);
+        _spawnCatcher.CatchSpawn();
         return _pool.GetObject(poolObject.Type);
     }
 
@@ -30,6 +34,7 @@ public class BonusSpawner
     {
         RandomLogic collectable = new RandomLogic(_pool);
         int index = collectable.GetDigit();
+        _spawnCatcher.CatchBonus(_pool.Storage.parts[index].ObjectType);
         return _pool.Storage.parts[index];
     }
 }

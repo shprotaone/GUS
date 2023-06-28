@@ -16,7 +16,7 @@ namespace GUS.LevelBuild
     {
         public event Action<int> OnPlatformAdded;
         private const int countStartPlatform = 2;
-        public const int RangeZ = -70;
+        public const int RangeZ = -50;
 
         private Transform _beginWorldTransform;
         private Vector3 _offset = new Vector3(0, 0, -20);
@@ -85,7 +85,7 @@ namespace GUS.LevelBuild
         {
             float nextPlatformOffset;
             
-            if (_platformsQueue.Count < 3)
+            if (_platformsQueue.Count < 4)
             {
                 SetNextPlatform();
 

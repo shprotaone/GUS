@@ -18,7 +18,6 @@ public class BarrelController : MonoBehaviour,IDynamicObstacle
     public void Init(float speed, float mult)
     {
         _speedMultilpy = speed * mult;
-        Debug.Log("BarrelSpeed " + _speed * _speedMultilpy);
     }
 
     public void Move()

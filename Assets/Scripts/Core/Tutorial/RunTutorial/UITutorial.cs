@@ -19,6 +19,7 @@ namespace GUS.Core.Tutorial
         public void Init()
         {
             _tutorialCanvas.gameObject.SetActive(true);
+            _tutorialCanvas.sortingOrder= 110;
         }
 
         public void CallStep(int index)
@@ -32,6 +33,7 @@ namespace GUS.Core.Tutorial
             _endPanel.DOAnchorPosX(-490, 1).SetEase(Ease.InCirc);
             await UniTask.Delay(3000);
             _endPanel.gameObject.SetActive(false);
+            _tutorialCanvas.sortingOrder = 0;
             //_tutorialCanvas.gameObject.SetActive(false);
         }
 

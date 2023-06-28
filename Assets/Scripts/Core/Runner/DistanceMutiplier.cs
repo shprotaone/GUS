@@ -1,33 +1,41 @@
+using GUS.Core;
 using GUS.Core.Locator;
 using GUS.Core.SaveSystem;
 using GUS.Core.UI;
+using System;
 
 public class DistanceMutiplier
 {
-    private int _multiply = 0;
+    public event Action<int> OnMultiplyChanged;
     private StorageService _storageService;
-    private UIInGame _UIinGame;
 
-    public int Multiplier => _multiply;
+    public int Multiplier { get; private set; }
+    public int ResultMulty { get; private set; }
 
     public void Init(IServiceLocator locator)
     {
         _storageService = locator.Get<StorageService>();
-        _UIinGame = locator.Get<UIController>().UiInGame;
+
         CalculateBonus();
-        _UIinGame.SetMultiplyImage(_multiply);
+        OnMultiplyChanged.Invoke(Multiplier);
     }
 
     private void CalculateBonus()
     {
         var datas = _storageService.Data.buildDatas;
-
+        int mult = 0;
         for (int i = 0; i < datas.Count; i++)
         {
-            _multiply += datas[i].state;
+            mult += datas[i].state;
         }
 
-        if (_multiply == 0) _multiply = 1;
-        else _multiply += 1;
+        Multiplier = mult;
+        ResultMulty = mult +1;
+    }
+
+    public void ChangeBonusAnimation()
+    {
+        CalculateBonus();
+        OnMultiplyChanged.Invoke(Multiplier);
     }
 }
