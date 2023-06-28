@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8a6b22d91318e6f4dac83e999513409b
+guid: 978733f81ee1f2b44a30ba51adee17c5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,211 +131,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bonus_BG
+      name: Frame 2_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 618
-        width: 172
-        height: 177
+        x: 21
+        y: 220
+        width: 540
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f934f60d53c8fad459ca6fce72e4eb3c
-      internalID: -2145566440
+      spriteID: 60253214989e7924f8b852112973bab9
+      internalID: 1176780694
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BonusFill
+      name: Frame 2_1
       rect:
         serializedVersion: 2
-        x: 198
-        y: 618
-        width: 170
-        height: 170
+        x: 579
+        y: 220
+        width: 4
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da3bff9edec0ab24a93c4416b8e129c1
-      internalID: -2079234051
+      spriteID: 34e8b667747ce6c45accf2ddecd94de0
+      internalID: -116145777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Exitv2
+      name: Frame 2_2
       rect:
         serializedVersion: 2
-        x: 378
-        y: 688
-        width: 102
-        height: 101
+        x: 17
+        y: 157
+        width: 550
+        height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f23be9119a367604fbcbabf3a9957a89
-      internalID: -1122024893
+      spriteID: f8dcd6d776f019a48910efa6402eec89
+      internalID: 672375896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cornv2
+      name: Frame 2_3
       rect:
         serializedVersion: 2
-        x: 497
-        y: 673
-        width: 120
+        x: 29
+        y: 50
+        width: 80
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d880f4cbeea43bd4998893f7b0e66434
+      internalID: 364044689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frame 2_4
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 24
+        width: 144
         height: 120
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c1d8083b6abc194799edd734f9f179f
-      internalID: 523069161
+      spriteID: 7f6af87ae3ad8d3469ae0023993b9bb3
+      internalID: 1494629986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PauseV2
+      name: Frame 2_5
       rect:
         serializedVersion: 2
-        x: 378
-        y: 574
-        width: 102
-        height: 101
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ceb143b4c6df4af41b13ca80d342461e
-      internalID: 551829968
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DistanceScoreHub
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 436
-        width: 400
-        height: 120
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cca25528d78f23145b66275aa34dc7de
-      internalID: -1533193598
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ShopV3
-      rect:
-        serializedVersion: 2
-        x: 443
-        y: 341
-        width: 210
-        height: 217
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58d9c1fa3dc08444f883f6f34f10a84e
-      internalID: 1098078677
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MoneyScore
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 320
-        width: 258
+        x: 254
+        y: 50
+        width: 103
         height: 104
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 035a67479d5d41549ba0ab366440e46d
-      internalID: -1139950342
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GreenButton
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 178
-        width: 196
-        height: 120
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 261b5c5b8d8141d498b3d95ecf06c176
-      internalID: -625746197
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: YellowButton
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 43
-        width: 196
-        height: 120
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 004580a1a9ae89b4396eefaea9cbadc3
-      internalID: -417193
+      spriteID: 69d8434567cd263479e3bcec007057dd
+      internalID: 2140581459
       vertices: []
       indices: 
       edges: []
@@ -343,7 +259,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: dc0cd80d2fda13340949df5092350bcd
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -351,16 +267,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BonusFill: -2079234051
-      GreenButton: -625746197
-      MoneyScore: -1139950342
-      YellowButton: -417193
-      ShopV3: 1098078677
-      DistanceScoreHub: -1533193598
-      Cornv2: 523069161
-      Bonus_BG: -2145566440
-      PauseV2: 551829968
-      Exitv2: -1122024893
+      Frame 2_1: -116145777
+      Frame 2_0: 1176780694
+      Frame 2_4: 1494629986
+      Frame 2_3: 364044689
+      Frame 2_5: 2140581459
+      Frame 2_2: 672375896
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
