@@ -16,9 +16,7 @@ namespace GUS.Objects.PowerUps
         [SerializeField] private Material _goldMaterial;
 
         private Material _standartMaterial;
-        private CancellationTokenSource _cancellationTokenSource;
-        private List<IPowerUp> _powerUps= new List<IPowerUp>();
-        private float _delay;
+        private Dictionary<PowerUpEnum,CancellationTokenSource> _powerUps = new Dictionary<PowerUpEnum, CancellationTokenSource>();
 
         private void Start()
         {
@@ -31,75 +29,88 @@ namespace GUS.Objects.PowerUps
         /// <param name="powerUp"></param>
         public void Execute(IPowerUp powerUp)
         {
+            PowerUpEnum type = powerUp.PowerUpEnum;
             if (!FindActivePowerUp(powerUp))
             {
-                _powerUps.Add(powerUp);
+                _powerUps.Add(type, new CancellationTokenSource());
+            }
+            else
+            {
+                Cancel(_powerUps[type]);
+                _powerUps.Remove(type);
+                _powerUps.Add(type, new CancellationTokenSource());
             }
 
             powerUp.Execute(this);
-
-            _delay = powerUp.Duration;
             _view.ActivateBonusView(powerUp);
+            _particleController.BonusEffectEnable(powerUp.PowerUpEnum, powerUp.Duration);
 
-            //Cancel();
-            //_cancellationTokenSource = new CancellationTokenSource();
-            //_particleController.BonusEffectEnable(powerUp.PowerUpEnum, _delay);
+            CancellationToken token = _powerUps[type].Token;
 
-            //if (powerUp is Multiply)
-            //{                
-            //    MaterialChanger(_cancellationTokenSource.Token);
-            //}
-            //else if (powerUp is Magnet) 
-            //{
-
-            //}
+            if (powerUp is Multiply)
+            {               
+                MaterialChanger(powerUp,token);
+            }
+            else if(powerUp is Magnet) 
+            {
+                Magnet(powerUp, token);
+            }
         }
 
-        private async void MaterialChanger(CancellationToken token)
+        private async void MaterialChanger(IPowerUp powerUp, CancellationToken token)
         {
-            _renderer.material = _goldMaterial;            
+            _renderer.material = _goldMaterial;
 
             try
             {
-                await UniTask.Delay((int)_delay * 1000,false,PlayerLoopTiming.Update,token);
+                await UniTask.Delay((int)powerUp.Duration * 1000,false,PlayerLoopTiming.FixedUpdate,token);
                 _particleController.BonusEffectEnable(PowerUpEnum.Multiply, 1);
+                _powerUps.Remove(powerUp.PowerUpEnum);
                 _renderer.material = _standartMaterial;
             }
             catch (OperationCanceledException)
             {
-                _renderer.material = _standartMaterial;
+                
             }           
+        }
+
+        private async void Magnet(IPowerUp powerUp, CancellationToken token)
+        {
+            try
+            {
+                await UniTask.Delay((int)powerUp.Duration * 1000, false, PlayerLoopTiming.FixedUpdate, token);
+                _powerUps.Remove(powerUp.PowerUpEnum);
+            }
+            catch (OperationCanceledException)
+            {
+
+            }
         }
 
         private bool FindActivePowerUp(IPowerUp powerUp)
         {
-            foreach (var item in _powerUps)
-            {
-                if (item == powerUp) return true;
-            }
-
-            return false;
+            if (_powerUps.ContainsKey(powerUp.PowerUpEnum)) return true;
+            else return false;
         }
 
         public void ResetPoweraUps()
         {
-            foreach (var powerup in _powerUps)
+            foreach(var powerUp in _powerUps)
             {
-                powerup.Disable();
+                Cancel(powerUp.Value);
+                //powerUp.Key.Disable();
             }
 
-            Cancel();
-
+            _renderer.material = _standartMaterial;
             _particleController.DisablePowerUpParticle(PowerUpEnum.Magnet);
             _powerUps.Clear();
             _view.DesactivateBonuses();
         }
 
-        private void Cancel()
+        private void Cancel(CancellationTokenSource source)
         {
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = null;
+            source?.Cancel();
+            source?.Dispose();
         }
     }
 }

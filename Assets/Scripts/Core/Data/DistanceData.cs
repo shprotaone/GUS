@@ -31,7 +31,6 @@ namespace GUS.Core.Data
         {
             _value = distance * _distanceMutiplier.ResultMulty;
             _distanceView.RefreshDistancePointCount(_value);
-            Debug.Log("Multiplyer " + _distanceMutiplier.ResultMulty);
         }
 
         public void UpdateData()

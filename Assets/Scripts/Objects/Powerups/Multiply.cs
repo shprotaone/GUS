@@ -1,7 +1,10 @@
+using Cysharp.Threading.Tasks;
 using GUS.Core.Data;
 using GUS.Core.Pool;
 using GUS.Player;
+using System;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 namespace GUS.Objects.PowerUps
@@ -15,9 +18,8 @@ namespace GUS.Objects.PowerUps
         private GameObject _model;
         private Wallet _wallet;
         private ObjectPool _objectPool;
-
+        private CancellationTokenSource _cancellationToken;
         private bool _canTake;
-        private float _workTime;
         public float Duration => _duration;
         public Sprite Sprite => _collectable.icon;
         public PoolObjectType Type => PoolObjectType.Multiply;
@@ -50,17 +52,29 @@ namespace GUS.Objects.PowerUps
 
         public void Execute(PowerUpHandler handler)
         {
-            StopCoroutine(Activate());
-            StartCoroutine(Activate());
+            _cancellationToken?.Cancel();
+            _cancellationToken?.Dispose();
+
+            _cancellationToken= new CancellationTokenSource();
+            Activate();
         }
 
-        private IEnumerator Activate()
+        private async void Activate()
         {
-            Debug.Log("Multi " + _duration);
+            float dur = _duration;
             _model.SetActive(false);
             _wallet.SetMultiply(true);
 
-            yield return new WaitForSeconds(_duration);
+            try
+            {
+                await UniTask.Delay((int)dur * 1000,false, PlayerLoopTiming.Update, _cancellationToken.Token);
+                _wallet.SetMultiply(false);
+            }
+            catch (OperationCanceledException)
+            {
+
+            }
+
 
             Disable();            
         }
@@ -72,14 +86,11 @@ namespace GUS.Objects.PowerUps
 
         public void Disable()
         {
-            StopAllCoroutines();
+            Debug.Log("MultiDisable");
             _canTake = true;
-            _wallet.SetMultiply(false);
 
             if (_destroyable) Destroy(gameObject);
             else _objectPool.DestroyObject(this.gameObject);
-
-
         }
     }
 }
