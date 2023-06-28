@@ -25,6 +25,7 @@
        HoleWithTractor,
        ScareTrac,
        Tutorial,
+       ScareBarrel,
 
 
        Empty,
