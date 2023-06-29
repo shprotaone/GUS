@@ -33,12 +33,12 @@ public class UIClickerGame : MonoBehaviour
     {
         _slider.gameObject.SetActive(true);
         _slider.maxValue = health;
-        _slider.value = health;
+        _slider.value = 0;
     }
 
     public void UpdateSlider(float value)
     {
-        _slider.value -= value;
+        _slider.value += value;
         //FocusBehaviour();
         //UpscaleCorn();
     }

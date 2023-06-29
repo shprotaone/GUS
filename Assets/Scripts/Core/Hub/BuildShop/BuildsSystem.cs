@@ -73,7 +73,8 @@ namespace GUS.Core.Hub.BuildShop
                     _builds[i].RefreshData();
                 }
             }
-            _uiBuild.Refresh(_builds[index], _buildsData[index], index);
+
+            _uiBuild.Refresh(this, _buildsData);
             _distanceMutiplier.ChangeBonusAnimation();
             OnBuyed?.Invoke();
 
