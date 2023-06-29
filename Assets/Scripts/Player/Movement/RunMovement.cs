@@ -191,7 +191,7 @@ namespace GUS.Player.Movement
             _targetPosition = _startPosition;
             ResetPosition();
             CheckLinePosition();
-            OnChangePosition?.Invoke();
+            //OnChangePosition?.Invoke();
         }
 
         public void CallMove(EnumBind enumBind)
