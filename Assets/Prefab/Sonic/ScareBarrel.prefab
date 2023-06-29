@@ -172,7 +172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4927091465850864566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -29.75}
+  m_LocalPosition: {x: 0, y: 0, z: -34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -748,7 +748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268516, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268516, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -783,8 +783,12 @@ PrefabInstance:
       value: CurvedBarrellObstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268523, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
+      propertyPath: _time
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6311310927515268523, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: _speed
-      value: -20
+      value: -21
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268523, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: _speedMultilpy
@@ -905,7 +909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268516, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.25
+      value: 15.5
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268516, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -940,8 +944,12 @@ PrefabInstance:
       value: CurvedBarrellObstacle (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268523, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
+      propertyPath: _time
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6311310927515268523, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: _speed
-      value: -20
+      value: -21
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268523, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: _speedMultilpy
@@ -1866,7 +1874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268516, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268516, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1901,8 +1909,12 @@ PrefabInstance:
       value: CurvedBarrellObstacle (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268523, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
+      propertyPath: _time
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6311310927515268523, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: _speed
-      value: -20
+      value: -21
       objectReference: {fileID: 0}
     - target: {fileID: 6311310927515268523, guid: acef4bc52efd4a046950c64718920ee0, type: 3}
       propertyPath: _speedMultilpy
