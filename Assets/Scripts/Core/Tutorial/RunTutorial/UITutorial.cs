@@ -37,7 +37,7 @@ namespace GUS.Core.Tutorial
             //_tutorialCanvas.gameObject.SetActive(false);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             OnWaiter?.Invoke();
         }
