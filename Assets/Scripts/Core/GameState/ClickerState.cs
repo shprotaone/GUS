@@ -1,6 +1,7 @@
 ﻿using GUS.Core.Clicker;
 using GUS.Core.Locator;
 using GUS.LevelBuild;
+using GUS.Player;
 using System.Collections;
 
 namespace GUS.Core.GameState
@@ -10,6 +11,7 @@ namespace GUS.Core.GameState
         private WorldController _worldController;
         private ClickerGame _clicker;
         private ClickerStateMachine _clickerStateMachine;
+        private PlayerActor _playerActor;
         private IServiceLocator _serviceLocator;
         public IStateMachine StateMachine { get; private set; }
 
@@ -17,6 +19,7 @@ namespace GUS.Core.GameState
         {                       
             _serviceLocator = serviceLocator;
             _worldController = serviceLocator.Get<WorldController>();
+            _playerActor= _serviceLocator.Get<PlayerActor>();
             StateMachine = stateMachine;
         }        
 
@@ -24,6 +27,7 @@ namespace GUS.Core.GameState
         {
             _clicker = _serviceLocator.Get<ClickerGame>();
             _clickerStateMachine = _clicker.StateMachine;
+            _playerActor.PowerUpHandler.ResetPoweraUps();
             _clicker.Paused(false);
             _worldController.CreateOnlyFreePlatforms(true);            
         }

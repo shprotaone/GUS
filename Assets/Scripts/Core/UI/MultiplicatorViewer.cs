@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MultiplicatorViewer : MonoBehaviour
 {
     [SerializeField] private Image _multiplyImage;
+    [SerializeField] private Transform _multiplyTransform;
     [SerializeField] private bool _withAnimation = false;
     [SerializeField] private float _animTime;
 
@@ -25,9 +26,9 @@ public class MultiplicatorViewer : MonoBehaviour
     {
         if(_withAnimation)
         {
-            _multiplyImage.transform.localScale = Vector3.zero;
+            _multiplyTransform.localScale = Vector3.zero;
             _multiplyImage.sprite = _sprites[val];
-            _multiplyImage.transform.DOScale(1, _animTime).SetEase(Ease.OutBack);
+            _multiplyTransform.DOScale(1, _animTime).SetEase(Ease.OutBack);
                                           
         }
         else

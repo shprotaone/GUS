@@ -48,21 +48,27 @@ namespace GUS.Core.Tutorial
 
         public void Waiter()
         {
-            if (_player.InputType.Movement() == _direction)
-            {
-                _player.MovementType.CanMove(true);
-                _player.InputType.Blocker(false);
+            EnumBind bind = _player.InputType.Movement();
 
-                _worldContrtoller.WorldStopper(false);
+            if (bind != EnumBind.None)
+            {             
+                if (bind == _direction)
+                {
+                    _player.MovementType.CanMove(true);
+                    _player.InputType.Blocker(false);
 
-                _player.AnimatorController.Pause(false);
-                _player.MovementType.CallMove(_direction);
-                _player.InputType.Blocker(true);
+                    _worldContrtoller.WorldStopper(false);
 
-                _view.CurrentViewStep.Disable();
-                CheckLastStep();
-                _view.OnWaiter-= Waiter;
+                    _player.AnimatorController.Pause(false);
+                    _player.MovementType.CallMove(_direction);
+                    _player.InputType.Blocker(true);
+
+                    _view.CurrentViewStep.Disable();
+                    CheckLastStep();
+                    _view.OnWaiter -= Waiter;
+                }
             }
+            
         }
 
         private void CheckLastStep()

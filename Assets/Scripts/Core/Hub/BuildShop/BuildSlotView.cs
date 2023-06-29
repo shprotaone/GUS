@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,13 +39,14 @@ namespace GUS.Core.Hub.BuildShop
                 _progressImages[i].color = Color.blue;
             }
 
-            if (buildState >= step) _buy.interactable = false;
             CheckButtonState();
+            if (buildState < step) _buy.interactable = false;
+          
         }
 
         private void CheckButtonState()
         {
-            if (_buildsSystem.Wallet.Coins < _currentCost) _buy.interactable = false;
+            if (_buildsSystem.Wallet.Coins <= _currentCost) _buy.interactable = false;
             else _buy.interactable = true;
         }
 
@@ -53,6 +55,12 @@ namespace GUS.Core.Hub.BuildShop
             _cost.text = cost.ToString();
             _currentCost = cost;
             CheckButtonState();
+        }
+
+        public void Disable()
+        {
+            _cost.text = "";
+            _buy.interactable = false;
         }
     }
 }

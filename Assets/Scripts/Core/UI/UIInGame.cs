@@ -19,7 +19,7 @@ namespace GUS.Core.UI
         [SerializeField] private TMP_Text _honkTextValue;
         [SerializeField] private MultiplicatorViewer _multiplicatorViewer;
         
-        [Title("Нотификация болшого количества монет")]
+        [Title("Нотификация большого количества монет")]
         [SerializeField] private RectTransform _bigRewardNotify;
         [SerializeField] private TMP_Text _valueReward;
 
@@ -55,11 +55,11 @@ namespace GUS.Core.UI
         public async void CallBigCornNotify(float value)
         {
             _valueReward.text = "+" + value.ToString();
-            _bigRewardNotify.gameObject.SetActive(true);
-            _bigRewardNotify.DOAnchorPosX(0, 1).SetEase(Ease.OutSine);
+            _bigRewardNotify.localScale = Vector3.zero;
+
+            _bigRewardNotify.DOScale(1, 1).SetEase(Ease.OutSine);
             await UniTask.Delay(3000);
-            _bigRewardNotify.gameObject.SetActive(false);
-            _bigRewardNotify.anchoredPosition = new Vector2(600,-500);
+            _bigRewardNotify.DOScale(0, 0.3f).SetEase(Ease.OutSine);
         }
 
         public void Hide(bool flag)

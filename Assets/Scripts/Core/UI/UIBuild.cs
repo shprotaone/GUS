@@ -3,9 +3,12 @@ using GUS.Core.GameState;
 using GUS.Core.Hub;
 using GUS.Core.Hub.BuildShop;
 using GUS.Core.Locator;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.ObjectChangeEventStream;
 
 namespace GUS.Core.UI
 {
@@ -44,15 +47,27 @@ namespace GUS.Core.UI
         {
             for (int i = 0; i < _views.Length; i++)
             {
-                _views[i].Init(buildSystem, data[i]);
-                Refresh(buildSystem.Builds[i], data[i], i);
+                _views[i].Init(buildSystem, data[i]);               
             }
+
+            Refresh(buildSystem, data);
         }
 
-        public void Refresh(Build builds, BuildData data, int index)
+        public void Refresh(BuildsSystem buildSystem, List<BuildData> data)
         {
-            _views[index].RefreshProgress(data.state, builds.StepCount);
-            _views[index].SetCost(builds.Container.costs[(int)data.state]);
+            for (int i = 0; i < _views.Length; i++)
+            {
+                _views[i].RefreshProgress(data[i].state, buildSystem.Builds[i].StepCount);
+
+                if (data[i].state < buildSystem.Builds[i].Container.costs.Length)
+                {
+                    _views[i].SetCost(buildSystem.Builds[i].Container.costs[(int)data[i].state]);
+                }
+                else
+                {
+                    _views[i].Disable();
+                }
+            }
         }
 
         private void Explore()

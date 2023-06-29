@@ -38,15 +38,14 @@ namespace GUS.Core.Hub.BonusShop
         public void UpdateData(BonusData bonusData)
         {
             _bonusData = bonusData;
-            UpdateCost();
+            CheckState();
             RefreshProgress(_bonusData.state);
         }
 
         private void Buy()
         {
             _shopSystem.Buy(_collectable.powerUpEnum, _currentCost, _bonusData.state);
-            CheckState();
-            UpdateCost();
+            CheckState();          
             RefreshProgress(_bonusData.state);
         }
 
@@ -60,6 +59,8 @@ namespace GUS.Core.Hub.BonusShop
             {
                 _buy.interactable = true;
             }
+
+            UpdateCost();
         }
 
         private void UpdateCost()
@@ -68,18 +69,21 @@ namespace GUS.Core.Hub.BonusShop
             {
                 _currentCost = _collectable.costs[_bonusData.state];
                 
-                if (_bonusData.state >= _collectable.costs.Length)
+                if (_bonusData.state >= _collectable.costs.Length - 1)
                 {
                     _buy.interactable = false;
                     _costText.text = "";
+                }
+                else
+                {
+                    _costText.text = _currentCost.ToString();
                 }
             }
             else
             {
                 _currentCost = _collectable.costs[0];
             }
-
-            _costText.text = _currentCost.ToString();           
+                   
         }
 
         private void RefreshProgress(int index)
