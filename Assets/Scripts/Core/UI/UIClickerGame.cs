@@ -20,7 +20,7 @@ public class UIClickerGame : MonoBehaviour
     private ClickerGame _clickerGame;
 
     private Color _alphaColor;
-    private float _aplhaFocus = 0;
+    private float _aplhaFocus = 100;
 
     public void Init(IServiceLocator serviceLocator)
     {
@@ -39,7 +39,7 @@ public class UIClickerGame : MonoBehaviour
     public void UpdateSlider(float value)
     {
         _slider.value -= value;
-        FocusBehaviour();
+        //FocusBehaviour();
         //UpscaleCorn();
     }
 
