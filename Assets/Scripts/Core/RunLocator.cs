@@ -39,7 +39,6 @@ namespace GUS.Core
         [SerializeField] private GameStateController _stateController;        
         [SerializeField] private BossPositions _bossPositions;
         
-
         [Header("Сервисы")]
         [SerializeField] private AudioService _audioService;
         [SerializeField] private JsonToFirebase _jsonToFirebase;
@@ -61,6 +60,7 @@ namespace GUS.Core
         private DistanceMutiplier _distanceMutiplier;
         private PauseHandle _pauseHandle;
         private TutorialSystemRun _tutorial;
+        private BonusSpawnCatcher _bonusSpawnCatcher;
 
         private IStateChanger _stateChanger;
         private ICoinView _coinView;
@@ -105,6 +105,7 @@ namespace GUS.Core
             _distanceMutiplier = new DistanceMutiplier();
             _honkWallet = new HonkCoinWallet();
             _pauseHandle = new PauseHandle();
+            _bonusSpawnCatcher = new BonusSpawnCatcher();
 
             _coinView = _uiController.UiInGame;
             _distanceView = _uiController.UiInGame;
@@ -141,6 +142,7 @@ namespace GUS.Core
             _serviceLocator.Register(_gameStateMachine);
             _serviceLocator.Register(_distanceMutiplier);
             _serviceLocator.Register(_pauseHandle);
+            _serviceLocator.Register(_bonusSpawnCatcher);
             
            
             RegisterPools();
@@ -161,14 +163,14 @@ namespace GUS.Core
 
             _collectablesPool.InitPool(_collectablesStorage);           
             _platformPool.InitPool(_platformStorage);           
-
-            _distanceMutiplier.Init(_serviceLocator);
+          
             _worldController.Init(_startPoint, _serviceLocator);
             _player.Init(_serviceLocator,false);
             _progressiveSystem.Init(_serviceLocator);
             _uiController.Init(_serviceLocator);
             _clicker.Init(_serviceLocator);
             _playerState.Init(_serviceLocator);
+            _distanceMutiplier.Init(_serviceLocator);
 
             CheckTutorial();
         }

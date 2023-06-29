@@ -16,7 +16,7 @@ namespace GUS.LevelBuild
     {
         public event Action<int> OnPlatformAdded;
         private const int countStartPlatform = 2;
-        public const int RangeZ = -70;
+        public const int RangeZ = -50;
 
         private Transform _beginWorldTransform;
         private Vector3 _offset = new Vector3(0, 0, -20);
@@ -35,6 +35,7 @@ namespace GUS.LevelBuild
         private BonusSpawner _bonusSpawner;
 
         private int _platformCount = 0;
+       
         private bool _isTutorial;
         private bool _isFree;
         private bool _rewardPlatform;
@@ -51,7 +52,9 @@ namespace GUS.LevelBuild
             _collectablesPool = _runLocator.GetPool(PoolTypeEnum.Collectable);
             _isTutorial = _serviceLocator.Get<StorageService>().Data._tutorialSteps[1];
 
-            _bonusSpawner = new BonusSpawner(_collectablesPool);
+            _bonusSpawner = new BonusSpawner(_collectablesPool,
+                                             serviceLocator.Get<BonusSpawnCatcher>());
+
             _platformsQueue = new Queue<Platform>();
             _randomLogic = new RandomLogic(_platformPool);
 
@@ -85,7 +88,7 @@ namespace GUS.LevelBuild
         {
             float nextPlatformOffset;
             
-            if (_platformsQueue.Count < 3)
+            if (_platformsQueue.Count < 4)
             {
                 SetNextPlatform();
 

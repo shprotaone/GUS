@@ -19,7 +19,6 @@ namespace GUS.Core.Data
             _storageService = serviceLocator.Get<StorageService>();
             _distanceView = serviceLocator.Get<IDistanceView>();
             _distanceMutiplier = serviceLocator.Get<DistanceMutiplier>();
-            Debug.Log("Мульти " + _distanceMutiplier.Multiplier);
         }
 
         public void Reset()
@@ -30,7 +29,7 @@ namespace GUS.Core.Data
 
         public void Set(int distance)
         {
-            _value = distance * _distanceMutiplier.Multiplier;
+            _value = distance * _distanceMutiplier.ResultMulty;
             _distanceView.RefreshDistancePointCount(_value);
         }
 

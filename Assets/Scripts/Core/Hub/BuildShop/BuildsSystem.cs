@@ -16,6 +16,7 @@ namespace GUS.Core.Hub.BuildShop
 
         private Wallet _wallet;
         private StorageService _storageService;
+        private DistanceMutiplier _distanceMutiplier;
         private AudioService _audioService;
         private UIBuild _uiBuild;
 
@@ -29,6 +30,7 @@ namespace GUS.Core.Hub.BuildShop
             _storageService = serviceLocator.Get<StorageService>();
             _audioService = serviceLocator.Get<AudioService>();
             _uiBuild = serviceLocator.Get<UiHubController>().UIBuild;
+            _distanceMutiplier= serviceLocator.Get<DistanceMutiplier>();
             _buildsData = _storageService.Data.buildDatas;
 
             LoadListBuild();
@@ -61,6 +63,7 @@ namespace GUS.Core.Hub.BuildShop
             if (_wallet.Coins < cost) return;
 
             _wallet.DecreaseCoins(cost);
+
             for (int i = 0; i < _buildsData.Count; i++)
             {
                 if (_buildsData[i].nameEnum == buildName)
@@ -71,7 +74,7 @@ namespace GUS.Core.Hub.BuildShop
                 }
             }
             _uiBuild.Refresh(_builds[index], _buildsData[index], index);
-
+            _distanceMutiplier.ChangeBonusAnimation();
             OnBuyed?.Invoke();
 
             _audioService.PlaySFX(_audioService.Data.buySound);

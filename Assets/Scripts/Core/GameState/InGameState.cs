@@ -12,6 +12,7 @@ namespace GUS.Core.GameState
         private CameraRunController _cameraController;
         private WorldController _worldController;
         private DistanceData _distanceData;
+        private BonusSpawnCatcher _bonusCatcher;
 
         private bool _isTimer;
 
@@ -21,6 +22,7 @@ namespace GUS.Core.GameState
             _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
             _worldController = serviceLocator.Get<WorldController>();
             _distanceData = serviceLocator.Get<DistanceData>();
+            _bonusCatcher = serviceLocator.Get<BonusSpawnCatcher>();
             StateMachine = stateMachine;
         }
         
@@ -28,6 +30,7 @@ namespace GUS.Core.GameState
         {            
             _cameraController.RunCamera();
             _worldController.Move();            
+            _bonusCatcher.Reset();
             _isTimer = true;
         }
 

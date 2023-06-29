@@ -24,8 +24,9 @@ namespace GUS.Core.GameState
 
         public void Enter()
         {
-           _run.ReturnPosition();
+            _run.ReturnPosition();
             _playerActor.PowerUpHandler.ResetPoweraUps();
+            _playerActor.CameraController.SecondFloor(false);
             _wallet.ResetCounter();
             _honkCoinWallet.ResetCounter();
         }

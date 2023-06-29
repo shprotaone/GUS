@@ -39,6 +39,7 @@ namespace GUS.Core.Hub
 
         private Wallet _wallet;
         private HonkCoinWallet _honkWallet;
+        private DistanceMutiplier _distanceMutiplier;
         private HubStateController _hubController;
         private StorageService _storageService;
         private DeleteService _deleteService;
@@ -79,6 +80,7 @@ namespace GUS.Core.Hub
             _hubController = new HubStateController();
             _honkWallet = new HonkCoinWallet();
             _runMovement= new RunMovement();
+            _distanceMutiplier= new DistanceMutiplier();
             _stateChanger = _hubController;
             _inputType = _joystick;
             _coinView = _uiHubController.CoinView;
@@ -114,6 +116,7 @@ namespace GUS.Core.Hub
             _serviceLocator.Register(_gameStateMachine);
             _serviceLocator.Register(_shopSystem);
             _serviceLocator.Register(_buildSystem);
+            _serviceLocator.Register(_distanceMutiplier);
             
         }
 
@@ -134,6 +137,7 @@ namespace GUS.Core.Hub
             _hubController.Idle();
             _buildSystem.Init(ServiceLocator);
             _shopSystem.Init(ServiceLocator);
+            _distanceMutiplier.Init(ServiceLocator);
         }
     }
 }

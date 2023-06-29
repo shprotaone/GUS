@@ -1,5 +1,6 @@
 using GUS.Core.Pool;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace GUS.Utils
@@ -9,7 +10,6 @@ namespace GUS.Utils
         private List<ObjectInfo> _parts;
         private int _digit;
         private int _totalWeight;
-
         public List<ObjectInfo> Parts => _parts;
         public RandomLogic(ObjectPool pool)
         {
@@ -31,7 +31,11 @@ namespace GUS.Utils
 
             for (int i = 0; i < _parts.Count; i++)
             {
-                if (_parts[i].Weight >= _digit) return i;
+                if (_parts[i].Weight >= _digit)
+                {
+                    return i;
+                }
+
                 _digit -= _parts[i].Weight;
             }
 

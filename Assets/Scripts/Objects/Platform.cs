@@ -68,18 +68,22 @@ namespace GUS.Objects
         }
         private async UniTask FindPosition(BonusSpawner bonusSpawner)
         {
-
             _parent = bonusSpawner.GetPos(SpawnPoints);
             await UniTask.Yield();
         }
 
         public void DisableBonus(ObjectPool pool)
         {
-            if (_parent == null) return;
-
-            if(_parent.childCount > 0)
+            foreach(Transform obstacle in _spawnPoints)
             {
-                pool.DestroyObject(_currentCollectable);
+                if(obstacle.childCount > 0)
+                {
+                    for (int i = 0; i < obstacle.childCount; i++)
+                    {
+                        pool.DestroyObject(obstacle.GetChild(i).gameObject);
+                    }
+                }
+                Debug.Log("DisableCollectable");
                 _currentCollectable = null;
             }
         }
