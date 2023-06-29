@@ -19,4 +19,5 @@ public class LevelSettings : ScriptableObject
     public float exploreSpeed;
     [Range(0f, 1f)]
     public float tractorSpeedMult;
+    public int dryRange;
 }

@@ -9,10 +9,10 @@ public class BonusSpawner
     private BonusSpawnCatcher _spawnCatcher;
 
     private int _spawnCount = 0;
-    public BonusSpawner(ObjectPool pool)
+    public BonusSpawner(ObjectPool pool,BonusSpawnCatcher catcher)
     {
         _pool = pool;
-        _spawnCatcher = new BonusSpawnCatcher();
+        _spawnCatcher = catcher;
     }
 
     public Transform GetPos(List<Transform> spawnPoints)
@@ -40,30 +40,31 @@ public class BonusSpawner
     public GameObject GetObject(ObjectInfo obj)
     {
         obj.prefab.TryGetComponent(out IPoolObject poolObject);
-        _spawnCatcher.CatchSpawn();
         return _pool.GetObject(poolObject.Type);
     }
 
     public ObjectInfo GetTypeBonus()
     {
         RandomLogic collectable = new RandomLogic(_pool);
-        _spawnCount++;
-        //if(_spawnCount > 10)
-        //{
-        //    _spawnCount= 0;
-        //    Debug.Log("Принудительно");
-        //    return Reposition();
-        //}
+        _spawnCatcher.DryCount++;
+        if (_spawnCatcher.DryCount > _spawnCatcher.DryRange)
+        {
+            _spawnCount = 0;
+            Debug.Log("Принудительно");
+
+            return Reposition();
+        }
 
         int index = collectable.GetDigit();
         _spawnCatcher.CatchBonus(_pool.ObjectsInfo[index].ObjectType);
-
-        return _pool.Storage.parts[index];
+        return _pool.ObjectsInfo[index];
     }
 
     private ObjectInfo Reposition()
     {
-        if(_spawnCatcher.Common - _spawnCatcher.Multiply > 5)
+        int result = Random.Range(0,2);
+        Debug.Log(result);
+        if(result == 0)
         {
             return GetBonus(PoolObjectType.Multiply);
         }
@@ -75,13 +76,17 @@ public class BonusSpawner
 
     public ObjectInfo GetBonus(PoolObjectType poolObject)
     {
+        ObjectInfo obj;
         if (poolObject == PoolObjectType.Multiply)
-            return _pool.Storage.parts[2];
+            obj= _pool.ObjectsInfo[1];
         else if (poolObject == PoolObjectType.Magnet)
-            return _pool.Storage.parts[1];
+            obj = _pool.ObjectsInfo[0];
         else if (poolObject == PoolObjectType.HonkCoin)
-            return _pool.Storage.parts[4];
+            obj = _pool.ObjectsInfo[4];
 
-        else return _pool.Storage.parts[3];
+        else obj = _pool.ObjectsInfo[3];
+
+        _spawnCatcher.CatchBonus(poolObject);
+        return obj;
     }
 }

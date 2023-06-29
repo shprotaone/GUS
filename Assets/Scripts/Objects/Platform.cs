@@ -76,7 +76,13 @@ namespace GUS.Objects
         {
             foreach(Transform obstacle in _spawnPoints)
             {
-                pool.DestroyObject(_currentCollectable);
+                if(obstacle.childCount > 0)
+                {
+                    for (int i = 0; i < obstacle.childCount; i++)
+                    {
+                        pool.DestroyObject(obstacle.GetChild(i).gameObject);
+                    }
+                }
                 Debug.Log("DisableCollectable");
                 _currentCollectable = null;
             }

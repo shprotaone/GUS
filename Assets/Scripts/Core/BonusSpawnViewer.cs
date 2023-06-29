@@ -19,7 +19,7 @@ public class BonusSpawnViewer : MonoBehaviour
 
     private void Update()
     {
-        _coinSpawn.text = _catcher.Coins.ToString();
+        _coinSpawn.text = _catcher.DryCount.ToString();
         _magnetSpawn.text = _catcher.Magnets.ToString();
         _multipleSpawn.text = _catcher.Multiply.ToString();
         _common.text = _catcher.Common.ToString();

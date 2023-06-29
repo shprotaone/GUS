@@ -15,13 +15,16 @@ public class Progressive : MonoBehaviour
     private WorldController _worldController;
     private LevelSettings _currentLevelSettings;
     private PlayerStateMachine _playerStateMachine;
+    private BonusSpawnCatcher _spawnCatcher;
     private int _stageCount = 0;
     
     public void Init(IServiceLocator locator)
     {
         _worldController = locator.Get<WorldController>();
         _playerStateMachine = locator.Get<PlayerStateMachine>();
-        _worldController.PlatformBuilder.OnPlatformAdded += CheckStage;
+        _spawnCatcher = locator.Get<BonusSpawnCatcher>();
+        _spawnCatcher.SetDryRange(locator.Get<LevelSettings>().dryRange);
+        _worldController.PlatformBuilder.OnPlatformAdded += CheckStage;      
     }
 
     public void CheckStage(int value)
@@ -38,6 +41,7 @@ public class Progressive : MonoBehaviour
     {
         _worldController.UpdateSettings(_currentLevelSettings);
         _playerStateMachine.UpdateSettings(_currentLevelSettings);
+        _spawnCatcher.SetDryRange(_currentLevelSettings.dryRange);
     }
 
     private void OnDisable()

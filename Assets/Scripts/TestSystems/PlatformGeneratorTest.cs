@@ -33,7 +33,7 @@ namespace GUS.TestSystems
             _generateButton.onClick.AddListener(Generate);
             _platformRandomLogic = new RandomLogic(_platformPool);
             
-            _bonusSpawner = new BonusSpawner(_collectablesPool);
+            //_bonusSpawner = new BonusSpawner(_collectablesPool);
         }
 
         private void InitObjects()
