@@ -105,7 +105,7 @@ MonoBehaviour:
   - {fileID: 4065579086257459921}
   - {fileID: 2282249018217239494}
   _obstacles:
-  - {fileID: 0}
+  - {fileID: 7469836365611035018}
   - {fileID: 7237079762830914785}
   _objectPoolType: 20
   _beginPoint: {fileID: 4363945957078134808}
@@ -188,7 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3177e663b8d28498259014e090db53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dynObstacles: []
+  _dynObstacles:
+  - {fileID: 7469836365611035018}
   _isActive: 1
 --- !u!65 &2870352341362570453
 BoxCollider:
@@ -1194,6 +1195,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad1c33f0aca16d34bb7343db2e0279e9, type: 3}
+--- !u!1 &7469836365611035018 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6454644512412826949, guid: ad1c33f0aca16d34bb7343db2e0279e9, type: 3}
+  m_PrefabInstance: {fileID: 4483808850239034575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7845798541480571696 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5969609614826285055, guid: ad1c33f0aca16d34bb7343db2e0279e9, type: 3}

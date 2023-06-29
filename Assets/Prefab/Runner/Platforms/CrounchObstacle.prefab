@@ -54,7 +54,7 @@ MonoBehaviour:
   - {fileID: 8132156603262734500}
   - {fileID: 5774814593076008066}
   _obstacles:
-  - {fileID: 0}
+  - {fileID: 2156085786336568847}
   - {fileID: 8697773682509826259}
   - {fileID: 3817966371733847216}
   - {fileID: 5680029199521611752}
@@ -779,7 +779,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 14147381086155680, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.75
+      value: 0.74
       objectReference: {fileID: 0}
     - target: {fileID: 3429710984822616364, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_Name
@@ -1234,6 +1234,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d5917f79161b0de45a6d09acacb1596b, type: 3}
+--- !u!1 &2156085786336568847 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7714244081367521174, guid: d5917f79161b0de45a6d09acacb1596b, type: 3}
+  m_PrefabInstance: {fileID: 8567381992051454361}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2468130700640673853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6099557574273814948, guid: d5917f79161b0de45a6d09acacb1596b, type: 3}
