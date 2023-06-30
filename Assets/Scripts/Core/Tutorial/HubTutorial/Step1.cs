@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using GUS.Core.Tutorial;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ namespace GUS.Core.Tutorial
         [SerializeField] private Button _startButon;
         private TutorialSystemHUB _tutorial;
 
+        private CancellationTokenSource _cancellationTokenSource;
         public void ShowText(string text)
         {
 
@@ -37,6 +39,7 @@ namespace GUS.Core.Tutorial
 
         public void Next()
         {
+            
             _tutorial.CallNextStep();
         }
     }
