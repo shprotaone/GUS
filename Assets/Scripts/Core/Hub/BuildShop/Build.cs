@@ -34,6 +34,7 @@ namespace GUS.Core.Hub.BuildShop
             for (int i = 0; i < _buildData.state; i++)
             {
                 _parts[i].SetActive(true);
+
                 if (i > 0) _parts[i - 1].SetActive(false);
             }
         }
