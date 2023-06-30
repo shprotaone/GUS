@@ -16,7 +16,7 @@ namespace GUS.LevelBuild
     {
         public event Action<int> OnPlatformAdded;
         private const int countStartPlatform = 2;
-        public const int RangeZ = -50;
+        public const int RangeZ = -40;
 
         private Transform _beginWorldTransform;
         private Vector3 _offset = new Vector3(0, 0, -20);
@@ -63,19 +63,18 @@ namespace GUS.LevelBuild
 
         public void CreateStartSection()
         {
+
             if (!_isTutorial)
-            {
-                _isFree= true;
+            {               
+                _isFree = true;
                 CreateNextPlatform();
-                _isFree= false;
+                CreateNextPlatform();
+                _isFree = false;
                 CreateNextPlatform();
             }
 
             _isFree = true;
-            for (int i = 0; i < countStartPlatform; i++)
-            {
-                CreateNextPlatform();
-            }
+            CreateNextPlatform();
 
             _isFree = false;
             for (int i = 0; i < countStartPlatform; i++)
