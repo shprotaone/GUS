@@ -47,9 +47,11 @@ namespace GUS.Core.Hub
             _startPos = startPos;
         }
 
-        public void SceneLoadToRun()
+        public async void SceneLoadToRun()
         {
+            await _sceneHandler.FadeOutHandle();
             _sceneHandler.LoadOtherScene();
+            
         }
     }
 }

@@ -4,6 +4,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
+
+/// <summary>
+/// Загрузчик сцен с затемнением
+/// </summary>
 public class SceneHandler : MonoBehaviour
 {
     [SerializeField] private AssetReference _runSeneRef;
@@ -15,27 +19,30 @@ public class SceneHandler : MonoBehaviour
         _sceneLoader = FindObjectOfType<SceneLoader>();
         _fader= FindObjectOfType<Fader>();
     }
-
+    /// <summary>
+    /// Загрузка со всех сцен
+    /// </summary>
     public void LoadOtherScene()
     {
         _sceneLoader.ChangeAdditiveScene(_runSeneRef);
     }
+
     /// <summary>
-    /// Появление
+    /// Появление на всех сценах
     /// </summary>
     public async UniTask FadeInHandle()
     {
-        if(_fader != null)
+        if (_fader != null)
         {
             await _fader.FadeIn();
         }
     }
 
     /// <summary>
-    /// Затемнение
+    /// Затемнение на всех сценах 
     /// </summary>
     public async UniTask FadeOutHandle()
-    {       
-        if(_fader != null) await _fader.FadeOut();
-    }    
+    {
+        if (_fader != null) await _fader.FadeOut();
+    }
 }

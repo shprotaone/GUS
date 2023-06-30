@@ -27,7 +27,6 @@ public class SceneLoader : MonoBehaviour
 
     private async UniTask DelayRoutine(AssetReference reference)
     {      
-        await _fader.FadeOut();
         await PrevSceneUnload();
         
         _handle = Addressables.LoadSceneAsync(reference, LoadSceneMode.Additive);
@@ -51,8 +50,6 @@ public class SceneLoader : MonoBehaviour
 
         if (obj.IsDone)
         {
-
-            await _fader.FadeIn();
             SceneManager.SetActiveScene(obj.Result.Scene);
         }
         await UniTask.Yield();
