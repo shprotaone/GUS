@@ -37,7 +37,7 @@ namespace GUS.Core.SaveSystem
             }
             catch(Exception ex)
             {
-                Debug.LogError(ex.Message);
+                Delete(key);
                 return;
             }                   
         }    

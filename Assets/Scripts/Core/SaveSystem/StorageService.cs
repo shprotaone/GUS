@@ -36,7 +36,7 @@ namespace GUS.Core.SaveSystem
                 _playerData = data;
             });
 
-            if(_playerData == null)
+            if(_playerData == null || !CheckSave())
             {
                 _playerData = new PlayerData();
                 _playerData.playerName = "Player" + (int)Random.Range(0, 500000);
@@ -59,6 +59,15 @@ namespace GUS.Core.SaveSystem
         {
             _storageService.Delete(fileName);
             Load();
+        }
+
+        private bool CheckSave()
+        {
+            bool check = _playerData.buildDatas != null && 
+                         _playerData.bonusDatas != null && 
+                         _playerData._tutorialSteps != null;
+
+            return check;
         }
     }
 

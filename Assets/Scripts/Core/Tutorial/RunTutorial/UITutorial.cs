@@ -7,7 +7,6 @@ namespace GUS.Core.Tutorial
 {
     public class UITutorial :MonoBehaviour
     {
-        public event Action OnWaiter;
 
         [SerializeField] private Canvas _tutorialCanvas;
         [SerializeField] private RectTransform _endPanel;
@@ -35,12 +34,6 @@ namespace GUS.Core.Tutorial
             _endPanel.gameObject.SetActive(false);
             _tutorialCanvas.sortingOrder = 0;
             //_tutorialCanvas.gameObject.SetActive(false);
-        }
-
-        private void Update()
-        {
-            OnWaiter?.Invoke();
-            Debug.Log("Wait");
         }
     }
 }

@@ -12,7 +12,7 @@ namespace GUS.Core.Tutorial
         {
             _triggers = GetComponentsInChildren<IStepTrigger>();
             TriggerCount= _triggers.Length;
-            Debug.Log("Yeah");
+
             foreach(var trigger in _triggers)
             {
                 trigger.Init(serviceLocator);
