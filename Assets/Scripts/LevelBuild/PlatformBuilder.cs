@@ -16,7 +16,7 @@ namespace GUS.LevelBuild
     {
         public event Action<int> OnPlatformAdded;
         private const int countStartPlatform = 2;
-        public const int RangeZ = -40;
+        public const int RangeZ = -50;
 
         private Transform _beginWorldTransform;
         private Vector3 _offset = new Vector3(0, 0, -20);

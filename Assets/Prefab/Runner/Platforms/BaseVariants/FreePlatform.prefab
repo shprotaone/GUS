@@ -123,74 +123,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3476935401060007452, guid: b6d88bc38c805e84284f89e27e66357a, type: 3}
   m_PrefabInstance: {fileID: 948514193714810738}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &3717089938208429207
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 6349251218990175934}
-    m_Modifications:
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 42.25818
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.71560097
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -20.975939
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7155891
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.011355288
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.6983413
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.011081577
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.044
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -88.603
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -1.818
-      objectReference: {fileID: 0}
-    - target: {fileID: 1762139654693827025, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_Name
-      value: Fence
-      objectReference: {fileID: 0}
-    - target: {fileID: 1762139654693827025, guid: ae279a8caba90714b97368111194b811, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: ae279a8caba90714b97368111194b811, type: 3}
---- !u!4 &2353818654195351548 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1387020735441529707, guid: ae279a8caba90714b97368111194b811, type: 3}
-  m_PrefabInstance: {fileID: 3717089938208429207}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4718489245291854361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -787,9 +719,6 @@ PrefabInstance:
       addedObject: {fileID: 8698246007717906972}
     - targetCorrespondingSourceObject: {fileID: 2403545723925584648, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2353818654195351548}
-    - targetCorrespondingSourceObject: {fileID: 2403545723925584648, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4425141713398460782}
     - targetCorrespondingSourceObject: {fileID: 2403545723925584648, guid: 1056315413bce144fb2ed51b5995178e, type: 3}
       insertIndex: -1
@@ -829,6 +758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPoints: []
+  _obstacles: []
   _objectPoolType: 0
   _beginPoint: {fileID: 372381312345813487}
   _endPoint: {fileID: 372381312331468582}
