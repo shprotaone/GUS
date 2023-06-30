@@ -7,6 +7,8 @@ namespace GUS.Core.InputSys.Joiystick
     public class FloatingJoystick : Joystick, IInputType
     {
         public event Action OnActive;
+        public event Action<EnumBind> OnMove;
+
         public bool BlockInput { get; private set; }
         public bool IsActive { get; private set; }
 

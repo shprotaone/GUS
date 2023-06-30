@@ -82,6 +82,7 @@ namespace GUS.Core.Hub.BonusShop
             else
             {
                 _currentCost = _collectable.costs[0];
+                _costText.text = _currentCost.ToString();
             }
                    
         }

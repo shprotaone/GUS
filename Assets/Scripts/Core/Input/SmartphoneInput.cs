@@ -17,6 +17,8 @@ namespace GUS.Core.InputSys
         private bool _isTap;
         private bool _isSwiping;
 
+        public event Action<EnumBind> OnMove;
+
         public Vector2 StartPosition => _startPosition;
         public float Direction { get; private set; }
         public float Delta { get; private set; }
@@ -34,13 +36,8 @@ namespace GUS.Core.InputSys
             {
                 if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    //_startPosition= Input.GetTouch(0).position;
                     return EnumBind.Fire;
                 }
-
-                //if(Input.GetTouch(0).phase == TouchPhase.Stationary){
-                //    return EnumBind.FireHold;
-                //}
             }          
 
             return EnumBind.None;
@@ -56,25 +53,28 @@ namespace GUS.Core.InputSys
             if (_swipeDirection.y > 0)
             {
                 ResetSwipe();
+                OnMove?.Invoke(EnumBind.Up);
                 return EnumBind.Up;
             }
             else if (_swipeDirection.y < 0)
             {
                 ResetSwipe();
+                OnMove?.Invoke(EnumBind.Down);
                 return EnumBind.Down;
             }
             else if (_swipeDirection.x == 1)
             {
                 ResetSwipe();
+                OnMove?.Invoke(EnumBind.Left);
                 return EnumBind.Left;
             }
             else if (_swipeDirection.x == -1)
             {
                 ResetSwipe();
+                OnMove?.Invoke(EnumBind.Right);
                 return EnumBind.Right;
-            }
+            }            
 
-             
             return EnumBind.None;
         }
 

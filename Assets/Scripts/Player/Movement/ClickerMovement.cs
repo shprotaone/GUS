@@ -43,7 +43,7 @@ namespace GUS.Player.Movement
         {
             
         }       
-        public void Move(bool withForce)
+        public void Move()
         {
             
         }

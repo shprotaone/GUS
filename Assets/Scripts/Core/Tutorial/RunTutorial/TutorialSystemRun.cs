@@ -19,8 +19,9 @@ namespace GUS.Core.Tutorial
         {
             _specialPlatformBuilder = serviceLocator.Get<SpecialPlatformBuilder>();
             _player = serviceLocator.Get<PlayerActor>();
-            _storageService = serviceLocator.Get<StorageService>(); 
+            _storageService = serviceLocator.Get<StorageService>();
 
+            _player.InputType.Blocker(true);
             _specialPlatformBuilder.SetTutorial();
 
             await UniTask.Delay(1000);
@@ -31,8 +32,7 @@ namespace GUS.Core.Tutorial
             TutorialSteps = _tutorialPlatform.TriggerCount;
 
             await UniTask.Delay(1000);
-            _player.InputType.Blocker(true);
-            
+                        
         }
 
         public void EndTutorial()

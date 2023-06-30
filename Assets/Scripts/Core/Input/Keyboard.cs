@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 namespace GUS.Core.InputSys
@@ -6,6 +7,8 @@ namespace GUS.Core.InputSys
     public class Keyboard : IInputType
     {
         private bool _isHold;
+
+        public event Action<EnumBind> OnMove;
 
         public bool BlockInput { get; private set; }
 
