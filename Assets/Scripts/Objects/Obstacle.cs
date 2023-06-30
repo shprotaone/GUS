@@ -19,7 +19,8 @@ public class Obstacle : MonoBehaviour
     private IEnumerator Delay()
     {
         yield return new WaitForSeconds(2);
-        _model.SetActive(false);
+        if(_model != null) _model.SetActive(false);
+
     }
     private void OnEnable()
     {

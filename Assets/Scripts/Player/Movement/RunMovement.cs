@@ -58,9 +58,11 @@ namespace GUS.Player.Movement
 
         public void Update()
         {
-            if(_inputType != null && _canMoved)
+            _movementAction = _inputType.Movement();
+
+            if (_inputType != null && _canMoved)
             {
-                Move(false);
+                Move();
                 Jump();
                 DownSlide();
                 Fire();
@@ -88,9 +90,8 @@ namespace GUS.Player.Movement
             //}
         }
 
-        public void Move(bool withForce)
-        {
-            if(!withForce) _movementAction = _inputType.Movement();
+        public void Move()
+        {           
             float tmpDist = Time.deltaTime * _speedMovement;
 
             _direction.x = Mathf.Lerp(_player.transform.position.x, _targetPosition.x, tmpDist) - _player.transform.position.x;
@@ -204,8 +205,6 @@ namespace GUS.Player.Movement
                     break;
                 case EnumBind.Down: 
                     DownSlide(); 
-                    break;
-                default: Move(true);
                     break;
             }            
         }

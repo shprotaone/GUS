@@ -121,8 +121,8 @@ MonoBehaviour:
   _obstacles:
   - {fileID: 2510434249257867245}
   _objectPoolType: 11
-  _beginPoint: {fileID: 8675302281423322326}
-  _endPoint: {fileID: 1558284131547794559}
+  _beginPoint: {fileID: 3179397067051645066}
+  _endPoint: {fileID: 8002305616780644291}
   _isSpawning: 1
   _countBonuses: 3
 --- !u!1 &6352722978177785328
@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6352722978177785328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.161457, y: -22.779686, z: -3.003101}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -284,9 +284,17 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 6642018815475762623}
     m_Modifications:
+    - target: {fileID: 5763551228488171499, guid: f40a3587b402ade478616bd2c9239b68, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6123984266325007934, guid: f40a3587b402ade478616bd2c9239b68, type: 3}
       propertyPath: m_Name
       value: CurvedCypress_tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123984266325007934, guid: f40a3587b402ade478616bd2c9239b68, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6897002876134114436, guid: f40a3587b402ade478616bd2c9239b68, type: 3}
       propertyPath: m_RootOrder
@@ -408,6 +416,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurvedSunflower (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8879661885062733099, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
@@ -438,15 +450,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.161457
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.779686
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.996899
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalRotation.w
@@ -476,6 +488,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6562975889093544038, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f5bd4b164a569645b393fe095b4452d, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
@@ -487,11 +503,6 @@ Transform:
 --- !u!4 &4259916640065352930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
-  m_PrefabInstance: {fileID: 1148078635843985743}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8675302281423322326 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8613721536830725529, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
   m_PrefabInstance: {fileID: 1148078635843985743}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1279161645012872179
@@ -570,9 +581,17 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 6642018815475762623}
     m_Modifications:
+    - target: {fileID: 5763551228488171499, guid: f40a3587b402ade478616bd2c9239b68, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6123984266325007934, guid: f40a3587b402ade478616bd2c9239b68, type: 3}
       propertyPath: m_Name
       value: CurvedCypress_tree (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123984266325007934, guid: f40a3587b402ade478616bd2c9239b68, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6897002876134114436, guid: f40a3587b402ade478616bd2c9239b68, type: 3}
       propertyPath: m_RootOrder
@@ -650,6 +669,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurvedMushroom (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8482940336148628614, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9147556200677154364, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -713,6 +736,10 @@ PrefabInstance:
     - target: {fileID: 6181966735799340878, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
       propertyPath: m_Name
       value: CurvedBox (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181966735799340878, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6809743158636287476, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
       propertyPath: m_RootOrder
@@ -789,6 +816,10 @@ PrefabInstance:
     - target: {fileID: 8482940336148628614, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
       propertyPath: m_Name
       value: CurvedMushroom (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482940336148628614, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9147556200677154364, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
       propertyPath: m_RootOrder
@@ -868,15 +899,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.161457
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.779686
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.003101
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalRotation.w
@@ -906,12 +937,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6562975889093544038, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5087269c57d8b34bb9d42adb390f81f, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
 --- !u!4 &1569547920331748098 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
+  m_PrefabInstance: {fileID: 2393856123309352623}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8002305616780644291 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5635491844556958060, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
   m_PrefabInstance: {fileID: 2393856123309352623}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2877233616476013021
@@ -969,6 +1009,10 @@ PrefabInstance:
     - target: {fileID: 8879661885062733099, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
       propertyPath: m_Name
       value: CurvedSunflower (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879661885062733099, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -1034,6 +1078,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurvedStump (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6567619594374836126, guid: 681f8ee613915e143be0a9059766c6c1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 681f8ee613915e143be0a9059766c6c1, type: 3}
@@ -1053,6 +1101,10 @@ PrefabInstance:
     - target: {fileID: 6181966735799340878, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
       propertyPath: m_Name
       value: CurvedBox (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181966735799340878, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6809743158636287476, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
       propertyPath: m_RootOrder
@@ -1174,6 +1226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurvedSunflower
       objectReference: {fileID: 0}
+    - target: {fileID: 8879661885062733099, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
@@ -1193,6 +1249,10 @@ PrefabInstance:
     - target: {fileID: 8482940336148628614, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
       propertyPath: m_Name
       value: CurvedMushroom (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482940336148628614, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9147556200677154364, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
       propertyPath: m_RootOrder
@@ -1382,6 +1442,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurvedSunflower (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8879661885062733099, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
@@ -1446,6 +1510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurvedSunflower (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8879661885062733099, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
@@ -1509,6 +1577,10 @@ PrefabInstance:
     - target: {fileID: 6567619594374836126, guid: 681f8ee613915e143be0a9059766c6c1, type: 3}
       propertyPath: m_Name
       value: CurvedStump
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567619594374836126, guid: 681f8ee613915e143be0a9059766c6c1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -1602,6 +1674,10 @@ PrefabInstance:
     - target: {fileID: 6181966735799340878, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
       propertyPath: m_Name
       value: CurvedBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181966735799340878, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6809743158636287476, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
       propertyPath: m_RootOrder
@@ -1723,6 +1799,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurvedSunflower (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8879661885062733099, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b5d66a6feb92f64db244924d1edd98c, type: 3}
@@ -1742,6 +1822,10 @@ PrefabInstance:
     - target: {fileID: 8482940336148628614, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
       propertyPath: m_Name
       value: CurvedMushroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482940336148628614, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9147556200677154364, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
       propertyPath: m_RootOrder
@@ -1833,15 +1917,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.161457
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.779686
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.003101
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 3814699459635107245, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1875,6 +1959,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -8.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6562975889093544038, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cb1365777c099147be3c3ac4e37c0a8, type: 2}
     - target: {fileID: 7514052359822460399, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
       propertyPath: m_LocalPosition.z
       value: 2.75
@@ -1882,9 +1970,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
---- !u!4 &1558284131547794559 stripped
+--- !u!4 &3179397067051645066 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5635491844556958060, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8613721536830725529, guid: 06015f77b3723194fbdcbf3914d2df69, type: 3}
   m_PrefabInstance: {fileID: 6599298271127364883}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6604291530712749747 stripped
@@ -1908,6 +1996,10 @@ PrefabInstance:
     - target: {fileID: 6181966735799340878, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
       propertyPath: m_Name
       value: CurvedBox (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181966735799340878, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6809743158636287476, guid: 014af0d66cc87f741a0428fe83dc724c, type: 3}
       propertyPath: m_RootOrder
@@ -1985,6 +2077,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurvedMushroom (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8482940336148628614, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9147556200677154364, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -2048,6 +2144,10 @@ PrefabInstance:
     - target: {fileID: 8482940336148628614, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
       propertyPath: m_Name
       value: CurvedMushroom (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482940336148628614, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9147556200677154364, guid: c7df0c5d0f00723439c0e0f56e2f5aac, type: 3}
       propertyPath: m_RootOrder
@@ -2181,6 +2281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurvedRock1
       objectReference: {fileID: 0}
+    - target: {fileID: 5309702874304397491, guid: 68376a5d37deb6240b58f384b3dc9b43, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 68376a5d37deb6240b58f384b3dc9b43, type: 3}
@@ -2197,6 +2301,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 6642018815475762623}
     m_Modifications:
+    - target: {fileID: 2415687107105865781, guid: 2f027f8e7cace0a4d9f7ec542c4cb80b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3588544804815289178, guid: 2f027f8e7cace0a4d9f7ec542c4cb80b, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -2244,6 +2352,10 @@ PrefabInstance:
     - target: {fileID: 4217272300579774944, guid: 2f027f8e7cace0a4d9f7ec542c4cb80b, type: 3}
       propertyPath: m_Name
       value: CurvedPalm
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217272300579774944, guid: 2f027f8e7cace0a4d9f7ec542c4cb80b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

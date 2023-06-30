@@ -1528,6 +1528,10 @@ PrefabInstance:
       propertyPath: _images.Array.data[4]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5771671867007937015, guid: 2038556c2c7dc4c49878f1cd6c711a12, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5771671867321846976, guid: 2038556c2c7dc4c49878f1cd6c711a12, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1547,6 +1551,26 @@ PrefabInstance:
     - target: {fileID: 5771671867321846979, guid: 2038556c2c7dc4c49878f1cd6c711a12, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771671867534137960, guid: 2038556c2c7dc4c49878f1cd6c711a12, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 384.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771671867534137960, guid: 2038556c2c7dc4c49878f1cd6c711a12, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 156.0244
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771671867534137960, guid: 2038556c2c7dc4c49878f1cd6c711a12, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 10.058996
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771671867534137960, guid: 2038556c2c7dc4c49878f1cd6c711a12, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.0122
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771671867534137961, guid: 2038556c2c7dc4c49878f1cd6c711a12, type: 3}
+      propertyPath: m_margin.z
+      value: -0.5838317
       objectReference: {fileID: 0}
     - target: {fileID: 5771671867712880236, guid: 2038556c2c7dc4c49878f1cd6c711a12, type: 3}
       propertyPath: m_Color.a
@@ -11187,7 +11211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showHand: {fileID: 700269262}
   _exitButton: {fileID: 1062276927}
-  _secondBuyButton: {fileID: 0}
+  _secondBuyButton: {fileID: 1555317845}
   _click: {fileID: 2039480884}
 --- !u!1001 &1538957609
 PrefabInstance:
@@ -11276,6 +11300,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3691193827963161253, guid: c7323bd3dd70d5540b4bbf43e69579a8, type: 3}
   m_PrefabInstance: {fileID: 3782473282816393372}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1555317845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1934335457322621426, guid: efce213a9abf7604fbeb1278e5b22218, type: 3}
+  m_PrefabInstance: {fileID: 227094046}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1567528637 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3988542785339617829, guid: 33bea77f690a467428127347fad69028, type: 3}
@@ -14743,7 +14778,7 @@ MonoBehaviour:
   _showHand: {fileID: 2106195900}
   _hideButtons:
   - {fileID: 2039480884}
-  - {fileID: 0}
+  - {fileID: 1555317845}
   _click: {fileID: 426331199}
 --- !u!1001 &2039480882
 PrefabInstance:

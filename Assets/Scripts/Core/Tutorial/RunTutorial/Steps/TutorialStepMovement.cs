@@ -39,36 +39,30 @@ namespace GUS.Core.Tutorial
         {
             _player = actor;
             _view.CallStep(_stepIndex);
-            _view.OnWaiter += Waiter;
             _worldContrtoller.WorldStopper(true);
             _player.AnimatorController.Pause(true);
             _player.InputType.Blocker(false);
             _player.MovementType.CanMove(false);
+            _player.InputType.OnMove += Waiter;
         }
 
-        public void Waiter()
+        public void Waiter(EnumBind dir)
         {
-            EnumBind bind = _player.InputType.Movement();
+            if(_direction == dir)
+            {
+                _player.MovementType.CanMove(true);
+                _player.MovementType.CallMove(dir);
 
-            if (bind != EnumBind.None)
-            {             
-                if (bind == _direction)
-                {
-                    _player.MovementType.CanMove(true);
-                    _player.InputType.Blocker(false);
+                _player.InputType.OnMove -= Waiter;
+                
+                _worldContrtoller.WorldStopper(false);
 
-                    _worldContrtoller.WorldStopper(false);
+                _player.AnimatorController.Pause(false);
+                _player.InputType.Blocker(true);
 
-                    _player.AnimatorController.Pause(false);
-                    _player.MovementType.CallMove(_direction);
-                    _player.InputType.Blocker(true);
-
-                    _view.CurrentViewStep.Disable();
-                    CheckLastStep();
-                    _view.OnWaiter -= Waiter;
-                }
-            }
-            
+                _view.CurrentViewStep.Disable();
+                CheckLastStep();
+            }              
         }
 
         private void CheckLastStep()

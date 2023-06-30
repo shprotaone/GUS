@@ -32,7 +32,7 @@ namespace GUS.Player.Movement
         {
             if(_canMove)
             {
-                Move(false);
+                Move();
                 Fire();
             }           
         }
@@ -46,7 +46,7 @@ namespace GUS.Player.Movement
             }
         }
 
-        public void Move(bool withForce)
+        public void Move()
         {
             float horizontal = _inputType.Horizontal;
             float vertical = _inputType.Vertical;

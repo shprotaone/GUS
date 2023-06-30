@@ -56,8 +56,9 @@ namespace GUS.Core
         }
 
 
-        public void InitGame()
+        public async void InitGame()
         {
+            await _sceneHandler.FadeInHandle();
             SecondChance = true;
             _gameStateMachine.InitGameLoop(_gameStateMachine.initState);
             _playerStateMachine.InitGameLoop(_playerStateMachine.initState);
@@ -99,8 +100,9 @@ namespace GUS.Core
             _playerStateMachine.TransitionTo(_playerStateMachine.deathState);
         }
 
-        public void RestartGame()
+        public async void RestartGame()
         {
+            await _sceneHandler.FadeOutHandle();
             SecondChance = true;
             _routineExecuter.AllStop();
             _gameStateMachine.TransitionTo( _gameStateMachine.initState);
@@ -110,6 +112,7 @@ namespace GUS.Core
             
             _playerStateMachine.TransitionTo(_playerStateMachine.initState);
             _playerStateMachine.TransitionTo(_playerStateMachine.runState);
+            await _sceneHandler.FadeInHandle();
         }
 
         public void SecondChanceGame()
@@ -126,9 +129,10 @@ namespace GUS.Core
             _gameStateMachine.TransitionTo(_gameStateMachine.result);
         }
 
-        public void SceneLoadToHub()
+        public async void SceneLoadToHub()
         {
             EndGame();
+            await _sceneHandler.FadeOutHandle();
             _sceneHandler.LoadOtherScene();
         }
 
