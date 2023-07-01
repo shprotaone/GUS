@@ -18,6 +18,7 @@ namespace GUS.Player.Movement
 
         private bool _canMove;
         public bool IsMove { get; private set; }
+
         public void Init(PlayerActor player, PlayerStateMachine playerState, float speedMovement)
         {
             _playActor = player;
@@ -74,15 +75,13 @@ namespace GUS.Player.Movement
             _canMove = flag;
         }
 
-        public void FixedUpdate()
-        {
-            
-        }
+        public void FixedUpdate() { }
 
-        public void CallMove(EnumBind enumBind)
-        {
-            
-        }
+        public void CallMove(EnumBind enumBind) { }
+
+        public void ResetPosition() { }
+
+        public void ReturnPosition() { }
     }
 }
 

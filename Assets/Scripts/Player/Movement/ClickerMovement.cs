@@ -64,6 +64,11 @@ namespace GUS.Player.Movement
         {
             
         }
+
+        public void ReturnPosition()
+        {
+            
+        }
     }
 }
 

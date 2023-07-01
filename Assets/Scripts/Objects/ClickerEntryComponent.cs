@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using GUS.Player;
+using GUS.Player.Movement;
 using System.Collections;
 using UnityEngine;
 
@@ -26,8 +27,10 @@ namespace GUS.Core.Clicker
             {
                 _isActive = false;
                 PrepareEnemy();
-                actor.MovementType.CanMove(false);
                 actor.RestartPosition();
+                actor.MovementType.ReturnPosition();
+                actor.MovementType.CanMove(false);
+                
                 Initialization(actor);
                 Debug.Log("Начинается кликер");
             }

@@ -63,7 +63,7 @@ namespace GUS.Objects.PowerUps
 
             try
             {
-                await UniTask.Delay((int)powerUp.Duration * 1000,false,PlayerLoopTiming.FixedUpdate,token);
+                await UniTask.Delay((int)powerUp.Duration * 1000,false,PlayerLoopTiming.Update,token);
                 _particleController.BonusEffectEnable(PowerUpEnum.Multiply, 1);
                 _powerUps.Remove(powerUp.PowerUpEnum);
                 _renderer.material = _standartMaterial;

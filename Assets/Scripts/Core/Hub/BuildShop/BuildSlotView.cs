@@ -10,6 +10,7 @@ namespace GUS.Core.Hub.BuildShop
         [SerializeField] private TMP_Text _cost;
         [SerializeField] private Button _buy;
         [SerializeField] private Image[] _progressImages;
+        [SerializeField] private BuildImageData _buildImageData;
 
         private int _currentCost;
         private BuildsSystem _buildsSystem;
@@ -22,6 +23,7 @@ namespace GUS.Core.Hub.BuildShop
             BuildName = buildData.nameEnum;
             BuildState = buildData.state;
             
+            FillImages();
             _buy.onClick.AddListener(Buy);
         }
 
@@ -36,7 +38,7 @@ namespace GUS.Core.Hub.BuildShop
 
             for (int i = 0; i < (int)buildState; i++)
             {
-                _progressImages[i].color = Color.blue;
+                _progressImages[i].sprite = _buildImageData.EnableImages[i];
             }
 
             CheckButtonState();
@@ -61,6 +63,14 @@ namespace GUS.Core.Hub.BuildShop
         {
             _cost.text = "";
             _buy.interactable = false;
+        }
+
+        private void FillImages()
+        {
+            for (int i = 0; i < _progressImages.Length; i++)
+            {
+                _progressImages[i].sprite = _buildImageData.DisableImages[i];
+            }
         }
     }
 }

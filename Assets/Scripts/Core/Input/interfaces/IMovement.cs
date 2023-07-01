@@ -8,12 +8,13 @@ namespace GUS.Player
     public interface IMovement
     {
         void Init(PlayerActor player, PlayerStateMachine playerState, float speedMovement);
-        public void Update();
-        public void FixedUpdate();
-        public void Move();
-        public void Fire();
-        public void CanMove(bool flag);
-        public void CallMove(EnumBind enumBind);
+        void Update();
+        void FixedUpdate();
+        void Move();
+        void Fire();
+        void CanMove(bool flag);
+        void CallMove(EnumBind enumBind);
+        void ReturnPosition();
 
     }
 }
