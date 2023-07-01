@@ -4934,7 +4934,7 @@ Transform:
   - {fileID: 1407579963}
   - {fileID: 3163200715394820073}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &3163200715630416651
 CharacterController:
@@ -5003,7 +5003,7 @@ MonoBehaviour:
   _powerUpHandler: {fileID: 3163200715394820072}
   _particleController: {fileID: 3610240871200906006}
   _model: {fileID: 16474855498658503}
-  _speedPenaltyObstacle: 0.5
+  _speedPenaltyObstacle: 0.75
   _timeResetDamage: 5
 --- !u!114 &3610240871200906006
 MonoBehaviour:
@@ -5020,7 +5020,7 @@ MonoBehaviour:
   _afterDeath: {fileID: 1897994328}
   _deathParticle: {fileID: 3163200716317059722}
   _slideEffect: {fileID: 3163200715951618611}
-  _magnet: {fileID: 0}
+  _magnet: {fileID: 2558057371799947062}
   _multiply: {fileID: 0}
 --- !u!1 &5721944872451126459
 GameObject:
@@ -5199,6 +5199,82 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311266, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: m_LengthScale
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311266, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: m_VelocityScale
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: ClampVelocityModule.dampen
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: ClampVelocityModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.orbitalZ.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: ClampVelocityModule.drag.scalar
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.maxCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.maxCurve.m_Curve.Array.data[1].time
+      value: 0.47332922
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.maxCurve.m_Curve.Array.data[2].time
+      value: 0.95474243
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.maxCurve.m_Curve.Array.data[1].value
+      value: 0.253295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.maxCurve.m_Curve.Array.data[2].value
+      value: 0.501915
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.maxCurve.m_Curve.Array.data[1].inSlope
+      value: -1.0680374
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.maxCurve.m_Curve.Array.data[1].outSlope
+      value: -1.0680374
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.maxCurve.m_Curve.Array.data[2].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+      propertyPath: VelocityModule.speedModifier.maxCurve.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 1548023708830311269, guid: 7a866de74eeffd541a038a8850698831, type: 3}
       propertyPath: m_Name
       value: MagnetV2
@@ -5209,6 +5285,11 @@ PrefabInstance:
 --- !u!4 &2558057371799947061 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1548023708830311264, guid: 7a866de74eeffd541a038a8850698831, type: 3}
+  m_PrefabInstance: {fileID: 3961941703291708501}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2558057371799947062 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1548023708830311267, guid: 7a866de74eeffd541a038a8850698831, type: 3}
   m_PrefabInstance: {fileID: 3961941703291708501}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6889563316913047882
@@ -5903,7 +5984,7 @@ PrefabInstance:
     - target: {fileID: 4071770162631806044, guid: 30fd4d10b372f66429d6ace2ff153638, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 793b20a4ec301c94b8535a023e0ce327, type: 2}
+      objectReference: {fileID: 2100000, guid: c70026abef2574a46b0880e742f2b9f4, type: 2}
     - target: {fileID: 4170900217090844815, guid: 30fd4d10b372f66429d6ace2ff153638, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -7.0435433

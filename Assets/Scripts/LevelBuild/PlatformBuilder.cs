@@ -87,7 +87,7 @@ namespace GUS.LevelBuild
         {
             float nextPlatformOffset;
             
-            if (_platformsQueue.Count < 4)
+            if (_platformsQueue.Count < 3)
             {
                 SetNextPlatform();
 

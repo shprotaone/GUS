@@ -1006,8 +1006,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 517095751193678328}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: -0.78, z: 0}
+  m_LocalRotation: {x: -0.011942513, y: 0.0000022853417, z: -0.012727166, w: 0.9998477}
+  m_LocalPosition: {x: -0.049406547, y: -0.7878893, z: 0.018208653}
   m_LocalScale: {x: 0.25, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1015,7 +1015,7 @@ Transform:
   - {fileID: 3902455816329917692}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.368, y: 0.018, z: -1.459}
 --- !u!95 &6523160185053040952
 Animator:
   serializedVersion: 4
@@ -1066,7 +1066,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _neckRig: {fileID: 8422541407718115931}
   _neckTarget: {fileID: 4577328597350016496}
-  _biteAnimTime: 1
   _animator: {fileID: 6523160185053040952}
   _particleController: {fileID: 0}
 --- !u!1 &520000794412195993
@@ -9582,7 +9581,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 793b20a4ec301c94b8535a023e0ce327, type: 2}
+  - {fileID: 2100000, guid: c70026abef2574a46b0880e742f2b9f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
