@@ -51,6 +51,7 @@ namespace GUS.Player.Movement
 
         public void Move()  //спуск работает не корректно
         {
+            #region Полет
             //float tmpDist = Time.deltaTime * _speedMovement;
             //Vector3 movement = Vector3.MoveTowards(_playActor.transform.position, _target, tmpDist) - _playActor.transform.position;
 
@@ -76,7 +77,8 @@ namespace GUS.Player.Movement
             //}
 
             //_playActor.CharController.Move(movement);
-        }               
+            #endregion
+        }
 
         public void HoldTypeHandler(bool flag)
         {
@@ -88,14 +90,11 @@ namespace GUS.Player.Movement
             _canMove = flag;
         }
 
-        public void FixedUpdate()
-        {
-            
-        }
+        public void FixedUpdate() { }
 
-        public void CallMove(EnumBind enumBind)
-        {
-            
-        }
+        public void CallMove(EnumBind enumBind) { }
+
+        public void ReturnPosition() { }
+        
     }
 }

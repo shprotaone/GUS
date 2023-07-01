@@ -39,7 +39,7 @@ namespace GUS.Core.GameState
 
         public void Exit()
         {
-            //_clicker.Paused(true);           
+            //_clicker.Paused(true);
             _worldController.CreateOnlyFreePlatforms(false);
         }
 

@@ -11,9 +11,9 @@ namespace GUS.Core.Tutorial
         [SerializeField] private GameObject[] _hideObjects;
         [SerializeField] private GameObject _show;
         [SerializeField] private Button _startButon;
+
         private TutorialSystemHUB _tutorial;
 
-        private CancellationTokenSource _cancellationTokenSource;
         public void ShowText(string text)
         {
 
@@ -22,11 +22,13 @@ namespace GUS.Core.Tutorial
         public async void Activate(TutorialSystemHUB tutorial)
         {
             _tutorial = tutorial;
+
             _startButon.onClick.AddListener(Deactivate);
             foreach (var obj in _hideObjects)
             {
                 obj.SetActive(false);
             }
+
             await UniTask.Delay(2000);
             _show.SetActive(true);
         }

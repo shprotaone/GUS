@@ -132,7 +132,7 @@ namespace GUS.Player.Movement
             }
         }
 
-        private void ResetPosition()
+        public void ResetPosition()
         {
             _currentLine = Line.Center;
         }
