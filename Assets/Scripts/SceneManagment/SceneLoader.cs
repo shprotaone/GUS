@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using GUS.SceneManagment;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -9,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public event Action OnLoaded;
     [SerializeField] private Fader _fader;
     [SerializeField] private AssetReference _hubSceneRef;
 
@@ -51,6 +53,7 @@ public class SceneLoader : MonoBehaviour
         if (obj.IsDone)
         {
             SceneManager.SetActiveScene(obj.Result.Scene);
+            OnLoaded?.Invoke();
         }
         await UniTask.Yield();
     }

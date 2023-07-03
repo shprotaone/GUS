@@ -17,6 +17,7 @@ namespace GUS.Core.Tutorial
         private CancellationTokenSource _cancellationTokenSource;
         private TutorialSystemHUB _tutorialSystem;
         private bool _flag = true;
+
         public async void Activate(TutorialSystemHUB tutorial)
         {
             _tutorialSystem = tutorial;
@@ -85,8 +86,8 @@ namespace GUS.Core.Tutorial
         private void ExitTutorial()
         {
             _tutorialSystem.Complete();
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
             _showExitHand.SetActive(false);
         }
     }

@@ -93,7 +93,7 @@ namespace GUS.Core.Hub
 
         private void Registartion()
         {
-            _serviceLocator.Register(_tutorialSystem);
+            
             _serviceLocator.Register(_cameraController);
             _serviceLocator.Register(_audioService);
             _serviceLocator.Register(_sceneHandler);
@@ -127,7 +127,7 @@ namespace GUS.Core.Hub
             _uiHubController.Init(ServiceLocator);            
             _hubController.SetStartPosition(_startPos.position);
             _hubController.Init(ServiceLocator);
-            _tutorialSystem.Init(ServiceLocator);
+            
 
             _wallet.Init(ServiceLocator);
             _honkWallet.Init(ServiceLocator);
@@ -138,6 +138,17 @@ namespace GUS.Core.Hub
             _buildSystem.Init(ServiceLocator);
             _shopSystem.Init(ServiceLocator);
             _distanceMutiplier.Init(ServiceLocator);
+
+            TutorialInit();
+        }
+
+        private void TutorialInit()
+        {
+            if (!_storageService.Data._tutorialSteps[0] || !_storageService.Data._tutorialSteps[2])
+            {
+                _serviceLocator.Register(_tutorialSystem);
+                _tutorialSystem.Init(ServiceLocator);
+            }
         }
     }
 }
