@@ -966,7 +966,7 @@ Transform:
   - {fileID: 8726297638544794117}
   - {fileID: 8969721919421983390}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2905817755128779623
 Animator:
@@ -10845,7 +10845,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -10855,7 +10855,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4616070179451552232, guid: 7f60a24690346014283c1aafa56f8f63, type: 3}
+  - {fileID: 2100000, guid: c70026abef2574a46b0880e742f2b9f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
