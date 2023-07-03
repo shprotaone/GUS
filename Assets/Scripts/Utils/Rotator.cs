@@ -26,7 +26,7 @@ public class Rotator : MonoBehaviour
 
     private void OnDisable()
     {
-        DOTween.Rewind(transform);
-        DOTween.Kill(transform);
+        DOTween.Rewind(this.gameObject);
+        DOTween.Kill(this.gameObject);
     }
 }
