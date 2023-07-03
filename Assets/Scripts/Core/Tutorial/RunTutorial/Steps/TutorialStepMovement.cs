@@ -62,7 +62,11 @@ namespace GUS.Core.Tutorial
 
                 _view.CurrentViewStep.Disable();
                 CheckLastStep();
-            }              
+            }
+            else
+            {
+                _player.MovementType.CanMove(false);
+            }         
         }
 
         private void CheckLastStep()

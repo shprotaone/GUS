@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using GUS.Core.Pool;
-using GUS.Player;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -83,7 +82,6 @@ namespace GUS.Objects
                         pool.DestroyObject(obstacle.GetChild(i).gameObject);
                     }
                 }
-                Debug.Log("DisableCollectable");
                 _currentCollectable = null;
             }
         }

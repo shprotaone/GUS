@@ -49,15 +49,15 @@ namespace GUS.Core.UI
 
         private async void StartBonusAnim(float value,CancellationToken token)
         {           
-            float duration = value;
+            float duration = value;            
             gameObject.SetActive(true);
             transform.localScale = Vector3.one;
             while (duration > 0)
             {
-                if (!IsPaused) duration -= _sliderStep / 10;
+                if (!IsPaused) duration -= _sliderStep;
                 try
                 {
-                    await UniTask.Delay(100, false, PlayerLoopTiming.EarlyUpdate, token);
+                    await UniTask.Delay(100, false, PlayerLoopTiming.FixedUpdate, token);
                     _bonusSlider.value = duration;
 
                 }

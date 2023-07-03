@@ -51,7 +51,7 @@ namespace GUS.Player
         {
             particles.gameObject.SetActive(true);
             particles.Play();
-            await UniTask.Delay((int)delay * 1000);
+            await UniTask.Delay((int)delay * 1000,false,PlayerLoopTiming.Update);
 
             particles.Stop();
             particles.gameObject.SetActive(false);

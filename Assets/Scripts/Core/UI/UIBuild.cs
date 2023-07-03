@@ -13,6 +13,8 @@ namespace GUS.Core.UI
 {
     public class UIBuild : MonoBehaviour
     {
+        public event Action OnEnableShop;
+
         [SerializeField] private RectTransform _panel;
         [SerializeField] private BuildSlotView[] _views;
         [SerializeField] private Button _explore;
@@ -23,12 +25,17 @@ namespace GUS.Core.UI
         private CameraHubController _cameraController;
         private CoinView _coinView;
         private UiHubController _uiHubController;
+
+        private BuildsSystem _buildSystem;
+        private List<BuildData> _buildData;
+
         public void Init(IServiceLocator serviceLocator)
         {
             _controller = serviceLocator.Get<HubStateController>();
             _cameraController = serviceLocator.Get<ICamera>() as CameraHubController;
             _coinView = serviceLocator.Get<ICoinView>() as CoinView;
             _uiHubController = serviceLocator.Get<UiHubController>();
+
             _multiplicatorViewer.Init(serviceLocator);
             _close.onClick.AddListener(Close);
             _explore.onClick.AddListener(Explore);
@@ -38,6 +45,7 @@ namespace GUS.Core.UI
         {
             _panel.gameObject.SetActive(flag);
             _coinView.Activate(flag);
+            Refresh(_buildSystem,_buildData);
             _cameraController.MapCamera();
             _uiHubController.UIMainHub.UpPanelActivate(false);
         }
@@ -48,6 +56,9 @@ namespace GUS.Core.UI
             {
                 _views[i].Init(buildSystem, data[i]);               
             }
+
+            _buildSystem = buildSystem;
+            _buildData= data;
 
             Refresh(buildSystem, data);
         }

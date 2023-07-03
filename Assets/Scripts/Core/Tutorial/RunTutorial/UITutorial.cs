@@ -32,7 +32,6 @@ namespace GUS.Core.Tutorial
             _endPanel.DOAnchorPosX(-490, 1).SetEase(Ease.InCirc);
             await UniTask.Delay(3000);
             _endPanel.gameObject.SetActive(false);
-            _tutorialCanvas.sortingOrder = 0;
             //_tutorialCanvas.gameObject.SetActive(false);
         }
     }

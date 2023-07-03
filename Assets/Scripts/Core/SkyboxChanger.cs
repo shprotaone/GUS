@@ -39,8 +39,8 @@ public class SkyboxChanger : MonoBehaviour
         int index = Random.Range(0, _settings.Length);
         _currentSettings = _settings[index];
 
-        if(index == 0) _mainLight.gameObject.SetActive(true);
-        else _secondaryLight.gameObject.SetActive(true);
+        if(_currentSettings.WithFlash) _secondaryLight.gameObject.SetActive(true);
+        else _mainLight.gameObject.SetActive(true);
     }
 
     private void ResetSettings()
@@ -49,6 +49,7 @@ public class SkyboxChanger : MonoBehaviour
         RenderSettings.fogColor = _settings[0].FogColor;
         RenderSettings.ambientSkyColor = _settings[0].AmbientColor;
     }
+
     private void OnDisable()
     {
         //ResetSettings();

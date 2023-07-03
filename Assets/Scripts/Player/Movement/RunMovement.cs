@@ -198,6 +198,7 @@ namespace GUS.Player.Movement
         public void CallMove(EnumBind enumBind)
         {
             _movementAction = enumBind;
+
             switch (enumBind)
             {
                 case EnumBind.Up:               
@@ -205,7 +206,7 @@ namespace GUS.Player.Movement
                     break;
                 case EnumBind.Down: 
                     DownSlide(); 
-                    break;
+                    break;                        
             }            
         }
     }

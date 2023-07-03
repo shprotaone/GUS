@@ -32,7 +32,7 @@ public class EntryComponent : MonoBehaviour
 
             foreach (var obstacle in _obstacles)
             {
-                obstacle.Init(actor.WorldController.CurrentSpeed,multiply);
+                obstacle.Init((int)actor.WorldController.CurrentSpeed,multiply);
                 obstacle.Move();
             }
 

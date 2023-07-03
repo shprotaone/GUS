@@ -24,6 +24,7 @@ namespace GUS.Core.Hub.BuildShop
 
         public Build[] Builds => _builds;
         public Wallet Wallet => _wallet;
+
         public void Init(IServiceLocator serviceLocator)
         {
             _wallet = serviceLocator.Get<Wallet>();
@@ -49,7 +50,7 @@ namespace GUS.Core.Hub.BuildShop
             }
 
         }
-        private void UpdateBuilds()
+        public void UpdateBuilds()
         {
             for (int i = 0; i < _builds.Length; i++)
             {
