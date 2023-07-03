@@ -27,6 +27,7 @@ namespace GUS.Core.Tutorial
 
             if (!_storageService.Data._tutorialSteps[0])
             {
+                _parent.SetActive(true);
                 _tutorialCanvas?.gameObject.SetActive(true);              
                 _steps[0].Activate(this);
                 _storageService.Data._tutorialSteps[0] = true;

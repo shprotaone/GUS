@@ -20,7 +20,9 @@ namespace GUS.Player.State
         public void Enter()
         {
             _movement = _player.MovementType;
+            _player.AnimatorController.RunActivate(false);
             _player.AnimatorController.DeathActivate();
+            
             _movement.CanMove(false);
         }
 

@@ -38,8 +38,7 @@ namespace GUS.Player.State
         }
 
         public IEnumerator Execute()
-        {
-            
+        {           
             if (!_movement.IsGrounded) _movement.SetGravityScale(_levelSettings.forceLandingPower);
             else
             {
@@ -50,7 +49,7 @@ namespace GUS.Player.State
                 _player.Collider.height = _standartHeight;
                 _player.Collider.center += new Vector3(0, 0.5f, 0);
             }
-            _playerStateMachine.TransitionTo(_playerStateMachine.runState);
+            if(!_player.IsDead) _playerStateMachine.TransitionTo(_playerStateMachine.runState);
             yield return null;
         }
 

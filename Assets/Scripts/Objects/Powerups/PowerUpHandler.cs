@@ -63,8 +63,9 @@ namespace GUS.Objects.PowerUps
 
             try
             {
-                await UniTask.Delay((int)powerUp.Duration * 1000,false,PlayerLoopTiming.Update,token);
+                await UniTask.Delay((int)powerUp.Duration * 1000,false,PlayerLoopTiming.FixedUpdate,token);
                 _particleController.BonusEffectEnable(PowerUpEnum.Multiply, 1);
+                _view.DisableBonusView(powerUp);
                 _powerUps.Remove(powerUp.PowerUpEnum);
                 _renderer.material = _standartMaterial;
             }
@@ -80,6 +81,7 @@ namespace GUS.Objects.PowerUps
             {
                 await UniTask.Delay((int)powerUp.Duration * 1000, false, PlayerLoopTiming.FixedUpdate, token);
                 _powerUps.Remove(powerUp.PowerUpEnum);
+                _view.DisableBonusView(powerUp);
             }
             catch (OperationCanceledException)
             {

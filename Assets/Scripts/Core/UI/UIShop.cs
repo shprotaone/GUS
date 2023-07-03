@@ -20,6 +20,9 @@ namespace GUS.Core
         private CoinView _coinView;
         private HonkCoinView _honkCoinView;
 
+        private List<Collectable> _collectables;
+        private List<BonusData> _bonusData;
+
         public void Init(IServiceLocator locator)
         {
             _coinView = locator.Get<ICoinView>() as CoinView;
@@ -33,10 +36,14 @@ namespace GUS.Core
             _shopPanel.SetActive(flag);
             _coinView.Activate(flag);
             _honkCoinView.Activate(flag);
+            UpdateSlots(_collectables, _bonusData);
         }
 
         public void InitSlots(ShopSystem shop, List<Collectable> collectables, List<BonusData> bonusData)
         {
+            _bonusData = bonusData;
+            _collectables = collectables;
+
             for (int i = 0; i < collectables.Count; i++)
             {
                 _slotView[i].Init(shop, collectables[i], bonusData[i]);
@@ -45,6 +52,7 @@ namespace GUS.Core
 
         public void UpdateSlots(List<Collectable> collectables, List<BonusData> bonusData)
         {
+
             for (int i = 0; i < collectables.Count; i++)
             {
                 _slotView[i].UpdateData(bonusData[i]);

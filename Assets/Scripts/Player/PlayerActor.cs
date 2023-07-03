@@ -57,6 +57,7 @@ namespace GUS.Player
         public AnimatorController AnimatorController => _animator;
         public CapsuleCollider Collider => _capsuleCollider;
         public IServiceLocator ServiceLocator { get; private set; }
+        public bool IsDead => _isDeath;
         #endregion
         private void Start()
         {

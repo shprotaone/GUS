@@ -3,6 +3,7 @@ using DG.Tweening;
 using GUS.Core.Data;
 using GUS.Core.Locator;
 using Sirenix.OdinInspector;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -91,6 +92,18 @@ namespace GUS.Core.UI
         private void OnDisable()
         {
             _wallet.OnBigRewardNotify -= CallBigCornNotify;
+        }
+
+        public void DisableBonusView(IPowerUp powerUp)
+        {
+            foreach (var view in _bonusSlotViews)
+            {
+                if (view.Type == powerUp.PowerUpEnum)
+                {
+                    view.Disable();
+                    return;
+                }
+            }
         }
     }
 }
