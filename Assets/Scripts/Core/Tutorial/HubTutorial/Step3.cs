@@ -10,12 +10,15 @@ namespace GUS.Core.Tutorial
         [SerializeField] private GameObject _showHand;
         [SerializeField] private Button[] _hideButtons;
         [SerializeField] private Button _click;
+
         private TutorialSystemHUB _tutorial;
+
         public void Activate(TutorialSystemHUB tutorial)
         {
             _tutorial = tutorial;
             _showHand.SetActive(true);
             _click.onClick.AddListener(Next);
+
            foreach(var button in _hideButtons)
             {
                 button.interactable = false;

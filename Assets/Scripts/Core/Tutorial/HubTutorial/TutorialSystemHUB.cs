@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using GUS.Core.Data;
 using GUS.Core.Locator;
 using GUS.Core.SaveSystem;
 using System;
@@ -13,6 +14,7 @@ namespace GUS.Core.Tutorial
 
         private ITutorialStep[] _steps;
         private StorageService _storageService;
+        private Wallet _wallet;
         private int _tutorialStep = 0;
         private bool _isActive;
 
@@ -20,6 +22,7 @@ namespace GUS.Core.Tutorial
         public void Init(IServiceLocator serviceLocator)
         {
             _storageService = serviceLocator.Get<StorageService>();
+            _wallet = serviceLocator.Get<Wallet>();
             _steps = GetComponentsInChildren<ITutorialStep>();
 
             if (!_storageService.Data._tutorialSteps[0])
@@ -33,6 +36,11 @@ namespace GUS.Core.Tutorial
             else if (!_storageService.Data._tutorialSteps[2])
             {
                 _tutorialStep = 1;
+                if (_wallet.Coins < 100)
+                {
+                    _wallet.AddCoins(100);
+                    _wallet.AddCoinsToData();
+                }
                 _parent.SetActive(true);
                 _steps[1].Activate(this);
             }
@@ -58,6 +66,7 @@ namespace GUS.Core.Tutorial
         public void Complete()
         {
             _steps[_tutorialStep].Deactivate();
+            _tutorialCanvas?.gameObject.SetActive(false);
             _storageService.Data._tutorialSteps[2] = true;
             _storageService.Save();
         }

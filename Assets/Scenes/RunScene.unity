@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 5c80d49013691df48ac94280337e88ce, type: 2}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.338
   m_FlareStrength: 0
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.213
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1393434694913847706}
-  m_IndirectSpecularColor: {r: 0.09063985, g: 0.11082692, b: 0.13582535, a: 0.213}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9398,7 +9398,7 @@ MonoBehaviour:
   _player: {fileID: 464896665}
   _platformPool: {fileID: 193489787}
   _collectablesPool: {fileID: 658742040}
-  _platformStorage: {fileID: 11400000, guid: c346c2e11c9397145810252ae240cf46, type: 2}
+  _platformStorage: {fileID: 11400000, guid: 9d25a40de1325dd4b8d2f5777ba352a4, type: 2}
   _collectablesStorage: {fileID: 11400000, guid: 5d4ca77e28da6324b9a7cafda1e83791, type: 2}
   _levelSettings: {fileID: 11400000, guid: e0d5f89877db220478bf957613b9fffa, type: 2}
   _specialPlatformBuilder: {fileID: 1810050563}
@@ -12544,7 +12544,6 @@ MonoBehaviour:
   _secondaryLight: {fileID: 2017336693}
   _handler: {fileID: 763624435}
   _settings:
-  - {fileID: 11400000, guid: 8e85d2603bc3dff4dbd0cc2651235002, type: 2}
   - {fileID: 11400000, guid: 69f41269cf1650341a044d2a6744f68d, type: 2}
   - {fileID: 11400000, guid: 103f076b9d5589b40bcbb3f30ffd3ba8, type: 2}
   - {fileID: 11400000, guid: 15c417b5711b12d45937e753b854788c, type: 2}
