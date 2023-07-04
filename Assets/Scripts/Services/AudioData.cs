@@ -14,4 +14,6 @@ public class AudioData : ScriptableObject
     public AudioClip slowMo;
     public AudioClip buySound;
     public AudioClip collectBonus;
+    public AudioClip inflation;
+    public AudioClip explosion;
 }

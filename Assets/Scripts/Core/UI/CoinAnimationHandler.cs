@@ -49,11 +49,12 @@ public class CoinAnimationHandler : MonoBehaviour
     }
     private void MainCornAnim(RectTransform corn)
     {
+        _audioService.PlaySFX(_audioService.Data.inflation);
         corn.localScale = Vector3.zero;
         corn.gameObject.SetActive(true);
         corn.DOScale(Vector3.one * 3, 1).OnComplete(() => 
         {
-            _audioService.PlaySFX(_audioService.Data.collectBonus);
+            _audioService.PlaySFX(_audioService.Data.explosion);
             corn.gameObject.SetActive(false);
         });
     }
