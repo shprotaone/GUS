@@ -21,7 +21,6 @@ public class TractorController : MonoBehaviour, IDynamicObstacle
     public void Init(float speed,float mult)
     {
         _speedMultilpy = speed * mult;
-        Debug.Log("TractorSpeed " + _speed * _speedMultilpy);
     }
 
     private void OnDisable()
