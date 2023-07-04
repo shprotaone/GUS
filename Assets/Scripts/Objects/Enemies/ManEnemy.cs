@@ -30,7 +30,7 @@ namespace GUS.Objects.Enemies
             _isAlive = false;
             _manAnimator.speed = _animSpeed;
             _bagAnimator.speed = _animSpeed;
-            transform.DOMove(Vector3.left * 10, 2).OnComplete(() => gameObject.SetActive(false));
+            transform.DOMove(Vector3.forward * 45, 5).SetEase(Ease.InCirc).OnComplete(() => gameObject.SetActive(false));
         }
 
         public void Init(ClickerGame clicker)

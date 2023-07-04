@@ -37,7 +37,7 @@ namespace GUS.Core.Data
         {
             _coins += reward;
             OnBigRewardNotify?.Invoke(reward);
-            _coinView.RefreshCoinsCount(_coins);
+            _coinView.RefreshCoinWithAnim(_coins,reward);
         }
 
         public void DecreaseCoins(int amount)

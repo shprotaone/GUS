@@ -5,6 +5,7 @@ using GUS.Core.Locator;
 using Sirenix.OdinInspector;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,7 +46,13 @@ namespace GUS.Core.UI
 
         public void RefreshCoinsCount(int count)
         {
-            _coinTextValue.text = count.ToString();
+            _coinTextValue.text = count.ToString();           
+        }
+
+        public void RefreshCoinWithAnim(int count,int prevValue)
+        {
+            int start = count - prevValue;
+            DOTween.To(() => start, x => start = x, count, 1).OnUpdate(() => _coinTextValue.text = start.ToString());
         }
 
         public void RefreshDistancePointCount(float count)
