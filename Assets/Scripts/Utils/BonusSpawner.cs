@@ -63,7 +63,6 @@ public class BonusSpawner
     private ObjectInfo Reposition()
     {
         int result = Random.Range(0,2);
-        Debug.Log(result);
         if(result == 0)
         {
             return GetBonus(PoolObjectType.Multiply);

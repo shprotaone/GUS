@@ -49,12 +49,12 @@ namespace GUS.Player
 
         private async void ParticleRoutine(float delay,ParticleSystem particles)
         {
-            particles.gameObject.SetActive(true);
-            particles.Play();
+            particles?.gameObject.SetActive(true);
+            particles?.Play();
             await UniTask.Delay((int)delay * 1000,false,PlayerLoopTiming.Update);
 
-            particles.Stop();
-            particles.gameObject.SetActive(false);
+            particles?.Stop();
+            particles?.gameObject.SetActive(false);
         }
         public void DamageEffect(Vector3 position)
         {
