@@ -21,6 +21,7 @@ namespace GUS.Core
     {
         [Header("Игрок")]
         [SerializeField] private PlayerActor _player;
+        [SerializeField] private bool _isPC;
 
         [Header("Пулы")]    
         [SerializeField] private ObjectPool _platformPool;

@@ -128,7 +128,8 @@ namespace GUS.Player.Movement
         {
             if (_movementAction == EnumBind.Down/* && _player.CharController.isGrounded*/)
             {
-                _playerState.TransitionTo(_playerState.downslide);            
+                _playerState.TransitionTo(_playerState.downslide);
+                _audioService.PlaySFX(_audioService.Data.swipeSound);
             }
         }
 
