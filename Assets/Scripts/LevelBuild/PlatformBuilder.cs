@@ -34,7 +34,8 @@ namespace GUS.LevelBuild
         private RunLocator _runLocator;
         private BonusSpawner _bonusSpawner;
 
-        private int _platformCount = 0;
+        private int _currentPlatformNumber = 0;
+        private int _platformsCount = 3;
        
         private bool _isTutorial;
         private bool _isFree;
@@ -87,7 +88,7 @@ namespace GUS.LevelBuild
         {
             float nextPlatformOffset;
             
-            if (_platformsQueue.Count < 3)
+            if (_platformsQueue.Count < _platformsCount)
             {
                 SetNextPlatform();
 
@@ -125,9 +126,9 @@ namespace GUS.LevelBuild
                 _nextPlatform = _platformPool.GetObject(PoolObjectType.AfterClicker);
                 _rewardPlatform = false;
             }
-            else if(_specialPlatformBuilder.Find(_platformCount, out PoolObjectType specialType))
+            else if(_specialPlatformBuilder.Find(_currentPlatformNumber, out PoolObjectType specialType))
             {
-                CallSpecialPlatform(_platformCount, specialType, true, true);
+                CallSpecialPlatform(_currentPlatformNumber, specialType, true, true);
             }
             else
             {
@@ -154,9 +155,10 @@ namespace GUS.LevelBuild
             else
             {
                 _nextPlatform = _platformPool.GetObject(type);
-                _platformCount++;
-                OnPlatformAdded?.Invoke(_platformCount);
-            }            
+                _currentPlatformNumber++;
+                OnPlatformAdded?.Invoke(_currentPlatformNumber);
+            }
+            
         }
 
         public void DeletePlatform()
@@ -179,11 +181,8 @@ namespace GUS.LevelBuild
                     _platformPool.DestroyObject(platform.gameObject);                   
                 }
             }
-            else
-            {
-                
-            }
-            _platformCount = 0;
+
+            _currentPlatformNumber = 0;
             _specialPlatformBuilder.ResetCount();
             _platformsQueue.Clear();
             _lastPlatform = null;

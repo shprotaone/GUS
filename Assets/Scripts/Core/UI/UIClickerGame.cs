@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using GUS.Core.Clicker;
 using GUS.Core.Locator;
@@ -24,9 +25,8 @@ public class UIClickerGame : MonoBehaviour
 
     public void Init(IServiceLocator serviceLocator)
     {
-        //_scaleStep = Vector3.one / _scaler;
+        _coinAnimationHandler.Init(serviceLocator);
         _clickerGame = serviceLocator.Get<ClickerGame>();
-        //_startPosCorn = _corn.position;
     }
 
     public void InitSlider(float health)
@@ -39,8 +39,6 @@ public class UIClickerGame : MonoBehaviour
     public void UpdateSlider(float value)
     {
         _slider.value += value;
-        //FocusBehaviour();
-        //UpscaleCorn();
     }
 
     public void PanelActivate(bool flag) => _clickerPanel.SetActive(flag);
@@ -53,36 +51,20 @@ public class UIClickerGame : MonoBehaviour
     {
         _focus.gameObject.SetActive(true);
     }
-
-    private void FocusBehaviour()
-    {
-        _alphaColor = _focus.color;
-        _aplhaFocus += 0.02f;
-        _alphaColor.a = _aplhaFocus;
-        _focus.color = _alphaColor;
-    }
-
     public void FocusDeactivate()
     {
         _focus.gameObject.SetActive(false);
         _focus.DOFade(0, 1);
     }
 
-    private void UpscaleCorn()
+    public async UniTask EndClicker()
     {
-        _corn.localScale += _scaleStep;
-    }
-
-    public void EndClicker()
-    {
-        //Sequence sequence = DOTween.Sequence();
-        //sequence.Append(_corn.DOAnchorPos(Vector3.zero, 1));
-        //sequence.Append(_corn.DOScale(Vector3.one * 4,1)).SetEase(Ease.OutSine);
-        //sequence.Append(DOVirtual.DelayedCall(0, () =>_corn.gameObject.SetActive(false)));
-        //sequence.Append(DOVirtual.DelayedCall(0, () => _coinAnimationHandler.Animate()));
-        //sequence.Append(DOVirtual.DelayedCall(0, () => PanelActivate(false)));
-        //sequence.Append(DOVirtual.DelayedCall(0,() => _clickerGame.Complete()));
-        //sequence.Play();      
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(DOVirtual.DelayedCall(0, () => _coinAnimationHandler.Animate()));
+        sequence.Append(DOVirtual.DelayedCall(0, () => PanelActivate(false)));
+        sequence.Play();
+        await UniTask.Delay(2);
+        await UniTask.Yield();
     }
 
     public void TutorialPanel(bool flag)

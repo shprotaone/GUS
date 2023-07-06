@@ -1,9 +1,11 @@
-﻿using GUS.Core.GameState;
+﻿using GUS.Core.Data;
+using GUS.Core.GameState;
 using GUS.Core.Locator;
 using GUS.Core.UI;
 using GUS.LevelBuild;
 using System;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 namespace GUS.Core.Clicker
@@ -17,12 +19,15 @@ namespace GUS.Core.Clicker
         private ClickerStateMachine _clickerStateMachine;
         private IServiceLocator _serviceLocator;
         private CameraRunController _cameraController;
+        private Wallet _wallet;
+        private BossSettings _bossSettings;
         public IStateMachine StateMachine { get; private set; }
         public EndState(ClickerStateMachine stateMachine, IServiceLocator serviceLocator)
         {
             _serviceLocator = serviceLocator;       
             _clickerStateMachine = stateMachine;
             _worldController = serviceLocator.Get<WorldController>();
+            _wallet= serviceLocator.Get<Wallet>();           
             _uiController = serviceLocator.Get<UIController>();
             _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
         }
@@ -35,16 +40,20 @@ namespace GUS.Core.Clicker
 
             _uiController.UiInGame.Hide(false);
             _uiController.ClickerGame.SliderActivate(false);
-            _uiController.ClickerGame.EndClicker();
+            
             _clickerStateMachine.CallRoutine();
+            _bossSettings = _game.Settings;
         }
 
         public IEnumerator Execute()
         {
-            _cameraController.ClickerCamera();
-            yield return new WaitForSeconds(2);
             _cameraController.RunCamera();
-            _game.Complete();
+            _game.Complete();                  
+            yield return _uiController.ClickerGame.EndClicker();
+
+            yield return new WaitForSeconds(3);         
+            _wallet.AddCoins(_bossSettings.reward);
+
             _gameStateController.StartGame();
             _clickerStateMachine.StopRoutine();
             yield return null;

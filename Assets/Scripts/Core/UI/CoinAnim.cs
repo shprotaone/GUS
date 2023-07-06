@@ -15,7 +15,7 @@ public class CoinAnim : MonoBehaviour, IPoolObject
     public void Movement(Vector2 jarPosition)
     {
         gameObject.SetActive(true);
-        _rect.DOMove(jarPosition, 1).SetEase(Ease.InOutBack).OnComplete(DisableCoin);
+        _rect.DOMove(jarPosition, 1).OnComplete(DisableCoin);
     }
 
     private void DisableCoin()

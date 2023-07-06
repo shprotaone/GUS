@@ -15,6 +15,11 @@ namespace GUS.Core.UI
         {
             _coinText.text = count.ToString();
         }
+
+        public void RefreshCoinWithAnim(int count, int prevValue)
+        {
+            
+        }
     }
 }
 

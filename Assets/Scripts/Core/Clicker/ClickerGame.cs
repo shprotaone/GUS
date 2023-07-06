@@ -125,8 +125,6 @@ namespace GUS.Core.Clicker
         public void Complete()
         {
             IsActive = false;
-            _uiController.UiInGame.CallBigCornNotify(_settings.reward);
-            _wallet.AddCoins(_settings.reward);
         }
 
         private void DisablePanel()
