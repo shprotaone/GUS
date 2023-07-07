@@ -45,6 +45,7 @@ namespace GUS.Core.UI
         {
             _panel.gameObject.SetActive(flag);
             _coinView.Activate(flag);
+            _buildSystem.Wallet.RefreshView();
             Refresh(_buildSystem,_buildData);
             _cameraController.MapCamera();
             _uiHubController.UIMainHub.UpPanelActivate(false);

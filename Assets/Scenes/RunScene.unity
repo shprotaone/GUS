@@ -7985,7 +7985,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f30d9b2f8409e354d9f329c2d8a5eced, type: 3}
+  m_Sprite: {fileID: 523069161, guid: 8a6b22d91318e6f4dac83e999513409b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8608,7 +8608,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f30d9b2f8409e354d9f329c2d8a5eced, type: 3}
+  m_Sprite: {fileID: 523069161, guid: 8a6b22d91318e6f4dac83e999513409b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10404,6 +10404,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 510427695}
     m_Modifications:
+    - target: {fileID: 3759509742400323706, guid: 41310619e871cae45ab6e4b7c481ed86, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 523069161, guid: 8a6b22d91318e6f4dac83e999513409b, type: 3}
+    - target: {fileID: 3759509742400323707, guid: 41310619e871cae45ab6e4b7c481ed86, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -102.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3759509743182662976, guid: 41310619e871cae45ab6e4b7c481ed86, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10500,6 +10508,26 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1135672838, guid: 29cdd0e36441c0843adfbf996b9ad197, type: 3}
+    - target: {fileID: 3759509743250055464, guid: 41310619e871cae45ab6e4b7c481ed86, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3759509743250055464, guid: 41310619e871cae45ab6e4b7c481ed86, type: 3}
+      propertyPath: m_margin.x
+      value: 51.11792
+      objectReference: {fileID: 0}
+    - target: {fileID: 3759509743250055464, guid: 41310619e871cae45ab6e4b7c481ed86, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 3759509743250055464, guid: 41310619e871cae45ab6e4b7c481ed86, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3759509743250055465, guid: 41310619e871cae45ab6e4b7c481ed86, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -19.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 41310619e871cae45ab6e4b7c481ed86, type: 3}
@@ -14304,7 +14332,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _specials:
-  - platformIndex: 5
+  - platformIndex: 30
+    type: 8
+  - platformIndex: 60
     type: 8
 --- !u!1 &1853105642
 GameObject:

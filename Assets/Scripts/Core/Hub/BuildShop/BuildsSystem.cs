@@ -50,6 +50,7 @@ namespace GUS.Core.Hub.BuildShop
             }
 
         }
+
         public void UpdateBuilds()
         {
             for (int i = 0; i < _builds.Length; i++)

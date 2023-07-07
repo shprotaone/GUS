@@ -53,6 +53,11 @@ namespace GUS.Core.Data
             _storageService.Save();
         }
 
+        public void RefreshView()
+        {
+            _coinView.RefreshCoinsCount(_coins);
+        }
+
         public void UpdateData()
         {
             _storageService.Data.coins = _coins;

@@ -16572,7 +16572,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4349020251351961853}
-  m_LocalRotation: {x: 0.025744185, y: 0.95269805, z: -0.29084808, w: 0.08432731}
+  m_LocalRotation: {x: 0.02574418, y: 0.95269805, z: -0.29084805, w: 0.08432729}
   m_LocalPosition: {x: 0, y: 0, z: 0.0000038146973}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16894,6 +16894,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6920977595999358216, guid: 8b56892e7d1d0d546b0ba44c1b89cd7b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 523069161, guid: 8a6b22d91318e6f4dac83e999513409b, type: 3}
     - target: {fileID: 6920977595999358217, guid: 8b56892e7d1d0d546b0ba44c1b89cd7b, type: 3}
       propertyPath: m_SizeDelta.x
       value: 120
@@ -20758,7 +20762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8906324714598048381, guid: 8f56b995ff62f1e44ab10412d3342070, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.43000036
+      value: 0.288
       objectReference: {fileID: 0}
     - target: {fileID: 8906324714598048381, guid: 8f56b995ff62f1e44ab10412d3342070, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26743,7 +26747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8668613937335164939, guid: 4f45c694552ce094288684ba369eda36, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.68
+      value: 0.45899963
       objectReference: {fileID: 0}
     - target: {fileID: 8668613937335164939, guid: 4f45c694552ce094288684ba369eda36, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32133,9 +32137,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 1870554206}
     m_Modifications:
     - target: {fileID: 7934951801440508116, guid: b502f1cd84b2d5246bbf35ba33517851, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934951801440508116, guid: b502f1cd84b2d5246bbf35ba33517851, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 8e2fbe324b8984d45a5aba7e2f14676c, type: 3}
+      objectReference: {fileID: 8300000, guid: d2e42b0c39ee45e4db271da7477f068e, type: 3}
+    - target: {fileID: 7934951801440508116, guid: b502f1cd84b2d5246bbf35ba33517851, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7934951801440508118, guid: b502f1cd84b2d5246bbf35ba33517851, type: 3}
       propertyPath: m_RootOrder
       value: -1
