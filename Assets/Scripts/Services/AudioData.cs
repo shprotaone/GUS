@@ -16,4 +16,5 @@ public class AudioData : ScriptableObject
     public AudioClip collectBonus;
     public AudioClip inflation;
     public AudioClip explosion;
+    public AudioClip afterRunner;
 }

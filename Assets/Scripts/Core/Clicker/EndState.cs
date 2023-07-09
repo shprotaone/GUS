@@ -16,11 +16,13 @@ namespace GUS.Core.Clicker
         private ClickerGame _game;
         private WorldController _worldController;
         private GameStateController _gameStateController;
-        private ClickerStateMachine _clickerStateMachine;
-        private IServiceLocator _serviceLocator;
+        private ClickerStateMachine _clickerStateMachine;        
         private CameraRunController _cameraController;
         private Wallet _wallet;
         private BossSettings _bossSettings;
+        private AudioService _audioService;
+
+        private IServiceLocator _serviceLocator;
         public IStateMachine StateMachine { get; private set; }
         public EndState(ClickerStateMachine stateMachine, IServiceLocator serviceLocator)
         {
@@ -29,6 +31,7 @@ namespace GUS.Core.Clicker
             _worldController = serviceLocator.Get<WorldController>();
             _wallet= serviceLocator.Get<Wallet>();           
             _uiController = serviceLocator.Get<UIController>();
+            _audioService= serviceLocator.Get<AudioService>();
             _cameraController = serviceLocator.Get<ICamera>() as CameraRunController;
         }
 
@@ -48,10 +51,11 @@ namespace GUS.Core.Clicker
         public IEnumerator Execute()
         {
             _cameraController.RunCamera();
-            _game.Complete();                  
+            _game.Complete();
+            _audioService.PlaySFX(_audioService.Data.afterRunner);
             yield return _uiController.ClickerGame.EndClicker();
 
-            yield return new WaitForSeconds(3);         
+            yield return new WaitForSeconds(3);            
             _wallet.AddCoins(_bossSettings.reward);
 
             _gameStateController.StartGame();
